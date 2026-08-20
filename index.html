@@ -262,6 +262,12 @@ button{font-family:inherit;cursor:pointer}
 .feed-item .f-s{color:var(--gold);font-weight:600;white-space:nowrap}
 .feed-item .f-t{margin-left:auto;color:var(--faint);font-size:.74em;white-space:nowrap}
 .overlap-note{display:flex;flex-direction:column;gap:3px;margin-top:8px;font-size:.78em;color:var(--green)}
+/* 我的位置卡 */
+.loc-row{font-size:.9em}
+.loc-row .loc-lb{font-size:.7em;color:var(--faint);letter-spacing:2px;margin-bottom:3px}
+.loc-row .loc-main{font-size:1.2em;font-weight:700;color:var(--gold)}
+.loc-row .loc-sub{color:var(--dim);font-size:.8em;margin-top:4px;line-height:1.7}
+.loc-row .rk{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1px 8px;margin:2px 3px 0 0;font-size:.8em}
 /* 线路进度 */
 .line-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
 .line-row{display:flex;align-items:center;gap:7px;padding:6px 9px;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--panel2);transition:.1s}
@@ -382,6 +388,7 @@ button{font-family:inherit;cursor:pointer}
  <div class="stat-box p"><div class="n" id="h-honor">0/7</div><div class="l">荣誉徽章</div></div>
  </div>
  </div>
+ <div class="card" id="h-loc"></div>
  <div class="card">
  <div class="group-name"> 高速铁路</div>
  <div id="h-hs"></div>
@@ -1583,10 +1590,31 @@ function checkinBtn(name){
  return `<button class="ck-btn ${visited?'vis':''}" onclick="doCheckin('${name}')" title="${visited?'已打卡':'点击打卡'}${visited?' · '+G.stationFirstVisit[name]:''}">${visited?'✓ ':''}${name}${multi?' ◇':''}</button>`;
 }
 function renderHome(){
- const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
- const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
- document.getElementById('s-badge').textContent=getBadge().ic+' '+getBadge().name+' · 打卡 '+n+' 站';
- document.getElementById('h-station').textContent=n;
+  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
+  document.getElementById('s-badge').textContent=getBadge().ic+' '+getBadge().name+' · 打卡 '+n+' 站'+(G.bureau?' · '+G.bureau:'');
+  /* 我的位置（铁路局推断 / 真实定位） */
+  const loc=document.getElementById('h-loc');
+  if(loc){
+    if(!G.bureau){
+      loc.innerHTML='<div class="loc-row"><div class="loc-lb">所在铁路局</div><div class="loc-main">未选择</div><div class="loc-sub">选择后按中心站推断你的位置，生成第一版"到各站距离"</div><button class="btn primary" onclick="showBureauPicker()">选择铁路局</button></div>';
+    }else{
+      const pos=bureauCenterPos(G.bureau);
+      let near='';
+      if(pos&&pos.lat){
+        const ds=[];
+        for(const nm in RAIL.stations){
+          const st=RAIL.stations[nm];
+          if(!st||!st.lat)continue;
+          ds.push({name:nm,km:haversineKm(pos.lat,pos.lon,st.lat,st.lon)});
+        }
+        ds.sort((a,b)=>a.km-b.km);
+        near=ds.slice(0,4).map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(0)+'km</span>').join('');
+      }
+      loc.innerHTML='<div class="loc-row"><div class="loc-lb">所在铁路局</div><div class="loc-main">'+G.bureau+'</div><div class="loc-sub">默认位置：'+(pos?pos.station:G.bureau+'中心')+' · 距最近站：'+near+'</div><div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap"><button class="btn" onclick="checkinByGPS()">定位更精准</button><button class="btn" onclick="showBureauPicker()">重新选择</button></div></div>';
+    }
+  }
+  document.getElementById('h-station').textContent=n;
  document.getElementById('h-line').textContent=done+' 线';
  document.getElementById('h-prov').textContent=provs.size+' 省';
  const hon=honorList();
