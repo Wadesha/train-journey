@@ -58,6 +58,10 @@
  --text:#e8ecf4; --dim:#9aa3b5; --faint:#6b7280;
  --blue:#4fc3f7; --gold:#fdd835; --green:#66bb6a; --red:#ef5350; --orange:#ffa726;
 }
+body.light{
+ --bg:#f4f6f8; --panel:#ffffff; --panel2:#eceff3; --border:#d8dde4;
+ --text:#1d2733; --dim:#5c6672; --faint:#8b93a0;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 button{font-family:inherit;cursor:pointer}
@@ -65,8 +69,6 @@ button{font-family:inherit;cursor:pointer}
 
 /* ============ 顶栏 ============ */
 #topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px 16px;margin:10px}
-#topbar .logo{font-size:1.25em;font-weight:bold;color:var(--blue);letter-spacing:1px}
-#topbar .logo small{color:var(--faint);font-weight:normal;font-size:.6em;margin-left:6px}
 .stat{font-size:.92em;background:var(--panel2);padding:5px 12px;border-radius:16px}
 .stat b{color:var(--gold)}
 .spacer{flex:1}
@@ -407,7 +409,6 @@ button{font-family:inherit;cursor:pointer}
 
 <!-- ============ 顶栏 ============ -->
 <div id="topbar">
- <span class="logo"> 铁旅<small>中国高铁模拟旅程</small></span>
  <span class="stat" id="s-badge" style="color:var(--gold);font-weight:600;font-size:.78em"></span>
  <span class="spacer"></span>
  <span class="stat"><b id="s-money">0</b></span>
@@ -428,6 +429,14 @@ button{font-family:inherit;cursor:pointer}
 
 <!-- ============ 首页（车站打卡墙） ============ -->
 <div id="view-home" class="view show">
+ <div id="onboard-banner" class="card" style="display:none;border-color:var(--blue);background:linear-gradient(135deg,rgba(79,195,247,.14),rgba(253,216,53,.06))">
+ <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+  <div style="flex:1;min-width:220px;line-height:1.7">
+   <b>欢迎来到铁旅</b>　<span style="font-size:.85em;color:var(--dim)">点任意车站打卡 → 去「开始旅程」买票乘车 → 收集线路/足迹/荣誉。存档自动云端同步。</span>
+  </div>
+  <button class="btn primary" onclick="dismissOnboard()">知道了</button>
+ </div>
+ </div>
  <div class="card">
  <div class="home-title"> 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
  <div class="small-note" style="margin:4px 0 2px;font-size:.7em;color:var(--faint)">存档自动同步云端 · GPS 定位为演示</div>
@@ -643,7 +652,7 @@ function newGame(){
  trainsTaken: new Set(),
  linesRidden: new Set(),
  seatsTaken: new Set(),
- settings: { voice: true, speed: 1 },
+ settings: { voice: true, speed: 1, dark: true },
  rideStreak: 0,
  nextTrip: null, // {date,from,to,no} 首页倒计时
  stationFirstVisit: {}, // 站名 → 首次打卡日期
@@ -1325,6 +1334,8 @@ function renderSetTab(){
  const u=DB.getUser?DB.getUser():null;
  el.innerHTML=`<h3>⚙ 设置</h3>
  <div class="set-row"><div><div class="lb"> 报站语音</div><div class="ds">用浏览器中文语音播报车站信息（需浏览器支持）</div></div><button class="toggle ${G.settings.voice?'on':''}" onclick="toggleVoice()"></button></div>
+ <div class="set-row"><div><div class="lb"> 深色模式</div><div class="ds">浅色/深色外观切换</div></div><button class="toggle ${G.settings.dark!==false?'on':''}" onclick="toggleTheme()"></button></div>
+ <div class="set-row"><div><div class="lb"> 新手引导</div><div class="ds">重新查看开始时的引导横幅</div></div><button class="btn" onclick="reShowOnboard()">重看</button></div>
  <div class="set-row"><div><div class="lb"> 重置进度</div><div class="ds">清空所有旅程记录与成就，重新开始</div></div><button class="btn danger" onclick="resetGame()">重置</button></div>
  <div class="small-note">线路数据基于公开铁路站序资料整理，共 7 条高铁线路、107 座车站。</div>
  ${accRowHtml(u)}`;
@@ -1788,6 +1799,24 @@ function toggleIntro(){
  if(!d)return;
  d.style.display=d.style.display==='none'?'block':'none';
 }
+function applyTheme(){
+ const d=G.settings.dark!==false;
+ document.body.classList.toggle('light',!d);
+}
+function toggleTheme(){
+ G.settings.dark=(G.settings.dark!==false)?false:true;
+ applyTheme(); saveGame(); renderSetTab();
+}
+function initOnboard(){
+ if(!G._onboarded) document.getElementById('onboard-banner').style.display='block';
+}
+function dismissOnboard(){
+ document.getElementById('onboard-banner').style.display='none';
+ G._onboarded=true; saveGame();
+}
+function reShowOnboard(){
+ document.getElementById('onboard-banner').style.display='block';
+}
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
 function renderPassport(){
@@ -1931,6 +1960,7 @@ function closeModal(){
 }
 document.addEventListener('DOMContentLoaded',function(){
  if(!loadGame())newGame();
+ applyTheme(); initOnboard();
  renderAll();
  document.querySelectorAll('.modal-bg').forEach(m=>{
  m.addEventListener('click',function(e){if(e.target===m)this.classList.add('hidden');});
@@ -1942,6 +1972,7 @@ document.addEventListener('DOMContentLoaded',function(){
  DB.init(function(hasData){
    if(hasData){ // 云端/本地已有存档：重新载入并刷新界面
      if(!loadGame())newGame();
+     applyTheme(); initOnboard();
      renderAll();
    }
  });
