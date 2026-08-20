@@ -575,6 +575,8 @@ button{font-family:inherit;cursor:pointer}
 
 <script src="data.js"></script>
 <script src="trains_data.js"></script>
+<!-- Supabase 客户端 SDK（加载失败时 storage.js 会自动降级为本地存储，不影响游戏） -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="storage.js"></script>
 <!-- Vercel Web Analytics（无 Cookie、无需同意弹窗）。仅当部署在 Vercel 且后台开启 Web Analytics 时才上报，本地打开无副作用 -->
 <script defer src="/_vercel/insights/script.js"></script>
@@ -1877,6 +1879,14 @@ document.addEventListener('DOMContentLoaded',function(){
  });
  /* 首次进入：选择所在铁路局（架构预留：推断位置 → 定位后自动替换） */
  setTimeout(()=>{ if(G && !G.bureau) showBureauPicker(); }, 400);
+
+ /* Supabase 云端初始化：自动匿名登录并同步云端存档（失败自动降级本地，不影响游戏） */
+ DB.init(function(hasData){
+   if(hasData){ // 云端/本地已有存档：重新载入并刷新界面
+     if(!loadGame())newGame();
+     renderAll();
+   }
+ });
 });
 </script>
 </body>
