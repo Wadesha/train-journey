@@ -575,6 +575,7 @@ button{font-family:inherit;cursor:pointer}
 
 <script src="data.js"></script>
 <script src="trains_data.js"></script>
+<script src="storage.js"></script>
 <!-- Vercel Web Analytics（无 Cookie、无需同意弹窗）。仅当部署在 Vercel 且后台开启 Web Analytics 时才上报，本地打开无副作用 -->
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
@@ -1792,9 +1793,13 @@ function renderRank(){
  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他')).size;
  const me={nick:'你',km:G.totalKm,vis:n,done,prov:provs,me:true};
- const list=curRankTab==='friend'?FRIENDS.map(f=>f.me?me:f).sort((a,b)=>b.vis-a.vis)
- :curRankTab==='nation'?NATION.map(f=>f.nick==='你'?me:f).sort((a,b)=>b.vis-a.vis)
- :[{nick:'铁轨收藏家',delta:14},{nick:'慢车爱好者',delta:11},{nick:'你',delta:8,me:true},{nick:'京九铁道',delta:7},{nick:'沪昆走遍',delta:5}];
+ // 扩展点：Supabase 启用后 DB.getRanking 返回真实全服排行，自动覆盖本地模拟数据
+ const external=DB.getRanking(curRankTab);
+ let list;
+ if(external&&external.length){ list=external; }
+ else if(curRankTab==='friend'){ list=FRIENDS.map(f=>f.me?me:f).sort((a,b)=>b.vis-a.vis); }
+ else if(curRankTab==='nation'){ list=NATION.map(f=>f.nick==='你'?me:f).sort((a,b)=>b.vis-a.vis); }
+ else { list=[{nick:'铁轨收藏家',delta:14},{nick:'慢车爱好者',delta:11},{nick:'你',delta:8,me:true},{nick:'京九铁道',delta:7},{nick:'沪昆走遍',delta:5}]; }
  document.getElementById('r-list').innerHTML=list.map((r,i)=>{
  const cls=r.me?'rank-row me':'rank-row';
  const val=curRankTab==='progress'?`<span class="val"><b>+${r.delta}</b> 站</span>`
@@ -1828,19 +1833,17 @@ function renderAll(){
 }
 function saveGame(){
  if(!G)return;
- try{
  const d={...G,
  stationsVisited:[...G.stationsVisited], achievements:[...G.achievements],
  trainsTaken:[...G.trainsTaken], linesRidden:[...G.linesRidden], seatsTaken:[...G.seatsTaken],
+ _version:1, _uid:DB.getProfileId(),
  };
- localStorage.setItem('railJourneySave_v1',JSON.stringify(d));
- }catch(e){console.warn('save failed',e);}
+ DB.saveSave(d); // 走统一数据层（本地默认；未来切 Supabase 无需改动）
 }
 function loadGame(){
  try{
- const raw=localStorage.getItem('railJourneySave_v1');
- if(!raw)return false;
- const d=JSON.parse(raw);
+ const d=DB.loadSave(); // 走统一数据层，兼容旧 localStorage 存档键
+ if(!d)return false;
  G={...d,
  stationsVisited:new Set(d.stationsVisited), achievements:new Set(d.achievements),
  trainsTaken:new Set(d.trainsTaken), linesRidden:new Set(d.linesRidden), seatsTaken:new Set(d.seatsTaken),
@@ -1855,7 +1858,7 @@ function loadGame(){
 }
 function resetGame(){
  if(!confirm('确定要清空所有旅程进度重新开始吗？'))return;
- try{localStorage.removeItem('railJourneySave_v1');}catch(e){}
+ DB.clearSave();
  newGame();
  selFrom=null;selTo=null;selTrain=null;
  closeTrip();
