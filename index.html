@@ -70,7 +70,10 @@ button{font-family:inherit;cursor:pointer}
 /* ============ 顶栏 ============ */
 #topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px 16px;margin:10px}
 .stat{font-size:.92em;background:var(--panel2);padding:5px 12px;border-radius:16px}
-.stat b{color:var(--gold)}
+.stat b{color:var(--text);font-weight:700}
+#ticker{overflow:hidden;white-space:nowrap;background:var(--panel);border:1px solid var(--border);border-radius:10px;margin:0 10px 10px;padding:6px 0;font-size:.8em;color:var(--dim)}
+#ticker #ticker-track{display:inline-block;white-space:nowrap;padding-left:100%;animation:ticker-scroll 60s linear infinite}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 .spacer{flex:1}
 .tbtn{padding:7px 14px;border-radius:18px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em}
 .tbtn:hover{border-color:var(--blue)}
@@ -81,10 +84,10 @@ button{font-family:inherit;cursor:pointer}
 .line-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow-y:auto;height:100%;padding:12px 16px;scrollbar-gutter:stable}
 /* 车次/购票卡区（选完站就地展开） */
 #book-area{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
-#book-area .bk-title{font-size:1.02em;color:var(--blue);font-weight:bold;margin-bottom:10px}
+#book-area .bk-title{font-size:1.02em;color:var(--text);font-weight:bold;margin-bottom:10px}
 #book-area .bk-tip{color:var(--faint);font-size:.85em;text-align:center;padding:18px 10px;line-height:1.8}
 .line-panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;margin-bottom:12px}
-.line-panel-head .ttl{font-size:1.05em;color:var(--blue);font-weight:bold;letter-spacing:1px}
+.line-panel-head .ttl{font-size:1.05em;color:var(--text);font-weight:bold;letter-spacing:1px}
 .line-panel-head .hint{color:var(--faint);font-size:.75em}
 .line-panel-head{margin-bottom:8px}
 /* 出发/到达双槽位 */
@@ -95,7 +98,7 @@ button{font-family:inherit;cursor:pointer}
 .slot-btn .sl-lb{color:var(--faint);font-size:.62em;letter-spacing:1px}
 .slot-btn .sl-nm{font-size:1em;font-weight:bold;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .slot-btn.active .sl-nm{color:var(--gold)}
-.slot-btn.has-val .sl-nm{color:var(--blue)}
+.slot-btn.has-val .sl-nm{color:var(--text)}
 .search-row{display:flex;gap:6px;margin-bottom:8px}
 .search-row input{flex:1;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 10px;font-size:.85em;outline:none}
 .search-row input:focus{border-color:var(--gold)}
@@ -126,7 +129,7 @@ button{font-family:inherit;cursor:pointer}
 .tab{flex:1;padding:11px 0;text-align:center;background:transparent;border:none;color:var(--dim);font-size:.93em;border-bottom:2px solid transparent}
 .tab.active{color:var(--blue);border-bottom-color:var(--blue)}
 .tab-body{flex:1;overflow-y:auto;padding:14px}
-.tab-body h3{color:var(--blue);font-size:1.02em;margin-bottom:10px}
+.tab-body h3{color:var(--text);font-size:1.02em;margin-bottom:10px}
 
 /* 订票 */
 .book-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:10px}
@@ -134,7 +137,7 @@ button{font-family:inherit;cursor:pointer}
 .station-box:hover{border-color:var(--blue)}
 .station-box.sel{border-color:var(--gold);box-shadow:0 0 10px rgba(253,216,53,.35)}
 .station-box .lb{color:var(--faint);font-size:.72em;margin-bottom:2px}
-.station-box .nm{font-size:1.15em;font-weight:bold;color:var(--gold)}
+.station-box .nm{font-size:1.15em;font-weight:bold;color:var(--text)}
 .station-box .ln{color:var(--dim);font-size:.75em;margin-top:2px}
 .swap-btn{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--dim);font-size:1em}
 .swap-btn:hover{color:var(--blue);border-color:var(--blue)}
@@ -145,13 +148,13 @@ button{font-family:inherit;cursor:pointer}
 .train-list li{padding:9px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:6px;cursor:pointer;background:var(--panel2);transition:.15s}
 .train-list li:hover{border-color:var(--blue)}
 .train-list li.sel{border-color:var(--gold);background:rgba(253,216,53,.08)}
-.train-list .no{font-weight:bold;color:var(--blue);font-size:1.05em}
+.train-list .no{font-weight:bold;color:var(--text);font-size:1.05em}
 .train-list .tm{color:var(--dim);font-size:.78em;margin-top:2px}
 .seat-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
 .seat-btn{padding:7px 12px;border-radius:16px;border:1px solid var(--border);background:var(--panel2);color:var(--dim);font-size:.85em}
 .seat-btn.sel{border-color:var(--gold);color:var(--gold);background:rgba(253,216,53,.1)}
 .price-line{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:.92em;line-height:1.8}
-.price-line b{color:var(--orange);font-size:1.2em}
+.price-line b{color:var(--text);font-size:1.2em}
 .btn{padding:9px 18px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.93em;margin:4px 4px 4px 0}
 .btn:hover{border-color:var(--blue)}
 .btn.primary{background:#4fc3f7135deg,#4fc3f7,#2979ff);border:none;color:#fff;font-weight:bold}
@@ -161,7 +164,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* 手账 */
 .log-item{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px}
-.log-item .no{font-weight:bold;color:var(--blue)}
+.log-item .no{font-weight:bold;color:var(--text)}
 .log-item .rt{font-size:1em;margin:3px 0;color:var(--text)}
 .log-item .mt{color:var(--faint);font-size:.78em;line-height:1.6}
 .empty-tip{color:var(--faint);font-size:.85em;text-align:center;padding:30px 10px;line-height:1.8}
@@ -175,7 +178,7 @@ button{font-family:inherit;cursor:pointer}
 .ach-card .at{font-weight:bold;font-size:.88em;margin-bottom:3px;color:var(--dim)}
 .ach-card.unlocked .at{color:var(--gold)}
 .ach-card .ad{font-size:.75em;color:var(--faint);line-height:1.5}
-.ach-card .rw{font-size:.72em;color:var(--orange);margin-top:4px}
+.ach-card .rw{font-size:.72em;color:var(--dim);margin-top:4px}
 .overview{margin-bottom:10px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:.9em;line-height:1.9}
 
 /* 设置 */
@@ -194,7 +197,7 @@ button{font-family:inherit;cursor:pointer}
 #trip-top .tno{font-weight:bold;color:var(--blue);font-size:1.15em}
 #trip-top .tname{color:var(--dim);font-size:.78em}
 .tstat{font-size:.85em;color:var(--dim)}
-.tstat b{color:var(--gold)}
+.tstat b{color:var(--text)}
 #scenery-wrap{flex:1;position:relative;overflow:hidden;background:#0e141c}
 #scenery-svg{position:absolute;inset:0;width:100%;height:100%}
 #fg-layer{position:absolute;left:0;top:0;bottom:0;width:200%;pointer-events:none}
@@ -219,14 +222,14 @@ button{font-family:inherit;cursor:pointer}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:60;backdrop-filter:blur(3px)}
 .modal{background:var(--panel);border:1px solid var(--border);border-radius:16px;max-width:560px;width:92%;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 10px 50px rgba(0,0,0,.6)}
 .modal-head{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border)}
-.modal-head h2{font-size:1.15em;color:var(--blue)}
+.modal-head h2{font-size:1.15em;color:var(--text)}
 .close-btn{border:none;background:transparent;color:var(--dim);font-size:1.6em;line-height:1}
 .close-btn:hover{color:var(--red)}
 .modal-body{padding:18px 20px;overflow-y:auto}
 .meal-list{list-style:none}
 .meal-list li{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px}
 .meal-list .mn{font-weight:bold}
-.meal-list .mp{color:var(--orange);font-weight:bold}
+.meal-list .mp{color:var(--text);font-weight:bold}
 .meal-list .ms{color:var(--faint);font-size:.75em}
 .settle-box{text-align:center;padding:10px 0}
 .settle-box .big{font-size:1.5em;font-weight:bold;color:var(--gold);margin-bottom:6px}
@@ -261,9 +264,8 @@ button{font-family:inherit;cursor:pointer}
 .home-hero .hh-tagline{font-size:.82em;color:var(--faint);margin-top:10px;letter-spacing:3px}
 .stats{display:flex;gap:8px}
 .stat-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;text-align:center}
-.stat-box .n{font-size:1.35em;font-weight:700;color:var(--gold)}
+.stat-box .n{font-size:1.35em;font-weight:700;color:var(--text)}
 .stat-box .l{font-size:.68em;color:var(--faint);margin-top:2px}
-.stat-box.g .n{color:var(--green)} .stat-box.b .n{color:var(--blue)} .stat-box.p .n{color:var(--purple)}
 /* 我的旅程状态 */
 .trip-status{display:flex;gap:8px}
 .ts-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:11px 14px}
@@ -271,7 +273,7 @@ button{font-family:inherit;cursor:pointer}
 .ts-box .ts-main{font-weight:700;font-size:.98em}
 .ts-box .ts-sub{font-size:.74em;color:var(--dim);margin-top:3px}
 .ts-box.next{border-color:var(--blue)}
-.ts-box.next .ts-main{color:var(--blue);font-size:1.25em}
+.ts-box.next .ts-main{color:var(--text);font-size:1.25em}
 .btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:#f0b429135deg,#f0b429,#e67e22);color:#1a1206;margin:12px 0}
 .btn-big:hover{filter:brightness(1.08)}
 /* 车站打卡墙 */
@@ -307,15 +309,15 @@ button{font-family:inherit;cursor:pointer}
 /* 氛围层 */
 .feed-list{display:flex;flex-direction:column;gap:4px}
 .feed-item{display:flex;align-items:center;gap:8px;font-size:.82em;padding:5px 10px;border-radius:7px;background:var(--panel2);border:1px solid var(--border)}
-.feed-item .f-u{font-weight:600;color:var(--blue);white-space:nowrap}
+.feed-item .f-u{font-weight:600;color:var(--dim);white-space:nowrap}
 .feed-item .f-a{color:var(--dim)}
-.feed-item .f-s{color:var(--gold);font-weight:600;white-space:nowrap}
+.feed-item .f-s{color:var(--dim);font-weight:600;white-space:nowrap}
 .feed-item .f-t{margin-left:auto;color:var(--faint);font-size:.74em;white-space:nowrap}
 .overlap-note{display:flex;flex-direction:column;gap:3px;margin-top:8px;font-size:.78em;color:var(--green)}
 /* 我的位置卡 */
 .loc-row{font-size:.9em}
 .loc-row .loc-lb{font-size:.7em;color:var(--faint);letter-spacing:2px;margin-bottom:3px}
-.loc-row .loc-main{font-size:1.2em;font-weight:700;color:var(--gold)}
+.loc-row .loc-main{font-size:1.2em;font-weight:700;color:var(--text)}
 .loc-row .loc-sub{color:var(--dim);font-size:.8em;margin-top:4px;line-height:1.7}
 .loc-row .rk{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1px 8px;margin:2px 3px 0 0;font-size:.8em}
 /* 线路进度 */
@@ -355,7 +357,7 @@ button{font-family:inherit;cursor:pointer}
 .mile.ok{border-color:var(--green);background:rgba(63,185,80,.08)}
 .mile.ok .mn{color:var(--green)}
 .mile.cur{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
-.mile .prog{font-size:.62em;color:var(--blue)}
+.mile .prog{font-size:.62em;color:var(--dim)}
 /* 足迹 */
 .prov-cloud{display:flex;flex-wrap:wrap;gap:6px}
 .prov{font-size:.82em;padding:5px 12px;border-radius:14px;border:1px solid var(--border);color:var(--faint)}
@@ -372,7 +374,7 @@ button{font-family:inherit;cursor:pointer}
 .honor-item.got{border-color:var(--gold);background:rgba(240,180,41,.1)}
 .honor-item.got .hn{color:var(--gold);font-weight:600}
 .honor-item.cur{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
-.honor-item .prog{font-size:.62em;color:var(--blue)}
+.honor-item .prog{font-size:.62em;color:var(--dim)}
 /* 排行 */
 .rank-tabs{display:flex;gap:6px;margin-bottom:8px}
 .rank-tabs button{padding:5px 14px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:.8em;cursor:pointer}
@@ -390,32 +392,76 @@ button{font-family:inherit;cursor:pointer}
 .log-list{display:flex;flex-direction:column;gap:5px}
 .log-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--border)}
 .log-item .date{width:74px;font-size:.72em;color:var(--faint);flex:none}
-.log-item .no{font-weight:700;font-size:.9em;color:var(--blue);flex:none;width:56px}
+.log-item .no{font-weight:700;font-size:.9em;color:var(--text);flex:none;width:56px}
 .log-item .rt{flex:1;font-size:.86em}
 .log-item .rt small{color:var(--faint);font-size:.72em}
 .log-item .km{color:var(--dim);font-size:.78em;flex:none}
+
+/* ============ 移动端竖屏适配（窄屏 < 660px，手机竖屏为主） ============ */
+@media (max-width:660px){
+ #topbar{gap:6px;padding:6px 8px;margin:6px 6px 4px}
+ #topbar .stat{font-size:.76em;padding:4px 8px}
+ #s-badge{font-size:.68em}
+ #ticker{margin:0 6px 6px;font-size:.7em}
+ .nav{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:8px 0}
+ .nav button{padding:8px 4px;font-size:.82em;text-align:center}
+ .card{padding:11px 12px;margin:8px 0}
+ .stats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+ .stat-box{padding:7px 4px}
+ .stat-box .n{font-size:1.1em}
+ .trip-status{flex-wrap:wrap}
+ .ts-box{min-width:calc(50% - 8px)}
+ .station-grid{grid-template-columns:repeat(4,1fr);gap:2px}
+ .station-chip{font-size:10px}
+ .ck-grid{grid-template-columns:repeat(4,1fr);gap:3px}
+ .ck-btn{font-size:.68em}
+ .city-grid{grid-template-columns:repeat(4,1fr)}
+ .stamp-grid{grid-template-columns:repeat(5,1fr)}
+ .stamp .dot{width:22px;height:22px;font-size:9px}
+ .mile-grid{grid-template-columns:repeat(4,1fr);gap:4px}
+ .honor-grid{grid-template-columns:repeat(4,1fr);gap:4px}
+ .line-grid{grid-template-columns:1fr}
+ .bureau-grid{grid-template-columns:repeat(2,1fr);max-height:40vh}
+ .bureau-btn{font-size:.78em}
+ .slot-row{gap:4px}
+ .slot-btn{padding:6px 6px}
+ .slot-btn .sl-nm{font-size:.86em}
+ .book-grid{gap:6px}
+ .station-box{padding:8px 6px}
+ .station-box .nm{font-size:.98em}
+ .search-row input{font-size:.82em;padding:7px 8px}
+ .modal{width:96%;max-height:90vh}
+ .modal-body{padding:14px 14px}
+ .modal-head{padding:12px 14px}
+ #trip-top{padding:6px 8px;gap:6px}
+ #trip-ctrl{padding:8px;gap:6px}
+ .speed-btn,.ctrl-btn{font-size:.72em;padding:6px 8px}
+ #announce{font-size:.85em;padding:8px 16px}
+ .rank-row{gap:6px;padding:6px 8px}
+ .rank-row .pos{width:26px}
+ .group-name{letter-spacing:1px}
+ .home-title{font-size:.94em}
+ .line-wrap{padding:10px 10px}
+ .book-grid .station-box .nm{font-size:.9em}
+ #seo-intro{padding:10px 12px}
+}
 </style>
 </head>
 <body>
 
-<!-- ============ SEO 静态首段（对爬虫友好，也提升可读性）============ -->
-<div id="seo-intro" style="max-width:1180px;margin:10px auto 0;padding:14px 18px;background:var(--panel);border:1px solid var(--border);border-radius:12px;line-height:1.7;color:var(--dim)">
- <h1 style="font-size:1.15em;color:var(--text);margin:0 0 6px">铁旅 · 中国高铁模拟旅程</h1>
- <p style="margin:0;font-size:.72em;color:var(--faint);cursor:pointer;user-select:none" onclick="toggleIntro()">关于本游戏 ▸</p>
- <div id="intro-detail" style="display:none;margin-top:6px;font-size:.85em;line-height:1.7">
- 免费、即点即玩、无需下载。游戏覆盖 <b>京沪高速线、京广高速线、京沈高速线、哈大高速线、徐兰高速线、沪昆高速线、杭深线</b> 共 7 条中国高速铁路线、107 座车站、<b>3530 趟真实车次</b>。你可以选择出发站与到达站、买票上车、沿真实经停站行驶，体验窗外风景、报站广播与餐车点餐，收集 16 项铁路成就，书写旅程手账。
- </div>
-</div>
 
 <!-- ============ 顶栏 ============ -->
 <div id="topbar">
- <span class="stat" id="s-badge" style="color:var(--gold);font-weight:600;font-size:.78em"></span>
+ <span class="stat" id="s-badge" style="color:var(--dim);font-weight:600;font-size:.78em"></span>
  <span class="spacer"></span>
  <span class="stat"><b id="s-money">0</b></span>
  <span class="stat"><b id="s-km">0</b> km</span>
  <span class="stat"><b id="s-stations">0</b> 站</span>
  <button class="tbtn" onclick="openPanel('set')">⚙ 设置</button>
 </div>
+
+<!-- ============ 全服排行滚动条（单行循环 · 全量滚动，后续按优先级管理） ============ -->
+<div id="ticker"><div id="ticker-track"></div></div>
 
 <!-- ============ 主导航 ============ -->
 <div class="nav">
@@ -465,7 +511,7 @@ button{font-family:inherit;cursor:pointer}
  <div class="card">
  <div class="home-title"> 我的旅程</div>
  <div id="h-journey"></div>
- <div class="small-note" style="margin-top:8px"> 想体验窗外风景、报站广播？<a href="javascript:showView('book')" style="color:var(--gold)">模拟坐车体验（隐藏玩法）</a></div>
+ <div class="small-note" style="margin-top:8px"> 想体验窗外风景、报站广播？<a href="javascript:showView('book')" style="color:var(--blue)">模拟坐车体验（隐藏玩法）</a></div>
  </div>
  <div class="card" id="h-atmos"></div>
 </div>
@@ -514,7 +560,7 @@ button{font-family:inherit;cursor:pointer}
 <!-- ============ 足迹 ============ -->
 <div id="view-footprint" class="view">
  <div class="card"><div class="group-name"> 足迹省份（点亮 = 到访过）</div><div class="prov-cloud" id="f-prov"></div></div>
- <div class="card"><div class="group-name"> 铁路局覆盖（我的足迹归属）</div><div class="bureau-cloud" id="f-bureau"></div><div class="small-note" style="margin-top:6px">按你打卡车站归属的铁路局统计 · 所在局：<b id="f-my-bureau" style="color:var(--gold)">—</b></div></div>
+ <div class="card"><div class="group-name"> 铁路局覆盖（我的足迹归属）</div><div class="bureau-cloud" id="f-bureau"></div><div class="small-note" style="margin-top:6px">按你打卡车站归属的铁路局统计 · 所在局：<b id="f-my-bureau" style="color:var(--text)">—</b></div></div>
  <div class="card"><div class="group-name"> 到访城市</div><div class="city-grid" id="f-city"></div></div>
 </div>
 
@@ -896,7 +942,7 @@ function renderBookTab(){
  }
  trains=trains.slice().sort((a,b)=>RAIL.realTrains[a].dep.localeCompare(RAIL.realTrains[b].dep));
  const km=kmBetween(selFrom,selTo);
- s+=`<div class="price-line">里程约 <b>${km} km</b> · 可乘 <b style="color:var(--gold)">${trains.length}</b> 趟直达车次</div>`;
+ s+=`<div class="price-line">里程约 <b>${km} km</b> · 可乘 <b style="color:var(--text)">${trains.length}</b> 趟直达车次</div>`;
  // 车次列表
  const limit=Math.min(bookShowAll?trains.length:12, trains.length);
  s+='<div style="font-size:.85em;color:var(--dim);margin-bottom:6px">选择车次：</div><ul class="train-list">';
@@ -920,7 +966,7 @@ function renderBookTab(){
  const price=priceOf(selFrom,selTo,selSeat);
  const t0=RAIL.realTrains[tr];
  const est=Math.max(5,Math.round((timeToMin(t0.arr)-timeToMin(t0.dep))*kmBetween(selFrom,selTo)/routeKm(t0.stops)));
- s+=`<div class="price-line">车次 <b style="color:var(--blue)">${tr}</b> · ${selSeat} 票价：<b>${fmtMoney(price)}</b> · 预计 ${fmtDur(est)} · 余额 ${fmtMoney(G.money)}</div>`;
+ s+=`<div class="price-line">车次 <b style="color:var(--text)">${tr}</b> · ${selSeat} 票价：<b>${fmtMoney(price)}</b> · 预计 ${fmtDur(est)} · 余额 ${fmtMoney(G.money)}</div>`;
  s+=`<button class="btn primary block" style="font-size:1.05em" ${G.money>=price?'':'disabled'} onclick="buyTicket('${tr}','${selFrom}','${selTo}','${selSeat}')"> 购票出发</button>`;
  el.innerHTML=s;
 }
@@ -1258,7 +1304,7 @@ function settleTrip(manual){
  body.innerHTML=`<div class="settle-box">
  <div class="photo-badge"></div>
  <div class="big">${rec.no} · ${rec.from} → ${to}</div>
- <div class="line">${t.cls}${t.no} · ${t.seat} · 用时约 ${t.durMin} 分钟<br>本次里程：<b style="color:var(--gold)">${km} km</b> · 票价 ${fmtMoney(t.price)}<br>到达时刻：${arrivalTime}</div>
+ <div class="line">${t.cls}${t.no} · ${t.seat} · 用时约 ${t.durMin} 分钟<br>本次里程：<b style="color:var(--text)">${km} km</b> · 票价 ${fmtMoney(t.price)}<br>到达时刻：${arrivalTime}</div>
  <button class="btn primary block" onclick="closeModal()">继续旅程</button>
  </div>`;
  document.getElementById('modal-bg').classList.remove('hidden');
@@ -1321,7 +1367,7 @@ function renderLogTab(){
 function renderAchTab(){
  const el=document.getElementById('modal-body');
  const n=G.achievements.size;
- let s=`<div class="overview"> 已解锁 <b style="color:var(--gold)">${n}</b>/16<br> 累计里程 <b style="color:var(--gold)">${G.totalKm}</b> km · 到访 <b style="color:var(--gold)">${G.stationsVisited.size}</b> 站<br> 乘过 <b style="color:var(--gold)">${G.trainsTaken.size}</b> 个车次 · 覆盖 <b style="color:var(--gold)">${G.linesRidden.size}</b>/7 条线路<br> 照片 <b style="color:var(--gold)">${G.photos.length}</b> 张 · 餐车 <b style="color:var(--gold)">${G.meals}</b> 次</div>`;
+ let s=`<div class="overview"> 已解锁 <b style="color:var(--text)">${n}</b>/16<br> 累计里程 <b style="color:var(--text)">${G.totalKm}</b> km · 到访 <b style="color:var(--text)">${G.stationsVisited.size}</b> 站<br> 乘过 <b style="color:var(--text)">${G.trainsTaken.size}</b> 个车次 · 覆盖 <b style="color:var(--text)">${G.linesRidden.size}</b>/7 条线路<br> 照片 <b style="color:var(--text)">${G.photos.length}</b> 张 · 餐车 <b style="color:var(--text)">${G.meals}</b> 次</div>`;
  s+='<h3> 成就列表</h3><div class="ach-grid">';
  for(const a of ACHIEVEMENTS){
  const u=G.achievements.has(a.id);
@@ -1687,7 +1733,7 @@ function checkinByGPS(){
  }catch(e){
  btn.classList.remove('busy');
  btn.textContent=' 位置扫描 · 当前环境拦截定位，点车站手动打卡';
- toast('定位接口被当前环境拦截（预览面板/iframe 常见）——请<a href="'+location.href+'" target="_blank" style="color:var(--gold)">新窗口打开</a>体验真实定位，或点车站手动打卡','err');
+ toast('定位接口被当前环境拦截（预览面板/iframe 常见）——请<a href="'+location.href+'" target="_blank" style="color:var(--blue)">新窗口打开</a>体验真实定位，或点车站手动打卡','err');
  }
 }
 function doCheckin(name){
@@ -1831,6 +1877,13 @@ function dismissOnboard(){
 }
 function reShowOnboard(){
  document.getElementById('onboard-banner').style.display='block';
+}
+function renderTicker(){
+ const t=document.getElementById('ticker-track');
+ if(!t)return;
+ /* 全量滚动：一次性展示全部全服动态；真实数据接入后按优先级排序（自己的成绩/好友动态优先） */
+ const items=SIM_FEED.map(f=>'<span style="margin:0 20px">'+f.u+' '+f.act+' '+f.station+' '+f.ago+'</span>').join('');
+ t.innerHTML='<span>'+items+'</span><span>'+items+'</span>';
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
@@ -1976,6 +2029,7 @@ function closeModal(){
 document.addEventListener('DOMContentLoaded',function(){
  if(!loadGame())newGame();
  applyTheme(); initOnboard();
+ renderTicker();
  renderAll();
  document.querySelectorAll('.modal-bg').forEach(m=>{
  m.addEventListener('click',function(e){if(e.target===m)this.classList.add('hidden');});
@@ -1991,5 +2045,13 @@ document.addEventListener('DOMContentLoaded',function(){
  });
 });
 </script>
+<!-- ============ 品牌与游戏介绍（放页面底部，顶部保持干净）============ -->
+<div id="seo-intro" style="max-width:1180px;margin:0 auto;padding:14px 18px;background:var(--panel);border-top:1px solid var(--border);line-height:1.7;color:var(--dim)">
+ <h1 style="font-size:1.15em;color:var(--text);margin:0 0 6px">铁旅 · 中国高铁模拟旅程</h1>
+ <p style="margin:0;font-size:.72em;color:var(--faint);cursor:pointer;user-select:none" onclick="toggleIntro()">关于本游戏 ▸</p>
+ <div id="intro-detail" style="display:none;margin-top:6px;font-size:.85em;line-height:1.7">
+ 免费、即点即玩、无需下载。游戏覆盖 <b>京沪高速线、京广高速线、京沈高速线、哈大高速线、徐兰高速线、沪昆高速线、杭深线</b> 共 7 条中国高速铁路线、107 座车站、<b>3530 趟真实车次</b>。你可以选择出发站与到达站、买票上车、沿真实经停站行驶，体验窗外风景、报站广播与餐车点餐，收集 16 项铁路成就，书写旅程手账。
+ </div>
+</div>
 </body>
 </html>
