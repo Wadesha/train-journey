@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>铁旅 Demo · 我的铁路护照（模拟数据版）</title>
+<style>
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2d3748;
+  --text:#e6edf3; --dim:#9aa7b8; --faint:#5c6877;
+  --gold:#f0b429; --blue:#4fc3f7; --green:#3fb950; --red:#f85149; --purple:#a371f7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",-apple-system,sans-serif;line-height:1.5;padding:16px}
+.wrap{max-width:1020px;margin:0 auto}
+h2.sec{font-size:1.1em;margin:14px 0 8px;padding-left:10px;border-left:4px solid var(--gold);color:var(--gold)}
+
+/* topbar */
+.topbar{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:12px 16px;flex-wrap:wrap}
+.pcard{display:flex;align-items:center;gap:10px}
+.pcard .ava{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#f0b429,#e67e22);display:flex;align-items:center;justify-content:center;font-size:1.3em}
+.pcard .nm{font-weight:700;font-size:1.02em}
+.pcard .bd{font-size:.7em;color:var(--gold);background:rgba(240,180,41,.14);border:1px solid var(--gold);border-radius:10px;padding:0 8px;display:inline-block;margin-top:2px}
+.tstats{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.tstat{background:var(--panel2);border:1px solid var(--border);border-radius:9px;padding:5px 12px;text-align:center;min-width:76px}
+.tstat .n{font-size:1.05em;font-weight:700;color:var(--gold)}
+.tstat .l{font-size:.62em;color:var(--faint)}
+
+/* nav */
+.nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.nav button{padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.9em;cursor:pointer}
+.nav button.sel{border-color:var(--gold);color:var(--gold);font-weight:700;background:rgba(240,180,41,.08)}
+
+/* panels */
+.panel{display:none}
+.panel.show{display:block}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:10px 0}
+
+/* passport */
+.stats{display:flex;gap:8px}
+.stat-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;text-align:center}
+.stat-box .n{font-size:1.4em;font-weight:700;color:var(--gold)}
+.stat-box .l{font-size:.7em;color:var(--faint);margin-top:2px}
+.stat-box.g .n{color:var(--green)} .stat-box.b .n{color:var(--blue)} .stat-box.p .n{color:var(--purple)}
+.group-name{font-size:.72em;color:var(--faint);letter-spacing:2px;margin:10px 0 6px;display:flex;align-items:center;gap:8px}
+.group-name::after{content:'';flex:1;height:1px;background:var(--border)}
+.line-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.line-row{display:flex;align-items:center;gap:7px;padding:6px 9px;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--panel2);transition:.1s}
+.line-row:hover{border-color:var(--blue)}
+.line-row.sel{border-color:var(--gold);background:rgba(240,180,41,.07)}
+.line-row .bar{width:4px;height:20px;border-radius:2px;flex:none}
+.line-row .nm{font-size:.82em;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.line-row .done{font-size:.66em;color:var(--green);flex:none}
+.line-row .pb{width:52px;height:5px;background:#232b38;border-radius:3px;overflow:hidden;flex:none}
+.line-row .pb i{display:block;height:100%;border-radius:3px}
+.line-row .cnt{font-size:.72em;color:var(--dim);flex:none}
+.stamps{background:rgba(13,17,23,.5);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:8px}
+.st-title{font-size:.82em;color:var(--dim);margin-bottom:8px}
+.st-title b{color:var(--text)}
+.stamp-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.stamp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;padding:4px 1px 3px;cursor:pointer;border:1px solid transparent}
+.stamp:hover{border-color:var(--border);background:var(--panel2)}
+.stamp .dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}
+.stamp.visited .dot{background:rgba(240,180,41,.18);border:2px solid var(--gold);color:var(--gold);font-weight:700}
+.stamp.passed .dot{background:transparent;border:2px dashed var(--faint);color:var(--faint)}
+.stamp.unseen .dot{background:#1a2029;border:2px solid #2a3444;color:#3d4756}
+.stamp .sn{font-size:.64em;color:var(--dim);white-space:nowrap}
+.stamp.visited .sn{color:var(--gold);font-weight:600}
+.legend{display:flex;gap:12px;margin-top:8px;font-size:.7em;color:var(--dim)}
+.legend .s{width:12px;height:12px;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:3px}
+.legend .s.g{background:rgba(240,180,41,.18);border:2px solid var(--gold)}
+.legend .s.p{border:2px dashed var(--faint)}
+.legend .s.u{background:#1a2029;border:2px solid #2a3444}
+
+/* milestones */
+.mile-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.mile{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:8px;padding:8px 2px;text-align:center;background:var(--panel2);border:1px solid var(--border)}
+.mile .ic{font-size:1.2em}
+.mile .mn{font-size:.64em;color:var(--faint);line-height:1.3}
+.mile.ok{border-color:var(--green);background:rgba(63,185,80,.08)}
+.mile.ok .mn{color:var(--green)}
+.mile.cur{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.mile .prog{font-size:.62em;color:var(--blue)}
+
+/* footprint */
+.prov-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.prov{font-size:.82em;padding:5px 12px;border-radius:14px;border:1px solid var(--border);color:var(--faint)}
+.prov.vis{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);font-weight:600}
+.city-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.city{font-size:.72em;padding:4px 2px;border-radius:6px;text-align:center;background:var(--panel2);border:1px solid var(--border);color:var(--dim)}
+.city.vis{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);font-weight:600}
+
+/* honor */
+.honor-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.honor-item{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:8px;padding:8px 2px;text-align:center;background:var(--panel2);border:1px solid var(--border)}
+.honor-item .ic{font-size:1.35em}
+.honor-item .hn{font-size:.68em;color:var(--faint);line-height:1.3}
+.honor-item .req{font-size:.6em;color:var(--faint)}
+.honor-item.got{border-color:var(--gold);background:rgba(240,180,41,.1)}
+.honor-item.got .hn{color:var(--gold);font-weight:600}
+.honor-item.cur{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.honor-item .prog{font-size:.62em;color:var(--blue)}
+
+/* rank */
+.rank-tabs{display:flex;gap:6px;margin-bottom:8px}
+.rank-tabs button{padding:5px 14px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:.8em;cursor:pointer}
+.rank-tabs button.sel{border-color:var(--gold);color:var(--gold);font-weight:600}
+.rank-list{display:flex;flex-direction:column;gap:4px}
+.rank-row{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--border)}
+.rank-row.me{border-color:var(--gold);background:rgba(240,180,41,.08)}
+.rank-row .pos{width:34px;text-align:center;font-weight:700;color:var(--dim);flex:none}
+.rank-row .pos.top{color:var(--gold)}
+.rank-row .nick{flex:1;font-size:.88em;font-weight:600}
+.rank-row .nick small{color:var(--faint);font-weight:normal;font-size:.72em;margin-left:6px}
+.rank-row .val{color:var(--dim);font-size:.8em;flex:none}
+.rank-row .val b{color:var(--text)}
+
+/* log */
+.log-list{display:flex;flex-direction:column;gap:5px}
+.log-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--border)}
+.log-item .date{width:74px;font-size:.72em;color:var(--faint);flex:none}
+.log-item .no{font-weight:700;font-size:.9em;color:var(--blue);flex:none;width:56px}
+.log-item .rt{flex:1;font-size:.86em}
+.log-item .rt small{color:var(--faint);font-size:.72em}
+.log-item .km{color:var(--dim);font-size:.78em;flex:none}
+
+/* share */
+.share-card{background:linear-gradient(160deg,#1b2a44,#0f1826);border:1px solid var(--gold);border-radius:16px;padding:22px 24px;max-width:420px;margin:0 auto}
+.share-card .sc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.share-card .sc-logo{font-weight:700;color:var(--gold);font-size:1.05em}
+.share-card .sc-badge{font-size:.7em;color:var(--text);background:rgba(240,180,41,.2);border:1px solid var(--gold);border-radius:10px;padding:2px 10px}
+.share-card .sc-route{font-size:1.5em;font-weight:700;letter-spacing:1px}
+.share-card .sc-sub{color:var(--dim);font-size:.8em;margin:6px 0 14px}
+.share-card .sc-meta{display:flex;gap:18px;border-top:1px dashed var(--border);padding-top:10px;font-size:.78em;color:var(--dim)}
+.share-card .sc-meta b{color:var(--gold);font-size:1.15em}
+.share-card .sc-qr{text-align:center;margin-top:14px;font-size:.7em;color:var(--faint);border:1px dashed var(--border);padding:8px;border-radius:8px}
+
+.foot{margin-top:26px;color:var(--faint);font-size:.72em;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===== 顶栏 ===== -->
+<div class="topbar">
+  <div class="pcard">
+    <div class="ava">🚄</div>
+    <div>
+      <div class="nm">铁旅玩家</div>
+      <div class="bd">铁路旅人 · 打卡 236 站</div>
+    </div>
+  </div>
+  <div class="tstats">
+    <div class="tstat"><div class="n" id="t-station">0</div><div class="l">站点打卡</div></div>
+    <div class="tstat"><div class="n" id="t-line">0</div><div class="l">线路集齐</div></div>
+    <div class="tstat"><div class="n" id="t-prov">0</div><div class="l">足迹省份</div></div>
+    <div class="tstat"><div class="n" id="t-km">0</div><div class="l">累计里程km</div></div>
+  </div>
+</div>
+
+<!-- ===== 导航 ===== -->
+<div class="nav">
+  <button class="sel" onclick="showTab('passport')">📔 护照</button>
+  <button onclick="showTab('footprint')">🗺️ 足迹</button>
+  <button onclick="showTab('honor')">🏅 荣誉</button>
+  <button onclick="showTab('rank')">🏆 排行</button>
+  <button onclick="showTab('log')">📖 旅程</button>
+  <button onclick="showTab('share')">🎫 分享卡</button>
+</div>
+
+<!-- ===== 护照 ===== -->
+<div class="panel show" id="tab-passport">
+  <div class="card">
+    <div class="stats">
+      <div class="stat-box"><div class="n" id="s-station">0<span style="font-size:.5em;color:var(--faint)">/428</span></div><div class="l">站点打卡</div></div>
+      <div class="stat-box g"><div class="n" id="s-line">0<span style="font-size:.5em;color:var(--faint)">/15</span></div><div class="l">线路集齐</div></div>
+      <div class="stat-box b"><div class="n" id="s-prov">0</div><div class="l">足迹省份</div></div>
+      <div class="stat-box p"><div class="n" id="s-honor">0/7</div><div class="l">荣誉徽章</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="group-name">🚄 高速铁路 · 7 线</div>
+    <div class="line-grid" id="grid-hs"></div>
+    <div class="group-name">🚃 普速铁路 · 8 线</div>
+    <div class="line-grid" id="grid-ps"></div>
+  </div>
+  <div class="stamps">
+    <div class="st-title"><b id="st-name">京沪高速线</b> 印章册 · 点击印章看详情</div>
+    <div class="stamp-grid" id="stamp-grid"></div>
+    <div class="legend">
+      <span><span class="s g"></span>已打卡</span>
+      <span><span class="s p"></span>途经</span>
+      <span><span class="s u"></span>未到访</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="group-name">🎯 集章里程碑</div>
+    <div class="mile-grid" id="mile-grid"></div>
+  </div>
+</div>
+
+<!-- ===== 足迹 ===== -->
+<div class="panel" id="tab-footprint">
+  <div class="card">
+    <div class="group-name">🗺️ 足迹省份（点亮 = 到访过）</div>
+    <div class="prov-cloud" id="prov-cloud"></div>
+  </div>
+  <div class="card">
+    <div class="group-name">🏙️ 到访城市（金色 = 打卡）</div>
+    <div class="city-grid" id="city-grid"></div>
+  </div>
+</div>
+
+<!-- ===== 荣誉 ===== -->
+<div class="panel" id="tab-honor">
+  <div class="card">
+    <div class="group-name">🏅 荣誉徽章 · 身份层级（纯荣誉，不掺数值）</div>
+    <div class="honor-grid" id="honor-grid"></div>
+  </div>
+</div>
+
+<!-- ===== 排行 ===== -->
+<div class="panel" id="tab-rank">
+  <div class="card">
+    <div class="rank-tabs">
+      <button class="sel" onclick="showRank('friend')">👥 好友榜</button>
+      <button onclick="showRank('nation')">🌏 全国周榜</button>
+      <button onclick="showRank('progress')">📈 本周进步榜</button>
+    </div>
+    <div class="rank-list" id="rank-list"></div>
+  </div>
+</div>
+
+<!-- ===== 旅程 ===== -->
+<div class="panel" id="tab-log">
+  <div class="card">
+    <div class="group-name">📖 我的旅程记录（近 15 次）</div>
+    <div class="log-list" id="log-list"></div>
+  </div>
+</div>
+
+<!-- ===== 分享 ===== -->
+<div class="panel" id="tab-share">
+  <div class="card" style="text-align:center">
+    <div class="group-name">🎫 旅程卡（分享 = 最好的传播）</div>
+    <div class="share-card">
+      <div class="sc-top"><span class="sc-logo">🚄 铁旅</span><span class="sc-badge">铁路旅人</span></div>
+      <div class="sc-route">北京南 → 上海虹桥</div>
+      <div class="sc-sub">G1 · 复兴号 CR400AF · 二等座 · 2026-08-19</div>
+      <div class="sc-meta">
+        <span>里程 <b>1318</b> km</span>
+        <span>用时 <b>4:28</b></span>
+        <span>打卡 <b>7</b> 站</span>
+      </div>
+      <div class="sc-qr">▣ 扫码加入铁旅 · 一起集章（邀请码 TL-8842）</div>
+    </div>
+    <div style="margin-top:14px;font-size:.82em;color:var(--dim)">分享到微信/朋友圈 · 好友点开即带邀请码</div>
+  </div>
+</div>
+
+<div class="foot">铁旅 Demo v1 · 模拟数据（15 线 / 428 站）· 界面与数值均为演示，非最终版</div>
+</div>
+
+<script>
+/* ============ 模拟数据（固定种子，确定性） ============ */
+let seed=20260820;
+function rnd(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648;}
+function pick(a){return a[Math.floor(rnd()*a.length)];}
+
+const LINES=[
+  {key:'京沪高速线',grp:'hs',color:'#e74c3c',bias:.92,stations:['北京南','廊坊','天津西','天津南','沧州西','德州东','济南西','泰安','枣庄','徐州东','宿州东','蚌埠南','滁州','南京南','镇江南','常州北','无锡东','苏州北','上海虹桥']},
+  {key:'京广高速线',grp:'hs',color:'#9b59b6',bias:.8,stations:['北京丰台','保定东','石家庄','邢台东','邯郸东','安阳东','鹤壁东','新乡东','郑州东','许昌东','漯河西','驻马店西','信阳东','孝感北','武汉','咸宁北','岳阳东','长沙南','株洲西','衡阳东','郴州西','韶关','清远','广州北','广州南']},
+  {key:'京沈高速线',grp:'hs',color:'#e67e22',bias:.95,stations:['北京朝阳','承德南','朝阳','阜新','沈阳西','沈阳']},
+  {key:'哈大高速线',grp:'hs',color:'#3498db',bias:.85,stations:['哈尔滨西','长春西','四平东','铁岭西','沈阳北','沈阳','沈阳南','辽阳','鞍山西','营口东','大连北']},
+  {key:'徐兰高速线',grp:'hs',color:'#2ecc71',bias:.6,stations:['商丘','开封北','郑州西','洛阳龙门','三门峡南','渭南北','西安北','咸阳西','宝鸡南','天水南','定西北','兰州西']},
+  {key:'沪昆高速线',grp:'hs',color:'#f1c40f',bias:.75,stations:['嘉兴南','杭州南','金华','衢州','上饶','鹰潭北','抚州东','南昌西','新余北','宜春','萍乡北','湘潭北','娄底南','邵阳北','怀化南','铜仁南','贵阳东','贵阳北','安顺西','曲靖北','昆明南']},
+  {key:'杭深线',grp:'hs',color:'#1abc9c',bias:.5,stations:['杭州东','绍兴北','宁波','台州西','温州南','宁德','福州南','莆田','泉州','厦门北','漳州','潮汕','汕尾','深圳北']},
+  {key:'京沪线',grp:'ps',color:'#607d8b',bias:.85,stations:['北京站','北京南站','黄村站','天津西站','德州站','济南','泰山','磁窑','兖州','枣庄西','徐州站','蚌埠站','南京站','镇江站','丹阳站','常州站','无锡站','苏州站','上海站']},
+  {key:'京广线',grp:'ps',color:'#8d6e63',bias:.7,stations:['北京西站','良乡站','石家庄站','邯郸站','新乡','郑州','漯河','信阳','汉口站','武昌','株洲','衡阳','韶关东','广州']},
+  {key:'京九线',grp:'ps',color:'#795548',bias:.65,stations:['北京西站','霸州站','衡水站','聊城','菏泽','商丘','阜阳站','潢川','麻城','九江','南昌西','吉安','赣州','龙川','深圳']},
+  {key:'陇海线',grp:'ps',color:'#5d4037',bias:.55,stations:['连云港东站','徐州站','商丘','开封','郑州','洛阳东','华山','西安','咸阳','宝鸡','天水','兰州东']},
+  {key:'兰新线',grp:'ps',color:'#546e7a',bias:.45,stations:['兰州','武威南','金昌','张掖','酒泉','嘉峪关','柳园','哈密','吐鲁番','乌鲁木齐']},
+  {key:'哈大线',grp:'ps',color:'#3e7cb1',bias:.8,stations:['哈尔滨','长春','四平','沈阳北','辽阳','海城','大石桥','金州','大连北']},
+  {key:'沪昆线',grp:'ps',color:'#b8860b',bias:.7,stations:['上海站','杭州东站','诸暨站','义乌站','金华站','衢州站','上饶','鹰潭','醴陵','株洲','娄底','怀化','贵阳','六盘水','昆明']},
+  {key:'滨洲线',grp:'ps',color:'#4d7c5f',bias:.4,stations:['哈尔滨','大庆西','昂昂溪','博克图','牙克石','满洲里']},
+];
+
+/* 生成每条线打卡状态 */
+LINES.forEach(L=>{
+  L.state={};
+  L.stations.forEach((n,i)=>{
+    const r=rnd();
+    if(i===0||i===L.stations.length-1){L.state[n]=r<L.bias+0.05?'v':'p';}
+    else if(r<L.bias)L.state[n]='v';
+    else if(r<L.bias+0.22)L.state[n]='p';
+    else L.state[n]='u';
+  });
+  L.vis=Object.keys(L.state).filter(n=>L.state[n]==='v').length;
+  L.done=L.vis===L.stations.length;
+});
+
+/* 省份映射（主要城市） */
+const PROV={
+  '北京南':'北京','廊坊':'河北','天津西':'天津','济南西':'山东','徐州东':'江苏','南京南':'江苏','苏州北':'江苏','上海虹桥':'上海','北京丰台':'北京','石家庄':'河北','郑州东':'河南','武汉':'湖北','长沙南':'湖南','广州南':'广东','北京朝阳':'北京','承德南':'河北','朝阳':'辽宁','阜新':'辽宁','沈阳':'辽宁','哈尔滨西':'黑龙江','长春西':'吉林','大连北':'辽宁','西安北':'陕西','兰州西':'甘肃','昆明南':'云南','杭州东':'浙江','宁波':'浙江','福州南':'福建','厦门北':'福建','深圳北':'广东','嘉兴南':'浙江','南昌西':'江西','贵阳北':'贵州','济南':'山东','泰山':'山东','徐州站':'江苏','南京站':'江苏','上海站':'上海','北京站':'北京','天津西站':'天津','德州站':'山东','郑州':'河南','汉口站':'湖北','武昌':'湖北','株洲':'湖南','广州':'广东','衡水站':'河北','聊城':'山东','菏泽':'山东','阜阳站':'安徽','九江':'江西','南昌西站':'江西','赣州':'江西','深圳':'广东','连云港东站':'江苏','开封':'河南','洛阳东':'河南','西安':'陕西','宝鸡':'陕西','天水':'甘肃','兰州':'甘肃','武威南':'甘肃','张掖':'甘肃','嘉峪关':'甘肃','哈密':'新疆','乌鲁木齐':'新疆','哈尔滨':'黑龙江','长春':'吉林','四平':'吉林','沈阳北':'辽宁','大连北站':'辽宁','上海站':'上海','金华站':'浙江','衢州站':'浙江','上饶':'江西','鹰潭':'江西','怀化':'湖南','贵阳':'贵州','六盘水':'贵州','昆明':'云南','大庆西':'黑龙江','满洲里':'内蒙古','滁州':'安徽','蚌埠南':'安徽','宿州东':'安徽','枣庄':'山东','泰安':'山东','德州东':'山东','沧州西':'河北','保定东':'河北','邯郸东':'河北','安阳东':'河南','许昌东':'河南','信阳东':'河南','岳阳东':'湖南','衡阳东':'湖南','郴州西':'湖南','韶关':'广东','清远':'广东','广州北':'广东','沈阳南':'辽宁','辽阳':'辽宁','鞍山西':'辽宁','营口东':'辽宁','铁岭西':'辽宁','四平东':'吉林','长春':'吉林','商丘':'河南','洛阳龙门':'河南','渭南北':'陕西','宝鸡南':'陕西','天水南':'甘肃','定西北':'甘肃','曲靖北':'云南','温州南':'浙江','宁德':'福建','漳州':'福建','潮汕':'广东','汕尾':'广东','泉州':'福建','莆田':'福建','绍兴北':'浙江','台州西':'浙江','湖州':'浙江'};
+function provOf(n){return PROV[n]||'其他';}
+
+/* 总统计 */
+const allVis=new Set();
+LINES.forEach(L=>Object.keys(L.state).forEach(n=>{if(L.state[n]==='v')allVis.add(n);}));
+const provsVis=new Set([...allVis].map(n=>provOf(n)).filter(p=>p!=='其他'));
+const totalStations=LINES.reduce((a,L)=>a+L.stations.length,0);
+const totalVis=allVis.size;
+const linesDone=LINES.filter(L=>L.done).length;
+
+/* 里程碑 */
+const MILES=[
+  {ic:'🎖️',name:'首站打卡',ok:true},
+  {ic:'🏅',name:'首线集齐',ok:linesDone>=1},
+  {ic:'🥉',name:'集齐 3 线',ok:linesDone>=3,prog:linesDone+'/3'},
+  {ic:'💎',name:'集齐 5 线',ok:linesDone>=5,prog:linesDone+'/5'},
+  {ic:'🏆',name:'集齐 10 线',ok:linesDone>=10,prog:linesDone+'/10'},
+  {ic:'👑',name:'全 15 线',ok:linesDone>=15,prog:linesDone+'/15'},
+  {ic:'🗺️',name:'打卡 300 站',ok:totalVis>=300,prog:totalVis+'/300'},
+];
+
+/* 荣誉 */
+const HONORS=[
+  {ic:'🥉',name:'铁轨行者',req:'10 站',got:true},
+  {ic:'🥈',name:'铁路旅人',req:'50 站',got:true},
+  {ic:'🥇',name:'铁路达人',req:'100 站',got:true},
+  {ic:'💎',name:'铁路收藏家',req:'集齐 5 线',got:linesDone>=5,prog:linesDone+'/5线'},
+  {ic:'🏅',name:'铁路通',req:'集齐 10 线',got:linesDone>=10,prog:linesDone+'/10线'},
+  {ic:'🏆',name:'铁路大师',req:'500 站',got:totalVis>=500,prog:totalVis+'/500'},
+  {ic:'👑',name:'铁道传奇',req:'全 15 线',got:linesDone>=15,prog:linesDone+'/15线'},
+];
+
+/* 足迹城市 */
+const footCities=[...allVis].sort();
+
+/* 好友榜模拟 */
+const FRIENDS=[
+  {nick:'环渤海车迷',title:'铁路达人',km:9870,vis:301,done:5,prov:12,me:false},
+  {nick:'绿皮车情怀',title:'铁路旅人',km:5120,vis:198,done:2,prov:9,me:false},
+  {nick:'铁旅玩家',title:'铁路旅人',km:4680,vis:236,done:4,prov:11,me:true},
+  {nick:'京九铁道',title:'铁轨行者',km:3320,vis:128,done:2,prov:7,me:false},
+  {nick:'沪昆走遍',title:'铁轨行者',km:4210,vis:112,done:1,prov:6,me:false},
+  {nick:'夜行列车长',title:'铁轨行者',km:2980,vis:96,done:0,prov:5,me:false},
+  {nick:'慢车爱好者',title:'新手上路',km:1560,vis:54,done:0,prov:3,me:false},
+  {nick:'铁轨收藏家',title:'新手上路',km:880,vis:23,done:0,prov:2,me:false},
+];
+const NATION=[
+  {nick:'纵横中国',km:38600,vis:412,done:12,prov:24},
+  {nick:'铁道传奇',km:31200,vis:398,done:11,prov:23},
+  {nick:'兰新守望者',km:27500,vis:355,done:10,prov:22},
+  {nick:'京广全程',km:24100,vis:322,done:9,prov:21},
+  {nick:'四纵四横',km:21800,vis:301,done:9,prov:20},
+  {nick:'天山行者',km:18900,vis:280,done:8,prov:19},
+  {nick:'南海之滨',km:16200,vis:251,done:7,prov:18},
+  {nick:'北国风光',km:14100,vis:244,done:7,prov:17},
+  {nick:'铁旅玩家',km:4680,vis:236,done:4,prov:11},
+  {nick:'蓉渝穿梭',km:13200,vis:228,done:6,prov:16},
+];
+const PROGRESS=[
+  {nick:'铁轨收藏家',delta:14,act:'本周新打卡 14 站'},
+  {nick:'慢车爱好者',delta:11,act:'本周新打卡 11 站'},
+  {nick:'铁旅玩家',delta:8,act:'本周新打卡 8 站'},
+  {nick:'京九铁道',delta:7,act:'本周新打卡 7 站'},
+  {nick:'沪昆走遍',delta:5,act:'本周新打卡 5 站'},
+];
+
+/* 旅程记录 */
+const LOGS=[
+  {d:'08-19',no:'G1',rt:'北京南 → 上海虹桥',seat:'二等座',km:1318},
+  {d:'08-15',no:'G711',rt:'哈尔滨西 → 大连北',seat:'一等座',km:921},
+  {d:'08-10',no:'G913',rt:'北京朝阳 → 沈阳',seat:'二等座',km:697},
+  {d:'08-02',no:'Z281',rt:'上海站 → 北京站',seat:'硬卧',km:1463},
+  {d:'07-28',no:'K161',rt:'南京站 → 上海站',seat:'硬座',km:301},
+  {d:'07-20',no:'G1371',rt:'上海虹桥 → 昆明南',seat:'二等座',km:2252},
+  {d:'07-12',no:'G79',rt:'北京丰台 → 广州南',seat:'商务座',km:2298},
+  {d:'07-05',no:'G101',rt:'北京朝阳 → 哈尔滨西',seat:'一等座',km:1255},
+  {d:'06-28',no:'G672',rt:'西安北 → 北京西站',seat:'二等座',km:1216},
+  {d:'06-21',no:'K102',rt:'济南 → 北京站',seat:'硬卧',km:495},
+  {d:'06-15',no:'G1862',rt:'杭州东 → 北京南',seat:'二等座',km:1287},
+  {d:'06-08',no:'D311',rt:'南京南 → 杭州东',seat:'二等座',km:256},
+  {d:'06-01',no:'K161',rt:'北京站 → 南京站',seat:'硬卧',km:1162},
+  {d:'05-24',no:'G28',rt:'上海虹桥 → 北京南',seat:'一等座',km:1318},
+  {d:'05-16',no:'T109',rt:'北京站 → 上海站',seat:'软卧',km:1463},
+];
+
+/* ============ 渲染 ============ */
+let selLine=0, curRank='friend';
+
+function lineRow(L,i){
+  const pct=Math.round(L.vis/L.stations.length*100);
+  return `<div class="line-row ${i===selLine?'sel':''}" onclick="pickLine(${i})">
+    <div class="bar" style="background:${L.color}"></div>
+    <div class="nm">${L.key}</div>
+    ${L.done?'<div class="done">✅</div>':''}
+    <div class="pb"><i style="width:${pct}%;background:${L.color}"></i></div>
+    <div class="cnt">${L.vis}/${L.stations.length}</div>
+  </div>`;
+}
+function renderLines(){
+  document.getElementById('grid-hs').innerHTML=LINES.filter(l=>l.grp==='hs').map((l,i)=>lineRow(l,LINES.indexOf(l))).join('');
+  document.getElementById('grid-ps').innerHTML=LINES.filter(l=>l.grp==='ps').map((l,i)=>lineRow(l,LINES.indexOf(l))).join('');
+}
+function pickLine(i){selLine=i;renderLines();renderStamps();}
+function renderStamps(){
+  const L=LINES[selLine];
+  document.getElementById('st-name').textContent=L.key+'（'+L.grp==='hs'?'高铁':'普速'+' · '+L.stations.length+' 站）';
+  document.getElementById('st-name').textContent=L.key;
+  let s='';
+  L.stations.forEach(n=>{
+    const st=L.state[n];
+    const cls=st==='v'?'visited':(st==='p'?'passed':'unseen');
+    const dot=st==='v'?'✓':(st==='p'?'途':'·');
+    s+=`<div class="stamp ${cls}" title="${n}"><span class="dot">${dot}</span><span class="sn">${n}</span></div>`;
+  });
+  document.getElementById('stamp-grid').innerHTML=s;
+}
+function renderStats(){
+  const sets=[['s-station',totalVis],['s-line',linesDone],['s-prov',provsVis.size],['s-honor',HONORS.filter(h=>h.got).length+'/7']];
+  sets.forEach(([id,v])=>document.getElementById(id).textContent=v);
+  document.getElementById('t-station').textContent=totalVis;
+  document.getElementById('t-line').textContent=linesDone+'线';
+  document.getElementById('t-prov').textContent=provsVis.size+'省';
+  const km=LOGS.reduce((a,l)=>a+l.km,0);
+  document.getElementById('t-km').textContent=(km/1000).toFixed(1)+'k';
+}
+function renderMiles(){
+  document.getElementById('mile-grid').innerHTML=MILES.map((m,i)=>{
+    const cls=m.ok?'ok':(i===MILES.findIndex(x=>!x.ok)?'cur':'');
+    return `<div class="mile ${cls}"><span class="ic">${m.ic}</span><span class="mn">${m.name}</span>${m.prog?`<span class="prog">${m.prog}</span>`:''}</div>`;
+  }).join('');
+}
+function renderHonors(){
+  document.getElementById('honor-grid').innerHTML=HONORS.map((h,i)=>{
+    const cls=h.got?'got':(i===HONORS.findIndex(x=>!x.got)?'cur':'');
+    return `<div class="honor-item ${cls}"><span class="ic">${h.ic}</span><span class="hn">${h.name}</span><span class="req">${h.req}</span>${h.prog?`<span class="prog">${h.prog}</span>`:''}</div>`;
+  }).join('');
+}
+function renderFootprint(){
+  const allProvs=['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','陕西','甘肃','青海','宁夏','新疆','西藏'];
+  document.getElementById('prov-cloud').innerHTML=allProvs.map(p=>`<span class="prov ${provsVis.has(p)?'vis':''}">${p}</span>`).join('');
+  document.getElementById('city-grid').innerHTML=footCities.slice(0,72).map(c=>`<span class="city vis">${c}</span>`).join('');
+}
+function renderRank(){
+  const list=curRank==='friend'?FRIENDS:curRank==='nation'?NATION:PROGRESS;
+  document.getElementById('rank-list').innerHTML=list.map((r,i)=>{
+    const cls=r.me?'rank-row me':'rank-row';
+    const val=curRank==='nation'?`<span class="val"><b>${r.vis}</b> 站 · ${r.done}线 · ${r.prov}省</span>`
+             :curRank==='friend'?`<span class="val"><b>${r.vis}</b> 站 · ${r.done}线</span>`
+             :`<span class="val"><b>+${r.delta}</b> 站</span>`;
+    return `<div class="${cls}"><span class="pos ${i<3?'top':''}">${i+1}</span><span class="nick">${r.nick}${r.me?'<small>（我）</small>':''}</span>${val}</div>`;
+  }).join('');
+}
+function showRank(t){
+  curRank=t;
+  document.querySelectorAll('.rank-tabs button').forEach((b,i)=>b.classList.toggle('sel',['friend','nation','progress'][i]===t));
+  renderRank();
+}
+function renderLog(){
+  document.getElementById('log-list').innerHTML=LOGS.map(l=>`<div class="log-item">
+    <span class="date">${l.d}</span><span class="no">${l.no}</span>
+    <span class="rt">${l.rt}<br><small>${l.seat}</small></span>
+    <span class="km">${l.km} km</span>
+  </div>`).join('');
+}
+function showTab(t){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+  document.getElementById('tab-'+t).classList.add('show');
+  document.querySelectorAll('.nav button').forEach(b=>{if(b.textContent.includes(t==='passport'?'护照':t==='footprint'?'足迹':t==='honor'?'荣誉':t==='rank'?'排行':t==='log'?'旅程':'分享'))b.classList.add('sel');});
+}
+
+/* 初始化 */
+renderStats();
+renderLines();
+renderStamps();
+renderMiles();
+renderHonors();
+renderFootprint();
+renderRank();
+renderLog();
+</script>
+</body>
+</html>

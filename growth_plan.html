@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>铁旅 · 用户运营与数值体系规划 v0.1</title>
+<style>
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2d3748;
+  --text:#e6edf3; --dim:#9aa7b8; --faint:#6b7686;
+  --gold:#f0b429; --blue:#4fc3f7; --green:#3fb950; --red:#f85149; --purple:#a371f7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",-apple-system,sans-serif;line-height:1.65;padding:32px 16px 80px}
+.wrap{max-width:1060px;margin:0 auto}
+h1{font-size:1.9em;letter-spacing:1px}
+.sub{color:var(--dim);margin:8px 0 4px;font-size:.95em}
+.meta{color:var(--faint);font-size:.82em;margin-bottom:26px}
+h2{font-size:1.28em;margin:44px 0 14px;padding-left:12px;border-left:4px solid var(--gold);color:var(--gold)}
+h3{font-size:1.05em;margin:20px 0 8px;color:var(--blue)}
+p{color:var(--dim);margin:6px 0}
+b{color:var(--text)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9em}
+th{background:var(--panel2);color:var(--gold);text-align:left;padding:9px 10px;border:1px solid var(--border);font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border:1px solid var(--border);color:var(--dim);vertical-align:top}
+td b{color:var(--text)}
+.tag{display:inline-block;padding:1px 8px;border-radius:6px;font-size:.78em;margin-right:4px}
+.t-gold{background:rgba(240,180,41,.15);color:var(--gold)}
+.t-blue{background:rgba(79,195,247,.15);color:var(--blue)}
+.t-green{background:rgba(63,185,80,.15);color:var(--green)}
+.t-red{background:rgba(248,81,73,.15);color:var(--red)}
+.t-purple{background:rgba(163,113,247,.15);color:var(--purple)}
+.formula{background:#0a0e14;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:Consolas,monospace;font-size:.9em;color:var(--blue);margin:8px 0;overflow-x:auto}
+.formula b{color:var(--gold)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.flow .node{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:.86em;text-align:center}
+.flow .node b{display:block;font-size:.95em}
+.flow .node small{color:var(--faint)}
+.flow .arrow{color:var(--faint);font-size:1.1em}
+.roadmap{display:flex;flex-wrap:wrap;gap:10px}
+.phase{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.phase .p{font-weight:700;color:var(--gold);margin-bottom:6px}
+.phase ul{margin-left:16px;color:var(--dim);font-size:.88em}
+.phase ul li{margin:4px 0}
+.phase .scope{font-size:.8em;color:var(--faint);margin-top:8px}
+.warn{background:rgba(248,81,73,.07);border:1px solid rgba(248,81,73,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.warn b{color:var(--red)}
+.warn p{color:var(--dim);font-size:.9em;margin:4px 0}
+.ok{background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.ok b{color:var(--green)}
+svg{max-width:100%;height:auto;display:block;margin:10px auto}
+.foot{margin-top:50px;color:var(--faint);font-size:.8em;text-align:center;border-top:1px solid var(--border);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🚄 铁旅 · 用户运营与数值体系规划</h1>
+<div class="sub">把「一个单机小游戏」升级为「一套可运营的产品」——先建用户运营框架，再往框架里填数值。</div>
+<div class="meta">版本 v0.1 · 2026-08-19 · 适用：铁旅（中国高铁模拟旅程）· 状态：规划稿，待评审后进入开发</div>
+
+<!-- ============ 0 规划思路 ============ -->
+<h2>0 · 规划思路（先看这页）</h2>
+<div class="card">
+<p>核心原则：<b>先有用户运营体系，再调数值；数值服务目标，不是数字本身。</b></p>
+<p>用户运营的完整闭环 = <b>拉新 → 激活 → 留存 → 变现 → 传播</b>。每一个环节都要有<b>机制</b>（做什么）和<b>数值</b>（奖励多少）。先定义机制，数值只是给机制定价。</p>
+<div class="flow">
+  <div class="node"><b>拉新</b><small>邀请 / 分享卡 / 排行榜</small></div><span class="arrow">→</span>
+  <div class="node"><b>激活</b><small>新手任务 / 首乘奖励</small></div><span class="arrow">→</span>
+  <div class="node"><b>留存</b><small>登录奖励 / 每日任务 / 回归礼包</small></div><span class="arrow">→</span>
+  <div class="node"><b>变现</b><small>商家打卡 / 会员 / 皮肤</small></div><span class="arrow">→</span>
+  <div class="node"><b>传播</b><small>邀请码 / 成就卡分享</small></div><span class="arrow">→</span>
+  <div class="node"><b>拉新…</b><small>飞轮循环</small></div>
+</div>
+<p>运营北极星指标：<b style="color:var(--gold)">周活跃里程数</b>（用户每周实际乘车总里程）——它同时反映活跃、深度、内容消耗，比 DAU 更能代表产品价值。</p>
+</div>
+
+<!-- ============ 1 运营指标 ============ -->
+<h2>1 · 运营目标与指标体系</h2>
+<div class="card">
+<table>
+<tr><th>层级</th><th>指标</th><th>口径</th><th>健康线（参考）</th></tr>
+<tr><td>北极星</td><td><b>周活跃里程</b></td><td>全用户每周乘车里程总和</td><td>周环比 +10%</td></tr>
+<tr><td>拉新</td><td><b>新增注册</b></td><td>每周新注册用户数</td><td>稳定增长；邀请占比 ≥ 30%</td></tr>
+<tr><td>激活</td><td><b>次日留存</b></td><td>注册次日再登录比例</td><td>≥ 40%（游戏类参考线）</td></tr>
+<tr><td>留存</td><td><b>7日 / 30日留存</b></td><td>注册后第7/30天活跃比例</td><td>7日 ≥ 20% / 30日 ≥ 10%</td></tr>
+<tr><td>活跃</td><td><b>DAU</b></td><td>日活跃用户</td><td>随新增爬坡</td></tr>
+<tr><td>深度</td><td><b>人均日乘车次数</b></td><td>DAU 内日均完成行程数</td><td>≥ 1.5 次</td></tr>
+<tr><td>传播</td><td><b>邀请转化率</b></td><td>被邀请者注册并首乘比例</td><td>≥ 25%</td></tr>
+</table>
+<p>⚠️ 所有指标都要求<b>运营后台有数据可查</b>——没有后台，数值调不动、效果看不见（见 §10）。</p>
+</div>
+
+<!-- ============ 2 经济骨架 ============ -->
+<h2>2 · 经济骨架：五类资源，各司其职</h2>
+<div class="card">
+<p>游戏资源不是越多越好，而是<b>每一种资源承担一种运营职能</b>，防止"一个金币包打天下"导致数值无法控制。</p>
+<table>
+<tr><th>资源</th><th>定位</th><th>运营职能</th><th>主要获取</th><th>主要消耗</th><th>防通胀设计</th></tr>
+<tr><td><span class="tag t-gold">货币</span><b>金币 ¥</b></td><td>交易货币</td><td>驱动日常消费</td><td>登录 / 任务 / 打卡 / 邀请 / 成就</td><td>车票（核心）、餐车、装饰、活动</td><td>日产出硬上限 800；大额装饰回收</td></tr>
+<tr><td><span class="tag t-blue">成长</span><b>里程 km</b></td><td>经验值</td><td>驱动核心行为（乘车）</td><td><b>唯一来源：乘车</b></td><td>无（纯积累）</td><td>不可购买 → 无法氪金跳级</td></tr>
+<tr><td><span class="tag t-purple">阶段</span><b>等级</b></td><td>成长阶段</td><td>给老用户特权感</td><td>里程累计自动升级</td><td>无</td><td>指数经验曲线（见 §9）</td></tr>
+<tr><td><span class="tag t-green">运营</span><b>积分</b></td><td>运营货币</td><td>连接线下（打卡）与线上</td><td>打卡 / 签到 / 分享</td><td>积分商店兑换（皮肤券/装饰）</td><td>每季度活动清积分</td></tr>
+<tr><td><span class="tag t-red">荣誉</span><b>收藏</b></td><td>成就资产</td><td>展示型留存</td><td>车票收藏 / 徽章 / 风景照</td><td>无</td><td>纯荣誉，不参与经济</td></tr>
+</table>
+<div class="ok"><b>为什么这样分？</b> 金币负责"花钱的乐趣"，里程负责"成长的尊严"，积分负责"运营的弹性"——三者互不污染，运营想刺激哪个行为，就只调对应资源的产出。</div>
+</div>
+
+<!-- ============ 3 产出渠道 ============ -->
+<h2>3 · 产出渠道：用户每天为什么来？</h2>
+<div class="card">
+<h3>3.1 每日登录奖励（7 日循环，断签重置）</h3>
+<table>
+<tr><th>第1天</th><th>第2天</th><th>第3天</th><th>第4天</th><th>第5天</th><th>第6天</th><th>第7天</th></tr>
+<tr style="text-align:center"><td>¥100</td><td>¥120</td><td>¥140</td><td>¥160</td><td>¥180</td><td>¥220</td><td><b style="color:var(--gold)">¥300 + 积分50</b></td></tr>
+</table>
+<p>7 天一个循环、第 7 天大奖 → 制造"快集满了"的<b>沉没成本</b>；断签重置 → 制造"损失厌恶"。这是留存的第一道钩子。</p>
+
+<h3>3.2 每日任务（3 个，每天 0 点刷新）</h3>
+<table>
+<tr><th>任务</th><th>行为引导</th><th>奖励</th></tr>
+<tr><td><b>今日出发</b>：完成 1 次乘车</td><td>核心行为（坐车）</td><td>¥80 + 里程记录</td></tr>
+<tr><td><b>窗外风景</b>：拍 1 张风景照</td><td>玩法深度（拍照系统已有）</td><td>¥50</td></tr>
+<tr><td><b>线路巡礼</b>：浏览任意线路图/站点</td><td>浏览停留时长</td><td>¥30</td></tr>
+</table>
+<p>每日任务常规产出 ≈ <b>¥460</b>（不含登录奖励）。任务数量控制在 3 个——<b>能一眼做完，不形成负担</b>。</p>
+
+<h3>3.3 真实世界打卡（运营扩展点，P3 启用）</h3>
+<table>
+<tr><th>打卡方式</th><th>说明</th><th>奖励</th></tr>
+<tr><td><b>位置打卡</b></td><td>到达某火车站/合作商家附近（GPS 围栏 500m）</td><td>¥100 + 50 经验 + 积分 30</td></tr>
+<tr><td><b>扫码打卡</b></td><td>扫商家/车站二维码（可远程，防作弊）</td><td>¥100 + 积分 50</td></tr>
+</table>
+<p>打卡是<b>线上游戏 ↔ 线下真实世界</b>的桥：它让"卖家/商家"有理由入驻（用户到店打卡 = 线下导流），也让用户有理由把游戏带出屏幕。</p>
+
+<h3>3.4 一次性 & 传播产出</h3>
+<table>
+<tr><th>渠道</th><th>触发</th><th>奖励</th></tr>
+<tr><td>新手 7 日礼包</td><td>注册后连续 7 天登录</td><td>第 7 天额外 ¥500</td></tr>
+<tr><td>成就奖励</td><td>16 项成就（已有）</td><td>¥500~2000 / 项</td></tr>
+<tr><td>邀请注册</td><td>好友通过邀请码注册</td><td>邀请人 ¥500 / 被邀人 ¥200</td></tr>
+<tr><td>邀请首乘</td><td>被邀人完成首乘</td><td>双方各 ¥300</td></tr>
+<tr><td>分享成就卡</td><td>分享旅程/成就卡片</td><td>¥30 / 次，日上限 3 次</td></tr>
+<tr><td>升级奖励</td><td>每升 1 级</td><td>¥等级×50</td></tr>
+</table>
+</div>
+
+<!-- ============ 4 消耗渠道 ============ -->
+<h2>4 · 消耗渠道：金币花在哪？</h2>
+<div class="card">
+<table>
+<tr><th>消耗项</th><th>价格区间</th><th>频率</th><th>作用</th></tr>
+<tr><td><b>车票</b>（核心消耗）</td><td>¥100 ~ ¥1300（短途~全程）</td><td>每天 1-3 次</td><td>最大回收口，吃掉 70% 产出</td></tr>
+<tr><td>餐车</td><td>¥20 ~ ¥60</td><td>随行程</td><td>小额零花，制造"顺手消费"</td></tr>
+<tr><td><b>列车涂装</b></td><td>¥3000 / 款</td><td>低频</td><td><b>大额回收</b>，给存钱的理由</td></tr>
+<tr><td>徽章框 / 头像框</td><td>¥1500</td><td>低频</td><td>荣誉消费</td></tr>
+<tr><td>限时活动车次</td><td>特殊定价</td><td>活动期</td><td>节点消费</td></tr>
+</table>
+<div class="warn"><b>设计要点：</b> 车票吃掉日常产出（保证"要钱就要坐车"），涂装/徽章框吃掉<b>沉淀金币</b>（防止金币只增不减 = 通胀）。两类消耗缺一不可。</div>
+</div>
+
+<!-- ============ 5 经济循环 ============ -->
+<h2>5 · 经济循环图（一个闭环）</h2>
+<div class="card">
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f0b429"/></marker>
+  </defs>
+  <!-- 节点 -->
+  <g text-anchor="middle">
+    <rect x="30" y="40" width="170" height="76" rx="12" fill="#1c2330" stroke="#f0b429"/>
+    <text x="115" y="70" fill="#f0b429" font-size="15" font-weight="bold">🎁 获取渠道</text>
+    <text x="115" y="92" fill="#9aa7b8" font-size="11">登录奖励 · 每日任务 · 打卡</text>
+
+    <rect x="365" y="40" width="170" height="76" rx="12" fill="#1c2330" stroke="#4fc3f7"/>
+    <text x="450" y="70" fill="#4fc3f7" font-size="15" font-weight="bold">💰 金币池</text>
+    <text x="450" y="92" fill="#9aa7b8" font-size="11">¥ = 消费力（可交易）</text>
+
+    <rect x="700" y="40" width="170" height="76" rx="12" fill="#1c2330" stroke="#f85149"/>
+    <text x="785" y="70" fill="#f85149" font-size="15" font-weight="bold">🎫 消耗渠道</text>
+    <text x="785" y="92" fill="#9aa7b8" font-size="11">车票 70% · 餐车 · 涂装</text>
+
+    <rect x="365" y="210" width="170" height="76" rx="12" fill="#1c2330" stroke="#3fb950"/>
+    <text x="450" y="240" fill="#3fb950" font-size="15" font-weight="bold">📈 里程 → 等级</text>
+    <text x="450" y="262" fill="#9aa7b8" font-size="11">乘车积累 · 等级折扣省钱</text>
+  </g>
+  <!-- 箭头 -->
+  <g stroke="#f0b429" stroke-width="2" fill="none">
+    <line x1="200" y1="78" x2="360" y2="78" marker-end="url(#arr)"/>
+    <line x1="535" y1="78" x2="695" y2="78" marker-end="url(#arr)"/>
+    <line x1="785" y1="116" x2="785" y2="205" marker-end="url(#arr)"/>
+    <line x1="450" y1="286" x2="450" y2="330"/>
+  </g>
+  <g stroke="#9aa7b8" stroke-width="1.6" stroke-dasharray="6 4" fill="none">
+    <path d="M450,116 C 450,150 115,150 115,120" marker-end="url(#arr)"/>
+  </g>
+  <text x="250" y="140" fill="#6b7686" font-size="11">等级折扣 → 票价 -2%/5级</text>
+  <text x="760" y="160" fill="#6b7686" font-size="11">乘车消耗金币 → 产出里程</text>
+  <text x="330" y="318" fill="#f0b429" font-size="12" font-weight="bold">↑ 每天回来签到领金币 → 闭环</text>
+</svg>
+<p><b>阅读方式：</b> 用户每天登录领金币 → 花金币买车票（消费）→ 坐车得里程（成长）→ 升级享折扣（省钱）→ 第二天更愿意回来（留存）→ 回来再领金币（循环）。<b>每一环都为下一环创造动机</b>，这就是"数值驱动运营"。</p>
+</div>
+
+<!-- ============ 6 留存钩子 ============ -->
+<h2>6 · 留存钩子：把"来一次"变成"天天来"</h2>
+<div class="card">
+<table>
+<tr><th>钩子</th><th>机制</th><th>作用</th><th>启用阶段</th></tr>
+<tr><td><b>连续登录 7 日循环</b></td><td>7 天循环，断签重置</td><td>沉没成本 + 损失厌恶</td><td>P0</td></tr>
+<tr><td><b>每日任务 ×3</b></td><td>0 点刷新，3 个任务 + 进度条</td><td>培养每日习惯</td><td>P0</td></tr>
+<tr><td><b>周里程目标</b></td><td>本周累计 500km → 奖 ¥300</td><td>周回访（不止日活）</td><td>P1</td></tr>
+<tr><td><b>离线收益/回归礼包</b></td><td>&gt;24h 未登录：金币 = 小时数×10，上限 ¥500</td><td>召回沉默用户</td><td>P1</td></tr>
+<tr><td><b>限时主题线路</b></td><td>节假日开特别车次（如中秋赏月专列）</td><td>节点活跃</td><td>P2</td></tr>
+<tr><td><b>未完成成就提醒</b></td><td>"还差 2 站集齐京沪线"推送</td><td>目标感</td><td>P0</td></tr>
+</table>
+<div class="ok"><b>留存分级目标：</b> 次日 ≥ 40% / 7日 ≥ 20% / 30日 ≥ 10%。若达不到，优先检查"第 1 天体验"（新手引导）而不是加奖励——奖励只能放大已有体验，不能救活糟糕体验。</div>
+</div>
+
+<!-- ============ 7 增长飞轮 ============ -->
+<h2>7 · 增长飞轮：用户帮你拉用户</h2>
+<div class="card">
+<div class="flow">
+  <div class="node"><b>邀请码</b><small>注册+500/200 · 首乘+300/300</small></div><span class="arrow">→</span>
+  <div class="node"><b>成就分享卡</b><small>旅程/成就生成图片</small></div><span class="arrow">→</span>
+  <div class="node"><b>周里程排行榜</b><small>好友榜 + 全国榜</small></div><span class="arrow">→</span>
+  <div class="node"><b>打卡合影分享</b><small>线下打卡照 + 水印</small></div><span class="arrow">→</span>
+  <div class="node"><b>新用户 → 邀请…</b><small>飞轮自转</small></div>
+</div>
+<p>设计要点：</p>
+<ul style="color:var(--dim);margin-left:18px;font-size:.92em">
+<li><b>奖励要分两段</b>：注册发一部分、首乘再发一部分 → 过滤"注册即走"的羊毛党，保证拉来的是真玩家。</li>
+<li><b>分享要带品牌</b>：分享卡自动带"铁旅"标识 + 邀请码，每次转发 = 一次免费广告。</li>
+<li><b>排行只奖里程不奖金币</b>：排行榜用"荣誉"驱动（称号/徽章），避免排行榜变成刷金币工具。</li>
+</ul>
+</div>
+
+<!-- ============ 8 用户分层 ============ -->
+<h2>8 · 用户分层管理：不同的人，不同的打法</h2>
+<div class="card">
+<table>
+<tr><th>分层</th><th>定义</th><th>识别信号</th><th>运营策略</th></tr>
+<tr><td><span class="tag t-blue">新用户</span></td><td>注册 &lt; 7 天</td><td>未完成首乘 / 未领完新手礼包</td><td>新手任务线逐日引导；首乘奖励翻倍；前 3 天登录奖励 ×2</td></tr>
+<tr><td><span class="tag t-green">活跃</span></td><td>7 天内登录</td><td>每日任务完成率 ≥ 50%</td><td>日常任务 + 周目标 + 限时活动；维持即可</td></tr>
+<tr><td><span class="tag t-gold">核心</span></td><td>等级 ≥ 10 或周里程 ≥ 500</td><td>高里程 / 高消费</td><td>专属徽章、新玩法内测资格、等级折扣</td></tr>
+<tr><td><span class="tag t-red">沉睡</span></td><td>7~30 天未登录</td><td>最后一次登录距今 &gt; 7 天</td><td>回归礼包 + 推送"你的列车已到站待发车"</td></tr>
+<tr><td><span class="tag t-red">流失</span></td><td>&gt; 30 天未登录</td><td>—</td><td>大额回归礼包（¥800+）；只做短信/邮件，不骚扰</td></tr>
+</table>
+<p>分层是<b>运营后台的核心功能</b>：每层人数、转化漏斗、策略触达效果都要可视化（见 §10）。</p>
+</div>
+
+<!-- ============ 9 数值平衡模型 ============ -->
+<h2>9 · 数值平衡模型（数学验证，不是拍脑袋）</h2>
+<div class="card">
+<h3>9.1 产出 / 消耗平衡</h3>
+<table>
+<tr><th>项目</th><th>数值</th><th>说明</th></tr>
+<tr><td>常规日产出</td><td><b>≈ ¥560</b></td><td>任务 460 + 分享 90（3 次）+ 升级均摊 ~10</td></tr>
+<tr><td>登录奖励均摊</td><td>≈ ¥174/天</td><td>7 日循环总计 1220 ÷ 7</td></tr>
+<tr><td><b>总日产出</b></td><td><b>≈ ¥730</b>（上限 800）</td><td>打卡/邀请为额外脉冲</td></tr>
+<tr><td>日均消耗</td><td><b>≈ ¥600~900</b></td><td>每天 1-2 次中短途（平均 ~¥450/次）</td></tr>
+<tr><td>周净结余</td><td><b>≈ +¥2000</b></td><td>用于涂装/徽章等大额消费</td></tr>
+</table>
+<p>结论：<b>日常轻微赤字 + 周结余可观</b>——用户"不签到就缺钱"（天天来），但"签到一周能买大件"（有盼头）。这是游戏经济最经典的平衡点。</p>
+
+<h3>9.2 成长曲线（指数，防速通）</h3>
+<div class="formula">升级所需里程 = 500 × 1.4<sup>(等级-1)</sup>　<b>Lv2=500 · Lv5=1,921 · Lv10=10,336 · Lv15=55,617 · Lv20=299,045</b></div>
+<p>京沪全程 1221km ≈ Lv2 的一半。坐完全国 7 条线约 1 万 km = Lv10。指数曲线让<b>前期升级快（正反馈）、后期慢（长期目标）</b>。</p>
+
+<h3>9.3 等级折扣（老用户特权）</h3>
+<div class="formula">票价折扣 = min(20, ⌊等级/5⌋ × 2)%　<b>Lv5 -2% · Lv10 -4% · Lv20 -8% · Lv25 -20%（封顶）</b></div>
+<p>折扣让"老玩家买车票更便宜"→ 等级不只是数字，是<b>真金白银的省钱</b>，强化"老用户优越感"。折扣同时轻微降低消费 → 给高等级用户留出皮肤消费空间。</p>
+
+<h3>9.4 通胀控制三闸门</h3>
+<ul style="color:var(--dim);margin-left:18px;font-size:.92em">
+<li><b>产出上限</b>：日金币获取硬上限 ¥800（超出的打卡/分享不计入，防止刷子）</li>
+<li><b>大额回收</b>：涂装 ¥3000 / 徽章框 ¥1500 —— 每 2 周上架 1 款，持续抽干沉淀</li>
+<li><b>定期清积分</b>：积分每季度活动兑换，过期 50% 失效</li>
+</ul>
+</div>
+
+<!-- ============ 10 运营后台 ============ -->
+<h2>10 · 运营后台需求（管理的"仪表盘"）</h2>
+<div class="card">
+<table>
+<tr><th>模块</th><th>功能</th><th>谁用</th></tr>
+<tr><td><b>数据看板</b></td><td>DAU / 留存 / 周里程 / 金币流水 / 任务完成率，日周月视图</td><td>运营</td></tr>
+<tr><td><b>用户管理</b></td><td>搜索用户（ID/昵称）、查看详情（等级/里程/金币/最近登录）、标记/封禁、手动发币</td><td>运营 / 客服</td></tr>
+<tr><td><b>任务与数值配置</b></td><td><b>不改代码</b>调任务奖励、登录奖励曲线、折扣率（配置表）</td><td>运营</td></tr>
+<tr><td><b>活动管理</b></td><td>上/下线限时线路、双倍时段、节日活动</td><td>运营</td></tr>
+<tr><td><b>邀请统计</b></td><td>邀请链关系图、转化漏斗、防刷审核</td><td>增长</td></tr>
+<tr><td><b>打卡点管理</b></td><td>录入/编辑打卡点（名称、坐标、二维码、奖励额度）——<b>商家入驻入口</b></td><td>商家运营</td></tr>
+<tr><td><b>公告推送</b></td><td>游戏内公告 + 召回文案模板</td><td>运营</td></tr>
+</table>
+<div class="warn"><b>关键认知：</b> 没有后台的数值系统 = 写死的代码，改一次发一次版。运营的价值在于<b>随时可调</b>——所以数值全部配置化，是这套体系能"活"的前提。</div>
+</div>
+
+<!-- ============ 11 商业化 ============ -->
+<h2>11 · 商业化预留（卖家 / 商家怎么参与）</h2>
+<div class="card">
+<table>
+<tr><th>模式</th><th>机制</th><th>商家收益</th><th>用户收益</th></tr>
+<tr><td><b>商家打卡点</b>（P3 核心）</td><td>商家入驻后台录入打卡点 → 用户到店打卡得积分 → 积分兑换商家券/优惠</td><td>线下到店客流（真金白银的导流）</td><td>积分 → 真实优惠，游戏外收获</td></tr>
+<tr><td>广告位</td><td>行程页/结算页 banner，可关</td><td>广告收入</td><td>看广告得金币（可选）</td></tr>
+<tr><td>会员</td><td>月费制：每日任务双倍、专属车次、无广告</td><td>订阅收入</td><td>省时间 + 特权感</td></tr>
+<tr><td>皮肤商城</td><td>涂装/徽章框内购直购</td><td>直接收入</td><td>个性化</td></tr>
+</table>
+<p>顺序原则：<b>先有用户量（P0-P1），再有商业化（P2-P3）</b>。商家打卡放在最后——因为它依赖"用户规模 + 运营后台 + 合规审核"三件事同时就绪。</p>
+</div>
+
+<!-- ============ 12 路线图 ============ -->
+<h2>12 · 分阶段实施路线</h2>
+<div class="roadmap">
+  <div class="phase"><div class="p">P0 · 基础数值（v0.2）</div>
+    <ul>
+      <li>每日登录奖励（7 日循环）</li>
+      <li>每日任务 ×3 + 进度条</li>
+      <li>里程 → 等级 + 升级奖励</li>
+      <li>等级折扣（票价）</li>
+      <li>存档结构扩展（兼容旧档）</li>
+      <li>成就"未完成"提醒</li>
+    </ul>
+    <div class="scope">纯前端即可上线，立即可测</div>
+  </div>
+  <div class="phase"><div class="p">P1 · 留存与增长（v0.3）</div>
+    <ul>
+      <li>回归礼包（离线收益）</li>
+      <li>周里程目标</li>
+      <li>邀请码体系（两段奖励）</li>
+      <li>成就分享卡（生成图片）</li>
+      <li>周排行榜（好友/全国）</li>
+    </ul>
+    <div class="scope">需要简单的服务端或 localStorage 联盟</div>
+  </div>
+  <div class="phase"><div class="p">P2 · 运营后台（v0.4）</div>
+    <ul>
+      <li>数据看板（DAU/留存/流水）</li>
+      <li>任务与数值配置化</li>
+      <li>用户管理（搜索/发币/封禁）</li>
+      <li>活动管理（限时线路/双倍）</li>
+    </ul>
+    <div class="scope">需要一个轻量后端（如 Supabase/云函数）</div>
+  </div>
+  <div class="phase"><div class="p">P3 · 商业化（v0.5）</div>
+    <ul>
+      <li>LBS 打卡 + 扫码打卡</li>
+      <li>商家入驻 + 打卡点管理</li>
+      <li>积分商店（兑商家券）</li>
+      <li>会员 / 广告位 / 皮肤商城</li>
+    </ul>
+    <div class="scope">需要合规审核 + 商家 BD</div>
+  </div>
+</div>
+
+<!-- ============ 13 风险 ============ -->
+<h2>13 · 风险与对策</h2>
+<div class="card">
+<div class="warn"><b>⚠️ 金币通胀</b>：产出持续 &gt; 消耗 → 金币贬值、失去激励。<br>对策：日产出上限 ¥800 + 每 2 周 1 款涂装回收 + 每周看板监控"人均金币存量"，存量连续 2 周上升 10% 即上调消耗或下调产出。</div>
+<div class="warn"><b>⚠️ 打卡作弊</b>：虚拟定位刷打卡。<br>对策：GPS 围栏 + 扫码双通道；同点 24h 限 1 次；异常频率（1 小时 &gt;3 点）自动标记人工审核。</div>
+<div class="warn"><b>⚠️ 刷邀请</b>：小号互刷。<br>对策：设备指纹 + 注册到首乘间隔 &lt;5 分钟不结算；首乘才发大奖。</div>
+<div class="warn"><b>⚠️ 平衡失灵</b>：任务太简单/太难。<br>对策：任务完成率看板（目标 60-85%），低于 50% 降难度，高于 90% 提要求——<b>数值是运营出来的，不是设计出来就不动的</b>。</div>
+</div>
+
+<!-- ============ 14 衔接现状 ============ -->
+<h2>14 · 与当前游戏版本的衔接</h2>
+<div class="card">
+<table>
+<tr><th>现状（已有）</th><th>新增（本规划）</th><th>改动点</th></tr>
+<tr><td>真实车次 3530 趟 + 联动</td><td>—</td><td>不动</td></tr>
+<tr><td>票价（¥0.42/0.70/1.33 每 km）</td><td>等级折扣叠加</td><td>priceOf 乘折扣</td></tr>
+<tr><td>16 项成就</td><td>成就提醒 + 分享卡</td><td>成就 check 后引导分享</td></tr>
+<tr><td>localStorage 存档</td><td>增加 lastLogin / dailyTask / streak 字段</td><td>loadGame 兼容旧档（缺省补 0）</td></tr>
+<tr><td>金钱 ¥3000 开局</td><td>登录奖励入口（顶栏"签到"按钮）</td><td>新增 UI 区块</td></tr>
+<tr><td>—</td><td>每日任务面板</td><td>新增 UI 区块</td></tr>
+<tr><td>—</td><td>等级/经验条</td><td>顶栏 + 手账页</td></tr>
+</table>
+<div class="ok"><b>结论：</b> 现有代码架构（单文件 + localStorage + 成就系统）完全兼容新增数值层，P0 阶段无需重写任何核心逻辑。</div>
+</div>
+
+<div class="foot">铁旅 · 用户运营与数值体系规划 v0.1 —— 下一步：确认 P0 范围后进入开发（预计 1 次迭代即可落地登录奖励 + 每日任务 + 等级）</div>
+</div>
+</body>
+</html>

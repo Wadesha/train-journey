@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>铁旅 · 产品原点总纲（为什么这么做）</title>
+<style>
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2d3748;
+  --text:#e6edf3; --dim:#9aa7b8; --faint:#5c6877;
+  --gold:#f0b429; --blue:#4fc3f7; --green:#3fb950; --red:#f85149; --purple:#a371f7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",-apple-system,sans-serif;line-height:1.65;padding:32px 16px 80px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:1.85em;letter-spacing:1px}
+.sub{color:var(--dim);margin:8px 0 4px;font-size:.95em}
+.meta{color:var(--faint);font-size:.82em;margin-bottom:26px}
+h2{font-size:1.26em;margin:44px 0 14px;padding-left:12px;border-left:4px solid var(--gold);color:var(--gold)}
+h3{font-size:1.04em;margin:20px 0 8px;color:var(--blue)}
+p{color:var(--dim);margin:6px 0}
+b{color:var(--text)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9em}
+th{background:var(--panel2);color:var(--gold);text-align:left;padding:9px 10px;border:1px solid var(--border);font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border:1px solid var(--border);color:var(--dim);vertical-align:top}
+td b{color:var(--text)}
+.tag{display:inline-block;padding:1px 8px;border-radius:6px;font-size:.76em;margin-right:4px;white-space:nowrap}
+.t-gold{background:rgba(240,180,41,.15);color:var(--gold)}
+.t-blue{background:rgba(79,195,247,.15);color:var(--blue)}
+.t-green{background:rgba(63,185,80,.15);color:var(--green)}
+.t-red{background:rgba(248,81,73,.15);color:var(--red)}
+.t-purple{background:rgba(163,113,247,.15);color:var(--purple)}
+.warn{background:rgba(248,81,73,.07);border:1px solid rgba(248,81,73,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.warn b{color:var(--red)}
+.warn p{color:var(--dim);font-size:.9em;margin:4px 0}
+.ok{background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.ok b{color:var(--green)}
+.ok p{color:var(--dim);font-size:.9em;margin:4px 0}
+.hero{text-align:center;padding:34px 20px;background:linear-gradient(180deg,rgba(240,180,41,.08),transparent);border:1px solid var(--border);border-radius:16px;margin:18px 0 8px}
+.hero .big{font-size:1.45em;font-weight:700;color:var(--gold);line-height:1.5}
+.hero .sm{color:var(--dim);margin-top:10px;font-size:.9em}
+.chain{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.chain .step{flex:1;min-width:88px;border:1px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center;background:var(--panel2)}
+.chain .step .n{font-size:1.25em}
+.chain .step b{display:block;font-size:.82em;margin:3px 0 2px}
+.chain .step small{color:var(--faint);font-size:.68em;line-height:1.3;display:block}
+.chain .arrow{display:flex;align-items:center;color:var(--faint);font-size:.9em}
+.moat{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.moat .item{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--panel2)}
+.moat .item .ic{font-size:1.3em;flex:none;margin-top:2px}
+.moat .item .tt{font-weight:700;color:var(--text);font-size:.92em}
+.moat .item .dd{color:var(--dim);font-size:.86em}
+.why3{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.why3 .w{border-radius:12px;padding:14px 18px;border:1px solid var(--border)}
+.why3 .w .lv{font-weight:700;margin-bottom:4px;font-size:.95em}
+.why3 .w .ds{font-size:.88em;color:var(--dim)}
+.why3 .w1{border-color:var(--blue)}.why3 .w1 .lv{color:var(--blue)}
+.why3 .w2{border-color:var(--green)}.why3 .w2 .lv{color:var(--green)}
+.why3 .w3{border-color:var(--gold)}.why3 .w3 .lv{color:var(--gold)}
+.foot{margin-top:50px;color:var(--faint);font-size:.8em;text-align:center;border-top:1px solid var(--border);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🚄 铁旅 · 产品原点总纲</h1>
+<div class="sub">前面做了很多"怎么做"（流程 / 策略 / 数值 / 机制）。这一份回答"为什么"——把散落的所有规划串成一条主线。</div>
+<div class="meta">版本 v1 · 2026-08-20 · 定位：其他所有规划文档（v0.1 数值 / v0.2 分层 / v0.3 场景 / 互动调研）的灵魂与总纲</div>
+
+<!-- ============ 0 一句话 ============ -->
+<h2>0 · 我们到底在做什么</h2>
+<div class="hero">
+  <div class="big">让每个坐高铁的人，都有一本属于自己的铁路护照</div>
+  <div class="sm">不是游戏，不是社区，不是工具 —— 是用户在真实旅途中一本不断变厚的"章册"：<br>每一次坐车盖一枚章，集齐一条线是一种完成，点亮一片足迹是一种回忆</div>
+</div>
+<div class="ok"><b>为什么这句话成立：</b> 坐高铁是中国每天几千万人的真实场景；收集章、点亮地图是人类最原始的本能（集邮/盖章/集卡）；把这两件事放在一起，就是"旅途伴侣"——它既有真实场景的入口，又有情感驱动的留存。</div>
+
+<!-- ============ 1 为谁 ============ -->
+<h2>1 · 为谁：先抓"收集心理的人"，不是所有人</h2>
+<div class="card">
+<table>
+<tr><th>人群</th><th>画像</th><th>为什么先做他们</th></tr>
+<tr><td><span class="tag t-gold">种子人群</span><br><b>有收集心理的人</b></td><td>盖章/打卡/集邮/点亮地图爱好者；会记录自己去过的地方（手账/足迹 App/收藏车票）；旅行笔记党</td><td><b>他们已经在做"打卡记录"这件事</b>——只是散落在备忘录/小红书/纸质票根里。我们给一个更爽的章册，是"升级工具"不是"教育用户"</td></tr>
+<tr><td><span class="tag t-blue">高频人群</span><br><b>常旅客</b></td><td>出差党 / 通勤族 / 学生探亲，每周-每月真实乘车</td><td>打卡需要真实行为——<b>他们乘车频率高 = 章积累快 = 留存强</b>，是护照变厚的主力</td></tr>
+<tr><td><span class="tag t-purple">发烧人群</span><br><b>铁路爱好者</b></td><td>铁道迷 / 运转党，关注线路车型站序</td><td>自带传播力（会主动晒），也是<b>数据质量的天然校验员</b></td></tr>
+<tr><td><span class="tag t-green">辐射人群</span><br><b>普通出行者</b></td><td>周末游 / 节假日出行</td><td>低频但基数大；通过"朋友分享的旅程卡"被卷入</td></tr>
+</table>
+<div class="warn"><b>关键判断：</b> 冷启动阶段<b>绝不讨好所有人</b>。先让"收集心理的人"说出"卧槽这护照真适合我"——他们是口碑裂变的原点。普通出行者靠旅程卡分享自然流入，不靠我们硬拉。</div>
+</div>
+
+<!-- ============ 2 情感链 ============ -->
+<h2>2 · 他们怎么一步步使用（每一步获得什么）</h2>
+<div class="card">
+<div class="chain">
+  <div class="step"><span class="n">🎯</span><b>目标感</b><small>打开看到<br>"107 站等我去集"</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">✅</span><b>成就感</b><small>首乘到站<br>盖下第一章</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">📔</span><b>拥有感</b><small>护照变厚<br>我的旅程在变多</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">🔥</span><b>诱惑感</b><small>京沪还差 6 站<br>就想集齐</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">🏅</span><b>完成感</b><small>集齐一条线<br>巅峰时刻</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">🖼️</span><b>回忆感</b><small>足迹 9 省 15 城<br>"我去过这么多"</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">📤</span><b>炫耀感</b><small>旅程卡分享<br>被朋友看见</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">👥</span><b>连接感</b><small>"我们都到过<br>济南西"</small></div><span class="arrow">→</span>
+  <div class="step"><span class="n">⏳</span><b>期待感</b><small>下次出发倒计时<br>想再来一章</small></div>
+</div>
+<p><b>注意：这 9 步没有一步是"金币/数值"。</b>用户每一步获得的是情感——目标、成就、拥有、诱惑、完成、回忆、炫耀、连接、期待。它们首尾相连形成闭环：<b>期待 → 行动 → 反馈 → 积累 → 分享 → 再期待</b>。</p>
+<div class="ok"><b>这就是"为什么这么做"的答案之一：</b> 数值体系（v0.1）只是这 9 步的润滑剂，不是引擎。引擎是情感链。任何功能设计都要先问：<b>它落在情感链的哪一步？强化了哪个情感？</b>落不进情感链的功能不要做。</div>
+</div>
+
+<!-- ============ 3 连接 ============ -->
+<h2>3 · 他们之间怎么认识（不做社区，但有人与人）</h2>
+<div class="card">
+<table>
+<tr><th>连接方式</th><th>机制</th><th>情感</th></tr>
+<tr><td><b>分享即认识</b></td><td>旅程卡/集齐卡分享到微信 → 朋友看到 → 邀请码进来</td><td>炫耀 → 感染（"我也想集"）</td></tr>
+<tr><td><b>熟人小圈子</b></td><td>好友群组（4 位邀请码）：同事/家人组内独立排行</td><td>面子竞争（"你才 3 站？我都 8 站了"）</td></tr>
+<tr><td><b>足迹重合</b></td><td>"你和 X 都到过济南西"</td><td>缘分感（"我们走过同一条路"）</td></tr>
+<tr><td><b>共同目标</b></td><td>全服里程碑：全体累计打卡解锁集体徽章</td><td>弱连接（"我在参与一件大事"）</td></tr>
+</table>
+<p><b>连接的逻辑：</b> 不做社区，但通过"<b>晒出去</b>（分享卡）"和"<b>看见彼此</b>（榜单/重合/里程碑）"让用户之间发生关系。<b>熟人链负责深度（组内比拼），全服事件负责广度（参与感）</b>——中间不需要任何 UGC 内容。</p>
+</div>
+
+<!-- ============ 4 核心与优势 ============ -->
+<h2>4 · 我们的核心在哪、优势在哪</h2>
+<div class="card">
+<h3>4.1 核心（一句话）</h3>
+<div class="hero" style="padding:20px">
+  <div class="big" style="font-size:1.15em">核心 = 记录用户真实铁路旅程的"护照"；<br>一切围绕"让护照更值得集、更值得晒"展开</div>
+</div>
+<h3>4.2 护城河（4 条，别人难抄）</h3>
+<div class="moat">
+  <div class="item"><span class="ic">📊</span><div><div class="tt">真实数据壁垒</div><div class="dd">3530 趟真实车次 + 34 条普速线 + 107/1000+ 站，且有持续更新的 12306 数据源。抄 UI 容易，抄数据难——这是 3 个月内追不平的。</div></div></div>
+  <div class="item"><span class="ic">🎫</span><div><div class="tt">真实行为绑定</div><div class="dd">打卡必须真实乘车（到站才盖章）——用户把真实的出行时间沉淀进产品，迁移成本极高。这是"防抄袭"也是"防流失"。</div></div></div>
+  <div class="item"><span class="ic">❤️</span><div><div class="tt">情感资产</div><div class="dd">足迹、回忆、集齐记录、每一章的首次日期——是"我的资产"（像网易云歌单、像支付宝账单），无法搬走、无法复制。</div></div></div>
+  <div class="item"><span class="ic">🚄</span><div><div class="tt">场景独占</div><div class="dd">中国每天数千万高铁旅客，乘车是高频真实场景。我们在用户的真实旅途中占位——手机里唯一的"铁路护照"。</div></div></div>
+</div>
+</div>
+
+<!-- ============ 5 从 0 到 1 ============ -->
+<h2>5 · 从默默无闻，到积累核心用户</h2>
+<div class="card">
+<table>
+<tr><th>步骤</th><th>做什么</th><th>为什么</th></tr>
+<tr><td><b>① 只抓种子</b></td><td>面向"收集心理的人"（铁道迷社群/足迹党/常旅客），不讨好所有人</td><td>他们已经在做打卡记录，给"升级工具"而非"教育用户"——转化最快、口碑最真</td></tr>
+<tr><td><b>② 单点极致</b></td><td>先做好一件事：护照 + 真实车次（已有）——不堆功能</td><td>冷启动期一个"卧槽"胜过十个"还行"；护照本身就是完整闭环</td></tr>
+<tr><td><b>③ 晒即裂变</b></td><td>旅程卡/集齐卡一键分享（自动带邀请码）</td><td><b>每个集齐线路的用户都是免费广告位</b>——病毒系数最高的功能，不靠投放</td></tr>
+<tr><td><b>④ 小圈先行</b></td><td>好友群组：先让 10 组同事/朋友跑起来</td><td>组内排行制造"差一名想追"的持久动力；10 组活人群 > 1000 个僵尸用户</td></tr>
+<tr><td><b>⑤ 数据调优</b></td><td>盯三个数：首章达成率 / 首线集齐时间 / 分享率</td><td>核心是缩短"从打开到第一章"和"从第一章到集齐首线"的时间——这段旅程顺了，留存自成</td></tr>
+</table>
+<div class="warn"><b>冷启动的胜负手不是投放，是"晒"：</b> 一个用户集齐京沈线 → 晒卡 → 3 个朋友点进来 → 其中 1 个也集 → 再晒……这就是我们唯一需要的增长引擎。产品要做的，是让"晒"这件事尽可能简单、尽可能好看。</div>
+</div>
+
+<!-- ============ 6 三层为什么 ============ -->
+<h2>6 · 为什么这么做：三层答案</h2>
+<div class="why3">
+  <div class="w w1"><div class="lv">表层：给坐车的人一个集章本</div><div class="ds">用户在真实旅途中有"记录我去过哪"的需求（证据：小红书足迹笔记、盖章文化、票根收藏）。我们用游戏化印章满足它——这是功能层的为什么。</div></div>
+  <div class="w w2"><div class="lv">中层：把真实旅程变成情感资产</div><div class="ds">坐车本身是"无聊的 2-8 小时"，但"我的旅程"是有情感的记忆。护照把碎片行程沉淀成可回忆、可炫耀、可连接的资产——这是价值层的为什么。</div></div>
+  <div class="w w3"><div class="lv">深层：在真实场景里占据"旅途记忆"</div><div class="ds">谁占领了用户的旅途记忆，谁就占领了下一个出行周期的入口。我们不跟 12306 抢买票，不跟小红书抢攻略——我们只做一件事：<b>让用户记住"这一路，我有本护照在集"</b>。这是战略层的为什么。</div></div>
+</div>
+</div>
+
+<!-- ============ 7 决定了什么 ============ -->
+<h2>7 · 这决定了前面所有设计（总纲落点）</h2>
+<div class="card">
+<table>
+<tr><th>原点结论</th><th>决定的既有设计</th></tr>
+<tr><td>核心是情感链不是数值</td><td>v0.2：运营元素全部藏起来（L3），不打断 9 步情感链；"不打扰"是保护情感体验</td></tr>
+<tr><td>打卡记录是荣誉资产</td><td>v2 护照：金章/灰章/集齐进度，公开可晒；隐私红线只划 4 条真危险（未来行程/实时位置/身份/通讯录）</td></tr>
+<tr><td>用户之间靠"晒与看见"连接</td><td>互动调研：好友榜 + 旅程卡点赞 + 群组 + 足迹重合——全是"统计型"，零 UGC</td></tr>
+<tr><td>先抓种子人群</td><td>冷启动不做全功能铺开；护照 + 真实车次先做到极致</td></tr>
+<tr><td>真实数据是护城河</td><td>持续接入 12306 数据（3530 车次 → 普速线 → 1000 站），数据即壁垒</td></tr>
+</table>
+<div class="ok"><b>一句话收尾：</b> 铁旅的本质是"一本会因为你真实坐车而不断变厚的护照"。所有规划——数值、分层、场景、互动——都是为了让这本护照<b>更容易集、更值得晒、更难以离开</b>。</div>
+</div>
+
+<div class="foot">铁旅 · 产品原点总纲 v1 —— 本总纲是 v0.1/v0.2/v0.3/互动调研的灵魂；后续任何新功能先过"情感链检验"（落在哪一步、强化哪个情感）</div>
+</div>
+</body>
+</html>

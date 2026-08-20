@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>铁旅 · 产品架构与体验分层设计 v0.2</title>
+<style>
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2d3748;
+  --text:#e6edf3; --dim:#9aa7b8; --faint:#6b7686;
+  --gold:#f0b429; --blue:#4fc3f7; --green:#3fb950; --red:#f85149; --purple:#a371f7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",-apple-system,sans-serif;line-height:1.65;padding:32px 16px 80px}
+.wrap{max-width:1060px;margin:0 auto}
+h1{font-size:1.9em;letter-spacing:1px}
+.sub{color:var(--dim);margin:8px 0 4px;font-size:.95em}
+.meta{color:var(--faint);font-size:.82em;margin-bottom:26px}
+h2{font-size:1.28em;margin:44px 0 14px;padding-left:12px;border-left:4px solid var(--gold);color:var(--gold)}
+h3{font-size:1.05em;margin:20px 0 8px;color:var(--blue)}
+p{color:var(--dim);margin:6px 0}
+b{color:var(--text)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9em}
+th{background:var(--panel2);color:var(--gold);text-align:left;padding:9px 10px;border:1px solid var(--border);font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border:1px solid var(--border);color:var(--dim);vertical-align:top}
+td b{color:var(--text)}
+.tag{display:inline-block;padding:1px 8px;border-radius:6px;font-size:.78em;margin-right:4px;white-space:nowrap}
+.t-gold{background:rgba(240,180,41,.15);color:var(--gold)}
+.t-blue{background:rgba(79,195,247,.15);color:var(--blue)}
+.t-green{background:rgba(63,185,80,.15);color:var(--green)}
+.t-red{background:rgba(248,81,73,.15);color:var(--red)}
+.t-purple{background:rgba(163,113,247,.15);color:var(--purple)}
+.t-gray{background:rgba(155,167,184,.15);color:var(--dim)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.flow .node{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:.86em;text-align:center}
+.flow .node b{display:block;font-size:.95em}
+.flow .node small{color:var(--faint)}
+.flow .arrow{color:var(--faint);font-size:1.1em}
+.warn{background:rgba(248,81,73,.07);border:1px solid rgba(248,81,73,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.warn b{color:var(--red)}
+.warn p{color:var(--dim);font-size:.9em;margin:4px 0}
+.ok{background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.ok b{color:var(--green)}
+.ok p{color:var(--dim);font-size:.9em;margin:4px 0}
+.arch{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.arch .layer{border-radius:12px;padding:14px 18px;border:1px solid var(--border)}
+.arch .l1{background:rgba(79,195,247,.08);border-color:var(--blue)}
+.arch .l2{background:rgba(63,185,80,.07);border-color:var(--green)}
+.arch .l3{background:rgba(163,113,247,.07);border-color:var(--purple)}
+.arch .layer .hd{font-weight:700;margin-bottom:4px}
+.arch .l1 .hd{color:var(--blue)}
+.arch .l2 .hd{color:var(--green)}
+.arch .l3 .hd{color:var(--purple)}
+.arch .layer .desc{font-size:.88em;color:var(--dim)}
+.ladder{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.ladder .step{flex:1;min-width:150px;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:.85em;text-align:center;background:var(--panel2)}
+.ladder .step b{display:block;color:var(--text)}
+.ladder .step small{color:var(--faint)}
+.ladder .s0{border-color:#3a4052}.ladder .s1{border-color:#6b7686}
+.ladder .s2{border-color:#9aa7b8}.ladder .s3{border-color:var(--gold)}
+.ladder .s4{border-color:var(--red)}
+.roadmap{display:flex;flex-wrap:wrap;gap:10px}
+.phase{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.phase .p{font-weight:700;color:var(--gold);margin-bottom:6px}
+.phase ul{margin-left:16px;color:var(--dim);font-size:.88em}
+.phase ul li{margin:4px 0}
+.phase .scope{font-size:.8em;color:var(--faint);margin-top:8px}
+.foot{margin-top:50px;color:var(--faint);font-size:.8em;text-align:center;border-top:1px solid var(--border);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🚄 铁旅 · 产品架构与体验分层设计</h1>
+<div class="sub">v0.1 解决了「有什么」（数值体系）——本版 v0.2 解决「怎么摆、怎么藏、给谁用」：不打扰用户 + 结合真实出行场景 + 面向真实旅客人群。</div>
+<div class="meta">版本 v0.2 · 2026-08-19 · 前置依赖：v0.1 数值运营体系规划（全部保留）· 状态：规划稿</div>
+
+<!-- ============ 0 ============ -->
+<h2>0 · 这一版回答的三个问题</h2>
+<div class="card">
+<table>
+<tr><th>问题</th><th>答案（一句话）</th></tr>
+<tr><td><b>① 运营会不会打扰用户？</b></td><td>会，除非做<b>体验分层</b>——核心功能常驻，运营功能藏起来、只在用户完成动作后"顺带"出现。</td></tr>
+<tr><td><b>② 这不是纯游戏，是什么？</b></td><td>是<b>陪伴真实高铁旅程的轻游戏化出行工具</b>——核心价值是"记录旅程、让坐车不无聊"，数值只是调味。</td></tr>
+<tr><td><b>③ 人群有什么特点？</b></td><td>真实旅客：碎片时间、单手竖屏、网络不稳、电量焦虑、<b>不想被游戏绑架但愿意被旅途打动</b>。</td></tr>
+</table>
+<div class="ok"><b>总原则：</b> 用户打开产品的目的是"坐车"，不是"做任务"。所有运营元素<b>要么藏起来，要么顺水推舟</b>——绝不允许挡住"坐车"这件事本身。</div>
+</div>
+
+<!-- ============ 1 定位 ============ -->
+<h2>1 · 产品定位升级：从「游戏」到「旅途伴侣」</h2>
+<div class="card">
+<div class="flow">
+  <div class="node"><b>旧定位：游戏</b><small>玩法 → 数值 → 成就感</small></div><span class="arrow">→</span>
+  <div class="node"><b>新定位：旅途伴侣</b><small>真实出行 → 旅程记录 → 旅途趣味</small></div>
+</div>
+<table>
+<tr><th>维度</th><th>旧（纯游戏思维）</th><th>新（出行场景思维）</th></tr>
+<tr><td>核心价值</td><td>好玩、刷数值</td><td><b>记录我的旅程 + 让坐车不无聊</b></td></tr>
+<tr><td>用户是谁</td><td>游戏玩家</td><td><b>高铁旅客</b>（常旅客/出差党/学生/周末出行）</td></tr>
+<tr><td>使用时机</td><td>有空就玩</td><td><b>候车 15-60min / 乘车 1-8h / 到站后</b></td></tr>
+<tr><td>里程的含义</td><td>经验值</td><td><b>我真实走过的路</b>（记忆资产）</td></tr>
+<tr><td>成就的含义</td><td>游戏奖励</td><td><b>旅途故事</b>（"我集齐过京沪线"）</td></tr>
+<tr><td>金币的含义</td><td>游戏货币</td><td><b>旅途小乐趣</b>（不严肃、不绑架）</td></tr>
+</table>
+<p>一句话产品描述：<b>「铁旅」在真实高铁行程中陪你度过旅途时光，把每一次坐车变成一次可以回忆的旅程。</b></p>
+</div>
+
+<!-- ============ 2 不打扰铁律 ============ -->
+<h2>2 · 「不打扰」铁律：三层功能分级</h2>
+<div class="card">
+<h3>2.1 三层功能分级模型（所有功能先分级，再决定怎么摆）</h3>
+<table>
+<tr><th>层级</th><th>定位</th><th>呈现方式</th><th>典型功能</th></tr>
+<tr><td><span class="tag t-blue">L1 核心</span></td><td>用户来的<b>目的</b></td><td><b>永远常驻、最醒目</b></td><td>选站 / 车次 / 行程模拟 / 报站 / 窗外风景</td></tr>
+<tr><td><span class="tag t-green">L2 陪伴</span></td><td>锦上添花</td><td><b>在用户完成自然动作后出现</b>（顺水推舟）</td><td>旅程手账 / 成就 / 旅程卡 / 拍照</td></tr>
+<tr><td><span class="tag t-purple">L3 运营</span></td><td>增长工具</td><td><b>藏于入口，用户主动进入才显示</b></td><td>签到 / 每日任务 / 邀请 / 打卡 / 排行榜 / 回归礼包</td></tr>
+</table>
+<div class="warn"><b>核心判断：</b> 签到、任务、邀请、打卡、排行——<b>全部都是 L3</b>。它们只存在于"个人中心"一个入口里，用户不点开 = 完全不存在。这绝不降低它们的价值（该给的奖励照给），只是<b>不占据用户的注意力</b>。</div>
+
+<h3>2.2 五级打扰阶梯（渐进披露，绝不越级）</h3>
+<div class="ladder">
+  <div class="step s0"><b>① 无提醒</b><small>完全静默（默认态）</small></div>
+  <div class="step s1"><b>② 小红点</b><small>入口上一个小点，可忽略</small></div>
+  <div class="step s2"><b>③ 数字角标</b><small>如"可签到"，点开才知道</small></div>
+  <div class="step s3"><b>④ 轻提示条</b><small>底部非阻断横幅，5 秒消失，可关</small></div>
+  <div class="step s4"><b>⑤ 弹窗</b><small>仅限关键动作后（到站结算），其余禁用</small></div>
+</div>
+<p>规则：<b>运营内容默认停在 ①②，最多到 ③</b>；④ 只允许"回归礼包"这类召回场景；⑤ 只允许绑定在"到站结算"这种用户主动完成动作的瞬间。</p>
+
+<h3>2.3 三条铁律</h3>
+<ul style="color:var(--dim);margin-left:18px;font-size:.92em">
+<li><b>① 永不打断核心操作</b>：购票流程、行程模拟中禁止任何弹窗/横幅（奖励静默入账，稍后结算页才提示）。</li>
+<li><b>② 奖励跟着动作走</b>：所有运营奖励都挂在"用户已完成的行为"之后发放——坐完车才显示"今日任务 +1 完成"，绝不提前诱惑、绝不中途打断。</li>
+<li><b>③ 专注模式</b>：设置里一键关闭全部运营通知（红点/角标/横幅），用户可 100% 只使用核心功能——<b>运营功能全部可插拔，拔掉后产品依然是完整可用的出行工具</b>。</li>
+</ul>
+</div>
+
+<!-- ============ 3 场景时间轴 ============ -->
+<h2>3 · 功能 × 场景 时间轴（用户真实的一天）</h2>
+<div class="card">
+<table>
+<tr><th>阶段</th><th>场景</th><th>核心功能（L1）</th><th>运营出现方式（L3）</th></tr>
+<tr><td><b>行前</b></td><td>查车次 / 候车</td><td>车次查询、线路浏览、票价</td><td><b>仅</b>个人中心入口一个小红点（可签到），其余全隐藏</td></tr>
+<tr><td><b>行中</b></td><td>乘车 1-8h</td><td>行程模拟、报站、窗外风景、拍照</td><td><b>零打扰</b>：全程无任何运营元素；到站瞬间才"顺带"显示成就/任务进度</td></tr>
+<tr><td><b>到站</b></td><td>下车瞬间</td><td>行程结算</td><td><b>唯一允许"弹窗"的时机</b>：结算页自然展示「本次旅程里程碑 + 今日任务进度」（用户主动完成动作后的奖励时刻）</td></tr>
+<tr><td><b>日常</b></td><td>不坐车时</td><td>手账回顾、收藏</td><td>个人中心里：签到 / 任务 / 邀请 / 打卡 / 排行</td></tr>
+</table>
+<div class="ok"><b>关键洞察：</b> 用户在"行中"是被动的（坐车没事干），注意力天然在场——这是陪伴层发挥的时间；用户在"行前/日常"是主动的（要查信息），注意力稀缺——这是运营层必须藏起来的原因。<b>打扰阈值随时段变化，运营强度也随时段变化。</b></div>
+</div>
+
+<!-- ============ 4 架构重构 ============ -->
+<h2>4 · 架构重构：Core / Companion / Growth 三层</h2>
+<div class="card">
+<div class="arch">
+  <div class="layer l3">
+    <div class="hd">L3 · Growth 运营层（可插拔，默认隐藏）</div>
+    <div class="desc">签到 · 每日任务 · 邀请 · 打卡 · 排行榜 · 回归礼包 · 积分商店 —— 全部收在「个人中心」入口；<b>拔掉这一层，产品依然完整可用</b>（单机回退）</div>
+  </div>
+  <div class="layer l2">
+    <div class="hd">L2 · Companion 陪伴层（被动记录，适时呈现）</div>
+    <div class="desc">旅程手账 · 成就 · 旅程卡（自动生成） · 风景照收藏 —— 只记录不打断，在「到站结算」「个人中心」呈现</div>
+  </div>
+  <div class="layer l1">
+    <div class="hd">L1 · Core 核心层（永远可用，最醒目）</div>
+    <div class="desc">真实车次查询 · 选站购票 · 行程模拟 · 报站广播 · 窗外风景 —— 用户来的目的，不依赖任何运营系统</div>
+  </div>
+</div>
+<h3>架构三条原则</h3>
+<ul style="color:var(--dim);margin-left:18px;font-size:.92em">
+<li><b>单向数据流</b>：Core 产生行为（坐车/拍照）→ Companion 记录（手账/成就）→ Growth 消费（任务计数/签到奖励）。上游永远不依赖下游。</li>
+<li><b>解耦回退</b>：Growth 层任何功能下线，不影响 Core+Companion；甚至整层删除，游戏照常玩。</li>
+<li><b>离线优先</b>：隧道/弱网下，Core 与 Companion 全本地可用（静态资源 + localStorage 已满足）；Growth 层需网络的玩法（排行/邀请）自动降级隐藏，不报错。</li>
+</ul>
+</div>
+
+<!-- ============ 5 显性/隐性配置总表 ============ -->
+<h2>5 · 显性 / 隐性 配置总表（每个功能怎么摆）</h2>
+<div class="card">
+<table>
+<tr><th>功能</th><th>层级</th><th>默认状态</th><th>呈现时机</th><th>打扰级别</th></tr>
+<tr><td>选站 / 车次 / 行程</td><td><span class="tag t-blue">L1</span></td><td>常驻显性</td><td>永远</td><td>—（核心）</td></tr>
+<tr><td>报站 / 窗外风景</td><td><span class="tag t-blue">L1</span></td><td>常驻显性</td><td>行程中</td><td>—（核心）</td></tr>
+<tr><td>旅程手账</td><td><span class="tag t-green">L2</span></td><td>入口可见</td><td>顶栏按钮 / 到站结算后</td><td>低</td></tr>
+<tr><td>成就</td><td><span class="tag t-green">L2</span></td><td>被动</td><td>解锁时轻提示 + 结算页 + 手账页</td><td>低（toast 一声）</td></tr>
+<tr><td><b>旅程卡自动生成</b></td><td><span class="tag t-green">L2</span></td><td>自动</td><td><b>到站结算瞬间</b>（车次+线路+风景照+里程）</td><td>中（自然动作后）</td></tr>
+<tr><td>等级 / 折扣</td><td><span class="tag t-green">L2</span></td><td>顺带</td><td>手账页顶部 + 购票时价格旁小字"Lv5 省 2%"</td><td>极低（不打扰价格主信息）</td></tr>
+<tr><td>每日签到</td><td><span class="tag t-purple">L3</span></td><td><b>隐藏入口</b></td><td>个人中心入口小红点</td><td>低（红点）</td></tr>
+<tr><td>每日任务</td><td><span class="tag t-purple">L3</span></td><td><b>隐藏入口</b></td><td>个人中心；<b>结算页顺带显示进度条</b></td><td>低（顺带，不主动弹出）</td></tr>
+<tr><td>周里程目标</td><td><span class="tag t-purple">L3</span></td><td><b>隐藏入口</b></td><td>个人中心</td><td>无</td></tr>
+<tr><td>邀请</td><td><span class="tag t-purple">L3</span></td><td><b>被动</b></td><td>分享旅程卡时自动带邀请码（不单独教育用户）</td><td>无（顺带）</td></tr>
+<tr><td>打卡</td><td><span class="tag t-purple">L3</span></td><td><b>隐藏入口</b></td><td>个人中心 → 打卡地图</td><td>无</td></tr>
+<tr><td>排行榜</td><td><span class="tag t-purple">L3</span></td><td><b>隐藏入口</b></td><td>个人中心</td><td>无</td></tr>
+<tr><td>回归礼包</td><td><span class="tag t-purple">L3</span></td><td>触发式</td><td>回归首次打开，底部轻提示条（可关）</td><td>中（唯一允许横幅的场景）</td></tr>
+</table>
+<div class="ok"><b>一句话原则：</b> 看得见的是价值（L1+L2），<b>看不见的也是价值</b>（L3 奖励照发，只是不占注意力）。运营的重点从"让用户看见"转向"让用户无感地获得"。</div>
+</div>
+
+<!-- ============ 6 人群适配 ============ -->
+<h2>6 · 人群适配：真实出行场景的技术对策</h2>
+<div class="card">
+<table>
+<tr><th>旅客真实痛点</th><th>对策</th></tr>
+<tr><td><b>网络不稳</b>（隧道/弱网）</td><td>全部静态资源本地加载；行程模拟全程无需网络；涉及网络的玩法自动降级隐藏</td></tr>
+<tr><td><b>电量焦虑</b></td><td>低功耗模式（关闭高耗 rAF 动画/降低刷新率）；深色主题默认（OLED 省电）</td></tr>
+<tr><td><b>竖屏单手操作</b></td><td>底部操作栏 + 大按钮 + 拇指可达区域设计；选站→购票 3 步内完成</td></tr>
+<tr><td><b>碎片时间</b></td><td>每次核心操作 ≤10 秒；行前查车次、候车浏览、行中看风景各是独立可中断的单元</td></tr>
+<tr><td><b>不想被"游戏"绑架</b></td><td><b>专注模式</b>：一键关闭全部运营通知；奖励照发但完全静默</td></tr>
+<tr><td><b>旅途情感价值</b></td><td>每段旅程自动生成「旅程卡」：车次 + 线路 + 途经城市 + 风景照 + 里程 —— <b>可保存、可分享</b>，成为用户真实的旅途记忆</td></tr>
+</table>
+<div class="warn"><b>人群核心画像一句话：</b> 他们不会为"游戏"停留，但会为"我的旅程"停留。产品必须让用户觉得"这是我的出行工具，顺便有点趣味"，而不是"这是个游戏，我在里面做任务"。</div>
+</div>
+
+<!-- ============ 7 路线图调整 ============ -->
+<h2>7 · 调整后的实施路线</h2>
+<div class="roadmap">
+  <div class="phase"><div class="p">P0 · 核心+陪伴（v0.2）</div>
+    <ul>
+      <li>Core 不动（真实车次已就绪）</li>
+      <li><b>旅程卡自动生成</b>（到站结算瞬间）</li>
+      <li>专注模式（一键关运营通知）</li>
+      <li>个人中心入口（签到/任务藏于此）</li>
+      <li>签到 + 每日任务（L3 隐藏式）</li>
+      <li>存档结构扩展（兼容旧档）</li>
+    </ul>
+    <div class="scope">纯前端，立即可测；本版即可上线</div>
+  </div>
+  <div class="phase"><div class="p">P1 · 传播（v0.3）</div>
+    <ul>
+      <li>旅程卡分享（自动带邀请码）</li>
+      <li>邀请两段奖励</li>
+      <li>周里程目标 / 回归礼包（轻提示条）</li>
+      <li>排行榜（个人中心内）</li>
+    </ul>
+    <div class="scope">需轻后端（邀请/排行）</div>
+  </div>
+  <div class="phase"><div class="p">P2 · 运营后台（v0.4）</div>
+    <ul>
+      <li>数据看板（DAU/留存/流水）</li>
+      <li>任务/数值配置化（不改代码调参）</li>
+      <li>用户管理 / 活动管理</li>
+    </ul>
+    <div class="scope">需后端</div>
+  </div>
+  <div class="phase"><div class="p">P3 · 线下结合（v0.5）</div>
+    <ul>
+      <li>LBS 打卡 + 扫码打卡</li>
+      <li>商家入驻 + 打卡点管理</li>
+      <li>积分商店 / 会员 / 皮肤</li>
+    </ul>
+    <div class="scope">需合规 + 商家 BD</div>
+  </div>
+</div>
+<p style="font-size:.9em">变化说明：与 v0.1 相比，<b>P0 重心从"数值功能"转向"旅程卡 + 专注模式"</b>——先把"不打扰 + 旅途记忆"这两个产品本质立住，再上增长工具；签到任务虽在 P0 但以 L3 隐藏形式存在。</p>
+</div>
+
+<!-- ============ 8 与 v0.1 关系 ============ -->
+<h2>8 · 与 v0.1 的关系（一张表对照）</h2>
+<div class="card">
+<table>
+<tr><th>功能</th><th>v0.1 数值设计</th><th>v0.2 呈现设计</th></tr>
+<tr><td>登录奖励</td><td>7 日循环 100→300</td><td>藏在个人中心，入口小红点；<b>不主动弹</b></td></tr>
+<tr><td>每日任务</td><td>3 个，日产 ¥460</td><td>个人中心 + 结算页顺带进度条；<b>不打断行程</b></td></tr>
+<tr><td>里程/等级</td><td>500×1.4^(n-1)</td><td>手账页顶部 + 购票价格旁小字折扣；<b>不占主信息</b></td></tr>
+<tr><td>打卡</td><td>¥100 + 50exp + 30积分</td><td>个人中心 → 打卡地图；<b>用户主动才见</b></td></tr>
+<tr><td>邀请</td><td>注册+500/200、首乘+300/300</td><td>旅程卡分享<b>自动带邀请码</b>，不单独教育</td></tr>
+<tr><td>成就</td><td>16 项 + 奖励</td><td>解锁 toast 一声 + 手账页；<b>不弹窗庆祝</b></td></tr>
+<tr><td>回归礼包</td><td>小时数×10，上限 500</td><td>唯一允许轻提示条的召回场景（可关）</td></tr>
+</table>
+<p>结论：<b>v0.1 的所有数值照单全收，v0.2 决定它们"在哪里、什么时候、以什么强度"出现</b>。两版合起来才是完整的产品设计。</p>
+</div>
+
+<div class="foot">铁旅 · 产品架构与体验分层设计 v0.2 —— 下一步：确认后进入 P0 开发（旅程卡 + 专注模式 + 个人中心 + 签到任务）</div>
+</div>
+</body>
+</html>

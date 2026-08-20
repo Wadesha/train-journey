@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>铁旅 · 用户场景与产品路径规划 v0.3</title>
+<style>
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2d3748;
+  --text:#e6edf3; --dim:#9aa7b8; --faint:#6b7686;
+  --gold:#f0b429; --blue:#4fc3f7; --green:#3fb950; --red:#f85149; --purple:#a371f7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",-apple-system,sans-serif;line-height:1.65;padding:32px 16px 80px}
+.wrap{max-width:1060px;margin:0 auto}
+h1{font-size:1.9em;letter-spacing:1px}
+.sub{color:var(--dim);margin:8px 0 4px;font-size:.95em}
+.meta{color:var(--faint);font-size:.82em;margin-bottom:26px}
+h2{font-size:1.28em;margin:44px 0 14px;padding-left:12px;border-left:4px solid var(--gold);color:var(--gold)}
+h3{font-size:1.05em;margin:20px 0 8px;color:var(--blue)}
+p{color:var(--dim);margin:6px 0}
+b{color:var(--text)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9em}
+th{background:var(--panel2);color:var(--gold);text-align:left;padding:9px 10px;border:1px solid var(--border);font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border:1px solid var(--border);color:var(--dim);vertical-align:top}
+td b{color:var(--text)}
+.tag{display:inline-block;padding:1px 8px;border-radius:6px;font-size:.78em;margin-right:4px;white-space:nowrap}
+.t-gold{background:rgba(240,180,41,.15);color:var(--gold)}
+.t-blue{background:rgba(79,195,247,.15);color:var(--blue)}
+.t-green{background:rgba(63,185,80,.15);color:var(--green)}
+.t-red{background:rgba(248,81,73,.15);color:var(--red)}
+.t-purple{background:rgba(163,113,247,.15);color:var(--purple)}
+.t-gray{background:rgba(155,167,184,.15);color:var(--dim)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.flow .node{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:.86em;text-align:center}
+.flow .node b{display:block;font-size:.95em}
+.flow .node small{color:var(--faint)}
+.flow .arrow{color:var(--faint);font-size:1.1em}
+.warn{background:rgba(248,81,73,.07);border:1px solid rgba(248,81,73,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.warn b{color:var(--red)}
+.warn p{color:var(--dim);font-size:.9em;margin:4px 0}
+.ok{background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.3);border-radius:10px;padding:12px 16px;margin:8px 0}
+.ok b{color:var(--green)}
+.ok p{color:var(--dim);font-size:.9em;margin:4px 0}
+.timeline{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.timeline .seg{display:grid;grid-template-columns:110px 1fr 1fr 1fr;gap:8px;align-items:center;border-radius:10px;padding:10px 14px;border:1px solid var(--border);background:var(--panel)}
+.timeline .seg .phase{font-weight:700;font-size:.95em}
+.timeline .seg .freq{color:var(--faint);font-size:.78em}
+.timeline .seg .emo{color:var(--dim);font-size:.88em}
+.timeline .seg .task{color:var(--dim);font-size:.88em}
+.timeline .s1{border-color:var(--blue)}.timeline .s1 .phase{color:var(--blue)}
+.timeline .s2{border-color:var(--purple)}.timeline .s2 .phase{color:var(--purple)}
+.timeline .s3{border-color:var(--gold)}.timeline .s3 .phase{color:var(--gold)}
+.timeline .s4{border-color:var(--green)}.timeline .s4 .phase{color:var(--green)}
+.timeline .s5{border-color:var(--red)}.timeline .s5 .phase{color:var(--red)}
+.steps{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.steps .step{display:grid;grid-template-columns:52px 1fr;gap:12px;border:1px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--panel)}
+.steps .step .n{width:40px;height:40px;border-radius:50%;background:var(--panel2);border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05em}
+.steps .step .b{font-weight:700;color:var(--text);font-size:.95em}
+.steps .step .d{color:var(--dim);font-size:.88em;margin-top:2px}
+.foot{margin-top:50px;color:var(--faint);font-size:.8em;text-align:center;border-top:1px solid var(--border);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🚄 铁旅 · 用户场景与产品路径规划</h1>
+<div class="sub">用户大部分时间<b>不在车上</b>。产品要覆盖的，不只是"坐车的 2-8 小时"，还有"不坐车的 300 天里他们在想什么"——把用户自发的行为<b>流程化</b>成产品功能，但不做社区。</div>
+<div class="meta">版本 v0.3 · 2026-08-20 · 前置依赖：v0.1（数值体系）+ v0.2（体验分层）· 状态：规划稿</div>
+
+<!-- ============ 0 方法论 ============ -->
+<h2>0 · 怎么反复思考这个产品：三问框架</h2>
+<div class="card">
+<p>每次产品决策前，反复问三个问题，直到答案具体到"某个人在某天的某个时刻"：</p>
+<div class="flow">
+  <div class="node"><b>① 谁</b><small>哪类人群？（商务/旅行/探亲/铁道迷）</small></div><span class="arrow">→</span>
+  <div class="node"><b>② 何时</b><small>在哪个时段？（行前/行中/到站/不坐车）</small></div><span class="arrow">→</span>
+  <div class="node"><b>③ 为何</b><small>他此刻想干什么？（查票价/回忆/期待/分享）</small></div><span class="arrow">→</span>
+  <div class="node"><b>功能</b><small>这一步产品帮他完成什么？</small></div>
+</div>
+<p>产品思考的完整链条：<b>用户生命周期五段</b>——种草 → 规划 → 乘车 → 回忆 → 惦记下次。每一段都要回答"用户此刻在想什么、我帮他做什么"。</p>
+<div class="warn"><b>最容易犯的错（我犯过）：</b>只盯着"乘车"这一段做功能（因为坐车时产品最"像游戏"）。但乘车只占用户生命的 1%，另外 99% 的时间用户在想"下次去哪"——那才是留存的战场。</div>
+</div>
+
+<!-- ============ 1 人群细分 ============ -->
+<h2>1 · 人群细分（不同的人，不同的"不坐车时"）</h2>
+<div class="card">
+<table>
+<tr><th>人群</th><th>出行频率</th><th>坐车时的需求</th><th><b>不坐车时关注什么</b></th></tr>
+<tr><td><b>商务出差党</b></td><td>高（每周/月）</td><td>效率、准点、中转衔接</td><td>下次出差安排、高铁常客权益、出差城市吃喝/酒店、报销票据</td></tr>
+<tr><td><b>周末/假期旅行者</b></td><td>中（每 1-3 月）</td><td>风景、拍照、旅途趣味</td><td><b>目的地种草 → 攻略收藏 → 比价 → 倒计时</b>（完整"期待链"）</td></tr>
+<tr><td><b>学生/探亲族</b></td><td>低（寒暑假/节假日）</td><td>票价、时间、行李</td><td>放假倒计时、票价变动、给家人的礼物</td></tr>
+<tr><td><b>铁道迷/运转党</b></td><td>特殊高</td><td>线路、车型、站序、时刻</td><td>新开线路、新车型、运转记录整理、线路图收藏</td></tr>
+</table>
+<div class="ok"><b>结论：</b> "不坐车时"不是空窗，而是<b>四种人群各有各的惦记</b>。产品不必一次满足全部，但至少要知道——<b>最大的群体（旅行者）的不坐车时段，全在"期待链"上</b>：种草→收藏→比价→倒计时。这就是产品该接住的需求。</div>
+</div>
+
+<!-- ============ 2 时段矩阵 ============ -->
+<h2>2 · 时段 × 情绪 × 产品任务 矩阵</h2>
+<div class="card">
+<div class="timeline">
+  <div class="seg s1"><div class="phase">行前种草</div><div class="freq">低频·长</div><div class="emo">😍 期待</div><div class="task"><b>愿望清单</b>：收藏目的地，标注"想去"</div></div>
+  <div class="seg s2"><div class="phase">行前规划</div><div class="freq">低频·短</div><div class="emo">😰 怕贵/怕没票</div><div class="task"><b>票价日历 + 降价提醒</b>：决策工具</div></div>
+  <div class="seg s3"><div class="phase">行中乘车</div><div class="freq">2-8h</div><div class="emo">🙂 无聊+新鲜</div><div class="task"><b>陪伴（已有）</b>：行程/报站/风景/拍照</div></div>
+  <div class="seg s4"><div class="phase">到站瞬间</div><div class="freq">瞬时</div><div class="emo">✅ 完成感</div><div class="task"><b>旅程卡</b>：自动生成，可存可分享</div></div>
+  <div class="seg s5"><div class="phase">行后回忆</div><div class="freq">高频·短</div><div class="emo">😌 满足</div><div class="task"><b>旅程档案</b>：足迹地图/年度报告/回忆时间线</div></div>
+</div>
+<p>注意<b>频率</b>列：行后回忆是"高频短"——用户不坐车时最常做的事其实是<b>翻看回忆</b>（照片、里程、去过的地方）。这给了产品一个"每天打开的理由"。</p>
+</div>
+
+<!-- ============ 3 研究用户 ============ -->
+<h2>3 · 怎么一步步观察用户：研究方法阶梯</h2>
+<div class="card">
+<div class="steps">
+  <div class="step"><div class="n">1</div><div><div class="b">自我模拟（今天就能做）</div><div class="d">把自己当目标用户，走一遍"想出去玩→找攻略→查票价→订票→坐车→发朋友圈"的完整流程。每步记录：我在哪搜的、搜什么词、为什么停在这。<b>目标：还原用户的"手动工作流"</b>——这个工作流就是产品要流程化的对象。</div></div></div>
+  <div class="step"><div class="n">2</div><div><div class="b">二手数据观察（本周能做）</div><div class="d">看小红书/抖音/微博上高铁旅行相关内容的点赞收藏——<b>什么内容火，就是什么需求强</b>。看 12306/智行热搜、节假日出行报告。免费、快、量大。列一张"用户自发行为清单"。</div></div></div>
+  <div class="step"><div class="n">3</div><div><div class="b">真实访谈（1-2 周）</div><div class="d">问 5-10 个身边常坐高铁的人 4 个问题：① 坐车前你会做什么准备？② 坐车时你会干什么？③ 下车后你会做什么？④ 不坐车的时候，什么会让你想到旅行？<b>答案直接给功能清单</b>。</div></div></div>
+  <div class="step"><div class="n">4</div><div><div class="b">埋点验证（产品上线后持续）</div><div class="d">每个页面记录：点击率、停留、流失。用数据回答"我猜的用户行为对不对"。<b>研究是循环不是一次性的</b>——上线才是研究的开始。</div></div></div>
+</div>
+<div class="ok"><b>核心方法：</b> 研究的目的是找出<b>用户在别的平台/现实世界里"手动做的事"</b>——这些行为就是产品功能的候选清单。用户已经用脚投票了：他愿意做，只是没有趁手的工具。</div>
+</div>
+
+<!-- ============ 4 核心命题 ============ -->
+<h2>4 · 核心命题：自发行为 → 流程化产品功能（不做社区）</h2>
+<div class="card">
+<table>
+<tr><th>用户自发行为（真实世界）</th><th>现在怎么做（麻烦）</th><th>流程化成产品功能</th><th>对应时段</th></tr>
+<tr><td><b>收藏想去的地方</b></td><td>小红书收藏夹 + 备忘录，散落各处</td><td><b>愿望清单</b>：收藏目的地城市/景点，标注"想去"，将来购票时自动关联</td><td>种草</td></tr>
+<tr><td><b>查什么时候票价便宜</b></td><td>反复刷 12306/智行对比</td><td><b>票价日历</b>：某区间未来 30 天票价视图 + <b>降价提醒</b></td><td>规划</td></tr>
+<tr><td><b>做行程计划</b></td><td>Excel / 备忘录手写</td><td><b>连续行程规划</b>：A→B→C 多段中转，一次建好，自动衔接</td><td>规划</td></tr>
+<tr><td><b>记录旅程</b></td><td>相机 + 朋友圈九宫格</td><td><b>旅程卡自动生成</b>（车次+线路+风景+里程，已规划 P0）</td><td>到站</td></tr>
+<tr><td><b>翻看回忆</b></td><td>翻相册、翻车票</td><td><b>旅程档案</b>：足迹地图（去过的城市点亮）+ 年度旅行报告（像支付宝年度账单）+ 时间线</td><td>回忆</td></tr>
+<tr><td><b>惦记下次出发</b></td><td>记在日历/心里</td><td><b>出行倒计时</b>：购票自动记录，"距出发还有 X 天"，每天打开的第一眼</td><td>惦记</td></tr>
+<tr><td><b>铁道迷整理运转记录</b></td><td>Excel/论坛手动记录</td><td><b>线路收藏 + 打卡成就</b>（"已集齐 X 条线"，成就系统已有）</td><td>回忆</td></tr>
+<tr><td><b>分享旅途</b></td><td>发朋友圈</td><td><b>旅程卡分享</b>：一键生成图片转发（出口，不做社区）</td><td>到站后</td></tr>
+</table>
+</div>
+
+<!-- ============ 5 边界 ============ -->
+<h2>5 · 不做社区，做什么？——边界明确</h2>
+<div class="card">
+<table>
+<tr><th></th><th>不做（社区）</th><th>做（个人工作流 + 出口）</th></tr>
+<tr><td><b>内容</b></td><td>用户发帖、评论、点赞、关注</td><td><b>官方编辑的攻略/目的地推荐</b>（如"本周热门目的地"）</td></tr>
+<tr><td><b>互动</b></td><td>陌生人社交、私信</td><td><b>分享出口</b>：旅程卡生成图片 → 用户发到微信/朋友圈（我们只做"导出"，不做"圈内"）</td></tr>
+<tr><td><b>数据</b></td><td>公开排行榜单（刷子重灾区）</td><td><b>个人资产</b>：我的旅程档案、我的足迹、我的愿望清单（私有，用户自赏）</td></tr>
+<tr><td><b>运营</b></td><td>UGC 审核、社区治理</td><td><b>官方内容 + 节日活动</b>（中秋赏月专列等）</td></tr>
+</table>
+<div class="warn"><b>为什么不做社区是聪明决定：</b> 社区 = 内容供给 + 审核 + 治理 + 反垃圾，运营成本极高，且会稀释"旅途伴侣"的定位。我们要的是<b>把用户单人的"流程"做顺</b>（种草→比价→买票→记录→回忆→惦记），这一个人闭环做好，分享行为自然会带来传播（旅程卡带邀请码），<b>传播靠产品机制，不靠社区运营</b>。</div>
+</div>
+
+<!-- ============ 6 杀手锏 ============ -->
+<h2>6 · 杀手级功能：出行倒计时（衔接 v0.1 数值体系）</h2>
+<div class="card">
+<p>为什么它是杀手锏——它把"不坐车的 300 天"和"每天打开产品"完美焊在一起：</p>
+<div class="flow">
+  <div class="node"><b>购票</b><small>自动记录出发日期</small></div><span class="arrow">→</span>
+  <div class="node"><b>首页倒计时</b><small>"距 G1 出发还有 12 天 6 小时"</small></div><span class="arrow">→</span>
+  <div class="node"><b>每天打开的理由</b><small>倒计时 + 签到 + 期待感</small></div><span class="arrow">→</span>
+  <div class="node"><b>出发日</b><small>旅程卡自动生成</small></div><span class="arrow">→</span>
+  <div class="node"><b>下次购票…</b><small>循环</small></div>
+</div>
+<ul style="color:var(--dim);margin-left:18px;font-size:.92em">
+<li><b>对用户</b>：倒计时是"期待"，不是"任务"——用户来产品是"看我的行程"，顺便签到（名正言顺）</li>
+<li><b>对数值体系（v0.1）</b>：签到奖励从"为签到而签到"变成"为我的旅行做准备"——<b>动机升华</b></li>
+<li><b>可加升级玩法</b>：出发前连续签到 7 天 → 本次旅程卡升级"金色纪念版"（v0.1 的 7 日循环奖励顺势而为）</li>
+<li><b>技术成本极低</b>：只需在购票时多存一个日期字段，首页多一行文字——<b>性价比全场最高</b></li>
+</ul>
+</div>
+
+<!-- ============ 7 优先级 ============ -->
+<h2>7 · 优先级与节奏（结合 v0.1/v0.2 已定计划）</h2>
+<div class="card">
+<table>
+<tr><th>阶段</th><th>内容</th><th>覆盖时段</th><th>理由</th></tr>
+<tr><td><b>P0（进行中）</b></td><td>旅程卡 + 专注模式 + 个人中心 + 隐藏式签到任务</td><td>到站 / 日常</td><td>v0.2 已定，先把"不打扰+记忆"立住</td></tr>
+<tr><td><b>P0.5（强烈建议插队）</b></td><td><b>出行倒计时</b>（购票自动记录）+ 旅程档案基础版（足迹城市点亮）</td><td>惦记 / 回忆</td><td>成本极低、覆盖"不坐车时段"、给签到一个正当理由</td></tr>
+<tr><td><b>P1</b></td><td>愿望清单 + 票价日历/降价提醒 + 邀请 + 排行</td><td>种草 / 规划 / 传播</td><td>把"期待链"的前端接住</td></tr>
+<tr><td><b>P2</b></td><td>运营后台 + 连续行程规划 + 年度旅行报告</td><td>全时段</td><td>后台是运营前提；连续行程是深度功能</td></tr>
+<tr><td><b>P3</b></td><td>LBS 打卡 + 商家入驻 + 会员</td><td>线下</td><td>商业化，依赖用户规模</td></tr>
+</table>
+<div class="ok"><b>节奏原则：</b> 先接住"用户已经在做的事"（记录/回忆/惦记——成本低需求真），再引导"我们希望用户做的事"（种草/比价——需要运营内容支撑）。<b>不要创造需求，要流程化已有需求。</b></div>
+</div>
+
+<!-- ============ 8 关系 ============ -->
+<h2>8 · 三版规划的关系（完整产品设计）</h2>
+<div class="card">
+<table>
+<tr><th>版本</th><th>回答的问题</th><th>一句话</th></tr>
+<tr><td><b>v0.1 数值体系</b></td><td>有什么资源、怎么给、怎么回收</td><td>骨架：经济的规矩</td></tr>
+<tr><td><b>v0.2 体验分层</b></td><td>放在哪、藏起来还是露出来</td><td>皮肤：不打扰的规矩</td></tr>
+<tr><td><b>v0.3 场景路径</b></td><td>用户什么时候来、来干什么</td><td><b>心脏：产品存在的理由</b>（覆盖用户全部时段，不只是坐车）</td></tr>
+</table>
+<p>三版合起来：<b>v0.3 决定"为什么来"，v0.1 决定"来了给什么"，v0.2 决定"给的姿势不烦人"</b>。缺任何一个，产品都不完整。</p>
+</div>
+
+<div class="foot">铁旅 · 用户场景与产品路径规划 v0.3 —— 下一步：确认后把 P0.5（出行倒计时 + 旅程档案）并入开发计划</div>
+</div>
+</body>
+</html>
