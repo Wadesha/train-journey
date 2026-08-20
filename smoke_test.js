@@ -137,7 +137,7 @@ setTimeout(()=>{
     ev("openPanel('ach')");
     assert('成就页含 16 张卡片', document.querySelectorAll('.ach-card').length===16);
     ev("openPanel('log')");
-    assert('手账页显示 1 条', document.querySelectorAll('.log-item').length===1);
+    assert('手账页显示 1 条', document.querySelectorAll('#modal-body .log-item').length===1);
     
     assert('订票区存在', !!document.getElementById('book-area'));
     ev("openPanel('set')");

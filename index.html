@@ -194,6 +194,134 @@ button{font-family:inherit;cursor:pointer}
 ::-webkit-scrollbar-thumb{background:#3a4052;border-radius:4px}
 ::-webkit-scrollbar-track{background:transparent}
 .small-note{color:var(--faint);font-size:.75em;margin-top:6px;line-height:1.6}
+
+/* ============ 新首页 / 护照视图（v2 重构） ============ */
+.nav{display:flex;gap:6px;margin:12px 0 10px;flex-wrap:wrap}
+.nav button{padding:8px 16px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em;cursor:pointer}
+.nav button.sel{border-color:var(--gold);color:var(--gold);font-weight:700;background:rgba(240,180,41,.08)}
+.view{display:none}
+.view.show{display:block}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:10px 0}
+.group-name{font-size:.72em;color:var(--faint);letter-spacing:2px;margin:10px 0 6px;display:flex;align-items:center;gap:8px}
+.group-name::after{content:'';flex:1;height:1px;background:var(--border)}
+/* home hero */
+.home-hero{background:linear-gradient(160deg,rgba(240,180,41,.12),rgba(79,195,247,.06));border:1px solid var(--gold);border-radius:16px;padding:22px 24px;margin:10px 0;text-align:center}
+.home-hero .hh-title{font-size:1.05em;color:var(--dim);letter-spacing:2px}
+.home-hero .hh-badge{display:inline-block;margin-top:8px;font-size:.95em;color:var(--gold);background:rgba(240,180,41,.15);border:1px solid var(--gold);border-radius:16px;padding:4px 18px;font-weight:700}
+.home-hero .hh-tagline{font-size:.82em;color:var(--faint);margin-top:10px;letter-spacing:3px}
+.stats{display:flex;gap:8px}
+.stat-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;text-align:center}
+.stat-box .n{font-size:1.35em;font-weight:700;color:var(--gold)}
+.stat-box .l{font-size:.68em;color:var(--faint);margin-top:2px}
+.stat-box.g .n{color:var(--green)} .stat-box.b .n{color:var(--blue)} .stat-box.p .n{color:var(--purple)}
+/* 我的旅程状态 */
+.trip-status{display:flex;gap:8px}
+.ts-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:11px 14px}
+.ts-box .ts-lb{font-size:.68em;color:var(--faint);margin-bottom:4px}
+.ts-box .ts-main{font-weight:700;font-size:.98em}
+.ts-box .ts-sub{font-size:.74em;color:var(--dim);margin-top:3px}
+.ts-box.next{border-color:var(--blue)}
+.ts-box.next .ts-main{color:var(--blue);font-size:1.25em}
+.btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,#f0b429,#e67e22);color:#1a1206;margin:12px 0}
+.btn-big:hover{filter:brightness(1.08)}
+/* 车站打卡墙 */
+.home-title{font-size:1em;font-weight:700;color:var(--text);margin-bottom:4px}
+.ck-stats{font-size:.74em;color:var(--faint);margin:2px 0 8px}
+.ck-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.ck-btn{font-size:.72em;padding:4px 1px;border-radius:6px;border:1px solid var(--border);background:var(--panel2);color:var(--dim);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:.1s}
+.ck-btn:hover{border-color:var(--blue);color:var(--text)}
+.ck-btn.vis{border-color:var(--gold);background:rgba(240,180,41,.12);color:var(--gold);font-weight:600}
+.checkin-anim{animation:ckpop .5s}
+@keyframes ckpop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+/* 真实位置打卡 */
+.gps-btn{display:block;width:100%;margin:8px 0 2px;padding:9px;border-radius:10px;border:1px solid var(--blue);background:rgba(79,195,247,.1);color:var(--blue);font-size:.85em;cursor:pointer;font-weight:600}
+.gps-btn:hover{background:rgba(79,195,247,.2)}
+.gps-btn.on{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1)}
+.gps-btn.busy{opacity:.6;cursor:wait}
+/* 距离雷达 */
+#gps-radar{margin:6px 0 4px;background:rgba(13,17,23,.5);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.radar-title{font-size:.8em;color:var(--dim);margin-bottom:6px}
+.radar-sec{font-size:.82em;color:var(--dim);margin:4px 0;line-height:1.8}
+.radar-sec b{color:var(--text)}
+.radar-sec.ok b{color:var(--green)}
+.radar-sec .rk{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1px 8px;margin:2px 3px 0 0;font-size:.8em}
+.radar-sec.ok .rk{border-color:var(--green);color:var(--green)}
+/* 线路进度 */
+.line-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.line-row{display:flex;align-items:center;gap:7px;padding:6px 9px;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--panel2);transition:.1s}
+.line-row:hover{border-color:var(--blue)}
+.line-row.sel{border-color:var(--gold);background:rgba(240,180,41,.07)}
+.line-row .bar{width:4px;height:20px;border-radius:2px;flex:none}
+.line-row .nm{font-size:.82em;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.line-row .done{font-size:.66em;color:var(--green);flex:none}
+.line-row .pb{width:52px;height:5px;background:#232b38;border-radius:3px;overflow:hidden;flex:none}
+.line-row .pb i{display:block;height:100%;border-radius:3px}
+.line-row .cnt{font-size:.72em;color:var(--dim);flex:none}
+/* 印章册 */
+.stamps{background:rgba(13,17,23,.5);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:8px}
+.st-title{font-size:.82em;color:var(--dim);margin-bottom:8px}
+.st-title b{color:var(--text)}
+.stamp-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.stamp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;padding:4px 1px 3px;cursor:pointer;border:1px solid transparent}
+.stamp:hover{border-color:var(--border);background:var(--panel2)}
+.stamp .dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}
+.stamp.visited .dot{background:rgba(240,180,41,.18);border:2px solid var(--gold);color:var(--gold);font-weight:700}
+.stamp.passed .dot{background:transparent;border:2px dashed var(--faint);color:var(--faint)}
+.stamp.unseen .dot{background:#1a2029;border:2px solid #2a3444;color:#3d4756}
+.stamp .sn{font-size:.64em;color:var(--dim);white-space:nowrap}
+.stamp.visited .sn{color:var(--gold);font-weight:600}
+.legend{display:flex;gap:12px;margin-top:8px;font-size:.7em;color:var(--dim)}
+.legend .s{width:12px;height:12px;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:3px}
+.legend .s.g{background:rgba(240,180,41,.18);border:2px solid var(--gold)}
+.legend .s.p{border:2px dashed var(--faint)}
+.legend .s.u{background:#1a2029;border:2px solid #2a3444}
+/* 里程碑 */
+.mile-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.mile{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:8px;padding:8px 2px;text-align:center;background:var(--panel2);border:1px solid var(--border)}
+.mile .ic{font-size:1.2em}
+.mile .mn{font-size:.64em;color:var(--faint);line-height:1.3}
+.mile.ok{border-color:var(--green);background:rgba(63,185,80,.08)}
+.mile.ok .mn{color:var(--green)}
+.mile.cur{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.mile .prog{font-size:.62em;color:var(--blue)}
+/* 足迹 */
+.prov-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.prov{font-size:.82em;padding:5px 12px;border-radius:14px;border:1px solid var(--border);color:var(--faint)}
+.prov.vis{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);font-weight:600}
+.city-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.city{font-size:.72em;padding:4px 2px;border-radius:6px;text-align:center;background:var(--panel2);border:1px solid var(--border);color:var(--dim)}
+.city.vis{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);font-weight:600}
+/* 荣誉 */
+.honor-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.honor-item{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:8px;padding:8px 2px;text-align:center;background:var(--panel2);border:1px solid var(--border)}
+.honor-item .ic{font-size:1.35em}
+.honor-item .hn{font-size:.68em;color:var(--faint);line-height:1.3}
+.honor-item .req{font-size:.6em;color:var(--faint)}
+.honor-item.got{border-color:var(--gold);background:rgba(240,180,41,.1)}
+.honor-item.got .hn{color:var(--gold);font-weight:600}
+.honor-item.cur{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.honor-item .prog{font-size:.62em;color:var(--blue)}
+/* 排行 */
+.rank-tabs{display:flex;gap:6px;margin-bottom:8px}
+.rank-tabs button{padding:5px 14px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:.8em;cursor:pointer}
+.rank-tabs button.sel{border-color:var(--gold);color:var(--gold);font-weight:600}
+.rank-list{display:flex;flex-direction:column;gap:4px}
+.rank-row{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--border)}
+.rank-row.me{border-color:var(--gold);background:rgba(240,180,41,.08)}
+.rank-row .pos{width:34px;text-align:center;font-weight:700;color:var(--dim);flex:none}
+.rank-row .pos.top{color:var(--gold)}
+.rank-row .nick{flex:1;font-size:.88em;font-weight:600}
+.rank-row .nick small{color:var(--faint);font-weight:normal;font-size:.72em;margin-left:6px}
+.rank-row .val{color:var(--dim);font-size:.8em;flex:none}
+.rank-row .val b{color:var(--text)}
+/* 旅程记录 */
+.log-list{display:flex;flex-direction:column;gap:5px}
+.log-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--border)}
+.log-item .date{width:74px;font-size:.72em;color:var(--faint);flex:none}
+.log-item .no{font-weight:700;font-size:.9em;color:var(--blue);flex:none;width:56px}
+.log-item .rt{flex:1;font-size:.86em}
+.log-item .rt small{color:var(--faint);font-size:.72em}
+.log-item .km{color:var(--dim);font-size:.78em;flex:none}
 </style>
 </head>
 <body>
@@ -201,19 +329,59 @@ button{font-family:inherit;cursor:pointer}
 <!-- ============ 顶栏 ============ -->
 <div id="topbar">
   <span class="logo">🚄 铁旅<small>中国高铁模拟旅程</small></span>
+  <span class="stat" id="s-badge" style="color:var(--gold);font-weight:600;font-size:.78em"></span>
+  <span class="spacer"></span>
   <span class="stat">💰 <b id="s-money">0</b></span>
   <span class="stat">📏 <b id="s-km">0</b> km</span>
   <span class="stat">🚉 <b id="s-stations">0</b> 站</span>
-  <span class="stat">🏅 <b id="s-ach">0</b>/16</span>
-  <span class="spacer"></span>
-  <button class="tbtn" onclick="openPanel('log')">📔 手账</button>
-  <button class="tbtn gold" onclick="openPanel('ach')">🏆 成就</button>
   <button class="tbtn" onclick="openPanel('set')">⚙️ 设置</button>
   <button class="tbtn" onclick="resetGame()">🔄 重开</button>
 </div>
 
-<!-- ============ 主界面（单一购票流程） ============ -->
-<div id="main">
+<!-- ============ 主导航 ============ -->
+<div class="nav">
+  <button class="sel" data-v="home" onclick="showView('home')">📍 打卡</button>
+  <button data-v="passport" onclick="showView('passport')">📔 护照</button>
+  <button data-v="footprint" onclick="showView('footprint')">🗺️ 足迹</button>
+  <button data-v="honor" onclick="showView('honor')">🏅 荣誉</button>
+  <button data-v="rank" onclick="showView('rank')">🏆 排行</button>
+  <button data-v="log" onclick="showView('log')">📖 旅程</button>
+</div>
+
+<!-- ============ 首页（车站打卡墙） ============ -->
+<div id="view-home" class="view show">
+  <div class="card">
+    <div class="home-title">📍 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
+    <div class="small-note" style="margin:4px 0 2px">ℹ️ 演示说明：线路数据为公开资料整理 · 普速线 / 排行 / 荣誉为<b>模拟数据</b> · GPS 打卡为演示（后台未打通）· 打卡记录保存在本机浏览器</div>
+    <button class="gps-btn" onclick="checkinByGPS()" id="gps-btn">📡 位置扫描 · 授权后检测到达/路过车站</button>
+    <div id="gps-radar"></div>
+    <div class="search-row" style="margin:8px 0">
+      <input id="checkin-search" placeholder="🔍 搜索车站（bjn=北京南 · shhq=上海虹桥 · 汉字）" autocomplete="off" oninput="filterCheckin(this.value)">
+      <button class="btn" onclick="document.getElementById('checkin-search').value='';filterCheckin('')">清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-box"><div class="n" id="h-station">0</div><div class="l">已打卡车站</div></div>
+      <div class="stat-box g"><div class="n" id="h-line">0</div><div class="l">集齐线路</div></div>
+      <div class="stat-box b"><div class="n" id="h-prov">0</div><div class="l">足迹省份</div></div>
+      <div class="stat-box p"><div class="n" id="h-honor">0/7</div><div class="l">荣誉徽章</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="group-name">🚄 高速铁路</div>
+    <div id="h-hs"></div>
+    <div class="group-name">🚃 普速铁路</div>
+    <div id="h-ps"></div>
+    <div class="small-note" style="margin-top:8px">金色 = 已打卡 · 点击任意站盖章 · 普速线路为演示数据</div>
+  </div>
+  <div class="card">
+    <div class="home-title">📖 我的旅程</div>
+    <div id="h-journey"></div>
+    <div class="small-note" style="margin-top:8px">🎮 想体验窗外风景、报站广播？<a href="javascript:showView('book')" style="color:var(--gold)">模拟坐车体验（隐藏玩法）</a></div>
+  </div>
+</div>
+
+<!-- ============ 开始旅程（订票流程） ============ -->
+<div id="view-book" class="view">
   <div class="line-wrap">
     <div class="slot-row">
       <button class="slot-btn" id="slot-from" onclick="setSlot('from')">
@@ -232,6 +400,54 @@ button{font-family:inherit;cursor:pointer}
     <div id="line-panel"></div>
     <div id="book-area"></div>
   </div>
+</div>
+
+<!-- ============ 护照（印章册详情） ============ -->
+<div id="view-passport" class="view">
+  <div class="card">
+    <div class="group-name">🚄 高速铁路</div>
+    <div class="line-grid" id="p-grid-hs"></div>
+    <div class="group-name">🚃 普速铁路（模拟）</div>
+    <div class="line-grid" id="p-grid-ps"></div>
+  </div>
+  <div class="stamps">
+    <div class="st-title"><b id="p-st-name">—</b> 印章册 · 金色=已打卡 · 虚线=途经 · 灰=未到访</div>
+    <div class="stamp-grid" id="p-stamp-grid"></div>
+    <div class="legend">
+      <span><span class="s g"></span>已打卡</span>
+      <span><span class="s p"></span>途经</span>
+      <span><span class="s u"></span>未到访</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 足迹 ============ -->
+<div id="view-footprint" class="view">
+  <div class="card"><div class="group-name">🗺️ 足迹省份（点亮 = 到访过）</div><div class="prov-cloud" id="f-prov"></div></div>
+  <div class="card"><div class="group-name">🏙️ 到访城市</div><div class="city-grid" id="f-city"></div></div>
+</div>
+
+<!-- ============ 荣誉 ============ -->
+<div id="view-honor" class="view">
+  <div class="card"><div class="group-name">🏅 荣誉徽章 · 身份层级（纯荣誉）</div><div class="honor-grid" id="h-honor-grid"></div></div>
+</div>
+
+<!-- ============ 排行 ============ -->
+<div id="view-rank" class="view">
+  <div class="card">
+    <div class="rank-tabs">
+      <button class="sel" onclick="showRank('friend')">👥 好友榜</button>
+      <button onclick="showRank('nation')">🌏 全国周榜</button>
+      <button onclick="showRank('progress')">📈 本周进步榜</button>
+    </div>
+    <div class="rank-list" id="r-list"></div>
+    <div class="small-note">排行数据为演示用模拟数据 · 未来接入真实用户</div>
+  </div>
+</div>
+
+<!-- ============ 旅程 ============ -->
+<div id="view-log" class="view">
+  <div class="card"><div class="group-name">📖 我的旅程记录</div><div class="log-list" id="l-list"></div></div>
 </div>
 
 <!-- ============ 行程界面 ============ -->
@@ -343,6 +559,9 @@ function newGame(){
     seatsTaken: new Set(),
     settings: { voice: true, speed: 1 },
     rideStreak: 0,
+    nextTrip: null,   // {date,from,to,no} 首页倒计时
+    stationFirstVisit: {},  // 站名 → 首次打卡日期
+    passedStations: {},     // 站名 → {km,time} 真实位置路过（灰章）
   };
   saveGame();
 }
@@ -665,6 +884,7 @@ function buyTicket(no,from,to,seat){
     depMin, arrMin, durMin, curMin:depMin,
     passed:new Set(), announced:new Set(), photoCd:0, stopUntil:0,
   };
+  G.nextTrip={date:new Date().toLocaleDateString('zh-CN'), from, to, no};
   saveGame();
   openTrip();
   toast('🎫 已购票 '+no+' · '+from+' → '+to+'（'+seat+'）'+fmtMoney(price));
@@ -1042,6 +1262,336 @@ function checkAchievements(){
   if(newN){renderAll();saveGame();}
 }
 /* =====================================================
+   护照视图（首页/护照/足迹/荣誉/排行/旅程）
+===================================================== */
+/* 普速线路（模拟数据，站序真实） */
+const PS_LINES=[
+  {key:'京沪线',grp:'ps',color:'#607d8b',bias:.8,stations:['北京站','北京南站','黄村站','天津西站','德州站','济南','泰山','磁窑','兖州','枣庄西','徐州站','蚌埠站','南京站','镇江站','丹阳站','常州站','无锡站','苏州站','上海站']},
+  {key:'京广线',grp:'ps',color:'#8d6e63',bias:.6,stations:['北京西站','良乡站','石家庄站','邯郸站','新乡','郑州','漯河','信阳','汉口站','武昌','株洲','衡阳','韶关东','广州']},
+  {key:'京九线',grp:'ps',color:'#795548',bias:.55,stations:['北京西站','霸州站','衡水站','聊城','菏泽','商丘','阜阳站','潢川','麻城','九江','南昌西','吉安','赣州','龙川','深圳']},
+  {key:'陇海线',grp:'ps',color:'#5d4037',bias:.45,stations:['连云港东站','徐州站','商丘','开封','郑州','洛阳东','华山','西安','咸阳','宝鸡','天水','兰州东']},
+  {key:'兰新线',grp:'ps',color:'#546e7a',bias:.35,stations:['兰州','武威南','金昌','张掖','酒泉','嘉峪关','柳园','哈密','吐鲁番','乌鲁木齐']},
+  {key:'哈大线',grp:'ps',color:'#3e7cb1',bias:.7,stations:['哈尔滨','长春','四平','沈阳北','辽阳','海城','大石桥','金州','大连北']},
+  {key:'沪昆线',grp:'ps',color:'#b8860b',bias:.6,stations:['上海站','杭州东站','诸暨站','义乌站','金华站','衢州站','上饶','鹰潭','醴陵','株洲','娄底','怀化','贵阳','六盘水','昆明']},
+  {key:'滨洲线',grp:'ps',color:'#4d7c5f',bias:.3,stations:['哈尔滨','大庆西','昂昂溪','博克图','牙克石','满洲里']},
+];
+/* 站名→省份（用于足迹统计） */
+const PROV_MAP={'北京南':'北京','廊坊':'河北','天津西':'天津','天津南':'天津','沧州西':'河北','德州东':'山东','济南西':'山东','泰安':'山东','枣庄':'山东','徐州东':'江苏','宿州东':'安徽','蚌埠南':'安徽','滁州':'安徽','南京南':'江苏','镇江南':'江苏','常州北':'江苏','无锡东':'江苏','苏州北':'江苏','上海虹桥':'上海','北京丰台':'北京','保定东':'河北','石家庄':'河北','邢台东':'河北','邯郸东':'河北','安阳东':'河南','鹤壁东':'河南','新乡东':'河南','郑州东':'河南','许昌东':'河南','漯河西':'河南','驻马店西':'河南','信阳东':'河南','孝感北':'湖北','武汉':'湖北','咸宁北':'湖北','岳阳东':'湖南','长沙南':'湖南','株洲西':'湖南','衡阳东':'湖南','郴州西':'湖南','韶关':'广东','清远':'广东','广州北':'广东','广州南':'广东','北京朝阳':'北京','承德南':'河北','朝阳':'辽宁','阜新':'辽宁','沈阳西':'辽宁','哈尔滨西':'黑龙江','长春西':'吉林','四平东':'吉林','铁岭西':'辽宁','沈阳北':'辽宁','沈阳':'辽宁','沈阳南':'辽宁','辽阳':'辽宁','鞍山西':'辽宁','营口东':'辽宁','大连北':'辽宁','商丘':'河南','开封北':'河南','郑州西':'河南','洛阳龙门':'河南','三门峡南':'河南','渭南北':'陕西','西安北':'陕西','咸阳西':'陕西','宝鸡南':'陕西','天水南':'甘肃','定西北':'甘肃','兰州西':'甘肃','嘉兴南':'浙江','杭州南':'浙江','金华':'浙江','衢州':'浙江','上饶':'江西','鹰潭北':'江西','抚州东':'江西','南昌西':'江西','新余北':'江西','宜春':'江西','萍乡北':'江西','湘潭北':'湖南','娄底南':'湖南','邵阳北':'湖南','怀化南':'湖南','铜仁南':'贵州','贵阳东':'贵州','贵阳北':'贵州','安顺西':'贵州','曲靖北':'云南','昆明南':'云南','杭州东':'浙江','绍兴北':'浙江','宁波':'浙江','台州西':'浙江','温州南':'浙江','宁德':'福建','福州南':'福建','莆田':'福建','泉州':'福建','厦门北':'福建','漳州':'福建','潮汕':'广东','汕尾':'广东','深圳北':'广东','北京站':'北京','北京南站':'北京','黄村站':'北京','天津西站':'天津','德州站':'山东','济南':'山东','泰山':'山东','磁窑':'山东','兖州':'山东','枣庄西':'山东','徐州站':'江苏','蚌埠站':'安徽','南京站':'江苏','镇江站':'江苏','丹阳站':'江苏','常州站':'江苏','无锡站':'江苏','苏州站':'江苏','上海站':'上海','北京西站':'北京','良乡站':'北京','石家庄站':'河北','邯郸站':'河北','新乡':'河南','郑州':'河南','漯河':'河南','信阳':'河南','汉口站':'湖北','武昌':'湖北','株洲':'湖南','衡阳':'湖南','韶关东':'广东','广州':'广东','霸州站':'河北','衡水站':'河北','聊城':'山东','菏泽':'山东','阜阳站':'安徽','潢川':'河南','麻城':'湖北','九江':'江西','南昌西':'江西','吉安':'江西','赣州':'江西','龙川':'广东','深圳':'广东','连云港东站':'江苏','开封':'河南','洛阳东':'河南','华山':'陕西','西安':'陕西','咸阳':'陕西','宝鸡':'陕西','天水':'甘肃','兰州':'甘肃','武威南':'甘肃','金昌':'甘肃','张掖':'甘肃','酒泉':'甘肃','嘉峪关':'甘肃','柳园':'甘肃','哈密':'新疆','吐鲁番':'新疆','乌鲁木齐':'新疆','哈尔滨':'黑龙江','大庆西':'黑龙江','长春':'吉林','四平':'吉林','沈阳北':'辽宁','海城':'辽宁','大石桥':'辽宁','金州':'辽宁','大连北':'辽宁','杭州东站':'浙江','诸暨站':'浙江','义乌站':'浙江','金华站':'浙江','衢州站':'浙江','鹰潭':'江西','醴陵':'湖南','娄底':'湖南','怀化':'湖南','贵阳':'贵州','六盘水':'贵州','昆明':'云南','昂昂溪':'内蒙古','博克图':'内蒙古','牙克石':'内蒙古','满洲里':'内蒙古'};
+function provOf(n){return PROV_MAP[n]||'其他';}
+/* 普速线模拟打卡（固定种子） */
+let psSeed=20260820;
+function psRnd(){psSeed=(psSeed*1103515245+12345)%2147483648;return psSeed/2147483648;}
+PS_LINES.forEach(L=>{
+  L.state={};
+  L.stations.forEach((n,i)=>{
+    const r=psRnd();
+    L.state[n]=(i===0||i===L.stations.length-1)?(r<L.bias+0.1?'v':'p'):(r<L.bias?'v':(r<L.bias+0.25?'p':'u'));
+  });
+});
+const ALL_LINES=[...Object.keys(LINES).map(k=>({key:k,grp:'hs',color:LINES[k].color,stations:LINES[k].stations.map(s=>s.name)})),...PS_LINES];
+function lineState(L,name){
+  if(L.grp==='hs'){
+    if(G.stationsVisited.has(name))return 'v';
+    if(G.passedStations&&G.passedStations[name])return 'p';
+    return 'u';
+  }
+  return L.state[name];
+}
+function lineVisCount(L){ return L.stations.filter(n=>lineState(L,n)==='v').length; }
+/* 称号 */
+function getBadge(){
+  const n=G.stationsVisited.size;
+  if(n>=300)return {ic:'🏆',name:'铁路大师',req:'300 站'};
+  if(n>=200)return {ic:'💎',name:'铁路收藏家',req:'200 站'};
+  if(n>=100)return {ic:'🥇',name:'铁路达人',req:'100 站'};
+  if(n>=50)return {ic:'🥈',name:'铁路旅人',req:'50 站'};
+  if(n>=10)return {ic:'🥉',name:'铁轨行者',req:'10 站'};
+  return {ic:'🚶',name:'新手上路',req:'10 站'};
+}
+/* 荣誉 / 里程碑 */
+function honorList(){
+  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+  return [
+    {ic:'🥉',name:'铁轨行者',req:'10 站',got:n>=10},
+    {ic:'🥈',name:'铁路旅人',req:'50 站',got:n>=50},
+    {ic:'🥇',name:'铁路达人',req:'100 站',got:n>=100},
+    {ic:'💎',name:'铁路收藏家',req:'集齐 5 线',got:done>=5,prog:done+'/5线'},
+    {ic:'🏅',name:'铁路通',req:'集齐 10 线',got:done>=10,prog:done+'/10线'},
+    {ic:'🏆',name:'铁路大师',req:'300 站',got:n>=300,prog:n+'/300'},
+    {ic:'👑',name:'铁道传奇',req:'全部线路',got:done>=ALL_LINES.length,prog:done+'/'+ALL_LINES.length+'线'},
+  ];
+}
+function mileList(){
+  const done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+  const n=G.stationsVisited.size;
+  return [
+    {ic:'🎖️',name:'首站打卡',ok:G.stationsVisited.size>0},
+    {ic:'🏅',name:'首线集齐',ok:done>=1},
+    {ic:'🥉',name:'集齐 3 线',ok:done>=3,prog:done+'/3'},
+    {ic:'💎',name:'集齐 5 线',ok:done>=5,prog:done+'/5'},
+    {ic:'🏆',name:'集齐 10 线',ok:done>=10,prog:done+'/10'},
+    {ic:'👑',name:'全部线路',ok:done>=ALL_LINES.length,prog:done+'/'+ALL_LINES.length},
+    {ic:'🗺️',name:'打卡 300 站',ok:n>=300,prog:n+'/300'},
+  ];
+}
+/* 排行（模拟数据） */
+const FRIENDS=[
+  {nick:'环渤海车迷',km:9870,vis:301,done:5,prov:12,me:false},
+  {nick:'绿皮车情怀',km:5120,vis:198,done:2,prov:9,me:false},
+  {nick:'你',km:4680,vis:0,done:0,prov:0,me:true},
+  {nick:'京九铁道',km:3320,vis:128,done:2,prov:7,me:false},
+  {nick:'沪昆走遍',km:4210,vis:112,done:1,prov:6,me:false},
+  {nick:'夜行列车长',km:2980,vis:96,done:0,prov:5,me:false},
+  {nick:'慢车爱好者',km:1560,vis:54,done:0,prov:3,me:false},
+  {nick:'铁轨收藏家',km:880,vis:23,done:0,prov:2,me:false},
+];
+const NATION=[
+  {nick:'纵横中国',km:38600,vis:412,done:12,prov:24},
+  {nick:'铁道传奇',km:31200,vis:398,done:11,prov:23},
+  {nick:'兰新守望者',km:27500,vis:355,done:10,prov:22},
+  {nick:'京广全程',km:24100,vis:322,done:9,prov:21},
+  {nick:'四纵四横',km:21800,vis:301,done:9,prov:20},
+  {nick:'天山行者',km:18900,vis:280,done:8,prov:19},
+  {nick:'南海之滨',km:16200,vis:251,done:7,prov:18},
+  {nick:'北国风光',km:14100,vis:244,done:7,prov:17},
+  {nick:'你',km:4680,vis:0,done:0,prov:0},
+  {nick:'蓉渝穿梭',km:13200,vis:228,done:6,prov:16},
+];
+/* ============ 视图切换 ============ */
+let curView='home', curRankTab='friend', passportSel=ALL_LINES.findIndex(L=>L.key==='京沪高速线');
+function showView(v){
+  curView=v;
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('sel',b.dataset.v===v));
+  document.querySelectorAll('.view').forEach(p=>p.classList.remove('show'));
+  const el=document.getElementById('view-'+v);
+  if(el)el.classList.add('show');
+  if(v==='home')renderHome();
+  else if(v==='passport')renderPassport();
+  else if(v==='footprint')renderFootprint();
+  else if(v==='honor')renderHonorView();
+  else if(v==='rank')renderRank();
+  else if(v==='log')renderLogView();
+}
+/* ============ 首页：车站打卡墙 ============ */
+let checkinQuery='';
+function filterCheckin(v){checkinQuery=v;renderHome();}
+/* 真实位置：一次定位 → 全站距离 → 分层（到达/附近/路过） */
+function haversineKm(lat1,lon1,lat2,lon2){
+  const R=6371,toRad=x=>x*Math.PI/180;
+  const dLat=toRad(lat2-lat1),dLon=toRad(lon2-lon1);
+  const h=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+/* GPS 首次授权说明弹窗 */
+function openGpsExplain(){
+  document.getElementById('modal-title').textContent='📡 位置打卡 · 功能说明';
+  document.getElementById('modal-body').innerHTML=`
+    <div style="line-height:1.9;font-size:.93em">
+      <p style="color:var(--dim)">本功能用于<b style="color:var(--text)">铁路护照打卡</b>：检测你到达 / 经过的车站并自动盖章，让护照记录你的真实足迹。</p>
+      <div class="ok" style="margin:12px 0"><b>郑重说明：</b>
+        <p>· 不会收集你的隐私，不做任何位置追踪或侦查</p>
+        <p>· 当前为演示版（模拟数据），后台尚未打通</p>
+        <p>· 你在使用期间持续授权，定位匹配会越来越精准</p>
+        <p>· 可随时在浏览器设置中关闭定位权限</p>
+      </div>
+      <button class="btn primary block" onclick="consentGps()">✅ 同意并授权定位</button>
+      <button class="btn block" style="margin-top:8px" onclick="closeModal()">暂不</button>
+    </div>`;
+  document.getElementById('modal-bg').classList.remove('hidden');
+}
+function consentGps(){
+  try{localStorage.setItem('railGpsConsent','1');}catch(e){}
+  closeModal();
+  checkinByGPS();
+}
+function checkinByGPS(){
+  if(!localStorage.getItem('railGpsConsent')){
+    openGpsExplain();
+    return;
+  }
+  const btn=document.getElementById('gps-btn');
+  if(!('geolocation' in navigator)){
+    toast('当前环境不支持定位，请点击车站手动打卡','err');
+    return;
+  }
+  btn.classList.add('busy'); btn.textContent='📡 扫描中…（计算全站距离）';
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      btn.classList.remove('busy'); btn.classList.add('on');
+      btn.textContent='📡 位置扫描 · 已开启';
+      const lat=pos.coords.latitude, lon=pos.coords.longitude, now=new Date();
+      /* 一次定位 → 计算到全部车站的距离 */
+      const dists=[];
+      for(const name in RAIL.stations){
+        const st=RAIL.stations[name];
+        if(!st||!st.lat)continue;
+        dists.push({name, km:haversineKm(lat,lon,st.lat,st.lon)});
+      }
+      dists.sort((a,b)=>a.km-b.km);
+      const arrived=dists.filter(d=>d.km<0.15);      // 到达：站内
+      const nearby=dists.filter(d=>d.km>=0.15&&d.km<1); // 附近 1km
+      const passed=dists.filter(d=>d.km>=1&&d.km<10);   // 路过 10km
+      /* 到达自动打卡 */
+      if(arrived.length){
+        for(const d of arrived) doCheckin(d.name);
+        toast('📍 已到达车站：'+arrived.map(d=>d.name+'（'+d.km.toFixed(2)+'km）').join('、')+' · 自动打卡');
+      }
+      /* 路过记录（灰章） */
+      let passCnt=0;
+      for(const d of passed){
+        if(!G.passedStations[d.name]&&!G.stationsVisited.has(d.name)){
+          G.passedStations[d.name]={km:Math.round(d.km*10)/10, time:now.toLocaleString('zh-CN')};
+          passCnt++;
+        }
+      }
+      if(passCnt>0){ saveGame(); renderHome(); renderPassport(); }
+      if(passed.length) toast('🚉 路过 '+passed.length+' 个车站（10km 内）：'+passed.slice(0,3).map(d=>d.name).join('、')+(passed.length>3?' 等':'')+' · 已记入灰章');
+      /* 雷达视图 */
+      document.getElementById('gps-radar').innerHTML=
+        '<div class="radar-title">📡 当前位置距离雷达（'+lat.toFixed(4)+', '+lon.toFixed(4)+'）· '+now.toLocaleTimeString('zh-CN')+'</div>'
+        +(arrived.length?'<div class="radar-sec ok"><b>🟢 到达（站内 &lt;150m）：</b>'+arrived.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(2)+'km</span>').join('')+'</div>':'')
+        +(nearby.length?'<div class="radar-sec"><b>🔵 附近（&lt;1km）：</b>'+nearby.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(1)+'km</span>').join('')+'</div>':'')
+        +(passed.length?'<div class="radar-sec"><b>⚪ 路过（&lt;10km）：</b>'+passed.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(0)+'km</span>').join('')+'</div>':'')
+        +(dists[0].km>=10?'<div class="radar-sec">最近车站也在 '+dists[0].km.toFixed(1)+'km 外，本次无到达/路过记录</div>':'')
+        +'<div class="small-note">每次扫描都会积累"路过站"数据——你的真实铁路足迹越来越丰富。</div>';
+    },
+    err=>{
+      btn.classList.remove('busy');
+      btn.textContent='📡 位置扫描 · 授权失败，点车站手动打卡';
+      toast('无法获取位置（'+err.message+'），可点击车站手动打卡','err');
+    },
+    {enableHighAccuracy:false, timeout:8000, maximumAge:60000}
+  );
+}
+function doCheckin(name){
+  if(!G)return;
+  if(G.stationsVisited.has(name)){toast('📍 '+name+' 已打卡过','');return;}
+  G.stationsVisited.add(name);
+  G.stationFirstVisit[name]=(G.stationFirstVisit[name])||new Date().toLocaleDateString('zh-CN');
+  document.getElementById('s-stations').textContent=G.stationsVisited.size;
+  checkAchievements();
+  saveGame();
+  renderHome(); renderSlots(); renderLinePanel(); renderBookTab();
+  toast('📍 '+name+' · 打卡成功！','ach');
+}
+function checkinBtn(name){
+  const visited=G.stationsVisited.has(name);
+  const multi=STATIONS[name]&&STATIONS[name].lines.length>1;
+  return `<button class="ck-btn ${visited?'vis':''}" onclick="doCheckin('${name}')" title="${visited?'已打卡':'点击打卡'}${visited?' · '+G.stationFirstVisit[name]:''}">${visited?'✓ ':''}${name}${multi?' ◇':''}</button>`;
+}
+function renderHome(){
+  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
+  document.getElementById('s-badge').textContent=getBadge().ic+' '+getBadge().name+' · 打卡 '+n+' 站';
+  document.getElementById('h-station').textContent=n;
+  document.getElementById('h-line').textContent=done+' 线';
+  document.getElementById('h-prov').textContent=provs.size+' 省';
+  const hon=honorList();
+  document.getElementById('h-honor').textContent=hon.filter(h=>h.got).length+'/7';
+  const q=checkinQuery.trim().toLowerCase();
+  const grp=lines=>{
+    let s='';
+    for(const L of lines){
+      const vis=lineVisCount(L);
+      if(vis===L.stations.length)s+='<div class="line-row" style="margin-bottom:5px"><div class="bar" style="background:'+L.color+'"></div><div class="nm">'+L.key+'</div><div class="done">✅ 集齐</div><div class="cnt">'+vis+'/'+L.stations.length+'</div></div>';
+    }
+    return s;
+  };
+  const wall=lines=>{
+    const total=lines.reduce((a,L)=>a+L.stations.length,0);
+    let s='<div class="ck-stats">共 '+total+' 站 · 已打卡 '+lines.reduce((a,L)=>a+lineVisCount(L),0)+'</div><div class="ck-grid">';
+    let shown=0;
+    for(const L of lines){
+      for(const name of L.stations){
+        const nm=name, p=(PINYIN[nm]||'');
+        if(q && !(nm.includes(q)||p.startsWith(q)||(p.includes(q)&&q.length>=2)))continue;
+        s+=checkinBtn(nm); shown++;
+      }
+    }
+    if(!shown)s+='<div class="small-note">未找到「'+q+'」，试试站名或拼音（bjn=北京南）</div>';
+    return s+'</div>';
+  };
+  document.getElementById('h-hs').innerHTML=grp(ALL_LINES.filter(L=>L.grp==='hs'))+wall(ALL_LINES.filter(L=>L.grp==='hs'));
+  document.getElementById('h-ps').innerHTML=grp(ALL_LINES.filter(L=>L.grp==='ps'))+wall(ALL_LINES.filter(L=>L.grp==='ps'));
+  /* 我的旅程（有数据才显示，无数据不废话） */
+  const j=document.getElementById('h-journey');
+  const last=G.rides.length?G.rides[G.rides.length-1]:null;
+  const nt=G.nextTrip;
+  let js='';
+  if(last)js+='<div class="log-item"><span class="date">'+last.date+'</span><span class="no">'+last.no+'</span><span class="rt">'+last.from+' → '+last.to+'<br><small>'+last.km+' km</small></span></div>';
+  if(nt)js+='<div class="log-item"><span class="date">待出发</span><span class="no">'+nt.no+'</span><span class="rt">'+nt.from+' → '+nt.to+'<br><small>已安排</small></span></div>';
+  if(!js)js='<div class="small-note">你还没有旅程记录——点上方任意车站，模拟到达打卡，开启你的铁路护照。</div>';
+  j.innerHTML=js;
+}
+/* ============ 护照详情 ============ */
+function pickPassportLine(i){passportSel=i;renderPassport();}
+function renderPassport(){
+  const hs=ALL_LINES.filter(L=>L.grp==='hs'), ps=ALL_LINES.filter(L=>L.grp==='ps');
+  const row=L=>{
+    const vis=lineVisCount(L), total=L.stations.length, pct=Math.round(vis/total*100);
+    const i=ALL_LINES.indexOf(L);
+    return `<div class="line-row ${i===passportSel?'sel':''}" onclick="pickPassportLine(${i})">
+      <div class="bar" style="background:${L.color}"></div>
+      <div class="nm">${L.key}</div>
+      ${vis===total?'<div class="done">✅</div>':''}
+      <div class="pb"><i style="width:${pct}%;background:${L.color}"></i></div>
+      <div class="cnt">${vis}/${total}</div>
+    </div>`;
+  };
+  document.getElementById('p-grid-hs').innerHTML=hs.map(row).join('');
+  document.getElementById('p-grid-ps').innerHTML=ps.map(row).join('');
+  const L=ALL_LINES[passportSel];
+  document.getElementById('p-st-name').textContent=L.key+(L.grp==='hs'?'（高铁）':'（普速）')+' · '+L.stations.length+' 站';
+  document.getElementById('p-stamp-grid').innerHTML=L.stations.map(n=>{
+    const st=lineState(L,n), cls=st==='v'?'visited':(st==='p'?'passed':'unseen');
+    const dot=st==='v'?'✓':(st==='p'?'途':'·');
+    return `<div class="stamp ${cls}" title="${n}"><span class="dot">${dot}</span><span class="sn">${n}</span></div>`;
+  }).join('');
+}
+/* ============ 足迹 ============ */
+function renderFootprint(){
+  const vis=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
+  const allProv=['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','陕西','甘肃','青海','宁夏','新疆','西藏'];
+  document.getElementById('f-prov').innerHTML=allProv.map(p=>`<span class="prov ${vis.has(p)?'vis':''}">${p}</span>`).join('');
+  document.getElementById('f-city').innerHTML=[...G.stationsVisited].sort().map(c=>`<span class="city vis">${c}</span>`).join('')||'<span class="city">还没有到访记录</span>';
+}
+/* ============ 荣誉 ============ */
+function renderHonorView(){
+  const hon=honorList();
+  const firstMiss=hon.findIndex(h=>!h.got);
+  document.getElementById('h-honor-grid').innerHTML=hon.map((h,i)=>{
+    const cls=h.got?'got':(i===firstMiss?'cur':'');
+    return `<div class="honor-item ${cls}"><span class="ic">${h.ic}</span><span class="hn">${h.name}</span><span class="req">${h.req}</span>${h.prog?`<span class="prog">${h.prog}</span>`:''}</div>`;
+  }).join('');
+}
+/* ============ 排行 ============ */
+function showRank(t){curRankTab=t;document.querySelectorAll('.rank-tabs button').forEach((b,i)=>b.classList.toggle('sel',['friend','nation','progress'][i]===t));renderRank();}
+function renderRank(){
+  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他')).size;
+  const me={nick:'你',km:G.totalKm,vis:n,done,prov:provs,me:true};
+  const list=curRankTab==='friend'?FRIENDS.map(f=>f.me?me:f).sort((a,b)=>b.vis-a.vis)
+    :curRankTab==='nation'?NATION.map(f=>f.nick==='你'?me:f).sort((a,b)=>b.vis-a.vis)
+    :[{nick:'铁轨收藏家',delta:14},{nick:'慢车爱好者',delta:11},{nick:'你',delta:8,me:true},{nick:'京九铁道',delta:7},{nick:'沪昆走遍',delta:5}];
+  document.getElementById('r-list').innerHTML=list.map((r,i)=>{
+    const cls=r.me?'rank-row me':'rank-row';
+    const val=curRankTab==='progress'?`<span class="val"><b>+${r.delta}</b> 站</span>`
+      :`<span class="val"><b>${r.vis}</b> 站 · ${r.done}线 · ${r.prov}省</span>`;
+    return `<div class="${cls}"><span class="pos ${i<3?'top':''}">${i+1}</span><span class="nick">${r.nick}${r.me?'<small>（我）</small>':''}</span>${val}</div>`;
+  }).join('');
+}
+/* ============ 旅程记录 ============ */
+function renderLogView(){
+  const el=document.getElementById('l-list');
+  if(!G.rides.length){el.innerHTML='<div class="small-note">还没有乘车记录，去「开始旅程」开启第一段高铁之旅。</div>';return;}
+  el.innerHTML=[...G.rides].reverse().map(r=>`<div class="log-item">
+    <span class="date">${r.date}</span><span class="no">${r.no}</span>
+    <span class="rt">${r.from} → ${r.to}<br><small>${r.seat} · ${(r.lines||[]).map(l=>l.replace('高速线','').replace('线','')).join('·')||''}</small></span>
+    <span class="km">${r.km} km</span>
+  </div>`).join('');
+}
+
+/* =====================================================
    渲染入口 / 存档
 ===================================================== */
 function renderAll(){
@@ -1049,7 +1599,7 @@ function renderAll(){
   document.getElementById('s-money').textContent=fmtMoney(G.money);
   document.getElementById('s-km').textContent=G.totalKm.toLocaleString('zh-CN');
   document.getElementById('s-stations').textContent=G.stationsVisited.size;
-  document.getElementById('s-ach').textContent=G.achievements.size;
+  renderHome();
   renderSlots();
   renderLinePanel();
   renderBookTab();
@@ -1074,6 +1624,8 @@ function loadGame(){
       trainsTaken:new Set(d.trainsTaken), linesRidden:new Set(d.linesRidden), seatsTaken:new Set(d.seatsTaken),
     };
     G.rides=G.rides||[]; G.photos=G.photos||[];
+    G.stationFirstVisit=G.stationFirstVisit||{};
+    G.passedStations=G.passedStations||{};
     return true;
   }catch(e){console.warn('load failed',e);return false;}
 }
