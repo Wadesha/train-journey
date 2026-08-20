@@ -411,7 +411,6 @@ button{font-family:inherit;cursor:pointer}
  <span class="stat"><b id="s-km">0</b> km</span>
  <span class="stat"><b id="s-stations">0</b> 站</span>
  <button class="tbtn" onclick="openPanel('set')">⚙ 设置</button>
- <button class="tbtn" onclick="resetGame()"> 重开</button>
 </div>
 
 <!-- ============ 主导航 ============ -->
@@ -429,7 +428,7 @@ button{font-family:inherit;cursor:pointer}
  <div class="card">
  <div class="home-title"> 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
  <div class="small-note" style="margin:4px 0 2px;font-size:.7em;color:var(--faint)">存档自动同步云端 · GPS 定位为演示</div>
- <button class="gps-btn" onclick="checkinByGPS()" id="gps-btn"> 位置扫描 · 授权后检测到达/路过车站</button>
+ <button class="gps-btn" onclick="checkinByGPS()" id="gps-btn" style="display:inline-block;width:auto;margin:4px 0 2px;padding:3px 10px;border:1px dashed var(--border);background:transparent;color:var(--faint);font-size:.72em;font-weight:normal">位置扫描（GPS 打卡）</button>
  <div id="gps-radar"></div>
  <div class="search-row" style="margin:8px 0">
  <input id="checkin-search" placeholder=" 搜索车站（bjn=北京南 · shhq=上海虹桥 · 汉字）" autocomplete="off" oninput="filterCheckin(this.value)">
@@ -1762,15 +1761,24 @@ function renderHome(){
     if(hit.length>0)overlap.push(u+' 和你都到过 '+hit.join('、'));
   }
   atm.innerHTML=
-    '<div class="group-name">全服氛围</div>'+
-    '<div class="stats" style="margin-bottom:10px">'+
-      '<div class="stat-box"><div class="n">'+SIM_GLOBAL.users.toLocaleString('zh-CN')+'</div><div class="l">全服用户</div></div>'+
-      '<div class="stat-box g"><div class="n">'+Math.round(SIM_GLOBAL.km/10000)/100+' 万</div><div class="l">累计里程 km</div></div>'+
-      '<div class="stat-box b"><div class="n">'+Math.round(SIM_GLOBAL.checkins/1000)/10+' 万</div><div class="l">累计打卡</div></div>'+
-    '</div>'+
-    '<div class="feed-list">'+SIM_FEED.map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
-    (overlap.length?'<div class="overlap-note">'+overlap.map(o=>'<span>'+o+'</span>').join('')+'</div>':'')+
-    '<div class="small-note" style="margin-top:6px;font-size:.68em;color:var(--faint)">氛围动态为模拟 · 真实玩家增多后自动切换真实</div>';
+    '<div class="group-name" id="atmos-h" onclick="toggleAtmos()" style="cursor:pointer;user-select:none">全服氛围 ▸</div>'+
+    '<div id="atmos-body" style="display:none">'+
+      '<div class="stats" style="margin-bottom:10px">'+
+        '<div class="stat-box"><div class="n">'+SIM_GLOBAL.users.toLocaleString('zh-CN')+'</div><div class="l">全服用户</div></div>'+
+        '<div class="stat-box g"><div class="n">'+Math.round(SIM_GLOBAL.km/10000)/100+' 万</div><div class="l">累计里程 km</div></div>'+
+        '<div class="stat-box b"><div class="n">'+Math.round(SIM_GLOBAL.checkins/1000)/10+' 万</div><div class="l">累计打卡</div></div>'+
+      '</div>'+
+      '<div class="feed-list">'+SIM_FEED.map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
+      (overlap.length?'<div class="overlap-note">'+overlap.map(o=>'<span>'+o+'</span>').join('')+'</div>':'')+
+      '<div class="small-note" style="margin-top:6px;font-size:.68em;color:var(--faint)">氛围动态为模拟 · 真实玩家增多后自动切换真实</div>'+
+    '</div>';
+}
+function toggleAtmos(){
+ const b=document.getElementById('atmos-body'), h=document.getElementById('atmos-h');
+ if(!b)return;
+ const open=b.style.display!=='none';
+ b.style.display=open?'none':'block';
+ if(h)h.textContent=open?'全服氛围 ▸':'全服氛围 ▾';
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
