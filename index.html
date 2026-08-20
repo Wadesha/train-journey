@@ -398,8 +398,11 @@ button{font-family:inherit;cursor:pointer}
 
 <!-- ============ SEO 静态首段（对爬虫友好，也提升可读性）============ -->
 <div id="seo-intro" style="max-width:1180px;margin:10px auto 0;padding:14px 18px;background:var(--panel);border:1px solid var(--border);border-radius:12px;line-height:1.7;color:var(--dim)">
- <h1 style="font-size:1.15em;color:var(--text);margin:0 0 6px">铁旅 · 中国高铁模拟旅程 —— 基于 12306 真实车次的免费高铁旅行模拟游戏</h1>
- <p style="margin:0;font-size:.88em">免费、即点即玩、无需下载。游戏覆盖 <b>京沪高速线、京广高速线、京沈高速线、哈大高速线、徐兰高速线、沪昆高速线、杭深线</b> 共 7 条中国高速铁路线、107 座车站、<b>3530 趟真实车次</b>。你可以选择出发站与到达站、买票上车、沿真实经停站行驶，体验窗外风景、报站广播与餐车点餐，收集 16 项铁路成就，书写旅程手账。</p>
+ <h1 style="font-size:1.15em;color:var(--text);margin:0 0 6px">铁旅 · 中国高铁模拟旅程</h1>
+ <p style="margin:0;font-size:.72em;color:var(--faint);cursor:pointer;user-select:none" onclick="toggleIntro()">关于本游戏 ▸</p>
+ <div id="intro-detail" style="display:none;margin-top:6px;font-size:.85em;line-height:1.7">
+ 免费、即点即玩、无需下载。游戏覆盖 <b>京沪高速线、京广高速线、京沈高速线、哈大高速线、徐兰高速线、沪昆高速线、杭深线</b> 共 7 条中国高速铁路线、107 座车站、<b>3530 趟真实车次</b>。你可以选择出发站与到达站、买票上车、沿真实经停站行驶，体验窗外风景、报站广播与餐车点餐，收集 16 项铁路成就，书写旅程手账。
+ </div>
 </div>
 
 <!-- ============ 顶栏 ============ -->
@@ -1779,6 +1782,11 @@ function toggleAtmos(){
  const open=b.style.display!=='none';
  b.style.display=open?'none':'block';
  if(h)h.textContent=open?'全服氛围 ▸':'全服氛围 ▾';
+}
+function toggleIntro(){
+ const d=document.getElementById('intro-detail');
+ if(!d)return;
+ d.style.display=d.style.display==='none'?'block':'none';
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
