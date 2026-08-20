@@ -270,13 +270,25 @@ button{font-family:inherit;cursor:pointer}
 .bureau-cloud{display:flex;flex-wrap:wrap;gap:6px}
 .bureau-chip{font-size:.8em;padding:5px 12px;border-radius:14px;border:1px solid var(--border);color:var(--faint)}
 .bureau-chip.vis{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);font-weight:600}
-/* 氛围层 */
-.feed-list{display:flex;flex-direction:column;gap:4px}
-.feed-item{display:flex;align-items:center;gap:8px;font-size:.82em;padding:5px 10px;border-radius:7px;background:var(--panel2);border:1px solid var(--border)}
-.feed-item .f-u{font-weight:600;color:var(--blue);white-space:nowrap}
-.feed-item .f-a{color:var(--dim)}
-.feed-item .f-s{color:var(--gold);font-weight:600;white-space:nowrap}
-.feed-item .f-t{margin-left:auto;color:var(--faint);font-size:.74em;white-space:nowrap}
+/* 氛围层 · 实时动态（自动滚动跑马灯） */
+.atmos-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}
+.atmos-head .t{font-size:.95em;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px}
+.live-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6em;font-weight:800;letter-spacing:1px;color:#fff;background:var(--red);border-radius:10px;padding:2px 7px}
+.live-badge i{width:6px;height:6px;border-radius:50%;background:#fff;animation:liveBlink 1.2s ease-in-out infinite}
+@keyframes liveBlink{0%,100%{opacity:1}50%{opacity:.2}}
+.atmos-head .sub{font-size:.68em;color:var(--faint)}
+.atmos-stats{display:flex;gap:6px;margin-bottom:8px}
+.feed-viewport{position:relative;height:128px;overflow:hidden;border-radius:10px;border:1px solid var(--border);background:var(--panel2);-webkit-mask-image:linear-gradient(#000 76%,transparent);mask-image:linear-gradient(#000 76%,transparent)}
+.feed-track{display:flex;flex-direction:column;animation:feedScroll var(--dur,24s) linear infinite}
+.feed-viewport:hover .feed-track{animation-play-state:paused}
+@keyframes feedScroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.feed-block{display:flex;flex-direction:column}
+.feed-item{display:flex;align-items:center;gap:8px;font-size:.82em;padding:5px 8px;margin-bottom:5px;border-radius:7px}
+.feed-item .f-avatar{width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:.68em;color:#fff;font-weight:700;background:var(--blue)}
+.feed-item .f-u{font-weight:600;color:var(--blue);white-space:nowrap;flex:none}
+.feed-item .f-a{color:var(--faint);white-space:nowrap;flex:none}
+.feed-item .f-s{color:var(--gold);font-weight:600;white-space:nowrap;flex:none}
+.feed-item .f-t{margin-left:auto;color:var(--faint);font-size:.74em;white-space:nowrap;flex:none}
 .overlap-note{display:flex;flex-direction:column;gap:3px;margin-top:8px;font-size:.78em;color:var(--green)}
 /* 我的位置卡 */
 .loc-row{font-size:.9em}
@@ -1447,6 +1459,8 @@ const SIM_FEED=[
   {u:'南海之滨', station:'深圳北', act:'到站打卡', ago:'42 分钟前'},
   {u:'蓉渝穿梭', station:'贵阳北', act:'到站打卡', ago:'55 分钟前'},
 ];
+/* 头像配色（按用户名稳定取色） */
+const AV_FEED_COLORS=['#e57373','#f06292','#ba68c8','#7986cb','#4fc3f7','#4db6ac','#81c784','#ffb74d'];
 /* 模拟好友足迹（用于"足迹重合"提示，归属合理） */
 const SIM_FRIEND_FOOT={ '环渤海车迷':['北京南','天津西','济南西','沈阳'], '绿皮车情怀':['北京站','郑州','长沙','广州'], '京九铁道':['北京西站','聊城','九江','赣州'], '沪昆走遍':['上海虹桥','南昌西','长沙南','昆明南'], '夜行列车长':['武汉','长沙南','广州南'], '慢车爱好者':['济南','徐州站','蚌埠站'] };
 
@@ -1683,16 +1697,23 @@ function renderHome(){
     const hit=sts.filter(s=>G.stationsVisited.has(s));
     if(hit.length>0)overlap.push(u+' 和你都到过 '+hit.join('、'));
   }
+  const feedItems=SIM_FEED.map(f=>{
+    let h=0; for(let i=0;i<f.u.length;i++)h=(h*31+f.u.charCodeAt(i))%997;
+    const col=AV_FEED_COLORS[h%AV_FEED_COLORS.length];
+    return '<div class="feed-item"><span class="f-avatar" style="background:'+col+'">'+f.u[0]+'</span><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>';
+  }).join('');
+  const feedBlock='<div class="feed-block">'+feedItems+'</div>';
+  const feedDur=Math.max(16, SIM_FEED.length*2.4);
   atm.innerHTML=
-    '<div class="group-name">全服氛围（模拟数据 · 后台接通后自动切换真实）</div>'+
-    '<div class="stats" style="margin-bottom:10px">'+
+    '<div class="atmos-head"><span class="t">全服氛围<span class="live-badge"><i></i>LIVE</span></span><span class="sub">模拟数据 · 后台接通后自动切换真实</span></div>'+
+    '<div class="atmos-stats">'+
       '<div class="stat-box"><div class="n">'+SIM_GLOBAL.users.toLocaleString('zh-CN')+'</div><div class="l">全服用户</div></div>'+
       '<div class="stat-box g"><div class="n">'+Math.round(SIM_GLOBAL.km/10000)/100+' 万</div><div class="l">累计里程 km</div></div>'+
       '<div class="stat-box b"><div class="n">'+Math.round(SIM_GLOBAL.checkins/1000)/10+' 万</div><div class="l">累计打卡</div></div>'+
     '</div>'+
-    '<div class="feed-list">'+SIM_FEED.map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
+    '<div class="feed-viewport"><div class="feed-track" style="--dur:'+feedDur+'s">'+feedBlock+feedBlock+'</div></div>'+
     (overlap.length?'<div class="overlap-note">'+overlap.map(o=>'<span>'+o+'</span>').join('')+'</div>':'')+
-    '<div class="small-note" style="margin-top:6px">动态为模拟内容（合理归属）· 真实用户达 '+SIM_USER_THRESHOLD+' 后自动隐藏</div>';
+    '<div class="small-note" style="margin-top:6px">动态为模拟内容 · 真实用户达 '+SIM_USER_THRESHOLD+' 后自动隐藏</div>';
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
