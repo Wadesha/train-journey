@@ -1410,12 +1410,15 @@ function checkinByGPS(){
     return;
   }
   const btn=document.getElementById('gps-btn');
-  if(!('geolocation' in navigator)){
-    toast('当前环境不支持定位，请点击车站手动打卡','err');
+  /* 环境检查：定位需要安全上下文（HTTPS 或本机） */
+  if(!('geolocation' in navigator) || (window.isSecureContext===false && !/^https:|^http:\/\/(localhost|127\.0\.0\.1)/.test(location.href))){
+    btn.textContent='📡 位置扫描 · 当前环境不支持（需 HTTPS），点车站手动打卡';
+    toast('当前环境不支持定位（需 HTTPS 或本机访问），可点击车站手动打卡','err');
     return;
   }
   btn.classList.add('busy'); btn.textContent='📡 扫描中…（计算全站距离）';
-  navigator.geolocation.getCurrentPosition(
+  try{
+    navigator.geolocation.getCurrentPosition(
     pos=>{
       btn.classList.remove('busy'); btn.classList.add('on');
       btn.textContent='📡 位置扫描 · 已开启';
@@ -1457,11 +1460,23 @@ function checkinByGPS(){
     },
     err=>{
       btn.classList.remove('busy');
-      btn.textContent='📡 位置扫描 · 授权失败，点车站手动打卡';
-      toast('无法获取位置（'+err.message+'），可点击车站手动打卡','err');
+      const code=err&&err.code;
+      let why;
+      if(code===1)why='你拒绝了定位权限——可在浏览器地址栏/设置中重新允许';
+      else if(code===2)why='定位不可用（信号弱或当前环境限制）';
+      else if(code===3)why='定位超时，请重试';
+      else if(/permission|denied|policy/i.test(err&&err.message||''))why='定位被环境拦截（预览面板 iframe 常如此）——请在新窗口打开页面体验';
+      else why='定位失败（'+((err&&err.message)||'未知原因')+'）';
+      btn.textContent='📡 位置扫描 · '+why+'，点车站手动打卡';
+      toast(why+'；也可点车站手动打卡','err');
     },
     {enableHighAccuracy:false, timeout:8000, maximumAge:60000}
   );
+  }catch(e){
+    btn.classList.remove('busy');
+    btn.textContent='📡 位置扫描 · 当前环境拦截定位，点车站手动打卡';
+    toast('定位接口被当前环境拦截（预览面板/iframe 常见）——请<a href="'+location.href+'" target="_blank" style="color:var(--gold)">新窗口打开</a>体验真实定位，或点车站手动打卡','err');
+  }
 }
 function doCheckin(name){
   if(!G)return;
