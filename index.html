@@ -71,9 +71,9 @@ button{font-family:inherit;cursor:pointer}
 #topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px 16px;margin:10px}
 .stat{font-size:.92em;background:var(--panel2);padding:5px 12px;border-radius:16px}
 .stat b{color:var(--text);font-weight:700}
-#ticker{overflow:hidden;white-space:nowrap;background:var(--panel);border:1px solid var(--border);border-radius:10px;margin:0 10px 10px;padding:6px 0;font-size:.8em;color:var(--dim)}
-#ticker #ticker-track{display:inline-block;white-space:nowrap;padding-left:100%;animation:ticker-scroll 60s linear infinite}
-@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+#ticker{position:relative;overflow:hidden;height:24px;background:var(--panel);border:1px solid var(--border);border-radius:10px;margin:0 10px 10px;font-size:.78em;color:var(--dim)}
+#ticker .t-item{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;white-space:nowrap;opacity:0;transform:translateY(7px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+#ticker .t-item.on{opacity:1;transform:translateY(0)}
 .spacer{flex:1}
 .tbtn{padding:7px 14px;border-radius:18px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em}
 .tbtn:hover{border-color:var(--blue)}
@@ -157,8 +157,8 @@ button{font-family:inherit;cursor:pointer}
 .price-line b{color:var(--text);font-size:1.2em}
 .btn{padding:9px 18px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.93em;margin:4px 4px 4px 0}
 .btn:hover{border-color:var(--blue)}
-.btn.primary{background:#4fc3f7135deg,#4fc3f7,#2979ff);border:none;color:#fff;font-weight:bold}
-.btn.gold{background:#fdd835135deg,#fdd835,#f39c12);border:none;color:#222;font-weight:bold}
+.btn.primary{background:#2979ff;border:none;color:#fff;font-weight:bold}
+.btn.gold{background:#f0b429;border:none;color:#222;font-weight:bold}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.block{width:100%;margin:6px 0}
 
@@ -201,7 +201,7 @@ button{font-family:inherit;cursor:pointer}
 #scenery-wrap{flex:1;position:relative;overflow:hidden;background:#0e141c}
 #scenery-svg{position:absolute;inset:0;width:100%;height:100%}
 #fg-layer{position:absolute;left:0;top:0;bottom:0;width:200%;pointer-events:none}
-.fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:repeating-#2a2f3ato top,#2a2f3a 0 3px,transparent 3px 16px);animation:poleMove var(--pd,6s) linear infinite}
+.fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:#2a2f3a;animation:poleMove var(--pd,6s) linear infinite}
 .fg-pole::after{content:'';position:absolute;left:50%;bottom:0;width:3px;height:100%;background:#2a2f3a;transform:translateX(-50%)}
 @keyframes poleMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 #announce{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(10,14,22,.88);border:1px solid var(--blue);color:#fff;padding:10px 26px;border-radius:22px;font-size:1.05em;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.5);max-width:86%;opacity:0;transition:opacity .3s;pointer-events:none}
@@ -214,7 +214,7 @@ button{font-family:inherit;cursor:pointer}
 .ctrl-btn.gold{border-color:var(--gold);color:var(--gold)}
 .ctrl-btn.danger{border-color:var(--red);color:var(--red)}
 #trip-progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08)}
-#trip-progress i{display:block;height:100%;background:#4fc3f790deg,#4fc3f7,#fdd835);width:0%;transition:width .4s}
+#trip-progress i{display:block;height:100%;background:#4fc3f7;width:0%;transition:width .4s}
 
 /* 小地图 */
 
@@ -258,7 +258,7 @@ button{font-family:inherit;cursor:pointer}
 .group-name{font-size:.72em;color:var(--faint);letter-spacing:2px;margin:10px 0 6px;display:flex;align-items:center;gap:8px}
 .group-name::after{content:'';flex:1;height:1px;background:var(--border)}
 /* home hero */
-.home-hero{background:rgba(240,180,41,.12)160deg,rgba(240,180,41,.12),rgba(79,195,247,.06));border:1px solid var(--gold);border-radius:16px;padding:22px 24px;margin:10px 0;text-align:center}
+.home-hero{background:rgba(240,180,41,.08);border:1px solid var(--gold);border-radius:16px;padding:22px 24px;margin:10px 0;text-align:center}
 .home-hero .hh-title{font-size:1.05em;color:var(--dim);letter-spacing:2px}
 .home-hero .hh-badge{display:inline-block;margin-top:8px;font-size:.95em;color:var(--gold);background:rgba(240,180,41,.15);border:1px solid var(--gold);border-radius:16px;padding:4px 18px;font-weight:700}
 .home-hero .hh-tagline{font-size:.82em;color:var(--faint);margin-top:10px;letter-spacing:3px}
@@ -274,7 +274,7 @@ button{font-family:inherit;cursor:pointer}
 .ts-box .ts-sub{font-size:.74em;color:var(--dim);margin-top:3px}
 .ts-box.next{border-color:var(--blue)}
 .ts-box.next .ts-main{color:var(--text);font-size:1.25em}
-.btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:#f0b429135deg,#f0b429,#e67e22);color:#1a1206;margin:12px 0}
+.btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:#f0b429;color:#1a1206;margin:12px 0}
 .btn-big:hover{filter:brightness(1.08)}
 /* 车站打卡墙 */
 .home-title{font-size:1em;font-weight:700;color:var(--text);margin-bottom:4px}
@@ -460,8 +460,8 @@ button{font-family:inherit;cursor:pointer}
  <button class="tbtn" onclick="openPanel('set')">⚙ 设置</button>
 </div>
 
-<!-- ============ 全服排行滚动条（单行循环 · 全量滚动，后续按优先级管理） ============ -->
-<div id="ticker"><div id="ticker-track"></div></div>
+<!-- ============ 全服排行翻页条（单行竖向翻页 · 克制淡入淡出 · 循环 · 后续按优先级管理） ============ -->
+<div id="ticker"><div id="ticker-viewport"></div></div>
 
 <!-- ============ 主导航 ============ -->
 <div class="nav">
@@ -475,7 +475,7 @@ button{font-family:inherit;cursor:pointer}
 
 <!-- ============ 首页（车站打卡墙） ============ -->
 <div id="view-home" class="view show">
- <div id="onboard-banner" class="card" style="display:none;border-color:var(--blue);background:linear-gradient(135deg,rgba(79,195,247,.14),rgba(253,216,53,.06))">
+ <div id="onboard-banner" class="card" style="display:none;border-color:var(--blue);background:rgba(79,195,247,.12)">
  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
   <b>欢迎来到铁旅</b>
   <span onclick="toggleOnboardBureau()" style="cursor:pointer;font-size:.8em;color:var(--blue);border:1px dashed var(--blue);padding:4px 10px;border-radius:14px;user-select:none">所在铁路局：<b id="ob-bureau-val">未选择</b> ▾</span>
@@ -1878,12 +1878,21 @@ function dismissOnboard(){
 function reShowOnboard(){
  document.getElementById('onboard-banner').style.display='block';
 }
+let _tickerIdx=0,_tickerTimer=null;
 function renderTicker(){
- const t=document.getElementById('ticker-track');
- if(!t)return;
- /* 全量滚动：一次性展示全部全服动态；真实数据接入后按优先级排序（自己的成绩/好友动态优先） */
- const items=SIM_FEED.map(f=>'<span style="margin:0 20px">'+f.u+' '+f.act+' '+f.station+' '+f.ago+'</span>').join('');
- t.innerHTML='<span>'+items+'</span><span>'+items+'</span>';
+ const v=document.getElementById('ticker-viewport');
+ if(!v)return;
+ /* 单行竖向翻页：一条一条淡入淡出循环，效果克制；真实数据接入后按优先级排序（自己的成绩/好友动态优先） */
+ v.innerHTML=SIM_FEED.map((f,i)=>'<div class="t-item'+(i===0?' on':'')+'">'+f.u+' '+f.act+' '+f.station+' '+f.ago+'</div>').join('');
+ if(_tickerTimer)clearInterval(_tickerTimer);
+ _tickerTimer=setInterval(tickerNext,3000);
+}
+function tickerNext(){
+ const v=document.getElementById('ticker-viewport');
+ if(!v||!v.children.length)return;
+ v.children[_tickerIdx%v.children.length].classList.remove('on');
+ _tickerIdx=(_tickerIdx+1)%v.children.length;
+ v.children[_tickerIdx].classList.add('on');
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
