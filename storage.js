@@ -66,7 +66,7 @@ window.DB = (function () {
     clear: function () { try { localStorage.removeItem(SAVE_KEY); } catch (e) {} },
     getRanking: function () { return null; },
     submitRanking: function () {},
-    loadRanking: function (scope, cb) { if (cb) cb(); },
+    loadRanking: function () { return; },
     getUserCount: function () { return 0; },
     getProfile: getProfile
   };
@@ -131,11 +131,12 @@ window.DB = (function () {
   }
 
   function loadRanking(scope, cb) {
-    if (scope !== 'nation' || !client || !authUser || !window.supabase) { if (cb) cb(); return; }
+    // 非全国榜 / 未就绪 → 直接返回（不回调，避免 renderRank 无限递归；此时用本地模拟数据即可）
+    if (scope !== 'nation' || !client || !authUser || !window.supabase) return;
     var now = Date.now();
     var c = rankCache[scope];
-    // 正在加载或 60s 内已加载 → 直接返回（防止 renderRank 反复触发造成循环）
-    if (c && (c.loading || now - c.at < 60000)) { if (cb) cb(); return; }
+    // 正在加载或 60s 内已加载 → 直接返回（不回调，防止循环）
+    if (c && (c.loading || now - c.at < 60000)) return;
     rankCache[scope] = { loading: true, at: now, list: null };
     client.from('rankings')
       .select('profile_id, metric, value')
