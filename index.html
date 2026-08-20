@@ -428,7 +428,7 @@ button{font-family:inherit;cursor:pointer}
 <div id="view-home" class="view show">
  <div class="card">
  <div class="home-title"> 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
- <div class="small-note" style="margin:4px 0 2px">ℹ 演示说明：线路数据为公开资料整理 · 普速线 / 排行 / 荣誉为<b>模拟数据</b> · GPS 打卡为演示（后台未打通）· 打卡记录保存在本机浏览器</div>
+ <div class="small-note" style="margin:4px 0 2px;font-size:.7em;color:var(--faint)">存档自动同步云端 · GPS 定位为演示</div>
  <button class="gps-btn" onclick="checkinByGPS()" id="gps-btn"> 位置扫描 · 授权后检测到达/路过车站</button>
  <div id="gps-radar"></div>
  <div class="search-row" style="margin:8px 0">
@@ -520,7 +520,7 @@ button{font-family:inherit;cursor:pointer}
  <button onclick="showRank('progress')"> 本周进步榜</button>
  </div>
  <div class="rank-list" id="r-list"></div>
- <div class="small-note">排行数据为演示用模拟数据 · 未来接入真实用户</div>
+ <div class="small-note" style="font-size:.7em;color:var(--faint)">排行榜基于真实玩家数据 · 好友/进步榜暂为模拟</div>
  </div>
 </div>
 
@@ -1320,10 +1320,46 @@ function renderAchTab(){
 }
 function renderSetTab(){
  const el=document.getElementById('modal-body');
+ const u=DB.getUser?DB.getUser():null;
  el.innerHTML=`<h3>⚙ 设置</h3>
  <div class="set-row"><div><div class="lb"> 报站语音</div><div class="ds">用浏览器中文语音播报车站信息（需浏览器支持）</div></div><button class="toggle ${G.settings.voice?'on':''}" onclick="toggleVoice()"></button></div>
  <div class="set-row"><div><div class="lb"> 重置进度</div><div class="ds">清空所有旅程记录与成就，重新开始</div></div><button class="btn danger" onclick="resetGame()">重置</button></div>
- <div class="small-note">游戏进度自动保存在浏览器 localStorage。<br>线路数据基于公开铁路站序资料整理，共 7 条高铁线路、107 座车站。</div>`;
+ <div class="small-note">线路数据基于公开铁路站序资料整理，共 7 条高铁线路、107 座车站。</div>
+ ${accRowHtml(u)}`;
+}
+function accRowHtml(u){
+ const safe=e=>String(e==null?'':e).replace(/[<>&"]/g,'');
+ if(!u)return '<div class="set-row" style="border-top:1px dashed var(--border)"><div><div class="lb" style="font-size:.8em"> 账号</div><div class="ds" style="font-size:.7em">未连接云端（本地模式）</div></div><button class="btn" style="font-size:.76em" onclick="renderLinkForm()">绑定邮箱</button></div>';
+ if(u.email)return '<div class="set-row" style="border-top:1px dashed var(--border)"><div><div class="lb" style="font-size:.8em"> 账号</div><div class="ds" style="font-size:.7em">已绑定 '+safe(u.email)+' · 云端保存</div></div><button class="btn" style="font-size:.76em" onclick="renderSetTab()">完成</button></div>';
+ return '<div class="set-row" style="border-top:1px dashed var(--border)"><div><div class="lb" style="font-size:.8em"> 账号</div><div class="ds" style="font-size:.7em">已登录（匿名）· 云端保存</div></div><button class="btn" style="font-size:.76em" onclick="renderLinkForm()">绑定邮箱</button></div>';
+}
+function renderLinkForm(){
+ const el=document.getElementById('modal-body');
+ el.innerHTML=`<h3>⚙ 设置 · 绑定邮箱</h3>
+ <div class="set-row" style="flex-direction:column;align-items:stretch">
+  <div class="lb">绑定邮箱升级为正式账号</div>
+  <div class="ds">绑定后可用邮箱+密码登录，跨设备不丢进度（当前匿名进度会保留）</div>
+  <input id="link-email" type="email" placeholder="邮箱" autocomplete="email" style="margin:8px 0;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--text)">
+  <input id="link-pass" type="password" placeholder="设置密码（至少 6 位）" autocomplete="new-password" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--text)">
+  <div style="display:flex;gap:6px;margin-top:12px">
+   <button class="btn primary" onclick="doLinkEmail()">绑定</button>
+   <button class="btn" onclick="renderSetTab()">返回</button>
+  </div>
+ </div>`;
+}
+function doLinkEmail(){
+ const email=(document.getElementById('link-email').value||'').trim();
+ const pass=document.getElementById('link-pass').value||'';
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('请输入有效邮箱','err');return;}
+ if(pass.length<6){toast('密码至少 6 位','err');return;}
+ const btn=event.target;btn.disabled=true;btn.textContent='绑定中…';
+ DB.linkEmail(email,pass).then(function(){
+   toast('已绑定 '+email+'，升级为正式账号');
+   renderSetTab();
+ }).catch(function(e){
+   btn.disabled=false;btn.textContent='绑定';
+   toast('绑定失败：'+(e.message||e).toString().slice(0,60),'err');
+ });
 }
 function toggleVoice(){
  G.settings.voice=!G.settings.voice;
@@ -1726,7 +1762,7 @@ function renderHome(){
     if(hit.length>0)overlap.push(u+' 和你都到过 '+hit.join('、'));
   }
   atm.innerHTML=
-    '<div class="group-name">全服氛围（模拟数据 · 后台接通后自动切换真实）</div>'+
+    '<div class="group-name">全服氛围</div>'+
     '<div class="stats" style="margin-bottom:10px">'+
       '<div class="stat-box"><div class="n">'+SIM_GLOBAL.users.toLocaleString('zh-CN')+'</div><div class="l">全服用户</div></div>'+
       '<div class="stat-box g"><div class="n">'+Math.round(SIM_GLOBAL.km/10000)/100+' 万</div><div class="l">累计里程 km</div></div>'+
@@ -1734,7 +1770,7 @@ function renderHome(){
     '</div>'+
     '<div class="feed-list">'+SIM_FEED.map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
     (overlap.length?'<div class="overlap-note">'+overlap.map(o=>'<span>'+o+'</span>').join('')+'</div>':'')+
-    '<div class="small-note" style="margin-top:6px">动态为模拟内容（合理归属）· 真实用户达 '+SIM_USER_THRESHOLD+' 后自动隐藏</div>';
+    '<div class="small-note" style="margin-top:6px;font-size:.68em;color:var(--faint)">氛围动态为模拟 · 真实玩家增多后自动切换真实</div>';
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
@@ -1792,6 +1828,7 @@ function renderHonorView(){
 /* ============ 排行 ============ */
 function showRank(t){curRankTab=t;document.querySelectorAll('.rank-tabs button').forEach((b,i)=>b.classList.toggle('sel',['friend','nation','progress'][i]===t));renderRank();}
 function renderRank(){
+ if(DB.loadRanking) DB.loadRanking(curRankTab, renderRank); // 异步拉真实全服榜，完成后重渲染（内含 60s 缓存，不会循环）
  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他')).size;
  const me={nick:'你',km:G.totalKm,vis:n,done,prov:provs,me:true};
@@ -1841,6 +1878,11 @@ function saveGame(){
  _version:1, _uid:DB.getProfileId(),
  };
  DB.saveSave(d); // 走统一数据层（本地默认；未来切 Supabase 无需改动）
+ /* 上报排行指标（submitRanking 内含 30s 节流防刷；local 后端为空操作） */
+ if(G.stationsVisited && DB.submitRanking){
+   const _provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他')).size;
+   DB.submitRanking({ stations:G.stationsVisited.size, lines:G.linesRidden?G.linesRidden.size:0, provs:_provs, km:G.totalKm||0 });
+ }
 }
 function loadGame(){
  try{

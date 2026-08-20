@@ -66,6 +66,7 @@ window.DB = (function () {
     clear: function () { try { localStorage.removeItem(SAVE_KEY); } catch (e) {} },
     getRanking: function () { return null; },
     submitRanking: function () {},
+    loadRanking: function (scope, cb) { if (cb) cb(); },
     getUserCount: function () { return 0; },
     getProfile: getProfile
   };
@@ -97,11 +98,83 @@ window.DB = (function () {
       local.clear();
       if (authUser) clearCloud();
     },
-    getRanking: function () { return null; },  // 排行榜查询为异步，暂回退本地模拟数据
-    submitRanking: function () { /* TODO: 接入 rankings 表（app_id=APP_ID, auth.uid()） */ },
+    getRanking: function (scope) { return getRanking(scope); },        // 同步读缓存（无缓存返回 null → 游戏用本地模拟数据兜底）
+    submitRanking: function (entry) { submitRanking(entry); },         // 异步 upsert 到 rankings（带 30s 节流防刷）
+    loadRanking: function (scope, cb) { loadRanking(scope, cb); },     // 异步拉真实全服榜 → 写缓存 → 回调重渲染
     getUserCount: function () { return 0; },
     getProfile: getProfile
   };
+
+  /* ---------- 排行榜：真实全服（rankings 表） ---------- */
+  var rankCache = {};      // scope -> { list, at, loading }
+  var lastSubmitAt = 0;    // 防刷：最短提交间隔
+
+  function submitRanking(entry) {
+    if (!client || !authUser || !entry) return;
+    var now = Date.now();
+    if (now - lastSubmitAt < 30000) return; // 30s 节流，防刷
+    lastSubmitAt = now;
+    var rows = [
+      { scope: 'nation', metric: 'stations', value: entry.stations || 0 },
+      { scope: 'nation', metric: 'lines',    value: entry.lines || 0 },
+      { scope: 'nation', metric: 'provs',    value: entry.provs || 0 },
+      { scope: 'nation', metric: 'km',       value: entry.km || 0 }
+    ].map(function (r) {
+      r.app_id = APP_ID;
+      r.profile_id = authUser.id;
+      r.updated_at = new Date().toISOString();
+      return r;
+    });
+    client.from('rankings')
+      .upsert(rows, { onConflict: 'app_id,profile_id,scope,metric' })
+      .then(function (res) { if (res.error) console.warn('[DB] submitRanking fail', res.error); });
+  }
+
+  function loadRanking(scope, cb) {
+    if (scope !== 'nation' || !client || !authUser || !window.supabase) { if (cb) cb(); return; }
+    var now = Date.now();
+    var c = rankCache[scope];
+    // 正在加载或 60s 内已加载 → 直接返回（防止 renderRank 反复触发造成循环）
+    if (c && (c.loading || now - c.at < 60000)) { if (cb) cb(); return; }
+    rankCache[scope] = { loading: true, at: now, list: null };
+    client.from('rankings')
+      .select('profile_id, metric, value')
+      .eq('app_id', APP_ID)
+      .eq('scope', scope)
+      .order('value', { ascending: false })
+      .limit(200)
+      .then(function (res) {
+        if (res.error) throw res.error;
+        var rows = res.data || [];
+        var map = {};
+        rows.forEach(function (r) {
+          var k = r.profile_id;
+          if (!map[k]) map[k] = { id: k, stations: 0, lines: 0, provs: 0, km: 0 };
+          map[k][r.metric] = r.value || 0;
+        });
+        var list = Object.keys(map).map(function (k) {
+          var m = map[k];
+          return {
+            nick: '车友#' + k.slice(0, 6), // RLS 限制读不到他人昵称，用账号短 ID 展示
+            vis: m.stations, done: m.lines, prov: m.provs, km: m.km,
+            me: k === authUser.id
+          };
+        }).sort(function (a, b) { return b.vis - a.vis; }).slice(0, 20);
+        rankCache[scope] = { loading: false, at: Date.now(), list: list };
+        if (cb) cb();
+      })
+      .catch(function (e) {
+        console.warn('[DB] loadRanking fail', e);
+        rankCache[scope] = { loading: false, at: Date.now(), list: null };
+        if (cb) cb();
+      });
+  }
+
+  function getRanking(scope) {
+    if (scope !== 'nation') return null;
+    var c = rankCache[scope];
+    return (c && c.list) ? c.list : null;
+  }
 
   function getBackend() { return activeBackend === 'supabase' ? supabaseAdapter : local; }
 
@@ -135,6 +208,26 @@ window.DB = (function () {
       });
   }
 
+  /* ---------- 账号：查询当前登录状态 / 绑定邮箱升级正式账号 ---------- */
+  function getUser() {
+    if (!authUser) return null;
+    return {
+      id: authUser.id,
+      email: authUser.email || null,
+      isAnonymous: !!(authUser.is_anonymous ||
+        (authUser.app_metadata && authUser.app_metadata.provider === 'anonymous'))
+    };
+  }
+  function linkEmail(email, password) {
+    if (!client) return Promise.reject(new Error('未连接到云端服务'));
+    return client.auth.linkIdentity({ provider: 'email', options: { email: email, password: password } })
+      .then(function (res) {
+        if (res.error) throw res.error;
+        if (res.data && res.data.user) authUser = res.data.user; // 绑定后 id 不变，云端存档不丢
+        return { ok: true };
+      });
+  }
+
   /* ---------- 统一对外接口 ---------- */
   return {
     get backendName() { return activeBackend; }, // 实时当前后端：'local' | 'supabase'
@@ -145,8 +238,11 @@ window.DB = (function () {
     saveSave:      function (d) { return getBackend().save(d); },
     clearSave:     function () { return getBackend().clear(); },
     getProfile:    function () { return getBackend().getProfile(); },
+    getUser:       function () { return getUser(); },
+    linkEmail:     function (email, password) { return linkEmail(email, password); },
     getRanking:    function (scope) { return getBackend().getRanking(scope); },
     submitRanking: function (entry) { return getBackend().submitRanking(entry); },
+    loadRanking:   function (scope, cb) { return getBackend().loadRanking(scope, cb); },
     getUserCount:  function () { return getBackend().getUserCount(); }
   };
 })();
