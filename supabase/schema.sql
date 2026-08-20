@@ -78,24 +78,40 @@ alter table public.journeys  enable row level security;
 alter table public.checkins  enable row level security;
 alter table public.rankings  enable row level security;
 
--- 应用登记表：登录用户可读（前端需要它知道 app_id 是否合法）
-create policy if not exists "app_meta_read" on public.app_meta
-  for select using (true);
+-- 说明：PostgreSQL 的 CREATE POLICY 不支持 IF NOT EXISTS（表和索引才支持），
+--       所以用 DO 块先查 pg_policies 判断是否已存在，再创建，保证重复执行不报错。
+do $$
+begin
+  -- 应用登记表：登录用户可读（前端需要它知道 app_id 是否合法）
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='app_meta' and policyname='app_meta_read') then
+    create policy "app_meta_read" on public.app_meta for select using (true);
+  end if;
 
--- 档案：只能读写自己的行
-create policy if not exists "own_profile" on public.profiles
-  for all using (auth.uid() = id) with check (auth.uid() = id);
+  -- 档案：只能读写自己的行
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='profiles' and policyname='own_profile') then
+    create policy "own_profile" on public.profiles
+      for all using (auth.uid() = id) with check (auth.uid() = id);
+  end if;
 
--- 手账：只能读写自己的行
-create policy if not exists "own_journeys" on public.journeys
-  for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  -- 手账：只能读写自己的行
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='journeys' and policyname='own_journeys') then
+    create policy "own_journeys" on public.journeys
+      for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  end if;
 
--- 打卡：只能读写自己的行
-create policy if not exists "own_checkins" on public.checkins
-  for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  -- 打卡：只能读写自己的行
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='checkins' and policyname='own_checkins') then
+    create policy "own_checkins" on public.checkins
+      for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  end if;
 
--- 排行榜：所有人可读，但只能写入自己的行
-create policy if not exists "rank_read" on public.rankings
-  for select using (true);
-create policy if not exists "rank_write" on public.rankings
-  for insert update using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  -- 排行榜：所有人可读，但只能写入自己的行
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='rankings' and policyname='rank_read') then
+    create policy "rank_read" on public.rankings for select using (true);
+  end if;
+
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='rankings' and policyname='rank_write') then
+    create policy "rank_write" on public.rankings
+      for insert update using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  end if;
+end $$;
