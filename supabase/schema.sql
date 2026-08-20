@@ -105,13 +105,18 @@ begin
       for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
   end if;
 
-  -- 排行榜：所有人可读，但只能写入自己的行
+  -- 排行榜：所有人可读，写入只能写自己的行（insert 与 update 必须各建一条 policy）
   if not exists (select 1 from pg_policies where schemaname='public' and tablename='rankings' and policyname='rank_read') then
     create policy "rank_read" on public.rankings for select using (true);
   end if;
 
-  if not exists (select 1 from pg_policies where schemaname='public' and tablename='rankings' and policyname='rank_write') then
-    create policy "rank_write" on public.rankings
-      for insert update using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='rankings' and policyname='rank_write_insert') then
+    create policy "rank_write_insert" on public.rankings
+      for insert with check (auth.uid() = profile_id);
+  end if;
+
+  if not exists (select 1 from pg_policies where schemaname='public' and tablename='rankings' and policyname='rank_write_update') then
+    create policy "rank_write_update" on public.rankings
+      for update using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
   end if;
 end $$;
