@@ -431,11 +431,12 @@ button{font-family:inherit;cursor:pointer}
 <div id="view-home" class="view show">
  <div id="onboard-banner" class="card" style="display:none;border-color:var(--blue);background:linear-gradient(135deg,rgba(79,195,247,.14),rgba(253,216,53,.06))">
  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-  <div style="flex:1;min-width:220px;line-height:1.7">
-   <b>欢迎来到铁旅</b>　<span style="font-size:.85em;color:var(--dim)">点任意车站打卡 → 去「开始旅程」买票乘车 → 收集线路/足迹/荣誉。存档自动云端同步。</span>
-  </div>
+  <b>欢迎来到铁旅</b>
+  <span onclick="toggleOnboardBureau()" style="cursor:pointer;font-size:.8em;color:var(--blue);border:1px dashed var(--blue);padding:4px 10px;border-radius:14px;user-select:none">所在铁路局：<b id="ob-bureau-val">未选择</b> ▾</span>
+  <span style="flex:1;min-width:200px;font-size:.8em;color:var(--dim);line-height:1.6">点任意车站打卡 → 去「开始旅程」买票乘车 → 收集线路/足迹/荣誉。存档自动云端同步。</span>
   <button class="btn primary" onclick="dismissOnboard()">知道了</button>
  </div>
+ <div id="ob-bureau-grid" style="display:none;margin-top:10px;border-top:1px dashed var(--border);padding-top:8px" class="bureau-grid"></div>
  </div>
  <div class="card">
  <div class="home-title"> 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
@@ -1590,19 +1591,27 @@ function consentGps(){
 }
 /* ============ 铁路局选择（首次进入） ============ */
 function showBureauPicker(){
- document.getElementById('modal-title').textContent='选择你的所在铁路局';
- document.getElementById('modal-body').innerHTML=`
- <p style="color:var(--dim);font-size:.88em;margin-bottom:10px">选择后，我们将按该局中心站推断你的大致位置，生成第一版"到各站距离"数据；之后你授权定位会更精准，<b style="color:var(--text)">真实定位会自动替换推断数据</b>。</p>
- <div class="bureau-grid">${BUREAUS.map((b,i)=>`<button class="bureau-btn" onclick="pickBureau('${b.name}')">${b.name}<small>${b.short} · ${b.stations.length>0?b.stations.length+' 站':'待补'}</small></button>`).join('')}</div>
- <div class="small-note" style="margin-top:10px">铁路局→车站归属按公开资料整理（部分边界站可能存在归属差异）· 本选择仅用于距离推断，不采集真实位置</div>`;
- document.getElementById('modal-bg').classList.remove('hidden');
+ const loc=document.getElementById('h-loc');
+ if(!loc)return;
+ loc.innerHTML='<div class="loc-row"><div class="loc-lb">所在铁路局</div><div class="loc-main">请选择</div><div class="loc-sub">按中心站推断位置 · 授权定位后自动替换</div></div>'+
+   '<div class="bureau-grid">'+BUREAUS.map((b,i)=>`<button class="bureau-btn" onclick="pickBureau('${b.name}')">${b.name}<small>${b.short}</small></button>`).join('')+'</div>'+
+   '<div class="small-note" style="margin-top:6px">铁路局→车站归属按公开资料整理 · 仅用于距离推断，不采集真实位置</div>';
+}
+function toggleOnboardBureau(){
+ const g=document.getElementById('ob-bureau-grid');
+ if(!g)return;
+ if(g.style.display==='none'||!g.style.display){
+   g.innerHTML=BUREAUS.map((b,i)=>`<button class="bureau-btn" onclick="pickBureau('${b.name}')">${b.name}<small>${b.short}</small></button>`).join('');
+   g.style.display='grid';
+ }else g.style.display='none';
 }
 function pickBureau(name){
  G.bureau=name;
  const pos=bureauCenterPos(name);
  if(pos&&pos.lat) G.bureauCenter={station:pos.station,lat:pos.lat,lon:pos.lon};
  saveGame();
- closeModal();
+ const v=document.getElementById('ob-bureau-val'); if(v)v.textContent=name;
+ const g=document.getElementById('ob-bureau-grid'); if(g)g.style.display='none';
  toast('已选择'+name+' · 默认位置：'+(pos?pos.station:'该局中心站')+'（授权定位后可自动替换）','ach');
  renderHome(); renderFootprint();
 }
@@ -1759,8 +1768,14 @@ function renderHome(){
  let js='';
  if(last)js+='<div class="log-item"><span class="date">'+last.date+'</span><span class="no">'+last.no+'</span><span class="rt">'+last.from+' → '+last.to+'<br><small>'+last.km+' km</small></span></div>';
  if(nt)js+='<div class="log-item"><span class="date">待出发</span><span class="no">'+nt.no+'</span><span class="rt">'+nt.from+' → '+nt.to+'<br><small>已安排</small></span></div>';
-  if(!js)js='<div class="small-note">你还没有旅程记录——点上方任意车站，模拟到达打卡，开启你的铁路护照。</div>';
+  if(!js){
+    js='<div class="group-name" style="font-size:.92em"> 全服排行</div>'+
+       '<div class="feed-list">'+SIM_FEED.slice(0,5).map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
+       '<div class="small-note" style="margin-top:6px">还没有旅程记录 · 打卡一站在全服上榜 → 点上方任意车站开始</div>';
+  }
   j.innerHTML=js;
+  /* 无记录时隐藏独立氛围卡（排行预览已占位），避免重复 */
+  document.getElementById('h-atmos').style.display=(G.stationsVisited.size===0)?'none':'block';
   /* 氛围层：全服统计 + 最近动态 + 足迹重合（模拟，真实用户达阈值自动隐藏） */
   const atm=document.getElementById('h-atmos');
   if(!atm)return;
@@ -1965,8 +1980,6 @@ document.addEventListener('DOMContentLoaded',function(){
  document.querySelectorAll('.modal-bg').forEach(m=>{
  m.addEventListener('click',function(e){if(e.target===m)this.classList.add('hidden');});
  });
- /* 首次进入：选择所在铁路局（架构预留：推断位置 → 定位后自动替换） */
- setTimeout(()=>{ if(G && !G.bureau) showBureauPicker(); }, 400);
 
  /* Supabase 云端初始化：自动匿名登录并同步云端存档（失败自动降级本地，不影响游戏） */
  DB.init(function(hasData){
