@@ -4,11 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>铁旅 · 中国高铁模拟旅程</title>
+<script>try{if(localStorage.getItem('railTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 <style>
 :root{
+ --bg:#f4f6f9; --panel:#ffffff; --panel2:#eef1f6; --border:#d9dee7;
+ --text:#202833; --dim:#5b6572; --faint:#8891a0;
+ --blue:#0a7ed6; --gold:#e0a100; --green:#2e9e4f; --red:#e23b36; --orange:#f0780a; --purple:#7c4dff;
+ --trip-glass:rgba(255,255,255,.92);
+ --soft-bg:rgba(13,17,23,.05);
+ --pb-track:#d9dee7;
+ --stamp-empty-bg:#eef1f6; --stamp-empty-border:#c8cfdb; --stamp-empty-fg:#a7b0bf;
+ --scrollbar:#c2c9d4;
+}
+[data-theme="dark"]{
  --bg:#12141a; --panel:#1c1f29; --panel2:#242836; --border:#3a4052;
  --text:#e8ecf4; --dim:#9aa3b5; --faint:#6b7280;
- --blue:#4fc3f7; --gold:#fdd835; --green:#66bb6a; --red:#ef5350; --orange:#ffa726;
+ --blue:#4fc3f7; --gold:#fdd835; --green:#66bb6a; --red:#ef5350; --orange:#ffa726; --purple:#ba9cf0;
+ --trip-glass:rgba(18,20,26,.92);
+ --soft-bg:rgba(13,17,23,.5);
+ --pb-track:#232b38;
+ --stamp-empty-bg:#1a2029; --stamp-empty-border:#2a3444; --stamp-empty-fg:#3d4756;
+ --scrollbar:#3a4052;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
@@ -16,19 +32,19 @@ button{font-family:inherit;cursor:pointer}
 .hidden{display:none!important}
 
 /* ============ 顶栏 ============ */
-#topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px 16px;margin:10px}
+#topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:6px 12px;margin:8px 10px}
 #topbar .logo{font-size:1.25em;font-weight:bold;color:var(--blue);letter-spacing:1px}
 #topbar .logo small{color:var(--faint);font-weight:normal;font-size:.6em;margin-left:6px}
-.stat{font-size:.92em;background:var(--panel2);padding:5px 12px;border-radius:16px}
+.stat{font-size:.92em;background:var(--panel2);padding:4px 10px;border-radius:16px}
 .stat b{color:var(--gold)}
 .spacer{flex:1}
-.tbtn{padding:7px 14px;border-radius:18px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em}
+.tbtn{padding:6px 12px;border-radius:18px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em}
 .tbtn:hover{border-color:var(--blue)}
 .tbtn.gold{border-color:var(--gold);color:var(--gold)}
 
 /* ============ 主界面（单列购票流程） ============ */
 #main{padding:0 10px 10px;height:calc(100vh - 76px);min-height:520px;max-width:1180px;margin:0 auto}
-.line-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow-y:auto;height:100%;padding:12px 16px;scrollbar-gutter:stable}
+.line-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow-y:auto;height:100%;padding:10px 14px;scrollbar-gutter:stable}
 /* 车次/购票卡区（选完站就地展开） */
 #book-area{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
 #book-area .bk-title{font-size:1.02em;color:var(--blue);font-weight:bold;margin-bottom:10px}
@@ -60,7 +76,7 @@ button{font-family:inherit;cursor:pointer}
 .line-group-hd .gdone{color:var(--green);font-size:.7em;margin-left:auto}
 .station-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px}
 .station-chip{display:block;width:100%;padding:3px 1px;border-radius:4px;border:1px solid transparent;background:transparent;color:var(--dim);font-size:11px;cursor:pointer;transition:.08s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.station-chip:hover{background:rgba(79,195,247,.18);color:#fff}
+.station-chip:hover{background:rgba(79,195,247,.18);color:var(--blue)}
 .station-chip.sel{background:rgba(253,216,53,.2);color:var(--gold);font-weight:bold;border-color:var(--gold)}
 .station-chip.visited{color:var(--green)}
 .station-chip.transfer{color:var(--gold)}
@@ -104,8 +120,8 @@ button{font-family:inherit;cursor:pointer}
 .price-line b{color:var(--orange);font-size:1.2em}
 .btn{padding:9px 18px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.93em;margin:4px 4px 4px 0}
 .btn:hover{border-color:var(--blue)}
-.btn.primary{background:#4fc3f7135deg,#4fc3f7,#2979ff);border:none;color:#fff;font-weight:bold}
-.btn.gold{background:#fdd835135deg,#fdd835,#f39c12);border:none;color:#222;font-weight:bold}
+.btn.primary{background:linear-gradient(135deg,#4fc3f7,#2979ff);border:none;color:#fff;font-weight:bold}
+.btn.gold{background:linear-gradient(135deg,#fdd835,#f39c12);border:none;color:#222;font-weight:bold}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.block{width:100%;margin:6px 0}
 
@@ -140,7 +156,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* ============ 行程界面 ============ */
 #trip-screen{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;flex-direction:column}
-#trip-top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:rgba(18,20,26,.92);border-bottom:1px solid var(--border);padding:8px 16px}
+#trip-top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--trip-glass);border-bottom:1px solid var(--border);padding:8px 16px}
 #trip-top .tno{font-weight:bold;color:var(--blue);font-size:1.15em}
 #trip-top .tname{color:var(--dim);font-size:.78em}
 .tstat{font-size:.85em;color:var(--dim)}
@@ -148,20 +164,20 @@ button{font-family:inherit;cursor:pointer}
 #scenery-wrap{flex:1;position:relative;overflow:hidden;background:#0e141c}
 #scenery-svg{position:absolute;inset:0;width:100%;height:100%}
 #fg-layer{position:absolute;left:0;top:0;bottom:0;width:200%;pointer-events:none}
-.fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:repeating-#2a2f3ato top,#2a2f3a 0 3px,transparent 3px 16px);animation:poleMove var(--pd,6s) linear infinite}
+.fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:repeating-linear-gradient(to top,#2a2f3a 0 3px,transparent 3px 16px);animation:poleMove var(--pd,6s) linear infinite}
 .fg-pole::after{content:'';position:absolute;left:50%;bottom:0;width:3px;height:100%;background:#2a2f3a;transform:translateX(-50%)}
 @keyframes poleMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 #announce{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(10,14,22,.88);border:1px solid var(--blue);color:#fff;padding:10px 26px;border-radius:22px;font-size:1.05em;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.5);max-width:86%;opacity:0;transition:opacity .3s;pointer-events:none}
 #announce.show{opacity:1}
-#trip-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(18,20,26,.95);border-top:1px solid var(--border);padding:10px 16px}
+#trip-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--trip-glass);border-top:1px solid var(--border);padding:10px 16px}
 .speed-btn{padding:6px 12px;border-radius:14px;border:1px solid var(--border);background:var(--panel2);color:var(--dim);font-size:.8em}
 .speed-btn.sel{border-color:var(--blue);color:var(--blue)}
 .ctrl-btn{padding:8px 14px;border-radius:14px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em}
 .ctrl-btn:hover{border-color:var(--blue)}
 .ctrl-btn.gold{border-color:var(--gold);color:var(--gold)}
 .ctrl-btn.danger{border-color:var(--red);color:var(--red)}
-#trip-progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08)}
-#trip-progress i{display:block;height:100%;background:#4fc3f790deg,#4fc3f7,#fdd835);width:0%;transition:width .4s}
+#trip-progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--pb-track)}
+#trip-progress i{display:block;height:100%;background:linear-gradient(90deg,#4fc3f7,#fdd835);width:0%;transition:width .4s}
 
 /* 小地图 */
 
@@ -191,38 +207,38 @@ button{font-family:inherit;cursor:pointer}
 @keyframes slideIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
 
 ::-webkit-scrollbar{width:8px;height:8px}
-::-webkit-scrollbar-thumb{background:#3a4052;border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--scrollbar);border-radius:4px}
 ::-webkit-scrollbar-track{background:transparent}
 .small-note{color:var(--faint);font-size:.75em;margin-top:6px;line-height:1.6}
 
 /* ============ 新首页 / 护照视图（v2 重构） ============ */
-.nav{display:flex;gap:6px;margin:12px 0 10px;flex-wrap:wrap}
-.nav button{padding:8px 16px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em;cursor:pointer}
+.nav{display:flex;gap:6px;margin:8px 0 6px;flex-wrap:wrap}
+.nav button{padding:6px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.88em;cursor:pointer}
 .nav button.sel{border-color:var(--gold);color:var(--gold);font-weight:700;background:rgba(240,180,41,.08)}
 .view{display:none}
 .view.show{display:block}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:10px 0}
-.group-name{font-size:.72em;color:var(--faint);letter-spacing:2px;margin:10px 0 6px;display:flex;align-items:center;gap:8px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:11px 13px;margin:8px 0}
+.group-name{font-size:.72em;color:var(--faint);letter-spacing:2px;margin:8px 0 5px;display:flex;align-items:center;gap:8px}
 .group-name::after{content:'';flex:1;height:1px;background:var(--border)}
 /* home hero */
-.home-hero{background:rgba(240,180,41,.12)160deg,rgba(240,180,41,.12),rgba(79,195,247,.06));border:1px solid var(--gold);border-radius:16px;padding:22px 24px;margin:10px 0;text-align:center}
+.home-hero{background:linear-gradient(160deg,rgba(240,180,41,.12),rgba(79,195,247,.06));border:1px solid var(--gold);border-radius:16px;padding:16px 20px;margin:8px 0;text-align:center}
 .home-hero .hh-title{font-size:1.05em;color:var(--dim);letter-spacing:2px}
 .home-hero .hh-badge{display:inline-block;margin-top:8px;font-size:.95em;color:var(--gold);background:rgba(240,180,41,.15);border:1px solid var(--gold);border-radius:16px;padding:4px 18px;font-weight:700}
 .home-hero .hh-tagline{font-size:.82em;color:var(--faint);margin-top:10px;letter-spacing:3px}
 .stats{display:flex;gap:8px}
-.stat-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;text-align:center}
+.stat-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 10px;text-align:center}
 .stat-box .n{font-size:1.35em;font-weight:700;color:var(--gold)}
 .stat-box .l{font-size:.68em;color:var(--faint);margin-top:2px}
 .stat-box.g .n{color:var(--green)} .stat-box.b .n{color:var(--blue)} .stat-box.p .n{color:var(--purple)}
 /* 我的旅程状态 */
 .trip-status{display:flex;gap:8px}
-.ts-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:11px 14px}
+.ts-box{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 12px}
 .ts-box .ts-lb{font-size:.68em;color:var(--faint);margin-bottom:4px}
 .ts-box .ts-main{font-weight:700;font-size:.98em}
 .ts-box .ts-sub{font-size:.74em;color:var(--dim);margin-top:3px}
 .ts-box.next{border-color:var(--blue)}
 .ts-box.next .ts-main{color:var(--blue);font-size:1.25em}
-.btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:#f0b429135deg,#f0b429,#e67e22);color:#1a1206;margin:12px 0}
+.btn-big{display:block;width:100%;padding:13px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,#f0b429,#e67e22);color:#1a1206;margin:9px 0}
 .btn-big:hover{filter:brightness(1.08)}
 /* 车站打卡墙 */
 .home-title{font-size:1em;font-weight:700;color:var(--text);margin-bottom:4px}
@@ -239,7 +255,7 @@ button{font-family:inherit;cursor:pointer}
 .gps-btn.on{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1)}
 .gps-btn.busy{opacity:.6;cursor:wait}
 /* 距离雷达 */
-#gps-radar{margin:6px 0 4px;background:rgba(13,17,23,.5);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+#gps-radar{margin:6px 0 4px;background:var(--soft-bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
 .radar-title{font-size:.8em;color:var(--dim);margin-bottom:6px}
 .radar-sec{font-size:.82em;color:var(--dim);margin:4px 0;line-height:1.8}
 .radar-sec b{color:var(--text)}
@@ -276,11 +292,11 @@ button{font-family:inherit;cursor:pointer}
 .line-row .bar{width:4px;height:20px;border-radius:2px;flex:none}
 .line-row .nm{font-size:.82em;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .line-row .done{font-size:.66em;color:var(--green);flex:none}
-.line-row .pb{width:52px;height:5px;background:#232b38;border-radius:3px;overflow:hidden;flex:none}
+.line-row .pb{width:52px;height:5px;background:var(--pb-track);border-radius:3px;overflow:hidden;flex:none}
 .line-row .pb i{display:block;height:100%;border-radius:3px}
 .line-row .cnt{font-size:.72em;color:var(--dim);flex:none}
 /* 印章册 */
-.stamps{background:rgba(13,17,23,.5);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:8px}
+.stamps{background:var(--soft-bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:8px}
 .st-title{font-size:.82em;color:var(--dim);margin-bottom:8px}
 .st-title b{color:var(--text)}
 .stamp-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
@@ -289,14 +305,14 @@ button{font-family:inherit;cursor:pointer}
 .stamp .dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}
 .stamp.visited .dot{background:rgba(240,180,41,.18);border:2px solid var(--gold);color:var(--gold);font-weight:700}
 .stamp.passed .dot{background:transparent;border:2px dashed var(--faint);color:var(--faint)}
-.stamp.unseen .dot{background:#1a2029;border:2px solid #2a3444;color:#3d4756}
+.stamp.unseen .dot{background:var(--stamp-empty-bg);border:2px solid var(--stamp-empty-border);color:var(--stamp-empty-fg)}
 .stamp .sn{font-size:.64em;color:var(--dim);white-space:nowrap}
 .stamp.visited .sn{color:var(--gold);font-weight:600}
 .legend{display:flex;gap:12px;margin-top:8px;font-size:.7em;color:var(--dim)}
 .legend .s{width:12px;height:12px;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:3px}
 .legend .s.g{background:rgba(240,180,41,.18);border:2px solid var(--gold)}
 .legend .s.p{border:2px dashed var(--faint)}
-.legend .s.u{background:#1a2029;border:2px solid #2a3444}
+.legend .s.u{background:var(--stamp-empty-bg);border:2px solid var(--stamp-empty-border)}
 /* 里程碑 */
 .mile-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .mile{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:8px;padding:8px 2px;text-align:center;background:var(--panel2);border:1px solid var(--border)}
@@ -356,6 +372,7 @@ button{font-family:inherit;cursor:pointer}
  <span class="stat"><b id="s-money">0</b></span>
  <span class="stat"><b id="s-km">0</b> km</span>
  <span class="stat"><b id="s-stations">0</b> 站</span>
+ <button class="tbtn" id="theme-btn" onclick="toggleTheme()" title="切换深色/浅色模式">🌙 深色</button>
  <button class="tbtn" onclick="openPanel('set')">⚙ 设置</button>
  <button class="tbtn" onclick="resetGame()"> 重开</button>
 </div>
@@ -1810,7 +1827,18 @@ function closeModal(){
  document.getElementById('modal-bg').classList.add('hidden');
  renderAll();
 }
+function applyTheme(t){
+ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
+ else document.documentElement.removeAttribute('data-theme');
+ const btn=document.getElementById('theme-btn');
+ if(btn)btn.textContent=t==='dark'?'☀ 浅色':'🌙 深色';
+ try{localStorage.setItem('railTheme',t);}catch(e){}
+}
+function toggleTheme(){
+ applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+}
 document.addEventListener('DOMContentLoaded',function(){
+ applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');
  if(!loadGame())newGame();
  renderAll();
  document.querySelectorAll('.modal-bg').forEach(m=>{
