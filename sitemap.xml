@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 部署到 Vercel/自定义域名后，请把以下域名改成正式域名并补充其它页面 -->
+  <url>
+    <loc>https://wadesha.github.io/train-journey/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 部署到 Vercel/自定义域名后，请把 Sitemap 的域名改成正式域名
+Sitemap: https://wadesha.github.io/train-journey/sitemap.xml

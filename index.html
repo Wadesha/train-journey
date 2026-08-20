@@ -3,7 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>铁旅 · 中国高铁模拟旅程</title>
+<title>铁旅 · 中国高铁模拟旅程｜基于 12306 真实车次的免费高铁旅行模拟游戏</title>
+
+<!-- ===== SEO / 分享卡片 ===== -->
+<meta name="description" content="一款免费、即点即玩的中国高铁旅行模拟游戏。基于 12306 真实车次数据，覆盖京沪、京广、京沈、哈大、徐兰、沪昆、杭深 7 条高速铁路线共 107 座车站、3530 趟真实车次。选择出发站与到达站、买票上车、欣赏窗外风景、听报站广播、收集 16 项铁路成就，无需下载与登录。">
+<meta name="keywords" content="高铁模拟,中国高铁,高铁旅行,高铁游戏,高铁模拟游戏,12306,京沪高铁,京广高铁,铁路游戏,火车模拟">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#12141a">
+<link rel="canonical" href="https://wadesha.github.io/train-journey/">
+<!-- 部署到 Vercel/自定义域名后，请同步更新上面 canonical 与下方 JSON-LD 的 url -->
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="铁旅 · 中国高铁模拟旅程">
+<meta property="og:title" content="铁旅 · 中国高铁模拟旅程">
+<meta property="og:description" content="基于 12306 真实车次的免费中国高铁旅行模拟游戏：7 条线路、107 座车站、3530 趟真实车次，即点即玩。">
+<meta property="og:url" content="https://wadesha.github.io/train-journey/">
+<meta property="og:locale" content="zh_CN">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="铁旅 · 中国高铁模拟旅程">
+<meta name="twitter:description" content="基于 12306 真实车次的免费中国高铁旅行模拟游戏：7 条线路、107 座车站、3530 趟真实车次，即点即玩。">
+
+<!-- 结构化数据：让爬虫（含百度/必应）读到页面主题与核心内容 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "铁旅 · 中国高铁模拟旅程",
+  "alternateName": "中国高铁模拟游戏",
+  "url": "https://wadesha.github.io/train-journey/",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "zh-CN",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
+  "description": "一款免费、即点即玩的中国高铁旅行模拟游戏，基于 12306 真实车次数据，覆盖京沪、京广、京沈、哈大、徐兰、沪昆、杭深 7 条高速铁路线，共 107 座车站、3530 趟真实车次。可模拟选站购票、乘车行驶、窗外风景、报站广播、餐车点餐与里程成就。",
+  "keywords": "高铁模拟,中国高铁,高铁游戏,12306,京沪高铁,铁路游戏",
+  "featureList": [
+    "京沪高速线 · 北京南⇄上海虹桥 · 19 站 1318 km",
+    "京广高速线 · 北京丰台⇄广州南 · 25 站 2298 km",
+    "京沈高速线 · 北京朝阳⇄沈阳 · 6 站 697 km",
+    "哈大高速线 · 哈尔滨西⇄大连北 · 11 站 921 km",
+    "徐兰高速线 · 徐州东⇄兰州西 · 14 站 1406 km",
+    "沪昆高速线 · 上海虹桥⇄昆明南 · 24 站 2252 km",
+    "杭深线 · 杭州东⇄深圳北 · 14 站 1450 km"
+  ]
+}
+</script>
 <style>
 :root{
  --bg:#12141a; --panel:#1c1f29; --panel2:#242836; --border:#3a4052;
@@ -348,6 +396,12 @@ button{font-family:inherit;cursor:pointer}
 </head>
 <body>
 
+<!-- ============ SEO 静态首段（对爬虫友好，也提升可读性）============ -->
+<div id="seo-intro" style="max-width:1180px;margin:10px auto 0;padding:14px 18px;background:var(--panel);border:1px solid var(--border);border-radius:12px;line-height:1.7;color:var(--dim)">
+ <h1 style="font-size:1.15em;color:var(--text);margin:0 0 6px">铁旅 · 中国高铁模拟旅程 —— 基于 12306 真实车次的免费高铁旅行模拟游戏</h1>
+ <p style="margin:0;font-size:.88em">免费、即点即玩、无需下载。游戏覆盖 <b>京沪高速线、京广高速线、京沈高速线、哈大高速线、徐兰高速线、沪昆高速线、杭深线</b> 共 7 条中国高速铁路线、107 座车站、<b>3530 趟真实车次</b>。你可以选择出发站与到达站、买票上车、沿真实经停站行驶，体验窗外风景、报站广播与餐车点餐，收集 16 项铁路成就，书写旅程手账。</p>
+</div>
+
 <!-- ============ 顶栏 ============ -->
 <div id="topbar">
  <span class="logo"> 铁旅<small>中国高铁模拟旅程</small></span>
@@ -521,6 +575,8 @@ button{font-family:inherit;cursor:pointer}
 
 <script src="data.js"></script>
 <script src="trains_data.js"></script>
+<!-- Vercel Web Analytics（无 Cookie、无需同意弹窗）。仅当部署在 Vercel 且后台开启 Web Analytics 时才上报，本地打开无副作用 -->
+<script defer src="/_vercel/insights/script.js"></script>
 <script>
 "use strict";
 /* =====================================================
