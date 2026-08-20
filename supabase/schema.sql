@@ -1,26 +1,40 @@
 -- =====================================================
--- 铁旅 · Supabase 数据库结构（预留蓝图，当前不执行、不影响本地运行）
--- 启用步骤：
---   1) 在 storage.js 顶部把 BACKEND 改为 'supabase'
---   2) 在 storage.js 的 SupabaseAdapter 填入项目 URL / anon key
---   3) 到 Supabase 控制台 SQL Editor 执行本文件建表
---   4) 开启行级安全策略（见文末注释）后接入认证
+-- 铁旅 · 高铁模拟 —— Supabase 建表脚本（最终可执行版）
+-- 项目：enterprise（Wadesha's Org，多应用共用账号池）
+--
+-- 用途：一套 Supabase Auth 账号被多个应用共用；
+--       每张业务表带 app_id 字段，数据按应用隔离（本游戏 app_id = 'train_journey'）。
+--
+-- 执行位置：Supabase 控制台 → SQL Editor → 粘贴本文件全部内容 → Run
+-- 前置：先到 Authentication → Sign In / Providers 开启 Email 与匿名登录
+-- 特点：所有语句均为"幂等"写法，重复执行不会报错。
 -- =====================================================
 
--- 用户档案：认证由 Supabase Auth 承载（auth.users），这里存游戏内档案与云存档
-create table public.profiles (
-  id          uuid primary key references auth.users(id) on delete cascade,
+-- 1) 应用登记表：登记哪些应用共用这套账号（以后新增应用只加一行）
+create table if not exists public.app_meta (
+  app_id text primary key,
+  name   text not null
+);
+insert into public.app_meta(app_id, name)
+values ('train_journey', '铁旅·高铁模拟')
+on conflict (app_id) do nothing;
+
+-- 2) 用户档案：每个登录用户一条（跨应用共享昵称/头像），认证由 Supabase Auth 托管
+create table if not exists public.profiles (
+  id           uuid primary key references auth.users(id) on delete cascade,
   display_name text,
-  photo_url    text,
-  cloud_save   jsonb,                -- 游戏全程存档，对齐 storage.js 的 saveSave 数据结构
+  avatar_url   text,
+  cloud_save   jsonb,                -- 游戏全程存档（对齐 storage.js 的 saveSave 数据结构）
   created_at   timestamptz default now(),
   updated_at   timestamptz default now()
 );
 
--- 乘车旅程记录（用户生成内容，未来用于手账 / 分享）
-create table public.journeys (
+-- 3) 业务表：均带 app_id，数据按应用隔离
+--    乘车手账
+create table if not exists public.journeys (
   id         bigint generated always as identity primary key,
-  profile_id uuid references public.profiles(id) on delete cascade not null,
+  app_id     text not null references public.app_meta(app_id),
+  profile_id uuid not null references public.profiles(id) on delete cascade,
   train_no   text,
   departure  text,
   arrival    text,
@@ -31,32 +45,57 @@ create table public.journeys (
   created_at timestamptz default now()
 );
 
--- 足迹打卡：站点维度（同站只记一次）
-create table public.checkins (
+--    站点打卡（同一用户在同一个应用内，同站只记一次）
+create table if not exists public.checkins (
   id         bigint generated always as identity primary key,
-  profile_id uuid references public.profiles(id) on delete cascade not null,
+  app_id     text not null,
+  profile_id uuid not null references public.profiles(id) on delete cascade,
   station    text not null,
   at         timestamptz default now(),
-  unique (profile_id, station)
+  unique (app_id, profile_id, station)
 );
 
--- 排行榜：按范围(scope)与指标(metric)聚合
-create table public.rankings (
-  profile_id uuid references public.profiles(id) on delete cascade not null,
-  scope      text not null,          -- friend / nation / weekly
-  metric     text not null,          -- stations / km / lines
+--    排行榜（friend / nation / weekly × stations / km / lines）
+create table if not exists public.rankings (
+  app_id     text not null,
+  profile_id uuid not null references public.profiles(id) on delete cascade,
+  scope      text not null,
+  metric     text not null,
   value      numeric not null default 0,
   updated_at timestamptz default now(),
-  primary key (profile_id, scope, metric)
+  primary key (app_id, profile_id, scope, metric)
 );
 
--- 建议索引
-create index if not exists journeys_profile_idx on public.journeys(profile_id, created_at desc);
-create index if not exists checkins_profile_idx on public.checkins(profile_id);
-create index if not exists rankings_scope_idx  on public.rankings(scope, metric, value desc);
+-- 4) 常用索引
+create index if not exists journeys_profile_idx on public.journeys(app_id, profile_id, created_at desc);
+create index if not exists checkins_profile_idx on public.checkins(app_id, profile_id);
+create index if not exists rankings_scope_idx  on public.rankings(app_id, scope, metric, value desc);
 
--- 行级安全（RLS）：正式启用认证后再打开，例如：
--- alter table public.profiles enable row level security;
--- create policy "own profile" on public.profiles
---   for all using (auth.uid() = id) with check (auth.uid() = id);
--- （journeys / checkins / rankings 同理按 auth.uid() 或 scope 授权）
+-- 5) 行级安全（RLS）——必须开启，否则任何人能读写全表
+alter table public.app_meta  enable row level security;
+alter table public.profiles  enable row level security;
+alter table public.journeys  enable row level security;
+alter table public.checkins  enable row level security;
+alter table public.rankings  enable row level security;
+
+-- 应用登记表：登录用户可读（前端需要它知道 app_id 是否合法）
+create policy if not exists "app_meta_read" on public.app_meta
+  for select using (true);
+
+-- 档案：只能读写自己的行
+create policy if not exists "own_profile" on public.profiles
+  for all using (auth.uid() = id) with check (auth.uid() = id);
+
+-- 手账：只能读写自己的行
+create policy if not exists "own_journeys" on public.journeys
+  for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+
+-- 打卡：只能读写自己的行
+create policy if not exists "own_checkins" on public.checkins
+  for all using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
+
+-- 排行榜：所有人可读，但只能写入自己的行
+create policy if not exists "rank_read" on public.rankings
+  for select using (true);
+create policy if not exists "rank_write" on public.rankings
+  for insert update using (auth.uid() = profile_id) with check (auth.uid() = profile_id);
