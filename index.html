@@ -6,9 +6,9 @@
 <title>铁旅 · 中国高铁模拟旅程</title>
 <style>
 :root{
-  --bg:#12141a; --panel:#1c1f29; --panel2:#242836; --border:#3a4052;
-  --text:#e8ecf4; --dim:#9aa3b5; --faint:#6b7280;
-  --blue:#4fc3f7; --gold:#fdd835; --green:#66bb6a; --red:#ef5350; --orange:#ffa726;
+ --bg:#12141a; --panel:#1c1f29; --panel2:#242836; --border:#3a4052;
+ --text:#e8ecf4; --dim:#9aa3b5; --faint:#6b7280;
+ --blue:#4fc3f7; --gold:#fdd835; --green:#66bb6a; --red:#ef5350; --orange:#ffa726;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
@@ -104,8 +104,8 @@ button{font-family:inherit;cursor:pointer}
 .price-line b{color:var(--orange);font-size:1.2em}
 .btn{padding:9px 18px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.93em;margin:4px 4px 4px 0}
 .btn:hover{border-color:var(--blue)}
-.btn.primary{background:linear-gradient(135deg,#4fc3f7,#2979ff);border:none;color:#fff;font-weight:bold}
-.btn.gold{background:linear-gradient(135deg,#fdd835,#f39c12);border:none;color:#222;font-weight:bold}
+.btn.primary{background:#4fc3f7135deg,#4fc3f7,#2979ff);border:none;color:#fff;font-weight:bold}
+.btn.gold{background:#fdd835135deg,#fdd835,#f39c12);border:none;color:#222;font-weight:bold}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.block{width:100%;margin:6px 0}
 
@@ -148,7 +148,7 @@ button{font-family:inherit;cursor:pointer}
 #scenery-wrap{flex:1;position:relative;overflow:hidden;background:#0e141c}
 #scenery-svg{position:absolute;inset:0;width:100%;height:100%}
 #fg-layer{position:absolute;left:0;top:0;bottom:0;width:200%;pointer-events:none}
-.fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:repeating-linear-gradient(to top,#2a2f3a 0 3px,transparent 3px 16px);animation:poleMove var(--pd,6s) linear infinite}
+.fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:repeating-#2a2f3ato top,#2a2f3a 0 3px,transparent 3px 16px);animation:poleMove var(--pd,6s) linear infinite}
 .fg-pole::after{content:'';position:absolute;left:50%;bottom:0;width:3px;height:100%;background:#2a2f3a;transform:translateX(-50%)}
 @keyframes poleMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 #announce{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(10,14,22,.88);border:1px solid var(--blue);color:#fff;padding:10px 26px;border-radius:22px;font-size:1.05em;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.5);max-width:86%;opacity:0;transition:opacity .3s;pointer-events:none}
@@ -161,7 +161,7 @@ button{font-family:inherit;cursor:pointer}
 .ctrl-btn.gold{border-color:var(--gold);color:var(--gold)}
 .ctrl-btn.danger{border-color:var(--red);color:var(--red)}
 #trip-progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08)}
-#trip-progress i{display:block;height:100%;background:linear-gradient(90deg,#4fc3f7,#fdd835);width:0%;transition:width .4s}
+#trip-progress i{display:block;height:100%;background:#4fc3f790deg,#4fc3f7,#fdd835);width:0%;transition:width .4s}
 
 /* 小地图 */
 
@@ -205,7 +205,7 @@ button{font-family:inherit;cursor:pointer}
 .group-name{font-size:.72em;color:var(--faint);letter-spacing:2px;margin:10px 0 6px;display:flex;align-items:center;gap:8px}
 .group-name::after{content:'';flex:1;height:1px;background:var(--border)}
 /* home hero */
-.home-hero{background:linear-gradient(160deg,rgba(240,180,41,.12),rgba(79,195,247,.06));border:1px solid var(--gold);border-radius:16px;padding:22px 24px;margin:10px 0;text-align:center}
+.home-hero{background:rgba(240,180,41,.12)160deg,rgba(240,180,41,.12),rgba(79,195,247,.06));border:1px solid var(--gold);border-radius:16px;padding:22px 24px;margin:10px 0;text-align:center}
 .home-hero .hh-title{font-size:1.05em;color:var(--dim);letter-spacing:2px}
 .home-hero .hh-badge{display:inline-block;margin-top:8px;font-size:.95em;color:var(--gold);background:rgba(240,180,41,.15);border:1px solid var(--gold);border-radius:16px;padding:4px 18px;font-weight:700}
 .home-hero .hh-tagline{font-size:.82em;color:var(--faint);margin-top:10px;letter-spacing:3px}
@@ -222,7 +222,7 @@ button{font-family:inherit;cursor:pointer}
 .ts-box .ts-sub{font-size:.74em;color:var(--dim);margin-top:3px}
 .ts-box.next{border-color:var(--blue)}
 .ts-box.next .ts-main{color:var(--blue);font-size:1.25em}
-.btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,#f0b429,#e67e22);color:#1a1206;margin:12px 0}
+.btn-big{display:block;width:100%;padding:16px;font-size:1.15em;font-weight:700;border-radius:14px;border:none;cursor:pointer;background:#f0b429135deg,#f0b429,#e67e22);color:#1a1206;margin:12px 0}
 .btn-big:hover{filter:brightness(1.08)}
 /* 车站打卡墙 */
 .home-title{font-size:1em;font-weight:700;color:var(--text);margin-bottom:4px}
@@ -246,6 +246,22 @@ button{font-family:inherit;cursor:pointer}
 .radar-sec.ok b{color:var(--green)}
 .radar-sec .rk{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1px 8px;margin:2px 3px 0 0;font-size:.8em}
 .radar-sec.ok .rk{border-color:var(--green);color:var(--green)}
+/* 铁路局 */
+.bureau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:46vh;overflow-y:auto}
+.bureau-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border-radius:9px;border:1px solid var(--border);background:var(--panel2);color:var(--text);cursor:pointer;font-size:.86em;font-weight:600}
+.bureau-btn small{color:var(--faint);font-weight:normal;font-size:.7em}
+.bureau-btn:hover{border-color:var(--gold);color:var(--gold)}
+.bureau-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.bureau-chip{font-size:.8em;padding:5px 12px;border-radius:14px;border:1px solid var(--border);color:var(--faint)}
+.bureau-chip.vis{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);font-weight:600}
+/* 氛围层 */
+.feed-list{display:flex;flex-direction:column;gap:4px}
+.feed-item{display:flex;align-items:center;gap:8px;font-size:.82em;padding:5px 10px;border-radius:7px;background:var(--panel2);border:1px solid var(--border)}
+.feed-item .f-u{font-weight:600;color:var(--blue);white-space:nowrap}
+.feed-item .f-a{color:var(--dim)}
+.feed-item .f-s{color:var(--gold);font-weight:600;white-space:nowrap}
+.feed-item .f-t{margin-left:auto;color:var(--faint);font-size:.74em;white-space:nowrap}
+.overlap-note{display:flex;flex-direction:column;gap:3px;margin-top:8px;font-size:.78em;color:var(--green)}
 /* 线路进度 */
 .line-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
 .line-row{display:flex;align-items:center;gap:7px;padding:6px 9px;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--panel2);transition:.1s}
@@ -328,168 +344,170 @@ button{font-family:inherit;cursor:pointer}
 
 <!-- ============ 顶栏 ============ -->
 <div id="topbar">
-  <span class="logo">🚄 铁旅<small>中国高铁模拟旅程</small></span>
-  <span class="stat" id="s-badge" style="color:var(--gold);font-weight:600;font-size:.78em"></span>
-  <span class="spacer"></span>
-  <span class="stat">💰 <b id="s-money">0</b></span>
-  <span class="stat">📏 <b id="s-km">0</b> km</span>
-  <span class="stat">🚉 <b id="s-stations">0</b> 站</span>
-  <button class="tbtn" onclick="openPanel('set')">⚙️ 设置</button>
-  <button class="tbtn" onclick="resetGame()">🔄 重开</button>
+ <span class="logo"> 铁旅<small>中国高铁模拟旅程</small></span>
+ <span class="stat" id="s-badge" style="color:var(--gold);font-weight:600;font-size:.78em"></span>
+ <span class="spacer"></span>
+ <span class="stat"><b id="s-money">0</b></span>
+ <span class="stat"><b id="s-km">0</b> km</span>
+ <span class="stat"><b id="s-stations">0</b> 站</span>
+ <button class="tbtn" onclick="openPanel('set')">⚙ 设置</button>
+ <button class="tbtn" onclick="resetGame()"> 重开</button>
 </div>
 
 <!-- ============ 主导航 ============ -->
 <div class="nav">
-  <button class="sel" data-v="home" onclick="showView('home')">📍 打卡</button>
-  <button data-v="passport" onclick="showView('passport')">📔 护照</button>
-  <button data-v="footprint" onclick="showView('footprint')">🗺️ 足迹</button>
-  <button data-v="honor" onclick="showView('honor')">🏅 荣誉</button>
-  <button data-v="rank" onclick="showView('rank')">🏆 排行</button>
-  <button data-v="log" onclick="showView('log')">📖 旅程</button>
+ <button class="sel" data-v="home" onclick="showView('home')"> 打卡</button>
+ <button data-v="passport" onclick="showView('passport')"> 护照</button>
+ <button data-v="footprint" onclick="showView('footprint')"> 足迹</button>
+ <button data-v="honor" onclick="showView('honor')"> 荣誉</button>
+ <button data-v="rank" onclick="showView('rank')"> 排行</button>
+ <button data-v="log" onclick="showView('log')"> 旅程</button>
 </div>
 
 <!-- ============ 首页（车站打卡墙） ============ -->
 <div id="view-home" class="view show">
-  <div class="card">
-    <div class="home-title">📍 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
-    <div class="small-note" style="margin:4px 0 2px">ℹ️ 演示说明：线路数据为公开资料整理 · 普速线 / 排行 / 荣誉为<b>模拟数据</b> · GPS 打卡为演示（后台未打通）· 打卡记录保存在本机浏览器</div>
-    <button class="gps-btn" onclick="checkinByGPS()" id="gps-btn">📡 位置扫描 · 授权后检测到达/路过车站</button>
-    <div id="gps-radar"></div>
-    <div class="search-row" style="margin:8px 0">
-      <input id="checkin-search" placeholder="🔍 搜索车站（bjn=北京南 · shhq=上海虹桥 · 汉字）" autocomplete="off" oninput="filterCheckin(this.value)">
-      <button class="btn" onclick="document.getElementById('checkin-search').value='';filterCheckin('')">清空</button>
-    </div>
-    <div class="stats">
-      <div class="stat-box"><div class="n" id="h-station">0</div><div class="l">已打卡车站</div></div>
-      <div class="stat-box g"><div class="n" id="h-line">0</div><div class="l">集齐线路</div></div>
-      <div class="stat-box b"><div class="n" id="h-prov">0</div><div class="l">足迹省份</div></div>
-      <div class="stat-box p"><div class="n" id="h-honor">0/7</div><div class="l">荣誉徽章</div></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="group-name">🚄 高速铁路</div>
-    <div id="h-hs"></div>
-    <div class="group-name">🚃 普速铁路</div>
-    <div id="h-ps"></div>
-    <div class="small-note" style="margin-top:8px">金色 = 已打卡 · 点击任意站盖章 · 普速线路为演示数据</div>
-  </div>
-  <div class="card">
-    <div class="home-title">📖 我的旅程</div>
-    <div id="h-journey"></div>
-    <div class="small-note" style="margin-top:8px">🎮 想体验窗外风景、报站广播？<a href="javascript:showView('book')" style="color:var(--gold)">模拟坐车体验（隐藏玩法）</a></div>
-  </div>
+ <div class="card">
+ <div class="home-title"> 我在这站打卡 <span style="color:var(--faint);font-weight:normal;font-size:.75em">点击任意车站 = 模拟到达打卡</span></div>
+ <div class="small-note" style="margin:4px 0 2px">ℹ 演示说明：线路数据为公开资料整理 · 普速线 / 排行 / 荣誉为<b>模拟数据</b> · GPS 打卡为演示（后台未打通）· 打卡记录保存在本机浏览器</div>
+ <button class="gps-btn" onclick="checkinByGPS()" id="gps-btn"> 位置扫描 · 授权后检测到达/路过车站</button>
+ <div id="gps-radar"></div>
+ <div class="search-row" style="margin:8px 0">
+ <input id="checkin-search" placeholder=" 搜索车站（bjn=北京南 · shhq=上海虹桥 · 汉字）" autocomplete="off" oninput="filterCheckin(this.value)">
+ <button class="btn" onclick="document.getElementById('checkin-search').value='';filterCheckin('')">清空</button>
+ </div>
+ <div class="stats">
+ <div class="stat-box"><div class="n" id="h-station">0</div><div class="l">已打卡车站</div></div>
+ <div class="stat-box g"><div class="n" id="h-line">0</div><div class="l">集齐线路</div></div>
+ <div class="stat-box b"><div class="n" id="h-prov">0</div><div class="l">足迹省份</div></div>
+ <div class="stat-box p"><div class="n" id="h-honor">0/7</div><div class="l">荣誉徽章</div></div>
+ </div>
+ </div>
+ <div class="card">
+ <div class="group-name"> 高速铁路</div>
+ <div id="h-hs"></div>
+ <div class="group-name"> 普速铁路</div>
+ <div id="h-ps"></div>
+ <div class="small-note" style="margin-top:8px">金色 = 已打卡 · 点击任意站盖章 · 普速线路为演示数据</div>
+ </div>
+ <div class="card">
+ <div class="home-title"> 我的旅程</div>
+ <div id="h-journey"></div>
+ <div class="small-note" style="margin-top:8px"> 想体验窗外风景、报站广播？<a href="javascript:showView('book')" style="color:var(--gold)">模拟坐车体验（隐藏玩法）</a></div>
+ </div>
+ <div class="card" id="h-atmos"></div>
 </div>
 
 <!-- ============ 开始旅程（订票流程） ============ -->
 <div id="view-book" class="view">
-  <div class="line-wrap">
-    <div class="slot-row">
-      <button class="slot-btn" id="slot-from" onclick="setSlot('from')">
-        <span class="sl-lb">出发站</span><span class="sl-nm" id="slot-from-name">请选择</span>
-      </button>
-      <button class="swap-btn" onclick="swapPick()" title="互换出发/到达">⇄</button>
-      <button class="slot-btn" id="slot-to" onclick="setSlot('to')">
-        <span class="sl-lb">到达站</span><span class="sl-nm" id="slot-to-name">请选择</span>
-      </button>
-    </div>
-    <div class="search-row">
-      <input id="station-search" placeholder="🔍 搜索车站（拼音首字母 bjn=北京南 · shhq=上海虹桥 · 汉字）" autocomplete="off" oninput="filterStations(this.value)">
-      <button class="btn" onclick="document.getElementById('station-search').value='';filterStations('')">清空</button>
-    </div>
-    <div class="link-hint" id="link-hint"></div>
-    <div id="line-panel"></div>
-    <div id="book-area"></div>
-  </div>
+ <div class="line-wrap">
+ <div class="slot-row">
+ <button class="slot-btn" id="slot-from" onclick="setSlot('from')">
+ <span class="sl-lb">出发站</span><span class="sl-nm" id="slot-from-name">请选择</span>
+ </button>
+ <button class="swap-btn" onclick="swapPick()" title="互换出发/到达">⇄</button>
+ <button class="slot-btn" id="slot-to" onclick="setSlot('to')">
+ <span class="sl-lb">到达站</span><span class="sl-nm" id="slot-to-name">请选择</span>
+ </button>
+ </div>
+ <div class="search-row">
+ <input id="station-search" placeholder=" 搜索车站（拼音首字母 bjn=北京南 · shhq=上海虹桥 · 汉字）" autocomplete="off" oninput="filterStations(this.value)">
+ <button class="btn" onclick="document.getElementById('station-search').value='';filterStations('')">清空</button>
+ </div>
+ <div class="link-hint" id="link-hint"></div>
+ <div id="line-panel"></div>
+ <div id="book-area"></div>
+ </div>
 </div>
 
 <!-- ============ 护照（印章册详情） ============ -->
 <div id="view-passport" class="view">
-  <div class="card">
-    <div class="group-name">🚄 高速铁路</div>
-    <div class="line-grid" id="p-grid-hs"></div>
-    <div class="group-name">🚃 普速铁路（模拟）</div>
-    <div class="line-grid" id="p-grid-ps"></div>
-  </div>
-  <div class="stamps">
-    <div class="st-title"><b id="p-st-name">—</b> 印章册 · 金色=已打卡 · 虚线=途经 · 灰=未到访</div>
-    <div class="stamp-grid" id="p-stamp-grid"></div>
-    <div class="legend">
-      <span><span class="s g"></span>已打卡</span>
-      <span><span class="s p"></span>途经</span>
-      <span><span class="s u"></span>未到访</span>
-    </div>
-  </div>
+ <div class="card">
+ <div class="group-name"> 高速铁路</div>
+ <div class="line-grid" id="p-grid-hs"></div>
+ <div class="group-name"> 普速铁路（模拟）</div>
+ <div class="line-grid" id="p-grid-ps"></div>
+ </div>
+ <div class="stamps">
+ <div class="st-title"><b id="p-st-name">—</b> 印章册 · 金色=已打卡 · 虚线=途经 · 灰=未到访</div>
+ <div class="stamp-grid" id="p-stamp-grid"></div>
+ <div class="legend">
+ <span><span class="s g"></span>已打卡</span>
+ <span><span class="s p"></span>途经</span>
+ <span><span class="s u"></span>未到访</span>
+ </div>
+ </div>
 </div>
 
 <!-- ============ 足迹 ============ -->
 <div id="view-footprint" class="view">
-  <div class="card"><div class="group-name">🗺️ 足迹省份（点亮 = 到访过）</div><div class="prov-cloud" id="f-prov"></div></div>
-  <div class="card"><div class="group-name">🏙️ 到访城市</div><div class="city-grid" id="f-city"></div></div>
+ <div class="card"><div class="group-name"> 足迹省份（点亮 = 到访过）</div><div class="prov-cloud" id="f-prov"></div></div>
+ <div class="card"><div class="group-name"> 铁路局覆盖（我的足迹归属）</div><div class="bureau-cloud" id="f-bureau"></div><div class="small-note" style="margin-top:6px">按你打卡车站归属的铁路局统计 · 所在局：<b id="f-my-bureau" style="color:var(--gold)">—</b></div></div>
+ <div class="card"><div class="group-name"> 到访城市</div><div class="city-grid" id="f-city"></div></div>
 </div>
 
 <!-- ============ 荣誉 ============ -->
 <div id="view-honor" class="view">
-  <div class="card"><div class="group-name">🏅 荣誉徽章 · 身份层级（纯荣誉）</div><div class="honor-grid" id="h-honor-grid"></div></div>
+ <div class="card"><div class="group-name"> 荣誉徽章 · 身份层级（纯荣誉）</div><div class="honor-grid" id="h-honor-grid"></div></div>
 </div>
 
 <!-- ============ 排行 ============ -->
 <div id="view-rank" class="view">
-  <div class="card">
-    <div class="rank-tabs">
-      <button class="sel" onclick="showRank('friend')">👥 好友榜</button>
-      <button onclick="showRank('nation')">🌏 全国周榜</button>
-      <button onclick="showRank('progress')">📈 本周进步榜</button>
-    </div>
-    <div class="rank-list" id="r-list"></div>
-    <div class="small-note">排行数据为演示用模拟数据 · 未来接入真实用户</div>
-  </div>
+ <div class="card">
+ <div class="rank-tabs">
+ <button class="sel" onclick="showRank('friend')"> 好友榜</button>
+ <button onclick="showRank('nation')"> 全国周榜</button>
+ <button onclick="showRank('progress')"> 本周进步榜</button>
+ </div>
+ <div class="rank-list" id="r-list"></div>
+ <div class="small-note">排行数据为演示用模拟数据 · 未来接入真实用户</div>
+ </div>
 </div>
 
 <!-- ============ 旅程 ============ -->
 <div id="view-log" class="view">
-  <div class="card"><div class="group-name">📖 我的旅程记录</div><div class="log-list" id="l-list"></div></div>
+ <div class="card"><div class="group-name"> 我的旅程记录</div><div class="log-list" id="l-list"></div></div>
 </div>
 
 <!-- ============ 行程界面 ============ -->
 <div id="trip-screen" class="hidden">
-  <div id="trip-top">
-    <span class="tno" id="t-no">G1</span>
-    <span class="tname" id="t-name">复兴号 CR400AF</span>
-    <span class="tstat">📍 <b id="t-route"></b></span>
-    <span class="tstat">⏱️ <b id="t-time"></b></span>
-    <span class="tstat">🚉 下一站 <b id="t-next"></b></span>
-    <span class="tstat">📏 里程 <b id="t-km"></b> km</span>
-    <span class="tstat">🚄 时速 <b id="t-speed"></b> km/h</span>
-    <span class="tstat">🎫 <b id="t-seat"></b></span>
-    <div class="spacer"></div>
-    <button class="ctrl-btn gold" onclick="leaveTrip()">🚪 下车结算</button>
-  </div>
-  <div id="scenery-wrap">
-    <svg id="scenery-svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice"></svg>
-    <div id="fg-layer"><div class="fg-pole"></div></div>
-    <div id="announce"></div>
-    <div id="trip-progress"><i id="trip-progress-bar"></i></div>
-  </div>
-  <div id="trip-ctrl">
-    <span style="color:var(--faint);font-size:.8em">倍速</span>
-    <button class="speed-btn sel" data-s="1" onclick="setSpeed(1)">1x</button>
-    <button class="speed-btn" data-s="4" onclick="setSpeed(4)">4x</button>
-    <button class="speed-btn" data-s="16" onclick="setSpeed(16)">16x</button>
-    <button class="speed-btn" data-s="0" onclick="setSpeed(0)">⏸ 暂停</button>
-    <button class="speed-btn" onclick="skipToEnd()">⏩ 直达终点</button>
-    <div class="spacer"></div>
-    <button class="ctrl-btn" onclick="openDining()">🍱 餐车</button>
-    <button class="ctrl-btn" onclick="takePhoto()">📷 拍风景</button>
-    <button class="ctrl-btn danger" onclick="leaveTrip()">🚪 下车</button>
-  </div>
+ <div id="trip-top">
+ <span class="tno" id="t-no">G1</span>
+ <span class="tname" id="t-name">复兴号 CR400AF</span>
+ <span class="tstat"><b id="t-route"></b></span>
+ <span class="tstat">⏱ <b id="t-time"></b></span>
+ <span class="tstat"> 下一站 <b id="t-next"></b></span>
+ <span class="tstat"> 里程 <b id="t-km"></b> km</span>
+ <span class="tstat"> 时速 <b id="t-speed"></b> km/h</span>
+ <span class="tstat"><b id="t-seat"></b></span>
+ <div class="spacer"></div>
+ <button class="ctrl-btn gold" onclick="leaveTrip()"> 下车结算</button>
+ </div>
+ <div id="scenery-wrap">
+ <svg id="scenery-svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice"></svg>
+ <div id="fg-layer"><div class="fg-pole"></div></div>
+ <div id="announce"></div>
+ <div id="trip-progress"><i id="trip-progress-bar"></i></div>
+ </div>
+ <div id="trip-ctrl">
+ <span style="color:var(--faint);font-size:.8em">倍速</span>
+ <button class="speed-btn sel" data-s="1" onclick="setSpeed(1)">1x</button>
+ <button class="speed-btn" data-s="4" onclick="setSpeed(4)">4x</button>
+ <button class="speed-btn" data-s="16" onclick="setSpeed(16)">16x</button>
+ <button class="speed-btn" data-s="0" onclick="setSpeed(0)">⏸ 暂停</button>
+ <button class="speed-btn" onclick="skipToEnd()">⏩ 直达终点</button>
+ <div class="spacer"></div>
+ <button class="ctrl-btn" onclick="openDining()"> 餐车</button>
+ <button class="ctrl-btn" onclick="takePhoto()"> 拍风景</button>
+ <button class="ctrl-btn danger" onclick="leaveTrip()"> 下车</button>
+ </div>
 </div>
 
 <!-- ============ 模态 ============ -->
 <div id="modal-bg" class="modal-bg hidden">
-  <div class="modal">
-    <div class="modal-head"><h2 id="modal-title"></h2><button class="close-btn" onclick="closeModal()">✕</button></div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
+ <div class="modal">
+ <div class="modal-head"><h2 id="modal-title"></h2><button class="close-btn" onclick="closeModal()">✕</button></div>
+ <div class="modal-body" id="modal-body"></div>
+ </div>
 </div>
 
 <div id="toast"></div>
@@ -499,7 +517,7 @@ button{font-family:inherit;cursor:pointer}
 <script>
 "use strict";
 /* =====================================================
-   铁旅 · 中国高铁模拟旅程
+ 铁旅 · 中国高铁模拟旅程
 ===================================================== */
 const LINES = RAIL.lines;
 const STATIONS = RAIL.stations;
@@ -510,1159 +528,1268 @@ const SEATS = { '二等座':0.42, '一等座':0.70, '商务座':1.33 };
 const PINYIN = {'哈尔滨西':'hebx','长春西':'ccx','四平东':'spd','铁岭西':'tlx','沈阳北':'syb','沈阳':'sy','沈阳南':'syn','辽阳':'ly','鞍山西':'asx','营口东':'ykd','大连北':'dlb','北京朝阳':'bjcy','承德南':'cdn','朝阳':'cy','阜新':'fx','沈阳西':'syx','北京南':'bjn','廊坊':'lf','天津西':'tjx','天津南':'tjn','沧州西':'czx','德州东':'dzd','济南西':'jnx','泰安':'ta','枣庄':'zz','徐州东':'xzd','宿州东':'szd','蚌埠南':'bbn','滁州':'chz','南京南':'njn','镇江南':'zjn','常州北':'czb','无锡东':'wxd','苏州北':'szb','昆山南':'ksn','上海虹桥':'shhq','杭州东':'hzd','绍兴北':'sxb','宁波':'nb','台州西':'tzx','温州南':'wzn','宁德':'nd','福州南':'fzn','莆田':'pt','泉州':'qz','厦门北':'xmb','漳州':'zhz','潮汕':'cs','汕尾':'sw','深圳北':'szb','北京丰台':'bjft','保定东':'bdd','石家庄':'sjz','邢台东':'xtd','邯郸东':'hdd','安阳东':'ayd','鹤壁东':'hbd','新乡东':'xxd','郑州东':'zzd','许昌东':'xcd','漯河西':'lhx','驻马店西':'zmdx','信阳东':'xyd','孝感北':'xgb','武汉':'wh','咸宁北':'xnb','岳阳东':'yyd','长沙南':'csn','株洲西':'zzx','衡阳东':'hyd','郴州西':'chzx','韶关':'sg','清远':'qy','广州北':'gzb','广州南':'gzn','商丘':'sq','开封北':'kfb','郑州西':'zzx','洛阳龙门':'lylm','三门峡南':'smxn','渭南北':'wnb','西安北':'xab','咸阳西':'xyx','宝鸡南':'bjn','天水南':'tsn','定西北':'dxb','兰州西':'lzx','嘉兴南':'jxn','杭州南':'hzn','金华':'jh','衢州':'qzh','上饶':'sr','鹰潭北':'ytb','抚州东':'fzd','南昌西':'ncx','新余北':'xyb','宜春':'yc','萍乡北':'pxb','湘潭北':'xtb','娄底南':'ldn','邵阳北':'syb','怀化南':'hhn','铜仁南':'trn','贵阳东':'gyd','贵阳北':'gyb','安顺西':'asx','曲靖北':'qjb','昆明南':'kmn'};
 const SCENERY_NAME = { urban:'城市天际线', plain:'广袤平原', water:'江南水乡', mountain:'巍峨群山', snow:'林海雪原', coast:'蔚蓝海岸', loess:'黄土高原', karst:'喀斯特峰林' };
 const DINING_MENU = [
-  {n:'高铁盒饭', p:45, d:'当日现做 · 红烧牛肉'},
-  {n:'方便面', p:15, d:'红烧牛肉面 · 热水现泡'},
-  {n:'现磨咖啡', p:28, d:'热美式 · 提神醒脑'},
-  {n:'冰镇啤酒', p:12, d:'列车限定 · 畅饮'},
-  {n:'薯片零食', p:10, d:'咔嚓咔嚓'},
-  {n:'矿泉水', p:5, d:'农夫山泉'},
+ {n:'高铁盒饭', p:45, d:'当日现做 · 红烧牛肉'},
+ {n:'方便面', p:15, d:'红烧牛肉面 · 热水现泡'},
+ {n:'现磨咖啡', p:28, d:'热美式 · 提神醒脑'},
+ {n:'冰镇啤酒', p:12, d:'列车限定 · 畅饮'},
+ {n:'薯片零食', p:10, d:'咔嚓咔嚓'},
+ {n:'矿泉水', p:5, d:'农夫山泉'},
 ];
 const ACHIEVEMENTS = [
-  {id:1,icon:'🚄',name:'第一次乘火车',desc:'完成你的第一次高铁之旅',reward:500, check:g=>g.rides.length>=1},
-  {id:2,icon:'📏',name:'初露锋芒',desc:'累计里程达到 500 公里',reward:500, check:g=>g.totalKm>=500},
-  {id:3,icon:'🗺️',name:'千里之行',desc:'累计里程达到 2000 公里',reward:800, check:g=>g.totalKm>=2000},
-  {id:4,icon:'🌏',name:'万里长征',desc:'累计里程达到 8000 公里',reward:1500, check:g=>g.totalKm>=8000},
-  {id:5,icon:'🏆',name:'铁道迷',desc:'累计里程达到 20000 公里',reward:3000, check:g=>g.totalKm>=20000},
-  {id:6,icon:'🕸️',name:'线网达人',desc:'乘坐过全部 7 条线路',reward:2000, check:g=>g.linesRidden.size>=7},
-  {id:7,icon:'🎫',name:'车次收藏家',desc:'乘坐过 10 个不同车次',reward:1000, check:g=>g.trainsTaken.size>=10},
-  {id:8,icon:'💺',name:'全席体验',desc:'坐过二等座、一等座、商务座',reward:800, check:g=>g.seatsTaken.size>=3},
-  {id:9,icon:'🍱',name:'美食家',desc:'在餐车消费 3 次',reward:500, check:g=>g.meals>=3},
-  {id:10,icon:'📷',name:'摄影师',desc:'拍到 5 张窗外风景照',reward:500, check:g=>g.photos.length>=5},
-  {id:11,icon:'🌙',name:'夜行者',desc:'在夜间（21:00-5:00）乘过车',reward:800, check:g=>g.nights>=1},
-  {id:12,icon:'📍',name:'驿站行者',desc:'到访过 30 个不同车站',reward:1000, check:g=>g.stationsVisited.size>=30},
-  {id:13,icon:'🏮',name:'京沪全程',desc:'乘坐高铁从北京南直达上海虹桥',reward:1200, check:g=>g.rides.some(r=>r.from==='北京南'&&r.to==='上海虹桥')},
-  {id:14,icon:'🎋',name:'京广全程',desc:'乘坐高铁从北京丰台直达广州南',reward:1500, check:g=>g.rides.some(r=>r.from==='北京丰台'&&r.to==='广州南')},
-  {id:15,icon:'❄️',name:'白山黑水',desc:'乘坐高铁从哈尔滨西直达大连北',reward:1200, check:g=>g.rides.some(r=>r.from==='哈尔滨西'&&r.to==='大连北')},
-  {id:16,icon:'🔁',name:'连环旅人',desc:'连续 3 次乘坐不同车次',reward:600, check:g=>{const rs=g.rides.slice(-3);return rs.length===3&&new Set(rs.map(r=>r.no)).size===3;}},
+ {id:1,icon:'',name:'第一次乘火车',desc:'完成你的第一次高铁之旅',reward:500, check:g=>g.rides.length>=1},
+ {id:2,icon:'',name:'初露锋芒',desc:'累计里程达到 500 公里',reward:500, check:g=>g.totalKm>=500},
+ {id:3,icon:'',name:'千里之行',desc:'累计里程达到 2000 公里',reward:800, check:g=>g.totalKm>=2000},
+ {id:4,icon:'',name:'万里长征',desc:'累计里程达到 8000 公里',reward:1500, check:g=>g.totalKm>=8000},
+ {id:5,icon:'',name:'铁道迷',desc:'累计里程达到 20000 公里',reward:3000, check:g=>g.totalKm>=20000},
+ {id:6,icon:'',name:'线网达人',desc:'乘坐过全部 7 条线路',reward:2000, check:g=>g.linesRidden.size>=7},
+ {id:7,icon:'',name:'车次收藏家',desc:'乘坐过 10 个不同车次',reward:1000, check:g=>g.trainsTaken.size>=10},
+ {id:8,icon:'',name:'全席体验',desc:'坐过二等座、一等座、商务座',reward:800, check:g=>g.seatsTaken.size>=3},
+ {id:9,icon:'',name:'美食家',desc:'在餐车消费 3 次',reward:500, check:g=>g.meals>=3},
+ {id:10,icon:'',name:'摄影师',desc:'拍到 5 张窗外风景照',reward:500, check:g=>g.photos.length>=5},
+ {id:11,icon:'',name:'夜行者',desc:'在夜间（21:00-5:00）乘过车',reward:800, check:g=>g.nights>=1},
+ {id:12,icon:'',name:'驿站行者',desc:'到访过 30 个不同车站',reward:1000, check:g=>g.stationsVisited.size>=30},
+ {id:13,icon:'',name:'京沪全程',desc:'乘坐高铁从北京南直达上海虹桥',reward:1200, check:g=>g.rides.some(r=>r.from==='北京南'&&r.to==='上海虹桥')},
+ {id:14,icon:'',name:'京广全程',desc:'乘坐高铁从北京丰台直达广州南',reward:1500, check:g=>g.rides.some(r=>r.from==='北京丰台'&&r.to==='广州南')},
+ {id:15,icon:'❄',name:'白山黑水',desc:'乘坐高铁从哈尔滨西直达大连北',reward:1200, check:g=>g.rides.some(r=>r.from==='哈尔滨西'&&r.to==='大连北')},
+ {id:16,icon:'',name:'连环旅人',desc:'连续 3 次乘坐不同车次',reward:600, check:g=>{const rs=g.rides.slice(-3);return rs.length===3&&new Set(rs.map(r=>r.no)).size===3;}},
 ];
 
 /* =====================================================
-   游戏状态
+ 游戏状态
 ===================================================== */
 let G = null;
-let TRIP = null;   // 当前行程（null = 不在车上）
+let TRIP = null; // 当前行程（null = 不在车上）
 let selFrom = null, selTo = null, selTrain = null, selSeat = '二等座';
 let curTab = 'book';
 
 function newGame(){
-  G = {
-    money: 3000,
-    rides: [],          // 手账
-    totalKm: 0,
-    stationsVisited: new Set(),
-    photos: [],         // {scenery, line, name, time}
-    meals: 0,
-    nights: 0,
-    achievements: new Set(),
-    trainsTaken: new Set(),
-    linesRidden: new Set(),
-    seatsTaken: new Set(),
-    settings: { voice: true, speed: 1 },
-    rideStreak: 0,
-    nextTrip: null,   // {date,from,to,no} 首页倒计时
-    stationFirstVisit: {},  // 站名 → 首次打卡日期
-    passedStations: {},     // 站名 → {km,time} 真实位置路过（灰章）
-  };
-  saveGame();
+ G = {
+ money: 3000,
+ rides: [], // 手账
+ totalKm: 0,
+ stationsVisited: new Set(),
+ photos: [], // {scenery, line, name, time}
+ meals: 0,
+ nights: 0,
+ achievements: new Set(),
+ trainsTaken: new Set(),
+ linesRidden: new Set(),
+ seatsTaken: new Set(),
+ settings: { voice: true, speed: 1 },
+ rideStreak: 0,
+ nextTrip: null, // {date,from,to,no} 首页倒计时
+ stationFirstVisit: {}, // 站名 → 首次打卡日期
+ passedStations: {}, // 站名 → {km,time} 真实位置路过（灰章）
+ bureau: null, // 用户选择的铁路局（架构预留：选择后推断其所在位置）
+ gpsValidated: false, // 是否已有真实定位数据（用于替换铁路局推断）
+ };
+ saveGame();
 }
 
 /* =====================================================
-   工具
+ 工具
 ===================================================== */
 function fmtMoney(n){return '¥'+Math.round(n).toLocaleString('zh-CN');}
 function stationKm(lineKey, name){
-  const arr = LINES[lineKey].stations;
-  const s = arr.find(x=>x.name===name);
-  return s ? s.km : -1;
+ const arr = LINES[lineKey].stations;
+ const s = arr.find(x=>x.name===name);
+ return s ? s.km : -1;
 }
 function lineHas(lineKey, name){ return LINES[lineKey].stations.some(x=>x.name===name); }
 function linesOfStation(name){ return STATIONS[name] ? STATIONS[name].lines : []; }
 function timeToMin(t){ const [h,m]=t.split(':').map(Number); return h*60+m; }
 function minToTime(min){ min=((min%1440)+1440)%1440; const h=Math.floor(min/60), m=min%60; return (h<10?'0':'')+h+':'+(m<10?'0':'')+m; }
 function toast(msg,cls){
-  const el=document.createElement('div');
-  el.className='toast-item '+(cls||'');
-  el.textContent=msg;
-  document.getElementById('toast').appendChild(el);
-  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .4s';setTimeout(()=>el.remove(),400);},2800);
+ const el=document.createElement('div');
+ el.className='toast-item '+(cls||'');
+ el.textContent=msg;
+ document.getElementById('toast').appendChild(el);
+ setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .4s';setTimeout(()=>el.remove(),400);},2800);
 }
 function speak(text){
-  if(!G || !G.settings.voice) return;
-  try{
-    if(typeof speechSynthesis!=='undefined' && speechSynthesis.speak){
-      speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.95;
-      speechSynthesis.speak(u);
-    }
-  }catch(e){}
+ if(!G || !G.settings.voice) return;
+ try{
+ if(typeof speechSynthesis!=='undefined' && speechSynthesis.speak){
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang='zh-CN'; u.rate=0.95;
+ speechSynthesis.speak(u);
+ }
+ }catch(e){}
 }
 function announce(text,cls){
-  const el=document.getElementById('announce');
-  el.textContent=text;
-  el.className='show'+(cls?' '+cls:'');
-  speak(text);
-  clearTimeout(announce._t);
-  announce._t=setTimeout(()=>el.classList.remove('show'),3600);
+ const el=document.getElementById('announce');
+ el.textContent=text;
+ el.className='show'+(cls?' '+cls:'');
+ speak(text);
+ clearTimeout(announce._t);
+ announce._t=setTimeout(()=>el.classList.remove('show'),3600);
 }
 function playTone(ok){
-  try{
-    const ctx=new (window.AudioContext||window.webkitAudioContext)();
-    const o=ctx.createOscillator(), gn=ctx.createGain();
-    o.connect(gn); gn.connect(ctx.destination);
-    o.frequency.value=ok?880:440;
-    gn.gain.setValueAtTime(.06,ctx.currentTime);
-    gn.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.5);
-    o.start(); o.stop(ctx.currentTime+.5);
-  }catch(e){}
+ try{
+ const ctx=new (window.AudioContext||window.webkitAudioContext)();
+ const o=ctx.createOscillator(), gn=ctx.createGain();
+ o.connect(gn); gn.connect(ctx.destination);
+ o.frequency.value=ok?880:440;
+ gn.gain.setValueAtTime(.06,ctx.currentTime);
+ gn.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.5);
+ o.start(); o.stop(ctx.currentTime+.5);
+ }catch(e){}
 }
 
 /* =====================================================
-   选站面板（紧凑网格全展开 + 搜索 + 双槽位自动填选）
+ 选站面板（紧凑网格全展开 + 搜索 + 双槽位自动填选）
 ===================================================== */
-let selSlot='from';      // 当前激活槽位 from|to
-let searchQuery='';      // 搜索词
+let selSlot='from'; // 当前激活槽位 from|to
+let searchQuery=''; // 搜索词
 
 function renderLinePanel(){
-  const el=document.getElementById('line-panel');
-  if(!el)return;
-  const q=searchQuery.trim().toLowerCase();
-  const reach=reachableStations(selFrom);   // 出发站已定 → 可达集合；未定 → null(全部可选)
-  let totalShow=0;
-  let s='';
-  for(const key of LINE_KEYS){
-    const L=LINES[key];
-    const sts=L.stations;
-    // 过滤：线路名匹配 或 任一站名/拼音匹配
-    const lineHit=q && (key.includes(q)||key.toLowerCase().includes(q));
-    const hits=sts.filter(x=>{
-      const nm=x.name;
-      const p=(PINYIN[nm]||'');
-      return nm.includes(q)||p.startsWith(q)||(p.includes(q)&&q.length>=2);
-    });
-    const show=!q || lineHit || hits.length>0;
-    if(!show)continue;
-    totalShow+=(lineHit?sts.length:hits.length);
-    const done=G&&G.linesRidden.has(key);
-    const first=sts[0].name, last=sts[sts.length-1].name;
-    s+=`<div class="line-group">
-      <div class="line-group-hd">
-        <div class="bar" style="background:${L.color}"></div>
-        <span class="gname">${key}</span>
-        <span class="gmeta">${first}⇄${last} · ${L.total}km · ${sts.length}站</span>
-        ${done?`<span class="gdone">✅已乘</span>`:''}
-      </div>
-      <div class="station-grid">${(lineHit?sts:hits).map(x=>stationChip(x.name,reach)).join('')}</div>
-    </div>`;
-  }
-  if(!totalShow){
-    s=`<div class="search-empty">未找到匹配「${q}」的车站<br>试试输入站名（如"北京南"）或拼音首字母（如"bjn"）</div>`;
-  }
-  el.innerHTML=s;
+ const el=document.getElementById('line-panel');
+ if(!el)return;
+ const q=searchQuery.trim().toLowerCase();
+ const reach=reachableStations(selFrom); // 出发站已定 → 可达集合；未定 → null(全部可选)
+ let totalShow=0;
+ let s='';
+ for(const key of LINE_KEYS){
+ const L=LINES[key];
+ const sts=L.stations;
+ // 过滤：线路名匹配 或 任一站名/拼音匹配
+ const lineHit=q && (key.includes(q)||key.toLowerCase().includes(q));
+ const hits=sts.filter(x=>{
+ const nm=x.name;
+ const p=(PINYIN[nm]||'');
+ return nm.includes(q)||p.startsWith(q)||(p.includes(q)&&q.length>=2);
+ });
+ const show=!q || lineHit || hits.length>0;
+ if(!show)continue;
+ totalShow+=(lineHit?sts.length:hits.length);
+ const done=G&&G.linesRidden.has(key);
+ const first=sts[0].name, last=sts[sts.length-1].name;
+ s+=`<div class="line-group">
+ <div class="line-group-hd">
+ <div class="bar" style="background:${L.color}"></div>
+ <span class="gname">${key}</span>
+ <span class="gmeta">${first}⇄${last} · ${L.total}km · ${sts.length}站</span>
+ ${done?`<span class="gdone">✅已乘</span>`:''}
+ </div>
+ <div class="station-grid">${(lineHit?sts:hits).map(x=>stationChip(x.name,reach)).join('')}</div>
+ </div>`;
+ }
+ if(!totalShow){
+ s=`<div class="search-empty">未找到匹配「${q}」的车站<br>试试输入站名（如"北京南"）或拼音首字母（如"bjn"）</div>`;
+ }
+ el.innerHTML=s;
 }
 /* 联动：从出发站可直达的车站集合（同线所有站，不含出发站） */
 function reachableStations(from){
-  if(!from) return null;             // 未选出发 → 全部可选
-  const set=new Set();
-  for(const lk of linesOfStation(from)){
-    for(const st of LINES[lk].stations){ if(st.name!==from) set.add(st.name); }
-  }
-  return set;
+ if(!from) return null; // 未选出发 → 全部可选
+ const set=new Set();
+ for(const lk of linesOfStation(from)){
+ for(const st of LINES[lk].stations){ if(st.name!==from) set.add(st.name); }
+ }
+ return set;
 }
 function stationChip(name,reach){
-  const visited=G&&G.stationsVisited.has(name);
-  const multi=STATIONS[name].lines.length>1;
-  const isSel=selFrom===name||selTo===name;
-  const disabled=reach ? !reach.has(name) : false;
-  const tip=disabled?`title="从${selFrom}无法直达${name}"`:'';
-  return `<button class="station-chip ${isSel?'sel':''} ${visited?'visited':''} ${multi?'transfer':''} ${disabled?'disabled':''}" ${tip} onclick="pickStation('${name}')"><span>${name}</span>${multi?'<span class="multi-dot">◎</span>':''}</button>`;
+ const visited=G&&G.stationsVisited.has(name);
+ const multi=STATIONS[name].lines.length>1;
+ const isSel=selFrom===name||selTo===name;
+ const disabled=reach ? !reach.has(name) : false;
+ const tip=disabled?`title="从${selFrom}无法直达${name}"`:'';
+ return `<button class="station-chip ${isSel?'sel':''} ${visited?'visited':''} ${multi?'transfer':''} ${disabled?'disabled':''}" ${tip} onclick="pickStation('${name}')"><span>${name}</span>${multi?'<span class="multi-dot">◎</span>':''}</button>`;
 }
 function renderSlots(){
-  const sf=document.getElementById('slot-from'), st=document.getElementById('slot-to');
-  const nf=document.getElementById('slot-from-name'), nt=document.getElementById('slot-to-name');
-  sf.classList.toggle('active',selSlot==='from');
-  sf.classList.toggle('has-val',!!selFrom);
-  st.classList.toggle('active',selSlot==='to');
-  st.classList.toggle('has-val',!!selTo);
-  nf.textContent=selFrom||'请选择';
-  nt.textContent=selTo||'请选择';
-  // 联动提示：选出发后显示可直达站数
-  const lh=document.getElementById('link-hint');
-  if(selFrom){
-    const reach=reachableStations(selFrom);
-    nt.textContent=selTo||`请选择（可直达 ${reach.size} 站）`;
-    if(lh) lh.textContent=`从「${selFrom}」出发，可直达 ${reach.size} 站；灰色站点不可达`;
-    st.title=`从${selFrom}出发，可直达 ${reach.size} 站`;
-  }else{
-    if(lh) lh.textContent='';
-    st.title='';
-  }
+ const sf=document.getElementById('slot-from'), st=document.getElementById('slot-to');
+ const nf=document.getElementById('slot-from-name'), nt=document.getElementById('slot-to-name');
+ sf.classList.toggle('active',selSlot==='from');
+ sf.classList.toggle('has-val',!!selFrom);
+ st.classList.toggle('active',selSlot==='to');
+ st.classList.toggle('has-val',!!selTo);
+ nf.textContent=selFrom||'请选择';
+ nt.textContent=selTo||'请选择';
+ // 联动提示：选出发后显示可直达站数
+ const lh=document.getElementById('link-hint');
+ if(selFrom){
+ const reach=reachableStations(selFrom);
+ nt.textContent=selTo||`请选择（可直达 ${reach.size} 站）`;
+ if(lh) lh.textContent=`从「${selFrom}」出发，可直达 ${reach.size} 站；灰色站点不可达`;
+ st.title=`从${selFrom}出发，可直达 ${reach.size} 站`;
+ }else{
+ if(lh) lh.textContent='';
+ st.title='';
+ }
 }
 function setSlot(s){
-  selSlot=s;
-  renderSlots();
+ selSlot=s;
+ renderSlots();
 }
 function pickStation(name){
-  if(TRIP){toast('行车途中，先下车再订票','err');return;}
-  if(selSlot==='from'){
-    if(selFrom===name){ selSlot='to'; renderSlots(); return; }
-    selFrom=name;
-    // 联动：若已选到达站不可达，自动清空
-    const reach=reachableStations(selFrom);
-    if(selTo && !reach.has(selTo)){
-      toast(`已选的到达站${selTo}从${selFrom}无法直达，已清空，请重新选择`,'err');
-      selTo=null;
-    }
-    selSlot='to';      // 自动切到到达站
-  }else{
-    if(name===selFrom){ toast('出发站和到达站不能相同','err'); return; }
-    const reach=reachableStations(selFrom);
-    if(reach && !reach.has(name)){
-      toast(`从${selFrom}无法直达${name}，请选择同线路车站`,'err');
-      return;
-    }
-    selTo=name;
-    selSlot='from';
-  }
-  renderSlots(); renderLinePanel(); renderBookTab();
+ if(TRIP){toast('行车途中，先下车再订票','err');return;}
+ if(selSlot==='from'){
+ if(selFrom===name){ selSlot='to'; renderSlots(); return; }
+ selFrom=name;
+ // 联动：若已选到达站不可达，自动清空
+ const reach=reachableStations(selFrom);
+ if(selTo && !reach.has(selTo)){
+ toast(`已选的到达站${selTo}从${selFrom}无法直达，已清空，请重新选择`,'err');
+ selTo=null;
+ }
+ selSlot='to'; // 自动切到到达站
+ }else{
+ if(name===selFrom){ toast('出发站和到达站不能相同','err'); return; }
+ const reach=reachableStations(selFrom);
+ if(reach && !reach.has(name)){
+ toast(`从${selFrom}无法直达${name}，请选择同线路车站`,'err');
+ return;
+ }
+ selTo=name;
+ selSlot='from';
+ }
+ renderSlots(); renderLinePanel(); renderBookTab();
 }
 function filterStations(v){
-  searchQuery=v;
-  renderLinePanel();
+ searchQuery=v;
+ renderLinePanel();
 }
 function resetPick(){ selFrom=null; selTo=null; selTrain=null; selSlot='from'; searchQuery=''; const inp=document.getElementById('station-search'); if(inp)inp.value=''; renderSlots(); renderLinePanel(); renderBookTab(); }
 function swapPick(){ const t=selFrom; selFrom=selTo; selTo=t; renderSlots(); renderLinePanel(); renderBookTab(); }
 
 
 /* =====================================================
-   订票
+ 订票
 ===================================================== */
 /* ===== 真实车次索引（12306 数据） ===== */
 let REACH_INDEX=null, bookShowAll=false;
 function buildReachIndex(){
-  if(REACH_INDEX)return;
-  REACH_INDEX={};
-  const rt=RAIL.realTrains||{};
-  for(const code in rt){
-    const sts=rt[code].stops;
-    for(let i=0;i<sts.length-1;i++){
-      const a=sts[i];
-      if(!REACH_INDEX[a])REACH_INDEX[a]={};
-      for(let j=i+1;j<sts.length;j++){
-        const b=sts[j];
-        (REACH_INDEX[a][b]=REACH_INDEX[a][b]||[]).push(code);
-      }
-    }
-  }
+ if(REACH_INDEX)return;
+ REACH_INDEX={};
+ const rt=RAIL.realTrains||{};
+ for(const code in rt){
+ const sts=rt[code].stops;
+ for(let i=0;i<sts.length-1;i++){
+ const a=sts[i];
+ if(!REACH_INDEX[a])REACH_INDEX[a]={};
+ for(let j=i+1;j<sts.length;j++){
+ const b=sts[j];
+ (REACH_INDEX[a][b]=REACH_INDEX[a][b]||[]).push(code);
+ }
+ }
+ }
 }
 function reachableStations(from){
-  if(!from)return null;
-  buildReachIndex();
-  return new Set(Object.keys(REACH_INDEX[from]||{}));
+ if(!from)return null;
+ buildReachIndex();
+ return new Set(Object.keys(REACH_INDEX[from]||{}));
 }
 function directTrains(from,to){
-  buildReachIndex();
-  return (REACH_INDEX[from]&&REACH_INDEX[from][to])||[];
+ buildReachIndex();
+ return (REACH_INDEX[from]&&REACH_INDEX[from][to])||[];
 }
 function trainStopsBetween(code,from,to){
-  const t=RAIL.realTrains[code]; if(!t)return null;
-  const sts=t.stops;
-  const i=sts.indexOf(from), j=sts.indexOf(to);
-  if(i<0||j<0||i>=j)return null;
-  return sts.slice(i,j+1);
+ const t=RAIL.realTrains[code]; if(!t)return null;
+ const sts=t.stops;
+ const i=sts.indexOf(from), j=sts.indexOf(to);
+ if(i<0||j<0||i>=j)return null;
+ return sts.slice(i,j+1);
 }
 /* 站间里程：经纬度大圆 ×1.15（跨线车也适用） */
 function kmBetween(a,b){
-  const pa=STATIONS[a], pb=STATIONS[b];
-  const R=6371, toRad=x=>x*Math.PI/180;
-  const dLat=toRad(pb.lat-pa.lat), dLon=toRad(pb.lon-pa.lon);
-  const h=Math.sin(dLat/2)**2+Math.cos(toRad(pa.lat))*Math.cos(toRad(pb.lat))*Math.sin(dLon/2)**2;
-  return Math.max(10, Math.round(2*R*Math.asin(Math.sqrt(h))*1.15));
+ const pa=STATIONS[a], pb=STATIONS[b];
+ const R=6371, toRad=x=>x*Math.PI/180;
+ const dLat=toRad(pb.lat-pa.lat), dLon=toRad(pb.lon-pa.lon);
+ const h=Math.sin(dLat/2)**2+Math.cos(toRad(pa.lat))*Math.cos(toRad(pb.lat))*Math.sin(dLon/2)**2;
+ return Math.max(10, Math.round(2*R*Math.asin(Math.sqrt(h))*1.15));
 }
 function routeKm(stops){
-  let km=0; for(let i=0;i<stops.length-1;i++) km+=kmBetween(stops[i],stops[i+1]);
-  return km;
+ let km=0; for(let i=0;i<stops.length-1;i++) km+=kmBetween(stops[i],stops[i+1]);
+ return km;
 }
 function priceOf(from,to,seat){ return Math.max(20, Math.round(kmBetween(from,to)*SEATS[seat])); }
 function fmtDur(min){ const h=Math.floor(min/60),m=min%60; return h?`${h}小时${m?m+'分':''}`:`${m}分钟`; }
 function renderBookTab(){
-  const el=document.getElementById('book-area');
-  if(!el)return;
-  // 选完两站后才显示订票区（不重复上方槽位）
-  if(!selFrom||!selTo){ el.innerHTML=''; return; }
-  let s='<div class="bk-title">🎫 订票 · '+selFrom+' → '+selTo+'</div>';
-  let trains=directTrains(selFrom,selTo);
-  if(!trains.length){
-    s+='<div class="bk-tip">⚠️ 没有从 '+selFrom+' 直达 '+selTo+' 的车次<br>请选择其他出发/到达站（灰色站点不可达）</div>';
-    el.innerHTML=s; return;
-  }
-  trains=trains.slice().sort((a,b)=>RAIL.realTrains[a].dep.localeCompare(RAIL.realTrains[b].dep));
-  const km=kmBetween(selFrom,selTo);
-  s+=`<div class="price-line">里程约 <b>${km} km</b> · 可乘 <b style="color:var(--gold)">${trains.length}</b> 趟直达车次</div>`;
-  // 车次列表
-  const limit=Math.min(bookShowAll?trains.length:12, trains.length);
-  s+='<div style="font-size:.85em;color:var(--dim);margin-bottom:6px">选择车次：</div><ul class="train-list">';
-  for(let i=0;i<limit;i++){
-    const no=trains[i], t=RAIL.realTrains[no];
-    if(!t)continue;
-    const stopCnt=t.stops.indexOf(selTo)-t.stops.indexOf(selFrom);
-    s+=`<li class="${selTrain===no?'sel':''}" onclick="setTrain('${no}')"><div class="no">${no} <span style="color:var(--faint);font-weight:normal;font-size:.8em">${t.cls} · ${t.from}→${t.to}</span></div><div class="tm">${t.dep} 发车 → ${t.arr} 到达 · 经停 ${stopCnt-1} 站</div></li>`;
-  }
-  s+='</ul>';
-  if(!bookShowAll&&trains.length>12){
-    s+=`<button class="btn block" onclick="bookShowAll=true;renderBookTab()">展开全部 ${trains.length} 趟车次</button>`;
-  }
-  // 席别
-  s+='<div style="font-size:.85em;color:var(--dim);margin-bottom:6px">选择席别：</div><div class="seat-row">';
-  for(const seat of Object.keys(SEATS)){
-    s+=`<button class="seat-btn ${selSeat===seat?'sel':''}" onclick="setSeat('${seat}')">${seat}</button>`;
-  }
-  s+='</div>';
-  const tr=selTrain&&trains.includes(selTrain)?selTrain:trains[0];
-  const price=priceOf(selFrom,selTo,selSeat);
-  const t0=RAIL.realTrains[tr];
-  const est=Math.max(5,Math.round((timeToMin(t0.arr)-timeToMin(t0.dep))*kmBetween(selFrom,selTo)/routeKm(t0.stops)));
-  s+=`<div class="price-line">车次 <b style="color:var(--blue)">${tr}</b> · ${selSeat} 票价：<b>${fmtMoney(price)}</b> · 预计 ${fmtDur(est)} · 余额 ${fmtMoney(G.money)}</div>`;
-  s+=`<button class="btn primary block" style="font-size:1.05em" ${G.money>=price?'':'disabled'} onclick="buyTicket('${tr}','${selFrom}','${selTo}','${selSeat}')">🚄 购票出发</button>`;
-  el.innerHTML=s;
+ const el=document.getElementById('book-area');
+ if(!el)return;
+ // 选完两站后才显示订票区（不重复上方槽位）
+ if(!selFrom||!selTo){ el.innerHTML=''; return; }
+ let s='<div class="bk-title"> 订票 · '+selFrom+' → '+selTo+'</div>';
+ let trains=directTrains(selFrom,selTo);
+ if(!trains.length){
+ s+='<div class="bk-tip">⚠ 没有从 '+selFrom+' 直达 '+selTo+' 的车次<br>请选择其他出发/到达站（灰色站点不可达）</div>';
+ el.innerHTML=s; return;
+ }
+ trains=trains.slice().sort((a,b)=>RAIL.realTrains[a].dep.localeCompare(RAIL.realTrains[b].dep));
+ const km=kmBetween(selFrom,selTo);
+ s+=`<div class="price-line">里程约 <b>${km} km</b> · 可乘 <b style="color:var(--gold)">${trains.length}</b> 趟直达车次</div>`;
+ // 车次列表
+ const limit=Math.min(bookShowAll?trains.length:12, trains.length);
+ s+='<div style="font-size:.85em;color:var(--dim);margin-bottom:6px">选择车次：</div><ul class="train-list">';
+ for(let i=0;i<limit;i++){
+ const no=trains[i], t=RAIL.realTrains[no];
+ if(!t)continue;
+ const stopCnt=t.stops.indexOf(selTo)-t.stops.indexOf(selFrom);
+ s+=`<li class="${selTrain===no?'sel':''}" onclick="setTrain('${no}')"><div class="no">${no} <span style="color:var(--faint);font-weight:normal;font-size:.8em">${t.cls} · ${t.from}→${t.to}</span></div><div class="tm">${t.dep} 发车 → ${t.arr} 到达 · 经停 ${stopCnt-1} 站</div></li>`;
+ }
+ s+='</ul>';
+ if(!bookShowAll&&trains.length>12){
+ s+=`<button class="btn block" onclick="bookShowAll=true;renderBookTab()">展开全部 ${trains.length} 趟车次</button>`;
+ }
+ // 席别
+ s+='<div style="font-size:.85em;color:var(--dim);margin-bottom:6px">选择席别：</div><div class="seat-row">';
+ for(const seat of Object.keys(SEATS)){
+ s+=`<button class="seat-btn ${selSeat===seat?'sel':''}" onclick="setSeat('${seat}')">${seat}</button>`;
+ }
+ s+='</div>';
+ const tr=selTrain&&trains.includes(selTrain)?selTrain:trains[0];
+ const price=priceOf(selFrom,selTo,selSeat);
+ const t0=RAIL.realTrains[tr];
+ const est=Math.max(5,Math.round((timeToMin(t0.arr)-timeToMin(t0.dep))*kmBetween(selFrom,selTo)/routeKm(t0.stops)));
+ s+=`<div class="price-line">车次 <b style="color:var(--blue)">${tr}</b> · ${selSeat} 票价：<b>${fmtMoney(price)}</b> · 预计 ${fmtDur(est)} · 余额 ${fmtMoney(G.money)}</div>`;
+ s+=`<button class="btn primary block" style="font-size:1.05em" ${G.money>=price?'':'disabled'} onclick="buyTicket('${tr}','${selFrom}','${selTo}','${selSeat}')"> 购票出发</button>`;
+ el.innerHTML=s;
 }
 function setTrain(no){selTrain=no;renderBookTab();}
 function setSeat(seat){selSeat=seat;renderBookTab();}
 function pickViaBox(which){
-  // 弹站名选择（按线路分组）
-  const body=document.getElementById('modal-body');
-  document.getElementById('modal-title').textContent=which==='from'?'选择出发站':'选择到达站';
-  let s='<div class="search-row"><input id="m-search" placeholder="🔍 搜索站名" oninput="renderStationList(this.value,\''+which+'\')"></div><div id="m-stlist"></div>';
-  body.innerHTML=s;
-  renderStationList('',which);
-  document.getElementById('modal-bg').classList.remove('hidden');
+ // 弹站名选择（按线路分组）
+ const body=document.getElementById('modal-body');
+ document.getElementById('modal-title').textContent=which==='from'?'选择出发站':'选择到达站';
+ let s='<div class="search-row"><input id="m-search" placeholder=" 搜索站名" oninput="renderStationList(this.value,\''+which+'\')"></div><div id="m-stlist"></div>';
+ body.innerHTML=s;
+ renderStationList('',which);
+ document.getElementById('modal-bg').classList.remove('hidden');
 }
 function renderStationList(q,which){
-  const el=document.getElementById('m-stlist');
-  let s='<div style="display:flex;flex-wrap:wrap;gap:6px">';
-  for(const name of Object.keys(STATIONS)){
-    if(q&&!name.includes(q))continue;
-    const st=STATIONS[name];
-    const multi=st.lines.length>1;
-    s+=`<button class="btn small" style="${multi?'border-color:var(--gold);color:var(--gold)':''}" onclick="chooseStation('${name}','${which}')">${name}${multi?' ◎':''}</button>`;
-  }
-  s+='</div>';
-  el.innerHTML=s;
+ const el=document.getElementById('m-stlist');
+ let s='<div style="display:flex;flex-wrap:wrap;gap:6px">';
+ for(const name of Object.keys(STATIONS)){
+ if(q&&!name.includes(q))continue;
+ const st=STATIONS[name];
+ const multi=st.lines.length>1;
+ s+=`<button class="btn small" style="${multi?'border-color:var(--gold);color:var(--gold)':''}" onclick="chooseStation('${name}','${which}')">${name}${multi?' ◎':''}</button>`;
+ }
+ s+='</div>';
+ el.innerHTML=s;
 }
 function chooseStation(name,which){
-  if(which==='from') selFrom=name; else selTo=name;
-  if(selFrom&&selTo&&selFrom===selTo){
-    if(which==='from') selTo=null; else selFrom=null;
-    toast('出发站和到达站不能相同','err');
-  }
-  closeModal();
-  renderSlots(); renderLinePanel(); renderBookTab();
+ if(which==='from') selFrom=name; else selTo=name;
+ if(selFrom&&selTo&&selFrom===selTo){
+ if(which==='from') selTo=null; else selFrom=null;
+ toast('出发站和到达站不能相同','err');
+ }
+ closeModal();
+ renderSlots(); renderLinePanel(); renderBookTab();
 }
 function onSearch(v){ /* 仅渲染用 */ }
 function buyTicket(no,from,to,seat){
-  const t=RAIL.realTrains[no];
-  if(!t){toast('车次不存在','err');return;}
-  const stops=trainStopsBetween(no,from,to);
-  if(!stops){toast('该车次不经过所选区间','err');return;}
-  const price=priceOf(from,to,seat);
-  if(G.money<price){toast('余额不足','err');return;}
-  G.money-=price;
-  // 沿经停累计里程
-  const segKms=[], cumKms=[0];
-  for(let i=0;i<stops.length-1;i++){
-    const k=kmBetween(stops[i],stops[i+1]);
-    segKms.push(k); cumKms.push(cumKms[i]+k);
-  }
-  const totalKm=cumKms[cumKms.length-1];
-  const fullKm=routeKm(t.stops);
-  const depMin=timeToMin(t.dep), arrMin=timeToMin(t.arr);
-  const durMin=Math.max(5,Math.round((arrMin-depMin)*totalKm/fullKm));
-  TRIP={
-    no, trainName:t.cls+' '+no, cls:t.cls, from, to,
-    stops, segKms, cumKms, totalKm, seat, price,
-    curKm:0, speedMul:G.settings.speed>0?G.settings.speed:1, running:true,
-    depMin, arrMin, durMin, curMin:depMin,
-    passed:new Set(), announced:new Set(), photoCd:0, stopUntil:0,
-  };
-  G.nextTrip={date:new Date().toLocaleDateString('zh-CN'), from, to, no};
-  saveGame();
-  openTrip();
-  toast('🎫 已购票 '+no+' · '+from+' → '+to+'（'+seat+'）'+fmtMoney(price));
-  announce('旅客们，欢迎乘坐 '+no+' 次列车。本次列车由 '+from+' 开往 '+to+' 方向，全程经停 '+t.stops.length+' 站。祝您旅途愉快！');
-  playTone(true);
+ const t=RAIL.realTrains[no];
+ if(!t){toast('车次不存在','err');return;}
+ const stops=trainStopsBetween(no,from,to);
+ if(!stops){toast('该车次不经过所选区间','err');return;}
+ const price=priceOf(from,to,seat);
+ if(G.money<price){toast('余额不足','err');return;}
+ G.money-=price;
+ // 沿经停累计里程
+ const segKms=[], cumKms=[0];
+ for(let i=0;i<stops.length-1;i++){
+ const k=kmBetween(stops[i],stops[i+1]);
+ segKms.push(k); cumKms.push(cumKms[i]+k);
+ }
+ const totalKm=cumKms[cumKms.length-1];
+ const fullKm=routeKm(t.stops);
+ const depMin=timeToMin(t.dep), arrMin=timeToMin(t.arr);
+ const durMin=Math.max(5,Math.round((arrMin-depMin)*totalKm/fullKm));
+ TRIP={
+ no, trainName:t.cls+' '+no, cls:t.cls, from, to,
+ stops, segKms, cumKms, totalKm, seat, price,
+ curKm:0, speedMul:G.settings.speed>0?G.settings.speed:1, running:true,
+ depMin, arrMin, durMin, curMin:depMin,
+ passed:new Set(), announced:new Set(), photoCd:0, stopUntil:0,
+ };
+ G.nextTrip={date:new Date().toLocaleDateString('zh-CN'), from, to, no};
+ saveGame();
+ openTrip();
+ toast(' 已购票 '+no+' · '+from+' → '+to+'（'+seat+'）'+fmtMoney(price));
+ announce('旅客们，欢迎乘坐 '+no+' 次列车。本次列车由 '+from+' 开往 '+to+' 方向，全程经停 '+t.stops.length+' 站。祝您旅途愉快！');
+ playTone(true);
 }
 
 /* =====================================================
-   行程
+ 行程
 ===================================================== */
 const KM_PER_SEC = 8; // 1x 倍速下每秒推进的虚拟里程
 let rafId=null, lastTs=0;
 
 function openTrip(){
-  document.getElementById('trip-screen').classList.remove('hidden');
-  document.getElementById('line-panel').parentElement.parentElement.style.display='none';
-  document.getElementById('topbar').style.display='none';
-  document.getElementById('trip-progress-bar').style.width='0%';
-  renderTripInfo(); renderScenery();
-  lastTs=0;
-  if(rafId)cancelAnimationFrame(rafId);
-  const loop=(ts)=>{
-    const dt=lastTs?Math.min((ts-lastTs)/1000,0.5):0;
-    lastTs=ts;
-    if(dt>0) tick(dt);
-    rafId=requestAnimationFrame(loop);
-  };
-  try{ rafId=requestAnimationFrame(loop); }catch(e){ rafId=setInterval(()=>tick(0.25),250); }
+ document.getElementById('trip-screen').classList.remove('hidden');
+ document.getElementById('line-panel').parentElement.parentElement.style.display='none';
+ document.getElementById('topbar').style.display='none';
+ document.getElementById('trip-progress-bar').style.width='0%';
+ renderTripInfo(); renderScenery();
+ lastTs=0;
+ if(rafId)cancelAnimationFrame(rafId);
+ const loop=(ts)=>{
+ const dt=lastTs?Math.min((ts-lastTs)/1000,0.5):0;
+ lastTs=ts;
+ if(dt>0) tick(dt);
+ rafId=requestAnimationFrame(loop);
+ };
+ try{ rafId=requestAnimationFrame(loop); }catch(e){ rafId=setInterval(()=>tick(0.25),250); }
 }
 function leaveTrip(){
-  if(!TRIP)return;
-  settleTrip(true);
+ if(!TRIP)return;
+ settleTrip(true);
 }
 function setSpeed(m){
-  if(!TRIP)return;
-  TRIP.speedMul=m;
-  document.querySelectorAll('.speed-btn').forEach(b=>b.classList.toggle('sel',parseInt(b.dataset.s||'-1')===m));
-  if(m===0){TRIP.running=false;}
-  else TRIP.running=true;
+ if(!TRIP)return;
+ TRIP.speedMul=m;
+ document.querySelectorAll('.speed-btn').forEach(b=>b.classList.toggle('sel',parseInt(b.dataset.s||'-1')===m));
+ if(m===0){TRIP.running=false;}
+ else TRIP.running=true;
 }
 function skipToEnd(){
-  if(!TRIP)return;
-  TRIP.running=true;
-  TRIP.stopUntil=0;   // 直达无视到站短停
-  TRIP.speedMul=16;
-  tick((TRIP.totalKm-TRIP.curKm)/(16*KM_PER_SEC)+1.5);
+ if(!TRIP)return;
+ TRIP.running=true;
+ TRIP.stopUntil=0; // 直达无视到站短停
+ TRIP.speedMul=16;
+ tick((TRIP.totalKm-TRIP.curKm)/(16*KM_PER_SEC)+1.5);
 }
 function tick(dt){
-  if(!TRIP || !TRIP.running) return;
-  const t=TRIP;
-  if(t.stopUntil && performance.now()<t.stopUntil){ return; }
-  t.curKm=Math.min(t.totalKm, t.curKm+dt*t.speedMul*KM_PER_SEC);
-  // 时间推进
-  t.curMin=t.depMin + (t.curKm/t.totalKm)*t.durMin;
-  // 报站检测（真实经停站序）
-  for(let i=1;i<t.stops.length-1;i++){
-    const st=t.stops[i];
-    if(t.curKm>=t.cumKms[i] && !t.announced.has(st)){
-      t.announced.add(st); t.passed.add(st);
-      announce('旅客们，'+st+'站到了。请在'+st+'站下车的旅客携带好随身物品，有序下车。');
-      playTone(true);
-      t.stopUntil=performance.now()+900;
-    }
-  }
-  // 到站（终点）
-  if(t.curKm>=t.totalKm-0.5){ t.curKm=t.totalKm; settleTrip(false); return; }
-  renderTripInfo(); renderScenery();
-  if(t.photoCd>0)t.photoCd-=dt;
+ if(!TRIP || !TRIP.running) return;
+ const t=TRIP;
+ if(t.stopUntil && performance.now()<t.stopUntil){ return; }
+ t.curKm=Math.min(t.totalKm, t.curKm+dt*t.speedMul*KM_PER_SEC);
+ // 时间推进
+ t.curMin=t.depMin + (t.curKm/t.totalKm)*t.durMin;
+ // 报站检测（真实经停站序）
+ for(let i=1;i<t.stops.length-1;i++){
+ const st=t.stops[i];
+ if(t.curKm>=t.cumKms[i] && !t.announced.has(st)){
+ t.announced.add(st); t.passed.add(st);
+ announce('旅客们，'+st+'站到了。请在'+st+'站下车的旅客携带好随身物品，有序下车。');
+ playTone(true);
+ t.stopUntil=performance.now()+900;
+ }
+ }
+ // 到站（终点）
+ if(t.curKm>=t.totalKm-0.5){ t.curKm=t.totalKm; settleTrip(false); return; }
+ renderTripInfo(); renderScenery();
+ if(t.photoCd>0)t.photoCd-=dt;
 }
 function renderTripInfo(){
-  const t=TRIP;
-  document.getElementById('t-no').textContent=t.no;
-  document.getElementById('t-name').textContent=t.trainName;
-  document.getElementById('t-route').textContent=t.from+' → '+t.to;
-  document.getElementById('t-time').textContent=minToTime(Math.round(t.curMin));
-  const done=Math.round(t.curKm), total=t.totalKm;
-  document.getElementById('t-km').textContent=done+'/'+total;
-  const maxSpeed=t.cls==='动车'?250:300;
-  const prog=total?done/total:0;
-  const sp=Math.round(maxSpeed*(0.55+0.45*Math.abs(Math.sin(prog*Math.PI*2+performance.now()/3000))));
-  document.getElementById('t-speed').textContent=sp;
-  document.getElementById('t-seat').textContent=t.seat;
-  document.getElementById('trip-progress-bar').style.width=(prog*100).toFixed(1)+'%';
-  // 下一站（真实经停站序）
-  let nxt=t.to;
-  for(let i=0;i<t.stops.length-1;i++){
-    if(t.curKm>=t.cumKms[i] && t.curKm<t.cumKms[i+1]){ nxt=t.stops[i+1]; break; }
-  }
-  const ne=document.getElementById('t-next');
-  if(ne) ne.textContent=nxt;
+ const t=TRIP;
+ document.getElementById('t-no').textContent=t.no;
+ document.getElementById('t-name').textContent=t.trainName;
+ document.getElementById('t-route').textContent=t.from+' → '+t.to;
+ document.getElementById('t-time').textContent=minToTime(Math.round(t.curMin));
+ const done=Math.round(t.curKm), total=t.totalKm;
+ document.getElementById('t-km').textContent=done+'/'+total;
+ const maxSpeed=t.cls==='动车'?250:300;
+ const prog=total?done/total:0;
+ const sp=Math.round(maxSpeed*(0.55+0.45*Math.abs(Math.sin(prog*Math.PI*2+performance.now()/3000))));
+ document.getElementById('t-speed').textContent=sp;
+ document.getElementById('t-seat').textContent=t.seat;
+ document.getElementById('trip-progress-bar').style.width=(prog*100).toFixed(1)+'%';
+ // 下一站（真实经停站序）
+ let nxt=t.to;
+ for(let i=0;i<t.stops.length-1;i++){
+ if(t.curKm>=t.cumKms[i] && t.curKm<t.cumKms[i+1]){ nxt=t.stops[i+1]; break; }
+ }
+ const ne=document.getElementById('t-next');
+ if(ne) ne.textContent=nxt;
 }
 /* 风景 */
 function sceneryOf(name){
-  const lk=STATIONS[name]&&STATIONS[name].lines[0];
-  return lk?LINES[lk].scenery[name]:null;
+ const lk=STATIONS[name]&&STATIONS[name].lines[0];
+ return lk?LINES[lk].scenery[name]:null;
 }
 function renderScenery(){
-  const t=TRIP;
-  if(!t)return;
-  // 当前区段（真实经停站序：第 i 站 → i+1 站）
-  let ai=t.stops.length-2;
-  for(let i=0;i<t.stops.length-1;i++){
-    if(t.curKm>=t.cumKms[i] && t.curKm<t.cumKms[i+1]){ ai=i; break; }
-  }
-  const a=t.stops[ai];
-  const type=sceneryOf(a)||'plain';
-  const isNight=isNightTime(t.curMin);
-  const key=type+'-'+isNight;
-  if(t._scKey===key)return;
-  t._scKey=key;
-  const el=document.getElementById('scenery-svg');
-  el.innerHTML=buildScenery(type,isNight);
-  // 前景速度
-  const spd=t.cls==='动车'?250:300;
-  document.getElementById('fg-layer').style.setProperty('--pd',Math.max(1.2,8-(spd/60))+'s');
+ const t=TRIP;
+ if(!t)return;
+ // 当前区段（真实经停站序：第 i 站 → i+1 站）
+ let ai=t.stops.length-2;
+ for(let i=0;i<t.stops.length-1;i++){
+ if(t.curKm>=t.cumKms[i] && t.curKm<t.cumKms[i+1]){ ai=i; break; }
+ }
+ const a=t.stops[ai];
+ const type=sceneryOf(a)||'plain';
+ const isNight=isNightTime(t.curMin);
+ const key=type+'-'+isNight;
+ if(t._scKey===key)return;
+ t._scKey=key;
+ const el=document.getElementById('scenery-svg');
+ el.innerHTML=buildScenery(type,isNight);
+ // 前景速度
+ const spd=t.cls==='动车'?250:300;
+ document.getElementById('fg-layer').style.setProperty('--pd',Math.max(1.2,8-(spd/60))+'s');
 }
 function isNightTime(min){
-  return min>=19*60||min<5.5*60;
+ return min>=19*60||min<5.5*60;
 }
 function buildScenery(type,night){
-  const skyTop=night?'#0b1020':'#3d6ea5';
-  const skyMid=night?'#141b33':'#8fb8dd';
-  const skyBot=night?'#1d2a4a':'#cfe4f2';
-  let body='';
-  // 天空
-  body+=`<rect width="1000" height="400" fill="url(#skyG)"/>`;
-  body+=`<defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${skyTop}"/><stop offset="0.6" stop-color="${skyMid}"/><stop offset="1" stop-color="${skyBot}"/></linearGradient></defs>`;
-  if(night){
-    body+=`<circle cx="85%" cy="18%" r="16" fill="#e8e8f0" opacity=".9"/><circle cx="85%" cy="18%" r="26" fill="#e8e8f0" opacity=".25"/>`;
-    // 星星
-    for(let i=0;i<26;i++){const x=Math.random()*1000,y=Math.random()*180;body+=`<circle cx="${x}" cy="${y}" r="1.2" fill="#fff" opacity="${0.3+Math.random()*0.7}"/>`;}
-  }else{
-    body+=`<circle cx="78%" cy="20%" r="22" fill="#ffe9a8" opacity=".95"/><circle cx="78%" cy="20%" r="38" fill="#ffe9a8" opacity=".3"/>`;
-    for(let i=0;i<6;i++){const x=Math.random()*1000,y=60+Math.random()*120;body+=`<ellipse cx="${x}" cy="${y}" rx="40" ry="8" fill="#fff" opacity=".5"/>`;}
-  }
-  // 场景主体
-  if(type==='urban'){
-    body+=`<g fill="${night?'#0e1626':'#4a5a72'}">`;
-    for(let i=0;i<14;i++){const w=30+Math.random()*34,h=60+Math.random()*150,x=i*78+Math.random()*30;body+=`<rect x="${x}" y="${320-h}" width="${w}" height="${h}" rx="2"/>`;}
-    body+='</g>';
-    if(night){for(let i=0;i<14;i++){const x=i*78+Math.random()*30+15;body+=`<rect x="${x-2}" y="${320-(60+Math.random()*150)}" width="3" height="8" fill="#ffd54f" opacity=".9"/><rect x="${x+6}" y="${320-(40+Math.random()*120)}" width="3" height="8" fill="#ffd54f" opacity=".8"/>`;}}
-  }else if(type==='plain'){
-    body+=`<rect y="215" width="100%" height="105" fill="${night?'#182436':'#8a9b4f'}"/>`;
-    body+=`<g fill="${night?'#0f1622':'#6a7a35'}">`;
-    for(let i=0;i<22;i++){const x=i*58;body+=`<rect x="${x}" y="252" width="20" height="34" rx="3"/><rect x="${x+26}" y="238" width="20" height="48" rx="3"/>`;}
-    body+='</g>';
-    body+=`<g fill="${night?'#101722':'#8d6e3c'}">`;
-    for(let i=0;i<7;i++){const x=i*170;body+=`<path d="M${x} 215 Q${x+25} 160 ${x+50} 215" />`;}
-    body+='</g>';
-  }else if(type==='water'){
-    body+=`<rect y="180" width="100%" height="140" fill="${night?'#0e2333':'#4f8fbf'}"/>`;
-    for(let i=0;i<10;i++){const x=Math.random()*1000,y=200+Math.random()*80;body+=`<path d="M${x} ${y} q12 -6 24 0 q12 6 24 0" stroke="${night?'#2b5a80':'#bfe0f2'}" stroke-width="2" fill="none" opacity=".6"/>`;}
-    body+=`<g fill="${night?'#0d2020':'#2e6b3e'}">`;
-    for(let i=0;i<9;i++){const x=i*120+20;body+=`<ellipse cx="${x}" cy="188" rx="6" ry="22"/><ellipse cx="${x+10}" cy="190" rx="6" ry="20"/>`;}
-    body+='</g>';
-  }else if(type==='mountain'){
-    body+=`<g fill="${night?'#0c1522':'#5f6f4a'}">`;
-    for(let i=0;i<7;i++){const x=i*160, h=140+Math.random()*90;body+=`<path d="M${x} 320 L${x+80} ${320-h} L${x+160} 320 Z"/>`;}
-    body+='</g>';
-    body+=`<g fill="${night?'#0a111c':'#7d8a5e'}">`;
-    for(let i=0;i<6;i++){const x=i*180+40;body+=`<path d="M${x} 320 L${x+70} ${180+Math.random()*60} L${x+140} 320 Z"/>`;}
-    body+='</g>';
-    body+=`<rect y="285" width="100%" height="35" fill="${night?'#0d1622':'#4e5a3a'}"/>`;
-  }else if(type==='snow'){
-    body+=`<rect y="210" width="100%" height="110" fill="${night?'#1c2b40':'#e8eef5'}"/>`;
-    body+=`<g fill="${night?'#152235':'#c8d6e4'}">`;
-    for(let i=0;i<9;i++){const x=i*120;body+=`<path d="M${x} 320 L${x+55} 320 L${x+75} ${200+Math.random()*50} L${x+90} 320 Z"/>`;}
-    body+='</g>';
-    if(!night){for(let i=0;i<30;i++){const x=Math.random()*1000,y=Math.random()*200;body+=`<circle cx="${x}" cy="${y}" r="2.5" fill="#fff" opacity="${0.5+Math.random()*0.5}"/>`;}}
-  }else if(type==='coast'){
-    body+=`<rect y="175" width="100%" height="145" fill="${night?'#0a1e33':'#2e7fb0'}"/>`;
-    for(let i=0;i<8;i++){const x=Math.random()*1000,y=200+Math.random()*80;body+=`<path d="M${x} ${y} q14 -7 28 0 q14 7 28 0" stroke="${night?'#1d4a6e':'#bfe0f2'}" stroke-width="2.5" fill="none" opacity=".7"/>`;}
-    body+=`<rect y="205" width="100%" height="50" fill="${night?'#1b2738':'#d8c9a3'}"/>`;
-    body+=`<g fill="${night?'#0e2233':'#3f8f5a'}">`;
-    for(let i=0;i<5;i++){const x=i*220;body+=`<ellipse cx="${x}" cy="200" rx="8" ry="26"/><path d="M${x} 175 Q${x+6} 150 ${x+14} 175" stroke="${night?'#1d4a6e':'#2e7fb0'}" stroke-width="3" fill="none"/>`;}
-    body+='</g>';
-  }else if(type==='loess'){
-    body+=`<rect y="230" width="100%" height="90" fill="${night?'#1a1f12':'#a37a3c'}"/>`;
-    body+=`<g fill="${night?'#14180f':'#8a6630'}">`;
-    for(let i=0;i<8;i++){const x=i*130;body+=`<path d="M${x} 320 L${x+20} 250 L${x+45} 260 L${x+70} 230 L${x+95} 260 L${x+130} 320 Z"/>`;}
-    body+='</g>';
-    body+=`<g fill="${night?'#0e120c':'#6b5226'}">`;
-    for(let i=0;i<8;i++){const x=i*130+20;body+=`<rect x="${x}" y="212" width="4" height="22"/><rect x="${x+30}" y="205" width="4" height="29"/>`;}
-    body+='</g>';
-  }else if(type==='karst'){
-    body+=`<rect y="215" width="100%" height="105" fill="${night?'#12243a':'#5b8a5a'}"/>`;
-    body+=`<g fill="${night?'#0e1c30':'#6f9a68'}">`;
-    for(let i=0;i<8;i++){const x=i*140;body+=`<path d="M${x} 320 L${x+55} ${200+Math.random()*40} L${x+110} 320 Z"/>`;}
-    body+='</g>';
-    body+=`<g fill="${night?'#0a1524':'#3f6a45'}">`;
-    for(let i=0;i<7;i++){const x=i*150+40;body+=`<path d="M${x} 320 L${x+45} ${220+Math.random()*35} L${x+90} 320 Z"/>`;}
-    body+='</g>';
-  }
-  // 大地 + 轨道（底部 350-400）
-  body+=`<rect x="0" y="345" width="1000" height="55" fill="#1b2026"/>`;
-  body+=`<g stroke="#5a6472" stroke-width="2"><line x1="0" y1="380" x2="1000" y2="380"/><line x1="0" y1="386" x2="1000" y2="386"/></g>`;
-  body+=`<g stroke="#3a4052" stroke-width="1">`;
-  for(let x=0;x<1000;x+=40)body+=`<line x1="${x}" y1="372" x2="${x}" y2="378"/>`;
-  body+='</g>';
-  return body;
+ const skyTop=night?'#0b1020':'#3d6ea5';
+ const skyMid=night?'#141b33':'#8fb8dd';
+ const skyBot=night?'#1d2a4a':'#cfe4f2';
+ let body='';
+ // 天空
+ body+=`<rect width="1000" height="400" fill="url(#skyG)"/>`;
+ body+=`<defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${skyTop}"/><stop offset="0.6" stop-color="${skyMid}"/><stop offset="1" stop-color="${skyBot}"/></linearGradient></defs>`;
+ if(night){
+ body+=`<circle cx="85%" cy="18%" r="16" fill="#e8e8f0" opacity=".9"/><circle cx="85%" cy="18%" r="26" fill="#e8e8f0" opacity=".25"/>`;
+ // 星星
+ for(let i=0;i<26;i++){const x=Math.random()*1000,y=Math.random()*180;body+=`<circle cx="${x}" cy="${y}" r="1.2" fill="#fff" opacity="${0.3+Math.random()*0.7}"/>`;}
+ }else{
+ body+=`<circle cx="78%" cy="20%" r="22" fill="#ffe9a8" opacity=".95"/><circle cx="78%" cy="20%" r="38" fill="#ffe9a8" opacity=".3"/>`;
+ for(let i=0;i<6;i++){const x=Math.random()*1000,y=60+Math.random()*120;body+=`<ellipse cx="${x}" cy="${y}" rx="40" ry="8" fill="#fff" opacity=".5"/>`;}
+ }
+ // 场景主体
+ if(type==='urban'){
+ body+=`<g fill="${night?'#0e1626':'#4a5a72'}">`;
+ for(let i=0;i<14;i++){const w=30+Math.random()*34,h=60+Math.random()*150,x=i*78+Math.random()*30;body+=`<rect x="${x}" y="${320-h}" width="${w}" height="${h}" rx="2"/>`;}
+ body+='</g>';
+ if(night){for(let i=0;i<14;i++){const x=i*78+Math.random()*30+15;body+=`<rect x="${x-2}" y="${320-(60+Math.random()*150)}" width="3" height="8" fill="#ffd54f" opacity=".9"/><rect x="${x+6}" y="${320-(40+Math.random()*120)}" width="3" height="8" fill="#ffd54f" opacity=".8"/>`;}}
+ }else if(type==='plain'){
+ body+=`<rect y="215" width="100%" height="105" fill="${night?'#182436':'#8a9b4f'}"/>`;
+ body+=`<g fill="${night?'#0f1622':'#6a7a35'}">`;
+ for(let i=0;i<22;i++){const x=i*58;body+=`<rect x="${x}" y="252" width="20" height="34" rx="3"/><rect x="${x+26}" y="238" width="20" height="48" rx="3"/>`;}
+ body+='</g>';
+ body+=`<g fill="${night?'#101722':'#8d6e3c'}">`;
+ for(let i=0;i<7;i++){const x=i*170;body+=`<path d="M${x} 215 Q${x+25} 160 ${x+50} 215" />`;}
+ body+='</g>';
+ }else if(type==='water'){
+ body+=`<rect y="180" width="100%" height="140" fill="${night?'#0e2333':'#4f8fbf'}"/>`;
+ for(let i=0;i<10;i++){const x=Math.random()*1000,y=200+Math.random()*80;body+=`<path d="M${x} ${y} q12 -6 24 0 q12 6 24 0" stroke="${night?'#2b5a80':'#bfe0f2'}" stroke-width="2" fill="none" opacity=".6"/>`;}
+ body+=`<g fill="${night?'#0d2020':'#2e6b3e'}">`;
+ for(let i=0;i<9;i++){const x=i*120+20;body+=`<ellipse cx="${x}" cy="188" rx="6" ry="22"/><ellipse cx="${x+10}" cy="190" rx="6" ry="20"/>`;}
+ body+='</g>';
+ }else if(type==='mountain'){
+ body+=`<g fill="${night?'#0c1522':'#5f6f4a'}">`;
+ for(let i=0;i<7;i++){const x=i*160, h=140+Math.random()*90;body+=`<path d="M${x} 320 L${x+80} ${320-h} L${x+160} 320 Z"/>`;}
+ body+='</g>';
+ body+=`<g fill="${night?'#0a111c':'#7d8a5e'}">`;
+ for(let i=0;i<6;i++){const x=i*180+40;body+=`<path d="M${x} 320 L${x+70} ${180+Math.random()*60} L${x+140} 320 Z"/>`;}
+ body+='</g>';
+ body+=`<rect y="285" width="100%" height="35" fill="${night?'#0d1622':'#4e5a3a'}"/>`;
+ }else if(type==='snow'){
+ body+=`<rect y="210" width="100%" height="110" fill="${night?'#1c2b40':'#e8eef5'}"/>`;
+ body+=`<g fill="${night?'#152235':'#c8d6e4'}">`;
+ for(let i=0;i<9;i++){const x=i*120;body+=`<path d="M${x} 320 L${x+55} 320 L${x+75} ${200+Math.random()*50} L${x+90} 320 Z"/>`;}
+ body+='</g>';
+ if(!night){for(let i=0;i<30;i++){const x=Math.random()*1000,y=Math.random()*200;body+=`<circle cx="${x}" cy="${y}" r="2.5" fill="#fff" opacity="${0.5+Math.random()*0.5}"/>`;}}
+ }else if(type==='coast'){
+ body+=`<rect y="175" width="100%" height="145" fill="${night?'#0a1e33':'#2e7fb0'}"/>`;
+ for(let i=0;i<8;i++){const x=Math.random()*1000,y=200+Math.random()*80;body+=`<path d="M${x} ${y} q14 -7 28 0 q14 7 28 0" stroke="${night?'#1d4a6e':'#bfe0f2'}" stroke-width="2.5" fill="none" opacity=".7"/>`;}
+ body+=`<rect y="205" width="100%" height="50" fill="${night?'#1b2738':'#d8c9a3'}"/>`;
+ body+=`<g fill="${night?'#0e2233':'#3f8f5a'}">`;
+ for(let i=0;i<5;i++){const x=i*220;body+=`<ellipse cx="${x}" cy="200" rx="8" ry="26"/><path d="M${x} 175 Q${x+6} 150 ${x+14} 175" stroke="${night?'#1d4a6e':'#2e7fb0'}" stroke-width="3" fill="none"/>`;}
+ body+='</g>';
+ }else if(type==='loess'){
+ body+=`<rect y="230" width="100%" height="90" fill="${night?'#1a1f12':'#a37a3c'}"/>`;
+ body+=`<g fill="${night?'#14180f':'#8a6630'}">`;
+ for(let i=0;i<8;i++){const x=i*130;body+=`<path d="M${x} 320 L${x+20} 250 L${x+45} 260 L${x+70} 230 L${x+95} 260 L${x+130} 320 Z"/>`;}
+ body+='</g>';
+ body+=`<g fill="${night?'#0e120c':'#6b5226'}">`;
+ for(let i=0;i<8;i++){const x=i*130+20;body+=`<rect x="${x}" y="212" width="4" height="22"/><rect x="${x+30}" y="205" width="4" height="29"/>`;}
+ body+='</g>';
+ }else if(type==='karst'){
+ body+=`<rect y="215" width="100%" height="105" fill="${night?'#12243a':'#5b8a5a'}"/>`;
+ body+=`<g fill="${night?'#0e1c30':'#6f9a68'}">`;
+ for(let i=0;i<8;i++){const x=i*140;body+=`<path d="M${x} 320 L${x+55} ${200+Math.random()*40} L${x+110} 320 Z"/>`;}
+ body+='</g>';
+ body+=`<g fill="${night?'#0a1524':'#3f6a45'}">`;
+ for(let i=0;i<7;i++){const x=i*150+40;body+=`<path d="M${x} 320 L${x+45} ${220+Math.random()*35} L${x+90} 320 Z"/>`;}
+ body+='</g>';
+ }
+ // 大地 + 轨道（底部 350-400）
+ body+=`<rect x="0" y="345" width="1000" height="55" fill="#1b2026"/>`;
+ body+=`<g stroke="#5a6472" stroke-width="2"><line x1="0" y1="380" x2="1000" y2="380"/><line x1="0" y1="386" x2="1000" y2="386"/></g>`;
+ body+=`<g stroke="#3a4052" stroke-width="1">`;
+ for(let x=0;x<1000;x+=40)body+=`<line x1="${x}" y1="372" x2="${x}" y2="378"/>`;
+ body+='</g>';
+ return body;
 }
 /* 拍照 */
 function takePhoto(){
-  const t=TRIP;
-  if(!t)return;
-  if(t.photoCd>0){toast('📷 刚拍过，稍等片刻','err');return;}
-  t.photoCd=5;
-  const sts=LINES[t.line].stations;
-  let a=sts[0];
-  for(let i=0;i<sts.length-1;i++){if(t.dir===1?(t.curKm>=sts[i].km&&t.curKm<=sts[i+1].km):(t.curKm<=sts[i].km&&t.curKm>=sts[i+1].km)){a=sts[i];break;}}
-  const type=LINES[t.line].scenery[a.name]||'plain';
-  const name=SCENERY_NAME[type]||type;
-  if(Math.random()<0.72){
-    const now=new Date();
-    G.photos.push({scenery:type,name,line:t.line,time:now.toLocaleString('zh-CN')});
-    toast('📷 咔嚓！拍到了「'+name+'」'+(G.photos.length)+'张','ach');
-    checkAchievements();
-  }else{
-    toast('📷 手抖了一下，没拍好……');
-  }
-  saveGame();
+ const t=TRIP;
+ if(!t)return;
+ if(t.photoCd>0){toast(' 刚拍过，稍等片刻','err');return;}
+ t.photoCd=5;
+ const sts=LINES[t.line].stations;
+ let a=sts[0];
+ for(let i=0;i<sts.length-1;i++){if(t.dir===1?(t.curKm>=sts[i].km&&t.curKm<=sts[i+1].km):(t.curKm<=sts[i].km&&t.curKm>=sts[i+1].km)){a=sts[i];break;}}
+ const type=LINES[t.line].scenery[a.name]||'plain';
+ const name=SCENERY_NAME[type]||type;
+ if(Math.random()<0.72){
+ const now=new Date();
+ G.photos.push({scenery:type,name,line:t.line,time:now.toLocaleString('zh-CN')});
+ toast(' 咔嚓！拍到了「'+name+'」'+(G.photos.length)+'张','ach');
+ checkAchievements();
+ }else{
+ toast(' 手抖了一下，没拍好……');
+ }
+ saveGame();
 }
 /* 餐车 */
 function openDining(){
-  const body=document.getElementById('modal-body');
-  document.getElementById('modal-title').textContent='🍱 餐车点餐';
-  let s='<ul class="meal-list">';
-  for(const m of DINING_MENU){
-    const soldOut=Math.random()<0.18;
-    s+=`<li><div><div class="mn">${m.n}</div><div class="ms">${m.d}</div></div><div><span class="mp">${fmtMoney(m.p)}</span> ${soldOut?'<span style="color:var(--red);font-size:.78em">售罄</span>':`<button class="btn small gold" onclick="buyMeal('${m.n}',${m.p})">购买</button>`}</div></li>`;
-  }
-  s+='</ul><div class="small-note">余额：'+fmtMoney(G.money)+'</div>';
-  body.innerHTML=s;
-  document.getElementById('modal-bg').classList.remove('hidden');
+ const body=document.getElementById('modal-body');
+ document.getElementById('modal-title').textContent=' 餐车点餐';
+ let s='<ul class="meal-list">';
+ for(const m of DINING_MENU){
+ const soldOut=Math.random()<0.18;
+ s+=`<li><div><div class="mn">${m.n}</div><div class="ms">${m.d}</div></div><div><span class="mp">${fmtMoney(m.p)}</span> ${soldOut?'<span style="color:var(--red);font-size:.78em">售罄</span>':`<button class="btn small gold" onclick="buyMeal('${m.n}',${m.p})">购买</button>`}</div></li>`;
+ }
+ s+='</ul><div class="small-note">余额：'+fmtMoney(G.money)+'</div>';
+ body.innerHTML=s;
+ document.getElementById('modal-bg').classList.remove('hidden');
 }
 function buyMeal(n,p){
-  if(G.money<p){toast('余额不足','err');return;}
-  G.money-=p; G.meals++;
-  toast('🍱 购买了 '+n+'，花掉 '+fmtMoney(p));
-  checkAchievements(); saveGame();
-  renderTripTopMoney();
-  openDining();
+ if(G.money<p){toast('余额不足','err');return;}
+ G.money-=p; G.meals++;
+ toast(' 购买了 '+n+'，花掉 '+fmtMoney(p));
+ checkAchievements(); saveGame();
+ renderTripTopMoney();
+ openDining();
 }
 function renderTripTopMoney(){ /* 顶部不显示金钱，无需处理 */ }
 /* 到站结算 */
 function settleTrip(manual){
-  const t=TRIP;
-  if(!t)return;
-  TRIP=null;
-  const km=Math.round(t.curKm);
-  const arrivalTime=minToTime(Math.round(t.curMin));
-  const to=manual?lastPassedStation(t):t.to;
-  const rec={
-    no:t.no, cls:t.cls, from:t.from, to,
-    lines:coverLines(t.stops), km, seat:t.seat, cost:t.price,
-    date:new Date().toLocaleString('zh-CN'),
-    time:arrivalTime,
-  };
-  G.rides.push(rec);
-  G.totalKm+=km;
-  G.stationsVisited.add(rec.from); G.stationsVisited.add(rec.to);
-  G.trainsTaken.add(t.no);
-  for(const lk of rec.lines) G.linesRidden.add(lk);
-  G.seatsTaken.add(t.seat);
-  // 夜行者
-  if(isNightTime(t.depMin)||isNightTime(t.arrMin)||crossesNight(t.depMin,t.arrMin)) G.nights++;
-  checkAchievements();
-  saveGame();
-  closeTrip();
-  // 结算弹窗
-  const body=document.getElementById('modal-body');
-  document.getElementById('modal-title').textContent='🚉 到站结算';
-  body.innerHTML=`<div class="settle-box">
-    <div class="photo-badge">🚄</div>
-    <div class="big">${rec.no} · ${rec.from} → ${to}</div>
-    <div class="line">${t.cls}${t.no} · ${t.seat} · 用时约 ${t.durMin} 分钟<br>本次里程：<b style="color:var(--gold)">${km} km</b> · 票价 ${fmtMoney(t.price)}<br>到达时刻：${arrivalTime}</div>
-    <button class="btn primary block" onclick="closeModal()">继续旅程</button>
-  </div>`;
-  document.getElementById('modal-bg').classList.remove('hidden');
-  announce('旅客们，本次列车已经到达 '+rec.to+' 站。感谢您乘坐本次列车，祝您旅途愉快！');
-  playTone(true);
-  renderAll();
+ const t=TRIP;
+ if(!t)return;
+ TRIP=null;
+ const km=Math.round(t.curKm);
+ const arrivalTime=minToTime(Math.round(t.curMin));
+ const to=manual?lastPassedStation(t):t.to;
+ const rec={
+ no:t.no, cls:t.cls, from:t.from, to,
+ lines:coverLines(t.stops), km, seat:t.seat, cost:t.price,
+ date:new Date().toLocaleString('zh-CN'),
+ time:arrivalTime,
+ };
+ G.rides.push(rec);
+ G.totalKm+=km;
+ G.stationsVisited.add(rec.from); G.stationsVisited.add(rec.to);
+ G.trainsTaken.add(t.no);
+ for(const lk of rec.lines) G.linesRidden.add(lk);
+ G.seatsTaken.add(t.seat);
+ // 夜行者
+ if(isNightTime(t.depMin)||isNightTime(t.arrMin)||crossesNight(t.depMin,t.arrMin)) G.nights++;
+ checkAchievements();
+ saveGame();
+ closeTrip();
+ // 结算弹窗
+ const body=document.getElementById('modal-body');
+ document.getElementById('modal-title').textContent=' 到站结算';
+ body.innerHTML=`<div class="settle-box">
+ <div class="photo-badge"></div>
+ <div class="big">${rec.no} · ${rec.from} → ${to}</div>
+ <div class="line">${t.cls}${t.no} · ${t.seat} · 用时约 ${t.durMin} 分钟<br>本次里程：<b style="color:var(--gold)">${km} km</b> · 票价 ${fmtMoney(t.price)}<br>到达时刻：${arrivalTime}</div>
+ <button class="btn primary block" onclick="closeModal()">继续旅程</button>
+ </div>`;
+ document.getElementById('modal-bg').classList.remove('hidden');
+ announce('旅客们，本次列车已经到达 '+rec.to+' 站。感谢您乘坐本次列车，祝您旅途愉快！');
+ playTone(true);
+ renderAll();
 }
 function coverLines(stops){
-  const set=new Set();
-  for(const n of stops){ const st=STATIONS[n]; if(st) for(const lk of st.lines) set.add(lk); }
-  return [...set];
+ const set=new Set();
+ for(const n of stops){ const st=STATIONS[n]; if(st) for(const lk of st.lines) set.add(lk); }
+ return [...set];
 }
 function lastPassedStation(t){
-  let best=t.from, bestKm=Infinity;
-  for(let i=0;i<t.stops.length;i++){
-    const d=Math.abs(t.curKm-t.cumKms[i]);
-    if(d<bestKm && t.cumKms[i]<=t.curKm+0.5){ bestKm=d; best=t.stops[i]; }
-  }
-  return best;
+ let best=t.from, bestKm=Infinity;
+ for(let i=0;i<t.stops.length;i++){
+ const d=Math.abs(t.curKm-t.cumKms[i]);
+ if(d<bestKm && t.cumKms[i]<=t.curKm+0.5){ bestKm=d; best=t.stops[i]; }
+ }
+ return best;
 }
 function crossesNight(dep,arr){
-  // dep/arr 为分钟；若区间长度或端点覆盖 21:00-5:00
-  let d=dep,a=arr;
-  if(a<d)a+=1440;
-  for(let m=d;m<=a;m+=60){
-    const mm=m%1440;
-    if(mm>=1260||mm<300)return true;
-  }
-  return false;
+ // dep/arr 为分钟；若区间长度或端点覆盖 21:00-5:00
+ let d=dep,a=arr;
+ if(a<d)a+=1440;
+ for(let m=d;m<=a;m+=60){
+ const mm=m%1440;
+ if(mm>=1260||mm<300)return true;
+ }
+ return false;
 }
 function closeTrip(){
-  document.getElementById('trip-screen').classList.add('hidden');
-  document.getElementById('line-panel').parentElement.parentElement.style.display='';
-  document.getElementById('topbar').style.display='';
-  if(rafId){ try{cancelAnimationFrame(rafId);}catch(e){clearInterval(rafId);} }
-  rafId=null;
+ document.getElementById('trip-screen').classList.add('hidden');
+ document.getElementById('line-panel').parentElement.parentElement.style.display='';
+ document.getElementById('topbar').style.display='';
+ if(rafId){ try{cancelAnimationFrame(rafId);}catch(e){clearInterval(rafId);} }
+ rafId=null;
 }
 /* =====================================================
-   手账 / 成就 / 设置
+ 手账 / 成就 / 设置
 ===================================================== */
 function openPanel(which){
-  document.getElementById('modal-title').textContent=which==='log'?'📔 旅程手账':(which==='ach'?'🏆 成就':'⚙️ 设置');
-  if(which==='log')renderLogTab();
-  else if(which==='ach')renderAchTab();
-  else renderSetTab();
-  document.getElementById('modal-bg').classList.remove('hidden');
+ document.getElementById('modal-title').textContent=which==='log'?' 旅程手账':(which==='ach'?' 成就':'⚙ 设置');
+ if(which==='log')renderLogTab();
+ else if(which==='ach')renderAchTab();
+ else renderSetTab();
+ document.getElementById('modal-bg').classList.remove('hidden');
 }
 function renderLogTab(){
-  const el=document.getElementById('modal-body');
-  if(!G.rides.length){
-    el.innerHTML='<div class="empty-tip">还没有乘车记录<br>去 🎫 订票页开启你的第一段高铁旅程吧！</div>';
-    return;
-  }
-  let s='<h3>📔 旅程手账</h3>';
-  for(const r of [...G.rides].reverse()){
-    s+=`<div class="log-item"><div class="no">${r.no} <span style="color:var(--faint);font-weight:normal;font-size:.78em">${(r.lines||[]).map(l=>l.replace('高速线','').replace('线','')).join('·')}</span></div><div class="rt">${r.from} → ${r.to}</div><div class="mt">${r.seat} · ${r.km}km · ${fmtMoney(r.cost)} · ${r.date}</div></div>`;
-  }
-  el.innerHTML=s;
+ const el=document.getElementById('modal-body');
+ if(!G.rides.length){
+ el.innerHTML='<div class="empty-tip">还没有乘车记录<br>去 订票页开启你的第一段高铁旅程吧！</div>';
+ return;
+ }
+ let s='<h3> 旅程手账</h3>';
+ for(const r of [...G.rides].reverse()){
+ s+=`<div class="log-item"><div class="no">${r.no} <span style="color:var(--faint);font-weight:normal;font-size:.78em">${(r.lines||[]).map(l=>l.replace('高速线','').replace('线','')).join('·')}</span></div><div class="rt">${r.from} → ${r.to}</div><div class="mt">${r.seat} · ${r.km}km · ${fmtMoney(r.cost)} · ${r.date}</div></div>`;
+ }
+ el.innerHTML=s;
 }
 function renderAchTab(){
-  const el=document.getElementById('modal-body');
-  const n=G.achievements.size;
-  let s=`<div class="overview">🏅 已解锁 <b style="color:var(--gold)">${n}</b>/16<br>📏 累计里程 <b style="color:var(--gold)">${G.totalKm}</b> km · 🚉 到访 <b style="color:var(--gold)">${G.stationsVisited.size}</b> 站<br>🚄 乘过 <b style="color:var(--gold)">${G.trainsTaken.size}</b> 个车次 · 🕸️ 覆盖 <b style="color:var(--gold)">${G.linesRidden.size}</b>/7 条线路<br>📷 照片 <b style="color:var(--gold)">${G.photos.length}</b> 张 · 🍱 餐车 <b style="color:var(--gold)">${G.meals}</b> 次</div>`;
-  s+='<h3>🏆 成就列表</h3><div class="ach-grid">';
-  for(const a of ACHIEVEMENTS){
-    const u=G.achievements.has(a.id);
-    s+=`<div class="ach-card ${u?'unlocked':''}"><div class="ic">${a.icon}</div><div class="at">${a.name}</div><div class="ad">${a.desc}</div><div class="rw">奖励 ${fmtMoney(a.reward)}</div></div>`;
-  }
-  s+='</div>';
-  el.innerHTML=s;
+ const el=document.getElementById('modal-body');
+ const n=G.achievements.size;
+ let s=`<div class="overview"> 已解锁 <b style="color:var(--gold)">${n}</b>/16<br> 累计里程 <b style="color:var(--gold)">${G.totalKm}</b> km · 到访 <b style="color:var(--gold)">${G.stationsVisited.size}</b> 站<br> 乘过 <b style="color:var(--gold)">${G.trainsTaken.size}</b> 个车次 · 覆盖 <b style="color:var(--gold)">${G.linesRidden.size}</b>/7 条线路<br> 照片 <b style="color:var(--gold)">${G.photos.length}</b> 张 · 餐车 <b style="color:var(--gold)">${G.meals}</b> 次</div>`;
+ s+='<h3> 成就列表</h3><div class="ach-grid">';
+ for(const a of ACHIEVEMENTS){
+ const u=G.achievements.has(a.id);
+ s+=`<div class="ach-card ${u?'unlocked':''}"><div class="ic">${a.icon}</div><div class="at">${a.name}</div><div class="ad">${a.desc}</div><div class="rw">奖励 ${fmtMoney(a.reward)}</div></div>`;
+ }
+ s+='</div>';
+ el.innerHTML=s;
 }
 function renderSetTab(){
-  const el=document.getElementById('modal-body');
-  el.innerHTML=`<h3>⚙️ 设置</h3>
-  <div class="set-row"><div><div class="lb">🔊 报站语音</div><div class="ds">用浏览器中文语音播报车站信息（需浏览器支持）</div></div><button class="toggle ${G.settings.voice?'on':''}" onclick="toggleVoice()"></button></div>
-  <div class="set-row"><div><div class="lb">💰 重置进度</div><div class="ds">清空所有旅程记录与成就，重新开始</div></div><button class="btn danger" onclick="resetGame()">重置</button></div>
-  <div class="small-note">游戏进度自动保存在浏览器 localStorage。<br>线路数据基于公开铁路站序资料整理，共 7 条高铁线路、107 座车站。</div>`;
+ const el=document.getElementById('modal-body');
+ el.innerHTML=`<h3>⚙ 设置</h3>
+ <div class="set-row"><div><div class="lb"> 报站语音</div><div class="ds">用浏览器中文语音播报车站信息（需浏览器支持）</div></div><button class="toggle ${G.settings.voice?'on':''}" onclick="toggleVoice()"></button></div>
+ <div class="set-row"><div><div class="lb"> 重置进度</div><div class="ds">清空所有旅程记录与成就，重新开始</div></div><button class="btn danger" onclick="resetGame()">重置</button></div>
+ <div class="small-note">游戏进度自动保存在浏览器 localStorage。<br>线路数据基于公开铁路站序资料整理，共 7 条高铁线路、107 座车站。</div>`;
 }
 function toggleVoice(){
-  G.settings.voice=!G.settings.voice;
-  saveGame();
-  renderSetTab();
+ G.settings.voice=!G.settings.voice;
+ saveGame();
+ renderSetTab();
 }
 function checkAchievements(){
-  if(!G)return;
-  let newN=0;
-  for(const a of ACHIEVEMENTS){
-    if(G.achievements.has(a.id))continue;
-    try{
-      if(a.check(G)){
-        G.achievements.add(a.id);
-        G.money+=a.reward;
-        newN++;
-        toast('🏆 成就解锁：【'+a.name+'】 +'+fmtMoney(a.reward),'ach');
-        playTone(true);
-      }
-    }catch(e){console.error('ach',a.id,e);}
-  }
-  if(newN){renderAll();saveGame();}
+ if(!G)return;
+ let newN=0;
+ for(const a of ACHIEVEMENTS){
+ if(G.achievements.has(a.id))continue;
+ try{
+ if(a.check(G)){
+ G.achievements.add(a.id);
+ G.money+=a.reward;
+ newN++;
+ toast(' 成就解锁：【'+a.name+'】 +'+fmtMoney(a.reward),'ach');
+ playTone(true);
+ }
+ }catch(e){console.error('ach',a.id,e);}
+ }
+ if(newN){renderAll();saveGame();}
 }
 /* =====================================================
-   护照视图（首页/护照/足迹/荣誉/排行/旅程）
+ 护照视图（首页/护照/足迹/荣誉/排行/旅程）
 ===================================================== */
 /* 普速线路（模拟数据，站序真实） */
 const PS_LINES=[
-  {key:'京沪线',grp:'ps',color:'#607d8b',bias:.8,stations:['北京站','北京南站','黄村站','天津西站','德州站','济南','泰山','磁窑','兖州','枣庄西','徐州站','蚌埠站','南京站','镇江站','丹阳站','常州站','无锡站','苏州站','上海站']},
-  {key:'京广线',grp:'ps',color:'#8d6e63',bias:.6,stations:['北京西站','良乡站','石家庄站','邯郸站','新乡','郑州','漯河','信阳','汉口站','武昌','株洲','衡阳','韶关东','广州']},
-  {key:'京九线',grp:'ps',color:'#795548',bias:.55,stations:['北京西站','霸州站','衡水站','聊城','菏泽','商丘','阜阳站','潢川','麻城','九江','南昌西','吉安','赣州','龙川','深圳']},
-  {key:'陇海线',grp:'ps',color:'#5d4037',bias:.45,stations:['连云港东站','徐州站','商丘','开封','郑州','洛阳东','华山','西安','咸阳','宝鸡','天水','兰州东']},
-  {key:'兰新线',grp:'ps',color:'#546e7a',bias:.35,stations:['兰州','武威南','金昌','张掖','酒泉','嘉峪关','柳园','哈密','吐鲁番','乌鲁木齐']},
-  {key:'哈大线',grp:'ps',color:'#3e7cb1',bias:.7,stations:['哈尔滨','长春','四平','沈阳北','辽阳','海城','大石桥','金州','大连北']},
-  {key:'沪昆线',grp:'ps',color:'#b8860b',bias:.6,stations:['上海站','杭州东站','诸暨站','义乌站','金华站','衢州站','上饶','鹰潭','醴陵','株洲','娄底','怀化','贵阳','六盘水','昆明']},
-  {key:'滨洲线',grp:'ps',color:'#4d7c5f',bias:.3,stations:['哈尔滨','大庆西','昂昂溪','博克图','牙克石','满洲里']},
+ {key:'京沪线',grp:'ps',color:'#607d8b',bias:.8,stations:['北京站','北京南站','黄村站','天津西站','德州站','济南','泰山','磁窑','兖州','枣庄西','徐州站','蚌埠站','南京站','镇江站','丹阳站','常州站','无锡站','苏州站','上海站']},
+ {key:'京广线',grp:'ps',color:'#8d6e63',bias:.6,stations:['北京西站','良乡站','石家庄站','邯郸站','新乡','郑州','漯河','信阳','汉口站','武昌','株洲','衡阳','韶关东','广州']},
+ {key:'京九线',grp:'ps',color:'#795548',bias:.55,stations:['北京西站','霸州站','衡水站','聊城','菏泽','商丘','阜阳站','潢川','麻城','九江','南昌西','吉安','赣州','龙川','深圳']},
+ {key:'陇海线',grp:'ps',color:'#5d4037',bias:.45,stations:['连云港东站','徐州站','商丘','开封','郑州','洛阳东','华山','西安','咸阳','宝鸡','天水','兰州东']},
+ {key:'兰新线',grp:'ps',color:'#546e7a',bias:.35,stations:['兰州','武威南','金昌','张掖','酒泉','嘉峪关','柳园','哈密','吐鲁番','乌鲁木齐']},
+ {key:'哈大线',grp:'ps',color:'#3e7cb1',bias:.7,stations:['哈尔滨','长春','四平','沈阳北','辽阳','海城','大石桥','金州','大连北']},
+ {key:'沪昆线',grp:'ps',color:'#b8860b',bias:.6,stations:['上海站','杭州东站','诸暨站','义乌站','金华站','衢州站','上饶','鹰潭','醴陵','株洲','娄底','怀化','贵阳','六盘水','昆明']},
+ {key:'滨洲线',grp:'ps',color:'#4d7c5f',bias:.3,stations:['哈尔滨','大庆西','昂昂溪','博克图','牙克石','满洲里']},
 ];
 /* 站名→省份（用于足迹统计） */
 const PROV_MAP={'北京南':'北京','廊坊':'河北','天津西':'天津','天津南':'天津','沧州西':'河北','德州东':'山东','济南西':'山东','泰安':'山东','枣庄':'山东','徐州东':'江苏','宿州东':'安徽','蚌埠南':'安徽','滁州':'安徽','南京南':'江苏','镇江南':'江苏','常州北':'江苏','无锡东':'江苏','苏州北':'江苏','上海虹桥':'上海','北京丰台':'北京','保定东':'河北','石家庄':'河北','邢台东':'河北','邯郸东':'河北','安阳东':'河南','鹤壁东':'河南','新乡东':'河南','郑州东':'河南','许昌东':'河南','漯河西':'河南','驻马店西':'河南','信阳东':'河南','孝感北':'湖北','武汉':'湖北','咸宁北':'湖北','岳阳东':'湖南','长沙南':'湖南','株洲西':'湖南','衡阳东':'湖南','郴州西':'湖南','韶关':'广东','清远':'广东','广州北':'广东','广州南':'广东','北京朝阳':'北京','承德南':'河北','朝阳':'辽宁','阜新':'辽宁','沈阳西':'辽宁','哈尔滨西':'黑龙江','长春西':'吉林','四平东':'吉林','铁岭西':'辽宁','沈阳北':'辽宁','沈阳':'辽宁','沈阳南':'辽宁','辽阳':'辽宁','鞍山西':'辽宁','营口东':'辽宁','大连北':'辽宁','商丘':'河南','开封北':'河南','郑州西':'河南','洛阳龙门':'河南','三门峡南':'河南','渭南北':'陕西','西安北':'陕西','咸阳西':'陕西','宝鸡南':'陕西','天水南':'甘肃','定西北':'甘肃','兰州西':'甘肃','嘉兴南':'浙江','杭州南':'浙江','金华':'浙江','衢州':'浙江','上饶':'江西','鹰潭北':'江西','抚州东':'江西','南昌西':'江西','新余北':'江西','宜春':'江西','萍乡北':'江西','湘潭北':'湖南','娄底南':'湖南','邵阳北':'湖南','怀化南':'湖南','铜仁南':'贵州','贵阳东':'贵州','贵阳北':'贵州','安顺西':'贵州','曲靖北':'云南','昆明南':'云南','杭州东':'浙江','绍兴北':'浙江','宁波':'浙江','台州西':'浙江','温州南':'浙江','宁德':'福建','福州南':'福建','莆田':'福建','泉州':'福建','厦门北':'福建','漳州':'福建','潮汕':'广东','汕尾':'广东','深圳北':'广东','北京站':'北京','北京南站':'北京','黄村站':'北京','天津西站':'天津','德州站':'山东','济南':'山东','泰山':'山东','磁窑':'山东','兖州':'山东','枣庄西':'山东','徐州站':'江苏','蚌埠站':'安徽','南京站':'江苏','镇江站':'江苏','丹阳站':'江苏','常州站':'江苏','无锡站':'江苏','苏州站':'江苏','上海站':'上海','北京西站':'北京','良乡站':'北京','石家庄站':'河北','邯郸站':'河北','新乡':'河南','郑州':'河南','漯河':'河南','信阳':'河南','汉口站':'湖北','武昌':'湖北','株洲':'湖南','衡阳':'湖南','韶关东':'广东','广州':'广东','霸州站':'河北','衡水站':'河北','聊城':'山东','菏泽':'山东','阜阳站':'安徽','潢川':'河南','麻城':'湖北','九江':'江西','南昌西':'江西','吉安':'江西','赣州':'江西','龙川':'广东','深圳':'广东','连云港东站':'江苏','开封':'河南','洛阳东':'河南','华山':'陕西','西安':'陕西','咸阳':'陕西','宝鸡':'陕西','天水':'甘肃','兰州':'甘肃','武威南':'甘肃','金昌':'甘肃','张掖':'甘肃','酒泉':'甘肃','嘉峪关':'甘肃','柳园':'甘肃','哈密':'新疆','吐鲁番':'新疆','乌鲁木齐':'新疆','哈尔滨':'黑龙江','大庆西':'黑龙江','长春':'吉林','四平':'吉林','沈阳北':'辽宁','海城':'辽宁','大石桥':'辽宁','金州':'辽宁','大连北':'辽宁','杭州东站':'浙江','诸暨站':'浙江','义乌站':'浙江','金华站':'浙江','衢州站':'浙江','鹰潭':'江西','醴陵':'湖南','娄底':'湖南','怀化':'湖南','贵阳':'贵州','六盘水':'贵州','昆明':'云南','昂昂溪':'内蒙古','博克图':'内蒙古','牙克石':'内蒙古','满洲里':'内蒙古'};
 function provOf(n){return PROV_MAP[n]||'其他';}
+/* ============ 铁路局体系（18 个铁路局集团公司，站归属按公开资料整理） ============ */
+const BUREAUS=[
+ {name:'北京局',short:'京局',center:'北京南',stations:['北京南','北京丰台','北京朝阳','廊坊','天津西','天津南','沧州西','保定东','石家庄','邢台东','邯郸东','承德南']},
+ {name:'济南局',short:'济局',center:'济南西',stations:['济南西','泰安','枣庄','德州东']},
+ {name:'上海局',short:'上局',center:'上海虹桥',stations:['上海虹桥','徐州东','宿州东','蚌埠南','滁州','南京南','镇江南','常州北','无锡东','苏州北','昆山南','杭州东','绍兴北','宁波','台州西','温州南','嘉兴南','杭州南','金华','衢州']},
+ {name:'南昌局',short:'南局',center:'南昌西',stations:['南昌西','上饶','鹰潭北','抚州东','新余北','宜春','萍乡北','福州南','莆田','泉州','厦门北','漳州','宁德']},
+ {name:'广州局',short:'广局',center:'广州南',stations:['广州南','广州北','深圳北','韶关','清远','潮汕','汕尾','长沙南','株洲西','衡阳东','郴州西','岳阳东','怀化南']},
+ {name:'武汉局',short:'武局',center:'武汉',stations:['武汉','咸宁北','孝感北','信阳东']},
+ {name:'郑州局',short:'郑局',center:'郑州东',stations:['郑州东','安阳东','鹤壁东','新乡东','许昌东','漯河西','驻马店西','商丘','开封北','郑州西','洛阳龙门','三门峡南']},
+ {name:'西安局',short:'西局',center:'西安北',stations:['西安北','渭南北','咸阳西','宝鸡南']},
+ {name:'兰州局',short:'兰局',center:'兰州西',stations:['兰州西','天水南','定西北']},
+ {name:'成都局',short:'成局',center:'贵阳北',stations:['贵阳东','贵阳北','安顺西','铜仁南']},
+ {name:'昆明局',short:'昆局',center:'昆明南',stations:['昆明南','曲靖北']},
+ {name:'沈阳局',short:'沈局',center:'沈阳',stations:['沈阳','沈阳南','沈阳北','沈阳西','铁岭西','辽阳','鞍山西','营口东','朝阳','阜新','长春西','四平东','大连北']},
+ {name:'哈尔滨局',short:'哈局',center:'哈尔滨西',stations:['哈尔滨西']},
+ {name:'太原局',short:'太局',center:'太原南',stations:[]},
+ {name:'呼和浩特局',short:'呼局',center:'呼和浩特东',stations:[]},
+ {name:'南宁局',short:'宁局',center:'南宁东',stations:[]},
+ {name:'乌鲁木齐局',short:'乌局',center:'乌鲁木齐',stations:[]},
+ {name:'青藏集团',short:'青藏',center:'西宁',stations:[]},
+];
+const STATION_BUREAU={};
+BUREAUS.forEach(b=>b.stations.forEach(s=>STATION_BUREAU[s]=b.name));
+function bureauOf(st){return STATION_BUREAU[st]||'其他';}
+function bureauCenterPos(name){
+ const b=BUREAUS.find(x=>x.name===name);
+ if(!b)return null;
+ return {station:b.center, lat:RAIL.stations[b.center]?RAIL.stations[b.center].lat:null, lon:RAIL.stations[b.center]?RAIL.stations[b.center].lon:null};
+}
 /* 普速线模拟打卡（固定种子） */
 let psSeed=20260820;
 function psRnd(){psSeed=(psSeed*1103515245+12345)%2147483648;return psSeed/2147483648;}
 PS_LINES.forEach(L=>{
-  L.state={};
-  L.stations.forEach((n,i)=>{
-    const r=psRnd();
-    L.state[n]=(i===0||i===L.stations.length-1)?(r<L.bias+0.1?'v':'p'):(r<L.bias?'v':(r<L.bias+0.25?'p':'u'));
-  });
+ L.state={};
+ L.stations.forEach((n,i)=>{
+ const r=psRnd();
+ L.state[n]=(i===0||i===L.stations.length-1)?(r<L.bias+0.1?'v':'p'):(r<L.bias?'v':(r<L.bias+0.25?'p':'u'));
+ });
 });
 const ALL_LINES=[...Object.keys(LINES).map(k=>({key:k,grp:'hs',color:LINES[k].color,stations:LINES[k].stations.map(s=>s.name)})),...PS_LINES];
 function lineState(L,name){
-  if(L.grp==='hs'){
-    if(G.stationsVisited.has(name))return 'v';
-    if(G.passedStations&&G.passedStations[name])return 'p';
-    return 'u';
-  }
-  return L.state[name];
+ if(L.grp==='hs'){
+ if(G.stationsVisited.has(name))return 'v';
+ if(G.passedStations&&G.passedStations[name])return 'p';
+ return 'u';
+ }
+ return L.state[name];
 }
 function lineVisCount(L){ return L.stations.filter(n=>lineState(L,n)==='v').length; }
 /* 称号 */
 function getBadge(){
-  const n=G.stationsVisited.size;
-  if(n>=300)return {ic:'🏆',name:'铁路大师',req:'300 站'};
-  if(n>=200)return {ic:'💎',name:'铁路收藏家',req:'200 站'};
-  if(n>=100)return {ic:'🥇',name:'铁路达人',req:'100 站'};
-  if(n>=50)return {ic:'🥈',name:'铁路旅人',req:'50 站'};
-  if(n>=10)return {ic:'🥉',name:'铁轨行者',req:'10 站'};
-  return {ic:'🚶',name:'新手上路',req:'10 站'};
+ const n=G.stationsVisited.size;
+ if(n>=300)return {ic:'',name:'铁路大师',req:'300 站'};
+ if(n>=200)return {ic:'',name:'铁路收藏家',req:'200 站'};
+ if(n>=100)return {ic:'',name:'铁路达人',req:'100 站'};
+ if(n>=50)return {ic:'',name:'铁路旅人',req:'50 站'};
+ if(n>=10)return {ic:'',name:'铁轨行者',req:'10 站'};
+ return {ic:'',name:'新手上路',req:'10 站'};
 }
 /* 荣誉 / 里程碑 */
 function honorList(){
-  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
-  return [
-    {ic:'🥉',name:'铁轨行者',req:'10 站',got:n>=10},
-    {ic:'🥈',name:'铁路旅人',req:'50 站',got:n>=50},
-    {ic:'🥇',name:'铁路达人',req:'100 站',got:n>=100},
-    {ic:'💎',name:'铁路收藏家',req:'集齐 5 线',got:done>=5,prog:done+'/5线'},
-    {ic:'🏅',name:'铁路通',req:'集齐 10 线',got:done>=10,prog:done+'/10线'},
-    {ic:'🏆',name:'铁路大师',req:'300 站',got:n>=300,prog:n+'/300'},
-    {ic:'👑',name:'铁道传奇',req:'全部线路',got:done>=ALL_LINES.length,prog:done+'/'+ALL_LINES.length+'线'},
-  ];
+ const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+ return [
+ {ic:'',name:'铁轨行者',req:'10 站',got:n>=10},
+ {ic:'',name:'铁路旅人',req:'50 站',got:n>=50},
+ {ic:'',name:'铁路达人',req:'100 站',got:n>=100},
+ {ic:'',name:'铁路收藏家',req:'集齐 5 线',got:done>=5,prog:done+'/5线'},
+ {ic:'',name:'铁路通',req:'集齐 10 线',got:done>=10,prog:done+'/10线'},
+ {ic:'',name:'铁路大师',req:'300 站',got:n>=300,prog:n+'/300'},
+ {ic:'',name:'铁道传奇',req:'全部线路',got:done>=ALL_LINES.length,prog:done+'/'+ALL_LINES.length+'线'},
+ ];
 }
 function mileList(){
-  const done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
-  const n=G.stationsVisited.size;
-  return [
-    {ic:'🎖️',name:'首站打卡',ok:G.stationsVisited.size>0},
-    {ic:'🏅',name:'首线集齐',ok:done>=1},
-    {ic:'🥉',name:'集齐 3 线',ok:done>=3,prog:done+'/3'},
-    {ic:'💎',name:'集齐 5 线',ok:done>=5,prog:done+'/5'},
-    {ic:'🏆',name:'集齐 10 线',ok:done>=10,prog:done+'/10'},
-    {ic:'👑',name:'全部线路',ok:done>=ALL_LINES.length,prog:done+'/'+ALL_LINES.length},
-    {ic:'🗺️',name:'打卡 300 站',ok:n>=300,prog:n+'/300'},
-  ];
+ const done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+ const n=G.stationsVisited.size;
+ return [
+ {ic:'',name:'首站打卡',ok:G.stationsVisited.size>0},
+ {ic:'',name:'首线集齐',ok:done>=1},
+ {ic:'',name:'集齐 3 线',ok:done>=3,prog:done+'/3'},
+ {ic:'',name:'集齐 5 线',ok:done>=5,prog:done+'/5'},
+ {ic:'',name:'集齐 10 线',ok:done>=10,prog:done+'/10'},
+ {ic:'',name:'全部线路',ok:done>=ALL_LINES.length,prog:done+'/'+ALL_LINES.length},
+ {ic:'',name:'打卡 300 站',ok:n>=300,prog:n+'/300'},
+ ];
 }
 /* 排行（模拟数据） */
 const FRIENDS=[
-  {nick:'环渤海车迷',km:9870,vis:301,done:5,prov:12,me:false},
-  {nick:'绿皮车情怀',km:5120,vis:198,done:2,prov:9,me:false},
-  {nick:'你',km:4680,vis:0,done:0,prov:0,me:true},
-  {nick:'京九铁道',km:3320,vis:128,done:2,prov:7,me:false},
-  {nick:'沪昆走遍',km:4210,vis:112,done:1,prov:6,me:false},
-  {nick:'夜行列车长',km:2980,vis:96,done:0,prov:5,me:false},
-  {nick:'慢车爱好者',km:1560,vis:54,done:0,prov:3,me:false},
-  {nick:'铁轨收藏家',km:880,vis:23,done:0,prov:2,me:false},
+ {nick:'环渤海车迷',km:9870,vis:301,done:5,prov:12,me:false},
+ {nick:'绿皮车情怀',km:5120,vis:198,done:2,prov:9,me:false},
+ {nick:'你',km:4680,vis:0,done:0,prov:0,me:true},
+ {nick:'京九铁道',km:3320,vis:128,done:2,prov:7,me:false},
+ {nick:'沪昆走遍',km:4210,vis:112,done:1,prov:6,me:false},
+ {nick:'夜行列车长',km:2980,vis:96,done:0,prov:5,me:false},
+ {nick:'慢车爱好者',km:1560,vis:54,done:0,prov:3,me:false},
+ {nick:'铁轨收藏家',km:880,vis:23,done:0,prov:2,me:false},
 ];
 const NATION=[
-  {nick:'纵横中国',km:38600,vis:412,done:12,prov:24},
-  {nick:'铁道传奇',km:31200,vis:398,done:11,prov:23},
-  {nick:'兰新守望者',km:27500,vis:355,done:10,prov:22},
-  {nick:'京广全程',km:24100,vis:322,done:9,prov:21},
-  {nick:'四纵四横',km:21800,vis:301,done:9,prov:20},
-  {nick:'天山行者',km:18900,vis:280,done:8,prov:19},
-  {nick:'南海之滨',km:16200,vis:251,done:7,prov:18},
-  {nick:'北国风光',km:14100,vis:244,done:7,prov:17},
-  {nick:'你',km:4680,vis:0,done:0,prov:0},
-  {nick:'蓉渝穿梭',km:13200,vis:228,done:6,prov:16},
+ {nick:'纵横中国',km:38600,vis:412,done:12,prov:24},
+ {nick:'铁道传奇',km:31200,vis:398,done:11,prov:23},
+ {nick:'兰新守望者',km:27500,vis:355,done:10,prov:22},
+ {nick:'京广全程',km:24100,vis:322,done:9,prov:21},
+ {nick:'四纵四横',km:21800,vis:301,done:9,prov:20},
+ {nick:'天山行者',km:18900,vis:280,done:8,prov:19},
+ {nick:'南海之滨',km:16200,vis:251,done:7,prov:18},
+ {nick:'北国风光',km:14100,vis:244,done:7,prov:17},
+ {nick:'你',km:4680,vis:0,done:0,prov:0},
+ {nick:'蓉渝穿梭',km:13200,vis:228,done:6,prov:16},
 ];
+/* ============ 模拟用户氛围层（架构：真实用户达阈值自动隐藏） ============ */
+const SIM_USER_THRESHOLD = 1000;        // 真实用户超过此数 → 隐藏全部模拟数据
+function realUserCount(){ return 0; }   // 后端接入后替换：返回真实注册用户数
+function simVisible(){ return realUserCount() < SIM_USER_THRESHOLD; }
+/* 全服累计（模拟，数值有逻辑：千级用户、百万里程） */
+const SIM_GLOBAL={users:3287, km:1284325, checkins:283761, lines:1245};
+/* 最近动态（模拟，用户-车站归属合理） */
+const SIM_FEED=[
+  {u:'环渤海车迷', station:'天津西', act:'到站打卡', ago:'3 分钟前'},
+  {u:'沪昆走遍', station:'南昌西', act:'到站打卡', ago:'7 分钟前'},
+  {u:'京九铁道', station:'赣州', act:'到站打卡', ago:'11 分钟前'},
+  {u:'绿皮车情怀', station:'长沙', act:'到站打卡', ago:'16 分钟前'},
+  {u:'天山行者', station:'兰州西', act:'到站打卡', ago:'24 分钟前'},
+  {u:'北国风光', station:'哈尔滨西', act:'到站打卡', ago:'31 分钟前'},
+  {u:'南海之滨', station:'深圳北', act:'到站打卡', ago:'42 分钟前'},
+  {u:'蓉渝穿梭', station:'贵阳北', act:'到站打卡', ago:'55 分钟前'},
+];
+/* 模拟好友足迹（用于"足迹重合"提示，归属合理） */
+const SIM_FRIEND_FOOT={ '环渤海车迷':['北京南','天津西','济南西','沈阳'], '绿皮车情怀':['北京站','郑州','长沙','广州'], '京九铁道':['北京西站','聊城','九江','赣州'], '沪昆走遍':['上海虹桥','南昌西','长沙南','昆明南'], '夜行列车长':['武汉','长沙南','广州南'], '慢车爱好者':['济南','徐州站','蚌埠站'] };
+
 /* ============ 视图切换 ============ */
 let curView='home', curRankTab='friend', passportSel=ALL_LINES.findIndex(L=>L.key==='京沪高速线');
 function showView(v){
-  curView=v;
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('sel',b.dataset.v===v));
-  document.querySelectorAll('.view').forEach(p=>p.classList.remove('show'));
-  const el=document.getElementById('view-'+v);
-  if(el)el.classList.add('show');
-  if(v==='home')renderHome();
-  else if(v==='passport')renderPassport();
-  else if(v==='footprint')renderFootprint();
-  else if(v==='honor')renderHonorView();
-  else if(v==='rank')renderRank();
-  else if(v==='log')renderLogView();
+ curView=v;
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('sel',b.dataset.v===v));
+ document.querySelectorAll('.view').forEach(p=>p.classList.remove('show'));
+ const el=document.getElementById('view-'+v);
+ if(el)el.classList.add('show');
+ if(v==='home')renderHome();
+ else if(v==='passport')renderPassport();
+ else if(v==='footprint')renderFootprint();
+ else if(v==='honor')renderHonorView();
+ else if(v==='rank')renderRank();
+ else if(v==='log')renderLogView();
 }
 /* ============ 首页：车站打卡墙 ============ */
 let checkinQuery='';
 function filterCheckin(v){checkinQuery=v;renderHome();}
 /* 真实位置：一次定位 → 全站距离 → 分层（到达/附近/路过） */
 function haversineKm(lat1,lon1,lat2,lon2){
-  const R=6371,toRad=x=>x*Math.PI/180;
-  const dLat=toRad(lat2-lat1),dLon=toRad(lon2-lon1);
-  const h=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
-  return 2*R*Math.asin(Math.sqrt(h));
+ const R=6371,toRad=x=>x*Math.PI/180;
+ const dLat=toRad(lat2-lat1),dLon=toRad(lon2-lon1);
+ const h=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+ return 2*R*Math.asin(Math.sqrt(h));
 }
 /* GPS 首次授权说明弹窗 */
 function openGpsExplain(){
-  document.getElementById('modal-title').textContent='📡 位置打卡 · 功能说明';
-  document.getElementById('modal-body').innerHTML=`
-    <div style="line-height:1.9;font-size:.93em">
-      <p style="color:var(--dim)">本功能用于<b style="color:var(--text)">铁路护照打卡</b>：检测你到达 / 经过的车站并自动盖章，让护照记录你的真实足迹。</p>
-      <div class="ok" style="margin:12px 0"><b>郑重说明：</b>
-        <p>· 不会收集你的隐私，不做任何位置追踪或侦查</p>
-        <p>· 当前为演示版（模拟数据），后台尚未打通</p>
-        <p>· 你在使用期间持续授权，定位匹配会越来越精准</p>
-        <p>· 可随时在浏览器设置中关闭定位权限</p>
-      </div>
-      <button class="btn primary block" onclick="consentGps()">✅ 同意并授权定位</button>
-      <button class="btn block" style="margin-top:8px" onclick="closeModal()">暂不</button>
-    </div>`;
-  document.getElementById('modal-bg').classList.remove('hidden');
+ document.getElementById('modal-title').textContent=' 位置打卡 · 功能说明';
+ document.getElementById('modal-body').innerHTML=`
+ <div style="line-height:1.9;font-size:.93em">
+ <p style="color:var(--dim)">本功能用于<b style="color:var(--text)">铁路护照打卡</b>：检测你到达 / 经过的车站并自动盖章，让护照记录你的真实足迹。</p>
+ <div class="ok" style="margin:12px 0"><b>郑重说明：</b>
+ <p>· 不会收集你的隐私，不做任何位置追踪或侦查</p>
+ <p>· 当前为演示版（模拟数据），后台尚未打通</p>
+ <p>· 你在使用期间持续授权，定位匹配会越来越精准</p>
+ <p>· 可随时在浏览器设置中关闭定位权限</p>
+ </div>
+ <button class="btn primary block" onclick="consentGps()">✅ 同意并授权定位</button>
+ <button class="btn block" style="margin-top:8px" onclick="closeModal()">暂不</button>
+ </div>`;
+ document.getElementById('modal-bg').classList.remove('hidden');
 }
 function consentGps(){
-  try{localStorage.setItem('railGpsConsent','1');}catch(e){}
-  closeModal();
-  checkinByGPS();
+ try{localStorage.setItem('railGpsConsent','1');}catch(e){}
+ closeModal();
+ checkinByGPS();
+}
+/* ============ 铁路局选择（首次进入） ============ */
+function showBureauPicker(){
+ document.getElementById('modal-title').textContent='选择你的所在铁路局';
+ document.getElementById('modal-body').innerHTML=`
+ <p style="color:var(--dim);font-size:.88em;margin-bottom:10px">选择后，我们将按该局中心站推断你的大致位置，生成第一版"到各站距离"数据；之后你授权定位会更精准，<b style="color:var(--text)">真实定位会自动替换推断数据</b>。</p>
+ <div class="bureau-grid">${BUREAUS.map((b,i)=>`<button class="bureau-btn" onclick="pickBureau('${b.name}')">${b.name}<small>${b.short} · ${b.stations.length>0?b.stations.length+' 站':'待补'}</small></button>`).join('')}</div>
+ <div class="small-note" style="margin-top:10px">铁路局→车站归属按公开资料整理（部分边界站可能存在归属差异）· 本选择仅用于距离推断，不采集真实位置</div>`;
+ document.getElementById('modal-bg').classList.remove('hidden');
+}
+function pickBureau(name){
+ G.bureau=name;
+ const pos=bureauCenterPos(name);
+ if(pos&&pos.lat) G.bureauCenter={station:pos.station,lat:pos.lat,lon:pos.lon};
+ saveGame();
+ closeModal();
+ toast('已选择'+name+' · 默认位置：'+(pos?pos.station:'该局中心站')+'（授权定位后可自动替换）','ach');
+ renderHome(); renderFootprint();
 }
 function checkinByGPS(){
-  if(!localStorage.getItem('railGpsConsent')){
-    openGpsExplain();
-    return;
-  }
-  const btn=document.getElementById('gps-btn');
-  /* 环境检查：定位需要安全上下文（HTTPS 或本机） */
-  if(!('geolocation' in navigator) || (window.isSecureContext===false && !/^https:|^http:\/\/(localhost|127\.0\.0\.1)/.test(location.href))){
-    btn.textContent='📡 位置扫描 · 当前环境不支持（需 HTTPS），点车站手动打卡';
-    toast('当前环境不支持定位（需 HTTPS 或本机访问），可点击车站手动打卡','err');
-    return;
-  }
-  btn.classList.add('busy'); btn.textContent='📡 扫描中…（计算全站距离）';
-  try{
-    navigator.geolocation.getCurrentPosition(
-    pos=>{
-      btn.classList.remove('busy'); btn.classList.add('on');
-      btn.textContent='📡 位置扫描 · 已开启';
-      const lat=pos.coords.latitude, lon=pos.coords.longitude, now=new Date();
-      /* 一次定位 → 计算到全部车站的距离 */
-      const dists=[];
-      for(const name in RAIL.stations){
-        const st=RAIL.stations[name];
-        if(!st||!st.lat)continue;
-        dists.push({name, km:haversineKm(lat,lon,st.lat,st.lon)});
-      }
-      dists.sort((a,b)=>a.km-b.km);
-      const arrived=dists.filter(d=>d.km<0.15);      // 到达：站内
-      const nearby=dists.filter(d=>d.km>=0.15&&d.km<1); // 附近 1km
-      const passed=dists.filter(d=>d.km>=1&&d.km<10);   // 路过 10km
-      /* 到达自动打卡 */
-      if(arrived.length){
-        for(const d of arrived) doCheckin(d.name);
-        toast('📍 已到达车站：'+arrived.map(d=>d.name+'（'+d.km.toFixed(2)+'km）').join('、')+' · 自动打卡');
-      }
-      /* 路过记录（灰章） */
-      let passCnt=0;
-      for(const d of passed){
-        if(!G.passedStations[d.name]&&!G.stationsVisited.has(d.name)){
-          G.passedStations[d.name]={km:Math.round(d.km*10)/10, time:now.toLocaleString('zh-CN')};
-          passCnt++;
-        }
-      }
-      if(passCnt>0){ saveGame(); renderHome(); renderPassport(); }
-      if(passed.length) toast('🚉 路过 '+passed.length+' 个车站（10km 内）：'+passed.slice(0,3).map(d=>d.name).join('、')+(passed.length>3?' 等':'')+' · 已记入灰章');
-      /* 雷达视图 */
-      document.getElementById('gps-radar').innerHTML=
-        '<div class="radar-title">📡 当前位置距离雷达（'+lat.toFixed(4)+', '+lon.toFixed(4)+'）· '+now.toLocaleTimeString('zh-CN')+'</div>'
-        +(arrived.length?'<div class="radar-sec ok"><b>🟢 到达（站内 &lt;150m）：</b>'+arrived.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(2)+'km</span>').join('')+'</div>':'')
-        +(nearby.length?'<div class="radar-sec"><b>🔵 附近（&lt;1km）：</b>'+nearby.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(1)+'km</span>').join('')+'</div>':'')
-        +(passed.length?'<div class="radar-sec"><b>⚪ 路过（&lt;10km）：</b>'+passed.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(0)+'km</span>').join('')+'</div>':'')
-        +(dists[0].km>=10?'<div class="radar-sec">最近车站也在 '+dists[0].km.toFixed(1)+'km 外，本次无到达/路过记录</div>':'')
-        +'<div class="small-note">每次扫描都会积累"路过站"数据——你的真实铁路足迹越来越丰富。</div>';
-    },
-    err=>{
-      btn.classList.remove('busy');
-      const code=err&&err.code;
-      let why;
-      if(code===1)why='你拒绝了定位权限——可在浏览器地址栏/设置中重新允许';
-      else if(code===2)why='定位不可用（信号弱或当前环境限制）';
-      else if(code===3)why='定位超时，请重试';
-      else if(/permission|denied|policy/i.test(err&&err.message||''))why='定位被环境拦截（预览面板 iframe 常如此）——请在新窗口打开页面体验';
-      else why='定位失败（'+((err&&err.message)||'未知原因')+'）';
-      btn.textContent='📡 位置扫描 · '+why+'，点车站手动打卡';
-      toast(why+'；也可点车站手动打卡','err');
-    },
-    {enableHighAccuracy:false, timeout:8000, maximumAge:60000}
-  );
-  }catch(e){
-    btn.classList.remove('busy');
-    btn.textContent='📡 位置扫描 · 当前环境拦截定位，点车站手动打卡';
-    toast('定位接口被当前环境拦截（预览面板/iframe 常见）——请<a href="'+location.href+'" target="_blank" style="color:var(--gold)">新窗口打开</a>体验真实定位，或点车站手动打卡','err');
-  }
+ if(!localStorage.getItem('railGpsConsent')){
+ openGpsExplain();
+ return;
+ }
+ const btn=document.getElementById('gps-btn');
+ /* 环境检查：定位需要安全上下文（HTTPS 或本机） */
+ if(!('geolocation' in navigator) || (window.isSecureContext===false && !/^https:|^http:\/\/(localhost|127\.0\.0\.1)/.test(location.href))){
+ btn.textContent=' 位置扫描 · 当前环境不支持（需 HTTPS），点车站手动打卡';
+ toast('当前环境不支持定位（需 HTTPS 或本机访问），可点击车站手动打卡','err');
+ return;
+ }
+ btn.classList.add('busy'); btn.textContent=' 扫描中…（计算全站距离）';
+ try{
+ navigator.geolocation.getCurrentPosition(
+ pos=>{
+ btn.classList.remove('busy'); btn.classList.add('on');
+ btn.textContent=' 位置扫描 · 已开启';
+ if(!G.gpsValidated){ G.gpsValidated=true; saveGame(); }
+ const lat=pos.coords.latitude, lon=pos.coords.longitude, now=new Date();
+ /* 一次定位 → 计算到全部车站的距离 */
+ const dists=[];
+ for(const name in RAIL.stations){
+ const st=RAIL.stations[name];
+ if(!st||!st.lat)continue;
+ dists.push({name, km:haversineKm(lat,lon,st.lat,st.lon)});
+ }
+ dists.sort((a,b)=>a.km-b.km);
+ const arrived=dists.filter(d=>d.km<0.15); // 到达：站内
+ const nearby=dists.filter(d=>d.km>=0.15&&d.km<1); // 附近 1km
+ const passed=dists.filter(d=>d.km>=1&&d.km<10); // 路过 10km
+ /* 到达自动打卡 */
+ if(arrived.length){
+ for(const d of arrived) doCheckin(d.name);
+ toast(' 已到达车站：'+arrived.map(d=>d.name+'（'+d.km.toFixed(2)+'km）').join('、')+' · 自动打卡');
+ }
+ /* 路过记录（灰章） */
+ let passCnt=0;
+ for(const d of passed){
+ if(!G.passedStations[d.name]&&!G.stationsVisited.has(d.name)){
+ G.passedStations[d.name]={km:Math.round(d.km*10)/10, time:now.toLocaleString('zh-CN')};
+ passCnt++;
+ }
+ }
+ if(passCnt>0){ saveGame(); renderHome(); renderPassport(); }
+ if(passed.length) toast(' 路过 '+passed.length+' 个车站（10km 内）：'+passed.slice(0,3).map(d=>d.name).join('、')+(passed.length>3?' 等':'')+' · 已记入灰章');
+ /* 雷达视图 */
+ document.getElementById('gps-radar').innerHTML=
+ '<div class="radar-title"> 当前位置距离雷达（'+lat.toFixed(4)+', '+lon.toFixed(4)+'）· '+now.toLocaleTimeString('zh-CN')+'</div>'
+ +(arrived.length?'<div class="radar-sec ok"><b> 到达（站内 &lt;150m）：</b>'+arrived.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(2)+'km</span>').join('')+'</div>':'')
+ +(nearby.length?'<div class="radar-sec"><b> 附近（&lt;1km）：</b>'+nearby.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(1)+'km</span>').join('')+'</div>':'')
+ +(passed.length?'<div class="radar-sec"><b>⚪ 路过（&lt;10km）：</b>'+passed.map(d=>'<span class="rk">'+d.name+' '+d.km.toFixed(0)+'km</span>').join('')+'</div>':'')
+ +(dists[0].km>=10?'<div class="radar-sec">最近车站也在 '+dists[0].km.toFixed(1)+'km 外，本次无到达/路过记录</div>':'')
+ +'<div class="small-note">每次扫描都会积累"路过站"数据——你的真实铁路足迹越来越丰富。</div>';
+ },
+ err=>{
+ btn.classList.remove('busy');
+ const code=err&&err.code;
+ let why;
+ if(code===1)why='你拒绝了定位权限——可在浏览器地址栏/设置中重新允许';
+ else if(code===2)why='定位不可用（信号弱或当前环境限制）';
+ else if(code===3)why='定位超时，请重试';
+ else if(/permission|denied|policy/i.test(err&&err.message||''))why='定位被环境拦截（预览面板 iframe 常如此）——请在新窗口打开页面体验';
+ else why='定位失败（'+((err&&err.message)||'未知原因')+'）';
+ btn.textContent=' 位置扫描 · '+why+'，点车站手动打卡';
+ toast(why+'；也可点车站手动打卡','err');
+ },
+ {enableHighAccuracy:false, timeout:8000, maximumAge:60000}
+ );
+ }catch(e){
+ btn.classList.remove('busy');
+ btn.textContent=' 位置扫描 · 当前环境拦截定位，点车站手动打卡';
+ toast('定位接口被当前环境拦截（预览面板/iframe 常见）——请<a href="'+location.href+'" target="_blank" style="color:var(--gold)">新窗口打开</a>体验真实定位，或点车站手动打卡','err');
+ }
 }
 function doCheckin(name){
-  if(!G)return;
-  if(G.stationsVisited.has(name)){toast('📍 '+name+' 已打卡过','');return;}
-  G.stationsVisited.add(name);
-  G.stationFirstVisit[name]=(G.stationFirstVisit[name])||new Date().toLocaleDateString('zh-CN');
-  document.getElementById('s-stations').textContent=G.stationsVisited.size;
-  checkAchievements();
-  saveGame();
-  renderHome(); renderSlots(); renderLinePanel(); renderBookTab();
-  toast('📍 '+name+' · 打卡成功！','ach');
+ if(!G)return;
+ if(G.stationsVisited.has(name)){toast(' '+name+' 已打卡过','');return;}
+ G.stationsVisited.add(name);
+ G.stationFirstVisit[name]=(G.stationFirstVisit[name])||new Date().toLocaleDateString('zh-CN');
+ document.getElementById('s-stations').textContent=G.stationsVisited.size;
+ checkAchievements();
+ saveGame();
+ renderHome(); renderSlots(); renderLinePanel(); renderBookTab();
+ toast(' '+name+' · 打卡成功！','ach');
 }
 function checkinBtn(name){
-  const visited=G.stationsVisited.has(name);
-  const multi=STATIONS[name]&&STATIONS[name].lines.length>1;
-  return `<button class="ck-btn ${visited?'vis':''}" onclick="doCheckin('${name}')" title="${visited?'已打卡':'点击打卡'}${visited?' · '+G.stationFirstVisit[name]:''}">${visited?'✓ ':''}${name}${multi?' ◇':''}</button>`;
+ const visited=G.stationsVisited.has(name);
+ const multi=STATIONS[name]&&STATIONS[name].lines.length>1;
+ return `<button class="ck-btn ${visited?'vis':''}" onclick="doCheckin('${name}')" title="${visited?'已打卡':'点击打卡'}${visited?' · '+G.stationFirstVisit[name]:''}">${visited?'✓ ':''}${name}${multi?' ◇':''}</button>`;
 }
 function renderHome(){
-  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
-  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
-  document.getElementById('s-badge').textContent=getBadge().ic+' '+getBadge().name+' · 打卡 '+n+' 站';
-  document.getElementById('h-station').textContent=n;
-  document.getElementById('h-line').textContent=done+' 线';
-  document.getElementById('h-prov').textContent=provs.size+' 省';
-  const hon=honorList();
-  document.getElementById('h-honor').textContent=hon.filter(h=>h.got).length+'/7';
-  const q=checkinQuery.trim().toLowerCase();
-  const grp=lines=>{
-    let s='';
-    for(const L of lines){
-      const vis=lineVisCount(L);
-      if(vis===L.stations.length)s+='<div class="line-row" style="margin-bottom:5px"><div class="bar" style="background:'+L.color+'"></div><div class="nm">'+L.key+'</div><div class="done">✅ 集齐</div><div class="cnt">'+vis+'/'+L.stations.length+'</div></div>';
-    }
-    return s;
-  };
-  const wall=lines=>{
-    const total=lines.reduce((a,L)=>a+L.stations.length,0);
-    let s='<div class="ck-stats">共 '+total+' 站 · 已打卡 '+lines.reduce((a,L)=>a+lineVisCount(L),0)+'</div><div class="ck-grid">';
-    let shown=0;
-    for(const L of lines){
-      for(const name of L.stations){
-        const nm=name, p=(PINYIN[nm]||'');
-        if(q && !(nm.includes(q)||p.startsWith(q)||(p.includes(q)&&q.length>=2)))continue;
-        s+=checkinBtn(nm); shown++;
-      }
-    }
-    if(!shown)s+='<div class="small-note">未找到「'+q+'」，试试站名或拼音（bjn=北京南）</div>';
-    return s+'</div>';
-  };
-  document.getElementById('h-hs').innerHTML=grp(ALL_LINES.filter(L=>L.grp==='hs'))+wall(ALL_LINES.filter(L=>L.grp==='hs'));
-  document.getElementById('h-ps').innerHTML=grp(ALL_LINES.filter(L=>L.grp==='ps'))+wall(ALL_LINES.filter(L=>L.grp==='ps'));
-  /* 我的旅程（有数据才显示，无数据不废话） */
-  const j=document.getElementById('h-journey');
-  const last=G.rides.length?G.rides[G.rides.length-1]:null;
-  const nt=G.nextTrip;
-  let js='';
-  if(last)js+='<div class="log-item"><span class="date">'+last.date+'</span><span class="no">'+last.no+'</span><span class="rt">'+last.from+' → '+last.to+'<br><small>'+last.km+' km</small></span></div>';
-  if(nt)js+='<div class="log-item"><span class="date">待出发</span><span class="no">'+nt.no+'</span><span class="rt">'+nt.from+' → '+nt.to+'<br><small>已安排</small></span></div>';
+ const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+ const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
+ document.getElementById('s-badge').textContent=getBadge().ic+' '+getBadge().name+' · 打卡 '+n+' 站';
+ document.getElementById('h-station').textContent=n;
+ document.getElementById('h-line').textContent=done+' 线';
+ document.getElementById('h-prov').textContent=provs.size+' 省';
+ const hon=honorList();
+ document.getElementById('h-honor').textContent=hon.filter(h=>h.got).length+'/7';
+ const q=checkinQuery.trim().toLowerCase();
+ const grp=lines=>{
+ let s='';
+ for(const L of lines){
+ const vis=lineVisCount(L);
+ if(vis===L.stations.length)s+='<div class="line-row" style="margin-bottom:5px"><div class="bar" style="background:'+L.color+'"></div><div class="nm">'+L.key+'</div><div class="done">✅ 集齐</div><div class="cnt">'+vis+'/'+L.stations.length+'</div></div>';
+ }
+ return s;
+ };
+ const wall=lines=>{
+ const total=lines.reduce((a,L)=>a+L.stations.length,0);
+ let s='<div class="ck-stats">共 '+total+' 站 · 已打卡 '+lines.reduce((a,L)=>a+lineVisCount(L),0)+'</div><div class="ck-grid">';
+ let shown=0;
+ for(const L of lines){
+ for(const name of L.stations){
+ const nm=name, p=(PINYIN[nm]||'');
+ if(q && !(nm.includes(q)||p.startsWith(q)||(p.includes(q)&&q.length>=2)))continue;
+ s+=checkinBtn(nm); shown++;
+ }
+ }
+ if(!shown)s+='<div class="small-note">未找到「'+q+'」，试试站名或拼音（bjn=北京南）</div>';
+ return s+'</div>';
+ };
+ document.getElementById('h-hs').innerHTML=grp(ALL_LINES.filter(L=>L.grp==='hs'))+wall(ALL_LINES.filter(L=>L.grp==='hs'));
+ document.getElementById('h-ps').innerHTML=grp(ALL_LINES.filter(L=>L.grp==='ps'))+wall(ALL_LINES.filter(L=>L.grp==='ps'));
+ /* 我的旅程（有数据才显示，无数据不废话） */
+ const j=document.getElementById('h-journey');
+ const last=G.rides.length?G.rides[G.rides.length-1]:null;
+ const nt=G.nextTrip;
+ let js='';
+ if(last)js+='<div class="log-item"><span class="date">'+last.date+'</span><span class="no">'+last.no+'</span><span class="rt">'+last.from+' → '+last.to+'<br><small>'+last.km+' km</small></span></div>';
+ if(nt)js+='<div class="log-item"><span class="date">待出发</span><span class="no">'+nt.no+'</span><span class="rt">'+nt.from+' → '+nt.to+'<br><small>已安排</small></span></div>';
   if(!js)js='<div class="small-note">你还没有旅程记录——点上方任意车站，模拟到达打卡，开启你的铁路护照。</div>';
   j.innerHTML=js;
+  /* 氛围层：全服统计 + 最近动态 + 足迹重合（模拟，真实用户达阈值自动隐藏） */
+  const atm=document.getElementById('h-atmos');
+  if(!atm)return;
+  if(!simVisible()){
+    atm.innerHTML='<div class="small-note">全服已有 '+realUserCount()+' 位用户，排行榜与动态已切换为真实数据。</div>';
+    return;
+  }
+  /* 足迹重合（基于真实打卡站 vs 模拟好友足迹） */
+  const overlap=[];
+  for(const [u,sts] of Object.entries(SIM_FRIEND_FOOT)){
+    const hit=sts.filter(s=>G.stationsVisited.has(s));
+    if(hit.length>0)overlap.push(u+' 和你都到过 '+hit.join('、'));
+  }
+  atm.innerHTML=
+    '<div class="group-name">全服氛围（模拟数据 · 后台接通后自动切换真实）</div>'+
+    '<div class="stats" style="margin-bottom:10px">'+
+      '<div class="stat-box"><div class="n">'+SIM_GLOBAL.users.toLocaleString('zh-CN')+'</div><div class="l">全服用户</div></div>'+
+      '<div class="stat-box g"><div class="n">'+Math.round(SIM_GLOBAL.km/10000)/100+' 万</div><div class="l">累计里程 km</div></div>'+
+      '<div class="stat-box b"><div class="n">'+Math.round(SIM_GLOBAL.checkins/1000)/10+' 万</div><div class="l">累计打卡</div></div>'+
+    '</div>'+
+    '<div class="feed-list">'+SIM_FEED.map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
+    (overlap.length?'<div class="overlap-note">'+overlap.map(o=>'<span>'+o+'</span>').join('')+'</div>':'')+
+    '<div class="small-note" style="margin-top:6px">动态为模拟内容（合理归属）· 真实用户达 '+SIM_USER_THRESHOLD+' 后自动隐藏</div>';
 }
 /* ============ 护照详情 ============ */
 function pickPassportLine(i){passportSel=i;renderPassport();}
 function renderPassport(){
-  const hs=ALL_LINES.filter(L=>L.grp==='hs'), ps=ALL_LINES.filter(L=>L.grp==='ps');
-  const row=L=>{
-    const vis=lineVisCount(L), total=L.stations.length, pct=Math.round(vis/total*100);
-    const i=ALL_LINES.indexOf(L);
-    return `<div class="line-row ${i===passportSel?'sel':''}" onclick="pickPassportLine(${i})">
-      <div class="bar" style="background:${L.color}"></div>
-      <div class="nm">${L.key}</div>
-      ${vis===total?'<div class="done">✅</div>':''}
-      <div class="pb"><i style="width:${pct}%;background:${L.color}"></i></div>
-      <div class="cnt">${vis}/${total}</div>
-    </div>`;
-  };
-  document.getElementById('p-grid-hs').innerHTML=hs.map(row).join('');
-  document.getElementById('p-grid-ps').innerHTML=ps.map(row).join('');
-  const L=ALL_LINES[passportSel];
-  document.getElementById('p-st-name').textContent=L.key+(L.grp==='hs'?'（高铁）':'（普速）')+' · '+L.stations.length+' 站';
-  document.getElementById('p-stamp-grid').innerHTML=L.stations.map(n=>{
-    const st=lineState(L,n), cls=st==='v'?'visited':(st==='p'?'passed':'unseen');
-    const dot=st==='v'?'✓':(st==='p'?'途':'·');
-    return `<div class="stamp ${cls}" title="${n}"><span class="dot">${dot}</span><span class="sn">${n}</span></div>`;
-  }).join('');
+ const hs=ALL_LINES.filter(L=>L.grp==='hs'), ps=ALL_LINES.filter(L=>L.grp==='ps');
+ const row=L=>{
+ const vis=lineVisCount(L), total=L.stations.length, pct=Math.round(vis/total*100);
+ const i=ALL_LINES.indexOf(L);
+ return `<div class="line-row ${i===passportSel?'sel':''}" onclick="pickPassportLine(${i})">
+ <div class="bar" style="background:${L.color}"></div>
+ <div class="nm">${L.key}</div>
+ ${vis===total?'<div class="done">✅</div>':''}
+ <div class="pb"><i style="width:${pct}%;background:${L.color}"></i></div>
+ <div class="cnt">${vis}/${total}</div>
+ </div>`;
+ };
+ document.getElementById('p-grid-hs').innerHTML=hs.map(row).join('');
+ document.getElementById('p-grid-ps').innerHTML=ps.map(row).join('');
+ const L=ALL_LINES[passportSel];
+ document.getElementById('p-st-name').textContent=L.key+(L.grp==='hs'?'（高铁）':'（普速）')+' · '+L.stations.length+' 站';
+ document.getElementById('p-stamp-grid').innerHTML=L.stations.map(n=>{
+ const st=lineState(L,n), cls=st==='v'?'visited':(st==='p'?'passed':'unseen');
+ const dot=st==='v'?'✓':(st==='p'?'途':'·');
+ return `<div class="stamp ${cls}" title="${n}"><span class="dot">${dot}</span><span class="sn">${n}</span></div>`;
+ }).join('');
 }
 /* ============ 足迹 ============ */
 function renderFootprint(){
-  const vis=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
-  const allProv=['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','陕西','甘肃','青海','宁夏','新疆','西藏'];
-  document.getElementById('f-prov').innerHTML=allProv.map(p=>`<span class="prov ${vis.has(p)?'vis':''}">${p}</span>`).join('');
-  document.getElementById('f-city').innerHTML=[...G.stationsVisited].sort().map(c=>`<span class="city vis">${c}</span>`).join('')||'<span class="city">还没有到访记录</span>';
+ const vis=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他'));
+ const allProv=['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','陕西','甘肃','青海','宁夏','新疆','西藏'];
+ document.getElementById('f-prov').innerHTML=allProv.map(p=>`<span class="prov ${vis.has(p)?'vis':''}">${p}</span>`).join('');
+ document.getElementById('f-city').innerHTML=[...G.stationsVisited].sort().map(c=>`<span class="city vis">${c}</span>`).join('')||'<span class="city">还没有到访记录</span>';
+ /* 铁路局覆盖 */
+ const per={};
+ for(const st of G.stationsVisited){
+ const bn=bureauOf(st);
+ if(!per[bn])per[bn]={n:0,list:[]};
+ per[bn].n++; per[bn].list.push(st);
+ }
+ document.getElementById('f-bureau').innerHTML=BUREAUS.filter(b=>per[b.name]).map(b=>{
+ const d=per[b.name];
+ return `<span class="bureau-chip vis" title="${d.list.join('、')}">${b.name}（${d.n} 站）</span>`;
+ }).join('')||'<span class="small-note">还没有覆盖任何铁路局</span>';
+ document.getElementById('f-my-bureau').textContent=G.bureau||'未选择';
 }
 /* ============ 荣誉 ============ */
 function renderHonorView(){
-  const hon=honorList();
-  const firstMiss=hon.findIndex(h=>!h.got);
-  document.getElementById('h-honor-grid').innerHTML=hon.map((h,i)=>{
-    const cls=h.got?'got':(i===firstMiss?'cur':'');
-    return `<div class="honor-item ${cls}"><span class="ic">${h.ic}</span><span class="hn">${h.name}</span><span class="req">${h.req}</span>${h.prog?`<span class="prog">${h.prog}</span>`:''}</div>`;
-  }).join('');
+ const hon=honorList();
+ const firstMiss=hon.findIndex(h=>!h.got);
+ document.getElementById('h-honor-grid').innerHTML=hon.map((h,i)=>{
+ const cls=h.got?'got':(i===firstMiss?'cur':'');
+ return `<div class="honor-item ${cls}"><span class="ic">${h.ic}</span><span class="hn">${h.name}</span><span class="req">${h.req}</span>${h.prog?`<span class="prog">${h.prog}</span>`:''}</div>`;
+ }).join('');
 }
 /* ============ 排行 ============ */
 function showRank(t){curRankTab=t;document.querySelectorAll('.rank-tabs button').forEach((b,i)=>b.classList.toggle('sel',['friend','nation','progress'][i]===t));renderRank();}
 function renderRank(){
-  const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
-  const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他')).size;
-  const me={nick:'你',km:G.totalKm,vis:n,done,prov:provs,me:true};
-  const list=curRankTab==='friend'?FRIENDS.map(f=>f.me?me:f).sort((a,b)=>b.vis-a.vis)
-    :curRankTab==='nation'?NATION.map(f=>f.nick==='你'?me:f).sort((a,b)=>b.vis-a.vis)
-    :[{nick:'铁轨收藏家',delta:14},{nick:'慢车爱好者',delta:11},{nick:'你',delta:8,me:true},{nick:'京九铁道',delta:7},{nick:'沪昆走遍',delta:5}];
-  document.getElementById('r-list').innerHTML=list.map((r,i)=>{
-    const cls=r.me?'rank-row me':'rank-row';
-    const val=curRankTab==='progress'?`<span class="val"><b>+${r.delta}</b> 站</span>`
-      :`<span class="val"><b>${r.vis}</b> 站 · ${r.done}线 · ${r.prov}省</span>`;
-    return `<div class="${cls}"><span class="pos ${i<3?'top':''}">${i+1}</span><span class="nick">${r.nick}${r.me?'<small>（我）</small>':''}</span>${val}</div>`;
-  }).join('');
+ const n=G.stationsVisited.size, done=ALL_LINES.filter(L=>lineVisCount(L)===L.stations.length).length;
+ const provs=new Set([...G.stationsVisited].map(provOf).filter(p=>p!=='其他')).size;
+ const me={nick:'你',km:G.totalKm,vis:n,done,prov:provs,me:true};
+ const list=curRankTab==='friend'?FRIENDS.map(f=>f.me?me:f).sort((a,b)=>b.vis-a.vis)
+ :curRankTab==='nation'?NATION.map(f=>f.nick==='你'?me:f).sort((a,b)=>b.vis-a.vis)
+ :[{nick:'铁轨收藏家',delta:14},{nick:'慢车爱好者',delta:11},{nick:'你',delta:8,me:true},{nick:'京九铁道',delta:7},{nick:'沪昆走遍',delta:5}];
+ document.getElementById('r-list').innerHTML=list.map((r,i)=>{
+ const cls=r.me?'rank-row me':'rank-row';
+ const val=curRankTab==='progress'?`<span class="val"><b>+${r.delta}</b> 站</span>`
+ :`<span class="val"><b>${r.vis}</b> 站 · ${r.done}线 · ${r.prov}省</span>`;
+ return `<div class="${cls}"><span class="pos ${i<3?'top':''}">${i+1}</span><span class="nick">${r.nick}${r.me?'<small>（我）</small>':''}</span>${val}</div>`;
+ }).join('');
 }
 /* ============ 旅程记录 ============ */
 function renderLogView(){
-  const el=document.getElementById('l-list');
-  if(!G.rides.length){el.innerHTML='<div class="small-note">还没有乘车记录，去「开始旅程」开启第一段高铁之旅。</div>';return;}
-  el.innerHTML=[...G.rides].reverse().map(r=>`<div class="log-item">
-    <span class="date">${r.date}</span><span class="no">${r.no}</span>
-    <span class="rt">${r.from} → ${r.to}<br><small>${r.seat} · ${(r.lines||[]).map(l=>l.replace('高速线','').replace('线','')).join('·')||''}</small></span>
-    <span class="km">${r.km} km</span>
-  </div>`).join('');
+ const el=document.getElementById('l-list');
+ if(!G.rides.length){el.innerHTML='<div class="small-note">还没有乘车记录，去「开始旅程」开启第一段高铁之旅。</div>';return;}
+ el.innerHTML=[...G.rides].reverse().map(r=>`<div class="log-item">
+ <span class="date">${r.date}</span><span class="no">${r.no}</span>
+ <span class="rt">${r.from} → ${r.to}<br><small>${r.seat} · ${(r.lines||[]).map(l=>l.replace('高速线','').replace('线','')).join('·')||''}</small></span>
+ <span class="km">${r.km} km</span>
+ </div>`).join('');
 }
 
 /* =====================================================
-   渲染入口 / 存档
+ 渲染入口 / 存档
 ===================================================== */
 function renderAll(){
-  if(!G)return;
-  document.getElementById('s-money').textContent=fmtMoney(G.money);
-  document.getElementById('s-km').textContent=G.totalKm.toLocaleString('zh-CN');
-  document.getElementById('s-stations').textContent=G.stationsVisited.size;
-  renderHome();
-  renderSlots();
-  renderLinePanel();
-  renderBookTab();
+ if(!G)return;
+ document.getElementById('s-money').textContent=fmtMoney(G.money);
+ document.getElementById('s-km').textContent=G.totalKm.toLocaleString('zh-CN');
+ document.getElementById('s-stations').textContent=G.stationsVisited.size;
+ renderHome();
+ renderSlots();
+ renderLinePanel();
+ renderBookTab();
 }
 function saveGame(){
-  if(!G)return;
-  try{
-    const d={...G,
-      stationsVisited:[...G.stationsVisited], achievements:[...G.achievements],
-      trainsTaken:[...G.trainsTaken], linesRidden:[...G.linesRidden], seatsTaken:[...G.seatsTaken],
-    };
-    localStorage.setItem('railJourneySave_v1',JSON.stringify(d));
-  }catch(e){console.warn('save failed',e);}
+ if(!G)return;
+ try{
+ const d={...G,
+ stationsVisited:[...G.stationsVisited], achievements:[...G.achievements],
+ trainsTaken:[...G.trainsTaken], linesRidden:[...G.linesRidden], seatsTaken:[...G.seatsTaken],
+ };
+ localStorage.setItem('railJourneySave_v1',JSON.stringify(d));
+ }catch(e){console.warn('save failed',e);}
 }
 function loadGame(){
-  try{
-    const raw=localStorage.getItem('railJourneySave_v1');
-    if(!raw)return false;
-    const d=JSON.parse(raw);
-    G={...d,
-      stationsVisited:new Set(d.stationsVisited), achievements:new Set(d.achievements),
-      trainsTaken:new Set(d.trainsTaken), linesRidden:new Set(d.linesRidden), seatsTaken:new Set(d.seatsTaken),
-    };
-    G.rides=G.rides||[]; G.photos=G.photos||[];
-    G.stationFirstVisit=G.stationFirstVisit||{};
-    G.passedStations=G.passedStations||{};
-    return true;
-  }catch(e){console.warn('load failed',e);return false;}
+ try{
+ const raw=localStorage.getItem('railJourneySave_v1');
+ if(!raw)return false;
+ const d=JSON.parse(raw);
+ G={...d,
+ stationsVisited:new Set(d.stationsVisited), achievements:new Set(d.achievements),
+ trainsTaken:new Set(d.trainsTaken), linesRidden:new Set(d.linesRidden), seatsTaken:new Set(d.seatsTaken),
+ };
+ G.rides=G.rides||[]; G.photos=G.photos||[];
+ G.stationFirstVisit=G.stationFirstVisit||{};
+ G.passedStations=G.passedStations||{};
+ G.bureau=G.bureau||null;
+ G.gpsValidated=G.gpsValidated||false;
+ return true;
+ }catch(e){console.warn('load failed',e);return false;}
 }
 function resetGame(){
-  if(!confirm('确定要清空所有旅程进度重新开始吗？'))return;
-  try{localStorage.removeItem('railJourneySave_v1');}catch(e){}
-  newGame();
-  selFrom=null;selTo=null;selTrain=null;
-  closeTrip();
-  renderAll();
-  toast('🔄 已重置，新的旅程开始');
+ if(!confirm('确定要清空所有旅程进度重新开始吗？'))return;
+ try{localStorage.removeItem('railJourneySave_v1');}catch(e){}
+ newGame();
+ selFrom=null;selTo=null;selTrain=null;
+ closeTrip();
+ renderAll();
+ toast(' 已重置，新的旅程开始');
 }
 function closeModal(){
-  document.getElementById('modal-bg').classList.add('hidden');
-  renderAll();
+ document.getElementById('modal-bg').classList.add('hidden');
+ renderAll();
 }
 document.addEventListener('DOMContentLoaded',function(){
-  if(!loadGame())newGame();
-  renderAll();
-  document.querySelectorAll('.modal-bg').forEach(m=>{
-    m.addEventListener('click',function(e){if(e.target===m)this.classList.add('hidden');});
-  });
+ if(!loadGame())newGame();
+ renderAll();
+ document.querySelectorAll('.modal-bg').forEach(m=>{
+ m.addEventListener('click',function(e){if(e.target===m)this.classList.add('hidden');});
+ });
+ /* 首次进入：选择所在铁路局（架构预留：推断位置 → 定位后自动替换） */
+ setTimeout(()=>{ if(G && !G.bureau) showBureauPicker(); }, 400);
 });
 </script>
 </body>
