@@ -58,12 +58,14 @@
  --text:#20242c; --dim:#5b6472; --faint:#9098a5;
  --blue:#2563eb; --gold:#a87b00; --green:#15803d; --red:#dc2626;
  --track:#dde3ea; --unk:#d9dee6; --unk-bd:#c3cbd6; --unk-tx:#8a93a3; --blue-tint:rgba(37,99,235,.05);
+ --announce-bg:rgba(10,14,22,.9); --announce-tx:#fff;
 }
 body.dark{
  --bg:#12141a; --panel:#1c1f29; --panel2:#242836; --border:#3a4052;
  --text:#e8ecf4; --dim:#9aa3b5; --faint:#6b7280;
  --blue:#4fc3f7; --gold:#fdd835; --green:#66bb6a; --red:#ef5350;
  --track:#2a3444; --unk:#1a2029; --unk-bd:#2a3444; --unk-tx:#3d4756; --blue-tint:rgba(79,195,247,.06);
+ --announce-bg:rgba(18,22,33,.96); --announce-tx:#f2f5fa;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
@@ -213,9 +215,9 @@ button{font-family:inherit;cursor:pointer}
 .fg-pole{position:absolute;bottom:0;width:34px;height:100%;background:#2a2f3a;animation:poleMove var(--pd,6s) linear infinite}
 .fg-pole::after{content:'';position:absolute;left:50%;bottom:0;width:3px;height:100%;background:#2a2f3a;transform:translateX(-50%)}
 @keyframes poleMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-#announce{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(10,14,22,.88);border:1px solid var(--blue);color:#fff;padding:10px 26px;border-radius:6px;font-size:17px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.5);max-width:86%;opacity:0;transition:opacity .3s;pointer-events:none}
+#announce{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:5;background:var(--announce-bg);border:1px solid var(--blue);color:var(--announce-tx);padding:10px 26px;border-radius:6px;font-size:17px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.5);max-width:86%;opacity:0;transition:opacity .3s;pointer-events:none}
 #announce.show{opacity:1}
-#trip-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(18,20,26,.95);border-top:1px solid var(--border);padding:10px 16px}
+#trip-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--announce-bg);border-top:1px solid var(--border);padding:10px 16px}
 .speed-btn{padding:6px 12px;border-radius:4px;border:1px solid var(--border);background:var(--panel2);color:var(--dim);font-size:12px}
 .speed-btn.sel{border-color:var(--blue);color:var(--blue)}
 .ctrl-btn{padding:8px 14px;border-radius:4px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:13px}
