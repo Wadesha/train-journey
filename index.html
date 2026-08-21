@@ -309,14 +309,6 @@ button{font-family:inherit;cursor:pointer}
 .bureau-cloud{display:flex;flex-wrap:wrap;gap:6px}
 .bureau-chip{font-size:.8em;padding:5px 12px;border-radius:4px;border:1px solid var(--border);color:var(--faint)}
 .bureau-chip.vis{border-color:var(--gold);color:var(--gold);font-weight:600}
-/* 氛围层 */
-.feed-list{display:flex;flex-direction:column;gap:4px}
-.feed-item{display:flex;align-items:center;gap:8px;font-size:.82em;padding:5px 10px;border-radius:4px;background:var(--panel2);border:1px solid var(--border)}
-.feed-item .f-u{font-weight:600;color:var(--dim);white-space:nowrap}
-.feed-item .f-a{color:var(--dim)}
-.feed-item .f-s{color:var(--dim);font-weight:600;white-space:nowrap}
-.feed-item .f-t{margin-left:auto;color:var(--faint);font-size:.74em;white-space:nowrap}
-.overlap-note{display:flex;flex-direction:column;gap:3px;margin-top:8px;font-size:.78em;color:var(--green)}
 /* 我的位置卡 */
 .loc-row{font-size:.9em}
 .loc-row .loc-lb{font-size:.7em;color:var(--faint);letter-spacing:2px;margin-bottom:3px}
@@ -1612,8 +1604,6 @@ const SIM_FEED=[
   {u:'南海之滨', station:'深圳北', act:'到站打卡', ago:'42 分钟前'},
   {u:'蓉渝穿梭', station:'贵阳北', act:'到站打卡', ago:'55 分钟前'},
 ];
-/* 模拟好友足迹（用于"足迹重合"提示，归属合理） */
-const SIM_FRIEND_FOOT={ '环渤海车迷':['北京南','天津西','济南西','沈阳'], '绿皮车情怀':['北京站','郑州','长沙','广州'], '京九铁道':['北京西站','聊城','九江','赣州'], '沪昆走遍':['上海虹桥','南昌西','长沙南','昆明南'], '夜行列车长':['武汉','长沙南','广州南'], '慢车爱好者':['济南','徐州站','蚌埠站'] };
 
 /* ============ 视图切换 ============ */
 let curView='home', curRankTab='friend', passportSel=ALL_LINES.findIndex(L=>L.key==='京沪高速线');
@@ -1843,7 +1833,9 @@ function renderHome(){
  if(nt)js+='<div class="log-item"><span class="date">待出发</span><span class="no">'+nt.no+'</span><span class="rt">'+nt.from+' → '+nt.to+'<br><small>已安排</small></span></div>';
   if(!js){
     js='<div class="group-name" style="font-size:.92em"> 全服排行</div>'+
-       '<div class="feed-list">'+SIM_FEED.slice(0,5).map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
+       '<div style="display:flex;flex-direction:column;gap:2px">'+
+         NATION.slice(0,5).map((r,i)=>'<div class="rank-row" style="background:transparent;border:none;padding:5px 8px"><span class="pos">'+(i+1)+'</span><span class="nick">'+r.nick+'</span><span class="val"><b>'+r.vis+'</b> 站 · '+r.done+'线</span></div>').join('')+
+       '</div>'+
        '<div class="small-note" style="margin-top:6px">还没有旅程记录 · 打卡一站在全服上榜 → 点上方任意车站开始</div>';
   }
   j.innerHTML=js;
@@ -1856,12 +1848,7 @@ function renderHome(){
     atm.innerHTML='<div class="small-note">全服已有 '+realUserCount()+' 位用户，排行榜与动态已切换为真实数据。</div>';
     return;
   }
-  /* 足迹重合（基于真实打卡站 vs 模拟好友足迹） */
-  const overlap=[];
-  for(const [u,sts] of Object.entries(SIM_FRIEND_FOOT)){
-    const hit=sts.filter(s=>G.stationsVisited.has(s));
-    if(hit.length>0)overlap.push(u+' 和你都到过 '+hit.join('、'));
-  }
+  /* 足迹重合（基于真实打卡站 vs 模拟好友足迹）——已移除：动态统一走顶部 ticker，避免改名员重复出现在多处的视觉噪音 */
   atm.innerHTML=
     '<div class="group-name" id="atmos-h" onclick="toggleAtmos()" style="cursor:pointer;user-select:none">全服氛围 ▸</div>'+
     '<div id="atmos-body" style="display:none">'+
@@ -1870,9 +1857,7 @@ function renderHome(){
         '<div class="stat-box g"><div class="n">'+Math.round(SIM_GLOBAL.km/10000)/100+' 万</div><div class="l">累计里程 km</div></div>'+
         '<div class="stat-box b"><div class="n">'+Math.round(SIM_GLOBAL.checkins/1000)/10+' 万</div><div class="l">累计打卡</div></div>'+
       '</div>'+
-      '<div class="feed-list">'+SIM_FEED.map(f=>'<div class="feed-item"><span class="f-u">'+f.u+'</span><span class="f-a">'+f.act+'</span><span class="f-s">'+f.station+'</span><span class="f-t">'+f.ago+'</span></div>').join('')+'</div>'+
-      (overlap.length?'<div class="overlap-note">'+overlap.map(o=>'<span>'+o+'</span>').join('')+'</div>':'')+
-      '<div class="small-note" style="margin-top:6px;font-size:.68em;color:var(--faint)">氛围动态为模拟 · 真实玩家增多后自动切换真实</div>'+
+      '<div class="small-note" style="margin-top:6px;font-size:.68em;color:var(--faint)">氛围统计为模拟 · 真实玩家增多后自动切换真实</div>'+
     '</div>';
 }
 function toggleAtmos(){
